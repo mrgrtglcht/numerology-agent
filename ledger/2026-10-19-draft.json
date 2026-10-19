@@ -27,5 +27,9 @@
     "tiktok",
     "pinterest"
   ],
-  "deliveries": {}
+  "deliveries": {
+    "tiktok": {
+      "state": "sending"
+    }
+  }
 }
