@@ -59,8 +59,12 @@ def validate_response(data,plan,candidates):
     entries=data.get('entries'); numbers=[]; normalized=[]
     if not isinstance(entries,list): raise ValueError('Не получен список арканов.')
     for entry in entries:
-        if not isinstance(entry,dict) or type(entry.get('number'))!=int: raise ValueError('Неверный номер аркана.')
-        n=entry['number']; paragraphs=entry.get('paragraphs')
+        if not isinstance(entry,dict): raise ValueError('Неверный номер аркана.')
+        n=entry.get('number')
+        # Gemini may serialize JSON numbers as decimal strings; preserve all domain checks.
+        if isinstance(n,str) and n.isascii() and n.isdecimal() and len(n)<=2: n=int(n)
+        if type(n)!=int: raise ValueError('Неверный номер аркана.')
+        paragraphs=entry.get('paragraphs')
         if not isinstance(paragraphs,list) or len(paragraphs)!=2: raise ValueError('Нужно два абзаца для аркана.')
         paragraphs=[string(p,'paragraph',180) for p in paragraphs]
         full=' '.join(paragraphs)

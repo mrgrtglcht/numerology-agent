@@ -70,6 +70,15 @@ class SeriesTests(unittest.TestCase):
         self.assertEqual(c2['part_arcana'],[7,8,9,10])
         self.assertEqual(c2['example_points']['FR'],7)
 
+    def test_model_decimal_strings_are_normalized_but_invalid_numbers_rejected(self):
+        plan=series_plan('profession'); r=self.fixture()
+        for e in r['entries']: e['number']=str(e['number'])
+        result=series.validate_response(r,plan,[{'id':'b1'}])
+        self.assertEqual([e['number'] for e in result['entries']],list(range(3,23)))
+        for invalid in ('3.0','-3','03x',True,3.5,'1','2','23'):
+            r=self.fixture(); r['entries'][0]['number']=invalid
+            with self.assertRaises(ValueError): series.validate_response(r,plan,[{'id':'b1'}])
+
     def test_source_card_numbering_is_explicit(self):
         self.assertEqual(ARCANA[8],'справедливость')
         self.assertEqual(ARCANA[11],'сила')
