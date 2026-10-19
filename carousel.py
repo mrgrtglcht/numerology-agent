@@ -111,7 +111,7 @@ def position_diagram(draw,cx,cy,position,example,radius=265):
     draw.ellipse((cx-radius*.62,cy-radius*.62,cx+radius*.62,cy+radius*.62),outline=ink,width=1)
     draw.line([pos[k] for k in ['G2','FL','F3','FR','E2']],fill=ink,width=2)
     # Draw the chosen point last so its halo stays clear.
-    for key in [k for k in pos if k!=position]+[position]:
+    for key in [k for k in pos if k!=position]+([position] if position else []):
         x,y=pos[key]; chosen=key==position
         r=25 if chosen or key=='I' else 21 if key in 'ACEG' else 15 if key in vectors else 12
         draw.ellipse((x-r,y-r,x+r,y+r),fill='#151A12',outline=WHITE if chosen else ink,width=3 if chosen else 1)
@@ -176,7 +176,13 @@ def render(config_path=None, output=None, background_dir=None):
             for paragraph in s['paragraphs']: y=text(d,paragraph,460,y,40,width=500)+44
             if y>1510: raise ValueError(f'Аркан {number}: текст не помещается справа от карты.')
         elif s['layout']=='bot':
-            text(d,'разбор матрицы судьбы\nв telegram-боте\nquantafate',90,660,64,True,width=850)
+            text(d,'разобрать свою матрицу судьбы можешь в боте @quantafate',90,420,64,True,width=850)
+            # Original matrix illustration, using the same real example as the series.
+            if c.get('example_points'):
+                position_diagram(d,540,1120,None,c['example_points'],radius=285)
+            else:
+                from matrix_rules import points
+                position_diagram(d,540,1120,None,points(22,4,6),radius=285)
         elif s['layout']=='cover':
             text(d,s['title'],x,510,91,True)
             text(d,s['number'],x,805,109)
