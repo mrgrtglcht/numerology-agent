@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'check: доступ; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
+        description: 'check: Buffer; telegram-check: права бота; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
         type: choice
-        options: [check, demo, preview, draft, publish]
+        options: [check, telegram-check, demo, preview, draft, publish]
         default: check
       targets:
         description: 'Цели через запятую: tiktok,pinterest,telegram. Telegram доступен только при publish.'
@@ -67,6 +67,8 @@ jobs:
         run: |
           if [[ "$MODE" == "check" ]]; then
             python check_buffer.py
+          elif [[ "$MODE" == "telegram-check" ]]; then
+            python check_telegram.py
           else
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
