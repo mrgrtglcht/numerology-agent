@@ -28,7 +28,10 @@
   ],
   "deliveries": {
     "telegram": {
-      "state": "sending"
+      "state": "accepted",
+      "receipt": {
+        "message_id": 4
+      }
     }
   }
 }
