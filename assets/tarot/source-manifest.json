@@ -1,0 +1,332 @@
+[
+  {
+    "number": 1,
+    "name": "Маг",
+    "slug": "mag",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-mag.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-mag.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "0885508813706c2892de39806048b01187612f36d9ab79fc67dfb4be822a269a",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 2,
+    "name": "Верховная Жрица",
+    "slug": "verhovnaya-zhritsa",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-verhovnaya-zhritsa.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-verhovnaya-zhrica.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "b05d45841965cf4206fb2abdcde5fc22875b4ca5e3cbce4fa91ec91e7e9f0a5b",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 3,
+    "name": "Императрица",
+    "slug": "imperatritsa",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-imperatritsa.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-imperatrica.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "6451ef261d3abfa8303ff3746ff03a1c40e2436a3081dcc0c70878248d04dc15",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 4,
+    "name": "Император",
+    "slug": "imperator",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-imperator.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-imperator.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "af83e02da33555d22711b602edc3a3f8b5bcef698c102dbbb48896bdb941677a",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 5,
+    "name": "Иерофант",
+    "slug": "ierofant",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-ierofant.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-verhovnyj-zhrec.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "32ba7ca140be7f7d3297307aca06599c4240a906e6d708c6323e70977e27f99a",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 6,
+    "name": "Влюблённые",
+    "slug": "vlyublennye",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-vlyublennye.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-vlyublennye.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "3e8b0a773a7d61df146b0565a59b57b19da22c4e2df3ff4a605ce91f25bde767",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 7,
+    "name": "Колесница",
+    "slug": "kolesnitsa",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-kolesnitsa.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-kolesnica.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "94b3f5ea026ecbb1eb65fb6ed55aa9352f78c36294bf7107f6bd57aff6aec28e",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 8,
+    "name": "Справедливость",
+    "slug": "spravedlivost",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-spravedlivost.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-spravedlivost.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "461dcb00270b40514ab97adc8b57fcce18a370381a7f981f412e93a364b9e131",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 9,
+    "name": "Отшельник",
+    "slug": "otshelnik",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-otshelnik.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-otshelnik.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "19832acdd715a4937fe3a877c07c43c0a4d9d4f0487ca87da616c3bd6f6d57cf",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 10,
+    "name": "Колесо Фортуны",
+    "slug": "koleso-fortuny",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-koleso-fortuny.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-koleso-sudby.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "f1ae7e871517060fe7a59f9879069cf1fa344c96c8d03cd16e6c09d286f1fa94",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 11,
+    "name": "Сила",
+    "slug": "sila",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-sila.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-sila.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "2659f24fb85820f6aea3d0458eabd78578e4e2bb9fc3e122292eb2d8e8e07094",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 12,
+    "name": "Повешенный",
+    "slug": "poveshennyy",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-poveshennyy.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-poveshennyj.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "e6245b92f44933cbc05a216cd461473bdec2fc96367803cc8e0228c9b53ce629",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 13,
+    "name": "Смерть",
+    "slug": "smert",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-smert.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-smert.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "981d017d9b71ef7194fb692f14cefc1f7bf4dcc3394ebfa510f1ab4ad36157e4",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 14,
+    "name": "Умеренность",
+    "slug": "umerennost",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-umerennost.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-umerennost.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "a3b7da19bd7c8da9bbce35ebe66486b404442b8d7bd8935e4a9442a39c8d0aca",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 15,
+    "name": "Дьявол",
+    "slug": "dyavol",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-dyavol.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-dyavol.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "859971863b59a1ddae115ccda88eed57ce7c2b17a2329a5dcf30301b5187c0b9",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 16,
+    "name": "Башня",
+    "slug": "bashnya",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-bashnya.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-bashnya.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "fc3abbec3cc43839ef182591deeb87fc2358aad2878ad50974a0dc824626ffcb",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 17,
+    "name": "Звезда",
+    "slug": "zvezda",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-zvezda.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-zvezda.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "371f0f8b82645228f8facfce9e5c68de899bf861201091f44fb8b58cafa19269",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 18,
+    "name": "Луна",
+    "slug": "luna",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-luna.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/02/arkan-taro-luna.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "2f9853c3612f1f13df46257df342d0f28dd66a7f5878ad11c499c34f14ff96f8",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 19,
+    "name": "Солнце",
+    "slug": "solntse",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-solntse.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/02/arkan-taro-solnce.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "5e85a570972f5c86bc0cfe0c870ce4189713fc48adfe35b21326181604e9d10b",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 20,
+    "name": "Суд",
+    "slug": "sud",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-sud.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/02/arkan-taro-strashnyj-sud.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "efaa056e2863d2222ff53a63fc9d59d651359179caa6345aa1489986761ce0e7",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 21,
+    "name": "Мир",
+    "slug": "mir",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-mir.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/02/arkan-taro-mir.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "8948f3294e85811eb1c6320c44b76550afb2209fdf77c182c7812b65d4080ec5",
+    "rights_status": "user-selected source; republication licence not established"
+  },
+  {
+    "number": 22,
+    "name": "Шут",
+    "slug": "shut",
+    "page": "https://numerolog.ru/tarot/znachenie-karty-taro-shut.html",
+    "banner_url": "https://numerolog.ru/wp-content/uploads/2022/01/arkan-taro-durak.jpg",
+    "crop_box": [
+      357,
+      78,
+      513,
+      377
+    ],
+    "banner_sha256": "4b477ce9a4e0971a45f44b2207d5209e01cf12fc7108e4a821ee5ed0e91505ae",
+    "rights_status": "user-selected source; republication licence not established"
+  }
+]

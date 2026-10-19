@@ -94,13 +94,59 @@ def matrix_diagram(draw,cx,cy,radius=265,tail=(15,5,8)):
     draw.rounded_rectangle((cx-40,cy+radius*.66-32,cx+40,cy+radius+35),radius=29,outline=WHITE,width=3)
 
 
+def position_diagram(draw,cx,cy,position,example,radius=265):
+    """The same geometry as the bot, with a different highlighted real position."""
+    vectors={'A':(-1,0),'B':(-.695,-.695),'C':(0,-1),'D':(.695,-.695),
+             'E':(1,0),'F':(.695,.695),'G':(0,1),'H':(-.695,.695)}
+    pos={k:(cx+x*radius,cy+y*radius) for k,(x,y) in vectors.items()}
+    for k,(x,y) in vectors.items():
+        for suffix,f in [('2',.66),('1',.82)]: pos[k+suffix]=(cx+x*radius*f,cy+y*radius*f)
+    pos.update({'I':(cx,cy),'A3':(cx-radius*.36,cy),'C3':(cx,cy-radius*.36),
+                'I2':(cx+radius*112/590,cy),'I1':(cx+radius*205/590,cy)})
+    for k,t in [('FL',.25),('F3',.5),('FR',.75)]:
+        a,b=pos['G2'],pos['E2']; pos[k]=(a[0]*(1-t)+b[0]*t,a[1]*(1-t)+b[1]*t)
+    ink='#B3B8AC'
+    for keys in [('A','C','E','G','A'),('B','D','F','H','B'),('A','E'),('C','G'),('B','F'),('D','H')]:
+        draw.line([pos[k] for k in keys],fill=ink,width=2)
+    draw.ellipse((cx-radius*.62,cy-radius*.62,cx+radius*.62,cy+radius*.62),outline=ink,width=1)
+    draw.line([pos[k] for k in ['G2','FL','F3','FR','E2']],fill=ink,width=2)
+    # Draw the chosen point last so its halo stays clear.
+    for key in [k for k in pos if k!=position]+[position]:
+        x,y=pos[key]; chosen=key==position
+        r=25 if chosen or key=='I' else 21 if key in 'ACEG' else 15 if key in vectors else 12
+        draw.ellipse((x-r,y-r,x+r,y+r),fill='#151A12',outline=WHITE if chosen else ink,width=3 if chosen else 1)
+        draw.text((x,y),str(example[key]),font=face(22 if chosen else 16,chosen),fill=WHITE if chosen else ink,anchor='mm')
+        if chosen: draw.ellipse((x-r-8,y-r-8,x+r+8,y+r+8),outline=WHITE,width=3)
+    if position in ('FR','FL'):
+        x,y=pos[position]
+        if position=='FR': text(draw,'$',x-9,y-72,28,width=60)
+        else:
+            # Original heart geometry; no emoji-font dependency.
+            outline=[]
+            for i in range(80):
+                t=i*2*math.pi/80
+                outline.append((x+12*math.sin(t)**3,y-61-(13*math.cos(t)-5*math.cos(2*t)-2*math.cos(3*t)-math.cos(4*t))*.8))
+            draw.polygon(outline,fill=WHITE)
+
+
 def render(config_path=None, output=None, background_dir=None):
     config_path=Path(config_path) if config_path else ROOT/'examples/15-5-8.json'
     folder=Path(output) if output else ROOT/'output/approved-style-15-5-8'
     backgrounds=Path(background_dir) if background_dir else ASSETS/'backgrounds'
     c=json.loads(config_path.read_text(encoding='utf-8'))
-    if c.get('include_tarot_cards'):
+    is_series=c.get('type')=='arcana_series'
+    if c.get('include_tarot_cards') and not is_series:
         raise ValueError('В кармический хвост карты таро не добавляются.')
+    cards={}
+    if is_series:
+        from matrix_rules import THEMES,allowed
+        from tarot_assets import prepare
+        profile=THEMES[c['theme']]
+        if c.get('position')!=profile['position']: raise ValueError('Позиция не соответствует теме.')
+        numbers=[s['arcana_number'] for s in c['slides'] if s['layout']=='arcana']
+        if len(numbers)!=len(set(numbers)) or any(n not in allowed(c['position']) for n in numbers):
+            raise ValueError('Недопустимый или повторный аркан в позиции.')
+        cards=prepare(numbers)
     if c.get('size')!=[1080,1920]:
         raise ValueError('Для этого макета нужен профиль 1080×1920.')
     out=folder/'slides'; out.mkdir(parents=True,exist_ok=True)
@@ -115,7 +161,23 @@ def render(config_path=None, output=None, background_dir=None):
         im=background(asset,tuple(c['size']),s['focus']); d=ImageDraw.Draw(im)
         x=90
         text(d,'quantafate',x,215,25,width=840)
-        if s['layout']=='cover':
+        if s['layout']=='series_cover':
+            y=text(d,s['title'],x,500,82,True)
+            text(d,s['subtitle'],x,max(y+95,860),38,width=850)
+        elif s['layout']=='arcana':
+            from matrix_rules import ARCANA
+            number=s['arcana_number']
+            text(d,f'{number} аркан',460,390,28,width=505)
+            y=text(d,ARCANA[number],460,460,50,True,width=505)+80
+            art=Image.open(cards[number]).convert('RGBA')
+            art=art.resize((312,598),Image.Resampling.LANCZOS)
+            im.paste(art,(90,480),art); d=ImageDraw.Draw(im)
+            y=max(650,y)
+            for paragraph in s['paragraphs']: y=text(d,paragraph,460,y,40,width=500)+44
+            if y>1510: raise ValueError(f'Аркан {number}: текст не помещается справа от карты.')
+        elif s['layout']=='bot':
+            text(d,'разбор матрицы судьбы\nв telegram-боте\nquantafate',90,660,64,True,width=850)
+        elif s['layout']=='cover':
             text(d,s['title'],x,510,91,True)
             text(d,s['number'],x,805,109)
             text(d,s['subtitle'],x,1060,45,width=820)
@@ -126,7 +188,9 @@ def render(config_path=None, output=None, background_dir=None):
                 y=text(d,block['text'],x,y,43)+48
             if s['layout']=='location':
                 cy=max(y+290,1060)
-                matrix_diagram(d,525,cy,tail=c.get('tail_numbers',[15,5,8]))
+                if is_series:
+                    position_diagram(d,525,cy,c['position'],c['example_points'])
+                else: matrix_diagram(d,525,cy,tail=c.get('tail_numbers',[15,5,8]))
                 y=cy+335
                 text(d,s['note'],x,y,26)
                 y+=50
@@ -147,7 +211,7 @@ def render(config_path=None, output=None, background_dir=None):
     with zipfile.ZipFile(folder/'carousel.zip','w',zipfile.ZIP_DEFLATED) as z:
         for i in range(1,len(slides)+1): z.write(out/f'{i:02}.png',f'slides/{i:02}.png')
         for name in ['content.json','caption.txt','preview.jpg']: z.write(folder/name,name)
-    print(f'Exported {len(rendered)} slides at {c["size"]}; no tarot cards; CTA={c["include_cta"]}')
+    print(f'Exported {len(rendered)} slides at {c["size"]}; tarot_cards={bool(cards)}; CTA={c["include_cta"] or is_series}')
     return [out/f'{i:02}.png' for i in range(1,len(slides)+1)]
 
 if __name__=='__main__': render()

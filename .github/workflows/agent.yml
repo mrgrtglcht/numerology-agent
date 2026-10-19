@@ -6,12 +6,21 @@ on:
       mode:
         description: 'check: Buffer; telegram-check: права бота; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
         type: choice
-        options: [check, telegram-check, demo, preview, draft, publish, carousel-auto]
+        options: [check, telegram-check, demo, preview, draft, publish, carousel-auto, series-auto]
         default: check
       topic:
         description: 'Тема карусели, например: кармический хвост 15–5–8'
         type: string
         default: 'кармический хвост 15–5–8'
+      series_theme:
+        description: 'Тематическая серия: профессия, партнёр, знакомство, таланты, центр, факты или случайная тема'
+        type: choice
+        options: [profession, partner, meeting, talents, centre, facts, random]
+        default: profession
+      series_part:
+        description: 'Номер части; 0 — сразу вся серия'
+        type: string
+        default: '0'
       targets:
         description: 'Цели через запятую: tiktok,pinterest,telegram. Telegram доступен только при publish.'
         type: string
@@ -57,6 +66,8 @@ jobs:
       ALLOW_PUBLISH: ${{ github.event_name == 'schedule' && vars.ENABLE_DAILY == 'true' || inputs.approve_publication }}
       DEMO_CONTENT: ${{ github.event_name == 'workflow_dispatch' && inputs.demo_content }}
       TOPIC: ${{ inputs.topic || 'кармический хвост 15–5–8' }}
+      SERIES_THEME: ${{ inputs.series_theme || 'profession' }}
+      SERIES_PART: ${{ inputs.series_part || '0' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -80,16 +91,23 @@ jobs:
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
             python agent.py carousel-auto --topic "$TOPIC" --batch "auto-${GITHUB_RUN_ID}" "${extra[@]}"
+          elif [[ "$MODE" == "series-auto" ]]; then
+            extra=()
+            if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
+            python agent.py series-auto --series-theme "$SERIES_THEME" --part "$SERIES_PART" --batch "series-${GITHUB_RUN_ID}" "${extra[@]}"
           else
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
             python agent.py "$MODE" --targets "$TARGETS" "${extra[@]}"
           fi
       - uses: actions/upload-artifact@v4
-        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto')
+        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto' || inputs.mode == 'series-auto')
         with:
           name: quantafate-preview
-          path: output/
+          path: |
+            output/
+            !output/series-*/part-*/slides/**
+            !output/series-*/part-*/carousel.zip
           retention-days: 3
           if-no-files-found: ignore
 

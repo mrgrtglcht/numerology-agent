@@ -220,7 +220,9 @@ def send_telegram(content, urls):
 def main():
     load_env()
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish', 'carousel', 'carousel-auto'])
+    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish', 'carousel', 'carousel-auto', 'series-auto'])
+    parser.add_argument('--series-theme',default='profession')
+    parser.add_argument('--part',type=int,default=0,help='0: все части серии; иначе номер части.')
     parser.add_argument('--content', type=Path, help='Локальный JSON для карусели в согласованном стиле.')
     parser.add_argument('--targets', default='tiktok')
     parser.add_argument('--topic', default='Три вопроса для саморефлексии')
@@ -229,6 +231,12 @@ def main():
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,60}', args.batch):
         raise SafeError('Недопустимое имя серии.')
+    if args.mode == 'series-auto':
+        from arcana_series import run as run_series
+        try: run_series(args.series_theme,ROOT/'output'/args.batch,part=args.part,demo=args.demo_content)
+        except ValueError as error: raise SafeError(str(error)) from None
+        print('Тематическая серия готова. Публикаций не было.')
+        return
     if args.mode == 'carousel-auto':
         from carousel_auto import run
         topic=args.topic if args.topic!='Три вопроса для саморефлексии' else 'кармический хвост 15–5–8'

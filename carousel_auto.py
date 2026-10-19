@@ -18,6 +18,8 @@ def tail_numbers(topic):
     if not match: raise ValueError('Укажи сочетание, например: кармический хвост 15–5–8.')
     values=[int(v) for v in match.groups()]
     if any(not 1<=v<=22 for v in values): raise ValueError('Арканы должны быть от 1 до 22.')
+    from matrix_rules import valid_tail
+    if not valid_tail(values): raise ValueError('Такой хвост не получается по формулам личной матрицы бота.')
     return values
 
 
@@ -97,6 +99,10 @@ def validate_response(data,candidates):
 
 
 def generate(topic,candidates):
+    return generate_visual(prompt(topic,candidates),candidates,6500)
+
+
+def generate_visual(instruction,candidates,max_tokens=6500):
     # Reuse the project's existing quota guard and HTTP handling; no fallback calls.
     import agent
     if agent.os.environ.get('GEMINI_FREE_TIER_CONFIRMED')!='true':
@@ -104,12 +110,12 @@ def generate(topic,candidates):
     model=agent.os.environ.get('GEMINI_MODEL','gemini-3.5-flash-lite')
     if not re.fullmatch(r'gemini-[a-z0-9.\-]+',model): raise ValueError('Неверное имя модели.')
     key=agent.required('GEMINI_API_KEY')
-    parts=[{'text':prompt(topic,candidates)}]
+    parts=[{'text':instruction}]
     for c in candidates:
         parts.extend([{'text':'изображение '+c['id']},
                       {'inlineData':{'mimeType':'image/jpeg','data':base64.b64encode(Path(c['local_thumbnail']).read_bytes()).decode()}}])
     result=agent.request_json('Gemini',f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
-        {'contents':[{'parts':parts}], 'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':6500}},
+        {'contents':[{'parts':parts}], 'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':max_tokens}},
         {'x-goog-api-key':key})
     try:
         candidate=result['candidates'][0]
