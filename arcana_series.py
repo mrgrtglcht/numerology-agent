@@ -132,6 +132,7 @@ def run(theme,output,part=0,demo=False):
         raw=generate_visual(instruction(theme,plan,candidates),candidates,10000)
         response_path.write_text(json.dumps(raw,ensure_ascii=False,indent=2),encoding='utf-8')
     response=validate_response(raw,plan,candidates)
+    if len(response['selected'])<3: raise ValueError('Для чередования нужны минимум три подходящих фона.')
     sources=download_selection(candidates,response['selected'],folder/'backgrounds')
     (folder/'sources.json').write_text(json.dumps(sources,ensure_ascii=False,indent=2),encoding='utf-8')
     write_credits(sources,folder/'credits.txt')
