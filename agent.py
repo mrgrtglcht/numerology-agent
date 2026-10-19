@@ -220,7 +220,8 @@ def send_telegram(content, urls):
 def main():
     load_env()
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish'])
+    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish', 'carousel', 'carousel-auto'])
+    parser.add_argument('--content', type=Path, help='Локальный JSON для карусели в согласованном стиле.')
     parser.add_argument('--targets', default='tiktok')
     parser.add_argument('--topic', default='Три вопроса для саморефлексии')
     parser.add_argument('--batch', default=datetime.now(timezone.utc).strftime('%Y-%m-%d'))
@@ -228,6 +229,20 @@ def main():
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,60}', args.batch):
         raise SafeError('Недопустимое имя серии.')
+    if args.mode == 'carousel-auto':
+        from carousel_auto import run
+        topic=args.topic if args.topic!='Три вопроса для саморефлексии' else 'кармический хвост 15–5–8'
+        try:
+            run(topic,ROOT/'output'/args.batch,demo=args.demo_content)
+        except ValueError as error:
+            raise SafeError(str(error)) from None
+        print('Готовые картинки в output/' + args.batch + '. Публикаций не было.')
+        return
+    if args.mode == 'carousel':
+        from carousel import render as render_carousel
+        render_carousel(config_path=args.content, output=ROOT/'output'/args.batch)
+        print('Карусель в согласованном стиле готова. Это локальный просмотр, отправок не было.')
+        return
     targets = list(dict.fromkeys(x.strip() for x in args.targets.split(',')))
     if not targets or any(t not in ('pinterest', 'tiktok', 'telegram') for t in targets):
         raise SafeError('Допустимые цели: tiktok,pinterest,telegram.')
@@ -289,3 +304,4 @@ if __name__ == '__main__':
     except Exception:
         print('Операция остановлена. Подробности скрыты для защиты секретов.', file=sys.stderr)
         sys.exit(1)
+

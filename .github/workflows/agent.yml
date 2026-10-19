@@ -6,8 +6,12 @@ on:
       mode:
         description: 'check: Buffer; telegram-check: права бота; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
         type: choice
-        options: [check, telegram-check, demo, preview, draft, publish]
+        options: [check, telegram-check, demo, preview, draft, publish, carousel-auto]
         default: check
+      topic:
+        description: 'Тема карусели, например: кармический хвост 15–5–8'
+        type: string
+        default: 'кармический хвост 15–5–8'
       targets:
         description: 'Цели через запятую: tiktok,pinterest,telegram. Telegram доступен только при publish.'
         type: string
@@ -52,6 +56,7 @@ jobs:
       TARGETS: ${{ github.event_name == 'schedule' && vars.DAILY_TARGETS || inputs.targets }}
       ALLOW_PUBLISH: ${{ github.event_name == 'schedule' && vars.ENABLE_DAILY == 'true' || inputs.approve_publication }}
       DEMO_CONTENT: ${{ github.event_name == 'workflow_dispatch' && inputs.demo_content }}
+      TOPIC: ${{ inputs.topic || 'кармический хвост 15–5–8' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -60,6 +65,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
+      - name: Подготовка Manrope по контрольной сумме
+        run: python -c "from carousel import ensure_font; ensure_font()"
       - name: Проверки без публикации
         run: python -m unittest discover -s tests -v
       - name: Запуск
@@ -69,15 +76,20 @@ jobs:
             python check_buffer.py
           elif [[ "$MODE" == "telegram-check" ]]; then
             python check_telegram.py
+          elif [[ "$MODE" == "carousel-auto" ]]; then
+            extra=()
+            if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
+            python agent.py carousel-auto --topic "$TOPIC" --batch "auto-${GITHUB_RUN_ID}" "${extra[@]}"
           else
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
             python agent.py "$MODE" --targets "$TARGETS" "${extra[@]}"
           fi
       - uses: actions/upload-artifact@v4
-        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview')
+        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto')
         with:
           name: quantafate-preview
           path: output/
           retention-days: 3
           if-no-files-found: ignore
+
