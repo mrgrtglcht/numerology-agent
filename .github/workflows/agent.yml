@@ -1,0 +1,81 @@
+name: QuantaFate
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'check: доступ; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
+        type: choice
+        options: [check, demo, preview, draft, publish]
+        default: check
+      targets:
+        description: 'Цели через запятую: tiktok,pinterest,telegram. Telegram доступен только при publish.'
+        type: string
+        default: tiktok
+      demo_content:
+        description: 'Тестовый текст без обращения к Gemini'
+        type: boolean
+        default: true
+      approve_publication:
+        description: 'Разрешаю публичную публикацию этих карточек (только режим publish)'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '17 16 * * *'
+
+concurrency:
+  group: quantafate-delivery
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  agent:
+    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_DAILY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      PYTHONIOENCODING: utf-8
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
+      GEMINI_FREE_TIER_CONFIRMED: ${{ vars.GEMINI_FREE_TIER_CONFIRMED }}
+      BUFFER_TIKTOK_CHANNEL_ID: ${{ vars.BUFFER_TIKTOK_CHANNEL_ID }}
+      BUFFER_PINTEREST_CHANNEL_ID: ${{ vars.BUFFER_PINTEREST_CHANNEL_ID }}
+      PINTEREST_BOARD_ID: ${{ vars.PINTEREST_BOARD_ID }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ vars.TELEGRAM_CHANNEL_ID }}
+      GITHUB_TOKEN: ${{ github.token }}
+      MEDIA_BRANCH: ${{ github.event.repository.default_branch }}
+      MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
+      TARGETS: ${{ github.event_name == 'schedule' && vars.DAILY_TARGETS || inputs.targets }}
+      ALLOW_PUBLISH: ${{ github.event_name == 'schedule' && vars.ENABLE_DAILY == 'true' || inputs.approve_publication }}
+      DEMO_CONTENT: ${{ github.event_name == 'workflow_dispatch' && inputs.demo_content }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Проверки без публикации
+        run: python -m unittest discover -s tests -v
+      - name: Запуск
+        shell: bash
+        run: |
+          if [[ "$MODE" == "check" ]]; then
+            python check_buffer.py
+          else
+            extra=()
+            if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
+            python agent.py "$MODE" --targets "$TARGETS" "${extra[@]}"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview')
+        with:
+          name: quantafate-preview
+          path: output/
+          retention-days: 3
+          if-no-files-found: ignore
