@@ -1,0 +1,30 @@
+{
+  "content": {
+    "title": "Три вопроса для знакомства с собой",
+    "caption": "Что даёт тебе силы? Вспомни приятный момент недели и выбери один небольшой шаг на сегодня. Сохрани эти вопросы для саморефлексии. #самопознание #quantaura",
+    "slides": [
+      {
+        "title": "Что даёт тебе силы?",
+        "body": "Вспомни занятие, после которого появляется больше энергии."
+      },
+      {
+        "title": "Что хочется сохранить?",
+        "body": "Вспомни один приятный момент этой недели. Что сделало его особенным?"
+      },
+      {
+        "title": "Какой шаг сделаешь сегодня?",
+        "body": "Выбери одно небольшое действие, которое поддержит тебя."
+      }
+    ]
+  },
+  "urls": {
+    "tiktok-01.jpg": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3e8c0f45966dae9662b9e81b2e587ea5f91c651a/media/2026-10-19-publish/tiktok-01.jpg",
+    "tiktok-02.jpg": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/ba600ad067d74ee01ae788ce018792e9abd6816d/media/2026-10-19-publish/tiktok-02.jpg",
+    "tiktok-03.jpg": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3a6e139f6b30616b25337990c3dca45f952f5565/media/2026-10-19-publish/tiktok-03.jpg",
+    "pinterest-pin.jpg": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/984b31e67688599c6c170ce1abfbe81a09de683d/media/2026-10-19-publish/pinterest-pin.jpg"
+  },
+  "targets": [
+    "telegram"
+  ],
+  "deliveries": {}
+}
