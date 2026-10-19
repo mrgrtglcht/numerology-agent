@@ -1,0 +1,42 @@
+name: Verify QuantaFate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.py'
+      - 'tests/**'
+      - 'requirements.txt'
+      - '.github/workflows/verify.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Tests without publication
+        run: python -m unittest discover -s tests -v
+      - name: Read-only Buffer connection check
+        env:
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        run: python check_buffer.py
+      - name: Create sample cards without Gemini or publication
+        run: python agent.py demo --batch github-preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quantafate-test-cards
+          path: output/github-preview/
+          retention-days: 3
