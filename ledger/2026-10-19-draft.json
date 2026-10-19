@@ -36,7 +36,8 @@
       }
     },
     "pinterest": {
-      "state": "sending"
+      "state": "needs_review",
+      "reason": "Buffer отклонил пост: UnexpectedError"
     }
   }
 }
