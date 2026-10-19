@@ -26,5 +26,9 @@
   "targets": [
     "telegram"
   ],
-  "deliveries": {}
+  "deliveries": {
+    "telegram": {
+      "state": "sending"
+    }
+  }
 }
