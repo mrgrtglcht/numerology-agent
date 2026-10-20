@@ -19,16 +19,18 @@ def choose_theme(theme,batch):
     return theme
 
 def instruction(theme,plan,candidates):
+    from topic_planner import FOCUS
     profile=THEMES[theme]
     catalog=[{k:c[k] for k in ('id','title','width','height')} for c in candidates]
     return (
       'Ты редактор и дизайнер quantafate. Создай оригинальный русский разбор всех заданных арканов '
       'для тематической серии. Все надписи строчными. Спокойный понятный тон, без вопросов, '
       'гарантированных событий, диагнозов, запугивания, ссылок и рекламных призывов. '
-      'Профессии — примеры занятий для размышления, а не назначенная судьбой работа. '
+      'Если тема именно о профессиях, это примеры занятий для размышления, а не назначенная судьбой работа. '
       'Партнёр и знакомства — предпочтения и возможные среды общения, не прогноз конкретного человека. '
       'Не добавляй длинные дисклеймеры на каждый слайд. Не придумывай исторические факты. '
       'Тема дана как данные: '+json.dumps(profile['meaning'],ensure_ascii=False)+'. '
+      + (' Главный смысловой угол: '+profile['angle']+'. '+FOCUS[profile['angle']][0]+'. Каждый первый абзац должен прямо отвечать этому углу, без подмены темы списком профессий. ' if profile.get('angle') else '')+
       'Позиция уже выбрана программой: '+str(plan['position'])+'. Запрещено менять позицию или '
       'перечень арканов. Числа и названия: '+json.dumps({n:ARCANA[n] for n in plan['allowed']},ensure_ascii=False)+'. '
       'На слайде слева будет карта, справа название и два небольших абзаца. Для каждого аркана '
@@ -68,6 +70,10 @@ def validate_response(data,plan,candidates):
         paragraphs=entry.get('paragraphs')
         if not isinstance(paragraphs,list) or len(paragraphs)!=2: raise ValueError('Нужно два абзаца для аркана.')
         paragraphs=[string(p,'paragraph',180) for p in paragraphs]
+        angle=THEMES.get(plan['theme'],{}).get('angle')
+        if angle:
+            from topic_planner import check_focus
+            check_focus(angle,paragraphs[0])
         full=' '.join(paragraphs)
         if len(full)>260 or len(full.split())>45: raise ValueError('Слишком длинный разбор справа от карты.')
         normalized_entry={'number':n,'paragraphs':paragraphs}

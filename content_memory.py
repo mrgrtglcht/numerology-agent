@@ -46,7 +46,7 @@ class ContentMemory:
             tmp=self.path.with_suffix('.tmp');tmp.write_text(json.dumps(self.data,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(self.path)
 
     def available(self,owner,wanted):
-        return not any(set(wanted)&set(p['units']) for key,p in self.data['posts'].items() if key!=owner)
+        return not any(set(wanted)&set(p['units']) for key,p in self.data['posts'].items() if key!=owner and p['status']!='rejected')
 
     def reserve(self,owner,config):
         wanted=units(config);text=body(config);fingerprint=digest(text)
@@ -57,6 +57,7 @@ class ContentMemory:
         if not self.available(owner,wanted): raise ValueError('Эта тема и арканы уже подготовлены или опубликованы. Нужна следующая часть или другая тема.')
         tokens=set(normal(text).split())
         for p in self.data['posts'].values():
+            if p['status']=='rejected':continue
             previous=set(normal(p['body']).split())
             if p['fingerprint']==fingerprint or (min(len(tokens),len(previous))>=15 and len(tokens&previous)/len(tokens|previous)>=.9):
                 raise ValueError('Текст повторяет сохранённый пост, даже с другой обложкой.')
@@ -82,6 +83,12 @@ class ContentMemory:
 
     def context(self):
         return [{'title':r['title'],'units':r['units'],'status':r['status']} for r in list(self.data['posts'].values())[-40:]]
+
+    def reject(self,owner,reason):
+        record=self.data['posts'][owner]
+        if record['status']=='published' or any(d['status']=='published' for d in record['deliveries'].values()):
+            raise ValueError('Нельзя освободить от повторов уже опубликованный пост.')
+        record.update(status='rejected',rejection_reason=reason);self.save()
 
     def import_buffer(self,posts):
         for post in posts:

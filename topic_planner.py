@@ -1,5 +1,6 @@
 """Stable semantic angles create new topics without renaming already covered content."""
 import hashlib
+import re
 from matrix_rules import THEMES,series_plan
 from position_catalog import catalog
 from content_memory import units
@@ -21,6 +22,23 @@ GROUP_ANGLES={'character':('strength','shadow','practice','communication','bound
  'talent':('strength','practice','learning','creativity','motivation'),
  'work':('strength','practice','cooperation','work_rhythm','motivation'),
  'love':('communication','boundaries','cooperation','values','practice')}
+
+FOCUS={
+ 'strength':('назови конкретное сильное качество и его проявление; не перечисляй профессии',r'сильн|легко|получа|уме|способност|талант|опор'),
+ 'shadow':('назови привычку, которая может мешать, и способ её заметить',r'меша|сложн|перекос|застрева|чрезмер'),
+ 'practice':('предложи конкретное небольшое действие, которое можно попробовать',r'попроб|начни|выдел|запиш|практик|сдела|тренир|развив'),
+ 'communication':('объясни способ общения и приведи пример формулировки',r'общени|общать|диалог|слуш|говор|обсужд|слов'),
+ 'boundaries':('объясни, как обозначать личные границы и договариваться',r'границ|отказ|предел|соглас|договар'),
+ 'cooperation':('объясни взаимодействие с другими людьми в совместном деле',r'команд|сотруд|вместе|партн|договар|совмест|делег'),
+ 'learning':('опиши способ учиться и осваивать знания; не перечисляй рабочие должности',r'обуч|учиться|учёб|учеб|знани|осва|повтор|конспект|практик'),
+ 'creativity':('опиши конкретный способ создавать идеи и творчески выражаться',r'твор|иде|образ|созда|воображ|эксперимент'),
+ 'work_rhythm':('опиши темп, режим и организацию работы',r'ритм|темп|режим|перерыв|план|задач'),
+ 'motivation':('начни с того, что вдохновляет, заинтересовывает или поддерживает вовлечённость; не перечисляй профессии',r'мотивац|вдохнов|интерес|увлеч|вовлеч|заряж|поддерж'),
+ 'values':('назови ценность или приоритет и покажи его в повседневном выборе',r'важн|ценн|выбира|приоритет|уваж')}
+
+def check_focus(angle,paragraph):
+    if angle in FOCUS and not re.search(FOCUS[angle][1],paragraph.lower()):
+        raise ValueError('Описание не отвечает выбранной теме. Смена заголовка не делает текст новым.')
 
 def register_topics():
     positions=catalog()

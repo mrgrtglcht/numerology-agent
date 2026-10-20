@@ -265,13 +265,14 @@
           "checked_at": "2026-10-20T15:55:37.325753+00:00"
         }
       ],
-      "status": "prepared",
+      "status": "rejected",
       "created_at": "2026-10-20T15:56:10.304864+00:00",
       "deliveries": {},
       "formats": [
         "tiktok",
         "pinterest"
-      ]
+      ],
+      "rejection_reason": "тема мотивации подменена перечнем профессий; не публиковать"
     }
   }
 }

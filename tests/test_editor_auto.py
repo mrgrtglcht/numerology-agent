@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 from matrix_rules import THEMES,domains,series_plan
 from position_catalog import catalog
-from topic_planner import register_topics,choose
+from topic_planner import register_topics,choose,check_focus
 from content_memory import ContentMemory,units
 from web_research import Article,excerpt,safe
 import arcana_series
@@ -53,9 +53,22 @@ class EditorTests(unittest.TestCase):
         p['allowed']=[1,2,3,4];p['background_count']=1
         research=[{'id':'position'}]+[{'id':f'arcana-{n}'} for n in p['allowed']]
         data={'selected':[{'id':'b1','focus':[.5,.5],'reason':'готическое окно'}],'caption':'пример',
-          'entries':[{'number':n,'paragraphs':['первый абзац','второй абзац'],'source_ids':['position',f'arcana-{n}']} for n in p['allowed']]}
+          'entries':[{'number':n,'paragraphs':['учиться помогает практика','второй абзац'],'source_ids':['position',f'arcana-{n}']} for n in p['allowed']]}
         with patch.dict(THEMES[key],{'research_context':research}):
             self.assertEqual(len(arcana_series.validate_response(data,p,[{'id':'b1'}])['entries']),4)
             data['entries'][0]['source_ids']=['position','arcana-2']
             with self.assertRaises(ValueError):arcana_series.validate_response(data,p,[{'id':'b1'}])
+
+    def test_new_motivation_title_cannot_mask_a_profession_list(self):
+        with self.assertRaises(ValueError):check_focus('motivation','подходят дизайн, преподавание и управление проектами.')
+        check_focus('motivation','тебя вдохновляет видимый результат и возможность создать что-то своё.')
+
+    def test_rejected_unpublished_draft_is_retained_but_does_not_occupy_topic(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m=ContentMemory(Path(tmp)/'memory.json')
+            c={'topic':'тема','caption':'неудачный текст'};m.reserve('a',c)
+            m.reject('a','не отвечает теме')
+            self.assertTrue(m.available('b',units(c)));self.assertIn('a',m.data['posts'])
+            m.reserve('b',c);m.delivery('b','tiktok','published')
+            with self.assertRaises(ValueError):m.reject('b','нельзя забыть публикацию')
 
