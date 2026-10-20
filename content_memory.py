@@ -53,6 +53,7 @@ class ContentMemory:
         if owner in self.data['posts']:
             old=self.data['posts'][owner]
             if old['units']!=wanted or old['fingerprint']!=fingerprint: raise ValueError('Под этим именем уже сохранён другой контент.')
+            if not old.get('content'): old['content']=config;self.save()
             return
         if not self.available(owner,wanted): raise ValueError('Эта тема и арканы уже подготовлены или опубликованы. Нужна следующая часть или другая тема.')
         tokens=set(normal(text).split())
@@ -62,6 +63,7 @@ class ContentMemory:
             if p['fingerprint']==fingerprint or (min(len(tokens),len(previous))>=15 and len(tokens&previous)/len(tokens|previous)>=.9):
                 raise ValueError('Текст повторяет сохранённый пост, даже с другой обложкой.')
         self.data['posts'][owner]={'units':wanted,'fingerprint':fingerprint,'body':text,
+          'content':config,
           'title':config.get('title') or config.get('topic') or config.get('theme'),
           'theme':config.get('theme'),'position':config.get('position'),'arcana':config.get('part_arcana',[]),
           'tail':config.get('tail_numbers'),'part':config.get('part'),'sources':config.get('research_sources',[]),'status':'reserved',

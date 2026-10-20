@@ -12,6 +12,11 @@ def identities(source):
 def visually_same(a,b):
     return bool(a and b) and (int(a,16)^int(b,16)).bit_count()<=6
 
+def duplicate_visual(source,record):
+    a=source.get('visual_hashes') or [source.get('visual_hash')]
+    b=record.get('visual_hashes') or [record.get('visual_hash')]
+    return any(visually_same(x,y) for x in a for y in b)
+
 class BackgroundHistory:
     def __init__(self,path=None,store=None):
         self.path=Path(path) if path else ROOT/PATH
@@ -38,9 +43,9 @@ class BackgroundHistory:
             if key in posts:
                 if not ids & set(posts[key]['identities']): raise ValueError('Фон уже закреплён за этой каруселью.')
                 continue
-            if any(ids & set(record['identities']) or visually_same(source.get('visual_hash'),record.get('visual_hash')) for record in posts.values()):
+            if any(ids & set(record['identities']) or duplicate_visual(source,record) for record in posts.values()):
                 raise ValueError('Этот фон уже использован в другой карусели. Нужен новый.')
-            posts[key]={'batch':batch,'part':number,'identities':sorted(ids),'page':source.get('page'),'title':source.get('title'),'visual_hash':source.get('visual_hash')}
+            posts[key]={'batch':batch,'part':number,'identities':sorted(ids),'page':source.get('page'),'title':source.get('title'),'visual_hash':source.get('visual_hash'),'visual_hashes':source.get('visual_hashes',[])}
         self.data={'version':1,'posts':posts}
         if self.store: self.store.save_state(PATH,self.data)
         else:

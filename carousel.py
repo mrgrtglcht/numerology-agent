@@ -55,6 +55,15 @@ def text(draw,value,x,y,size,bold=False,width=850,gap=None):
         y+=step
     return y
 
+def fitted_paragraphs(draw,values,x,y,width,bottom,size=40,min_size=36,gap=44):
+    for candidate in range(size,min_size-1,-2):
+        font=face(candidate)
+        end=y+sum(len(lines(draw,value.lower(),font,width))*round(candidate*1.28)+gap for value in values)
+        if end<=bottom:
+            for value in values:y=text(draw,value,x,y,candidate,width=width)+gap
+            return y
+    raise ValueError('Текст не помещается при минимальном читаемом размере шрифта.')
+
 def background(path,size,focus):
     im=ImageOps.exif_transpose(Image.open(path)).convert('RGB')
     im=ImageOps.fit(im,size,method=Image.Resampling.LANCZOS,centering=tuple(focus))
@@ -176,7 +185,7 @@ def render(config_path=None, output=None, background_dir=None):
             art=art.resize((312,598),Image.Resampling.LANCZOS)
             im.paste(art,(90,480),art); d=ImageDraw.Draw(im)
             y=max(650,y)
-            for paragraph in s['paragraphs']: y=text(d,paragraph,460,y,40,width=500)+44
+            y=fitted_paragraphs(d,s['paragraphs'],460,y,500,1510)
             if y>1510: raise ValueError(f'Аркан {number}: текст не помещается справа от карты.')
         elif s['layout']=='bot':
             text(d,BOT_CTA,90,420,64,True,width=850)

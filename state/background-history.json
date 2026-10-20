@@ -73,6 +73,37 @@
       "page": "https://commons.wikimedia.org/wiki/File:Juliet_Balcony,_University_of_Sydney_(14281701626).jpg",
       "title": "File:Juliet Balcony, University of Sydney (14281701626).jpg",
       "visual_hash": "9199a3e3cb83c70c"
+    },
+    "quantafate-editor-focused/part-01": {
+      "batch": "quantafate-editor-focused",
+      "part": 1,
+      "identities": [
+        "original_sha1:56da6ba0cc7b1b77833f98006acbf30c1d6e77af",
+        "page:https://commons.wikimedia.org/wiki/File:Wall_Detail,_StAugustine%27s,_Bourke_Street,_Melbourne_Australia_(4590275828).jpg",
+        "sha256:40bf4e372fda75eff0ee12299e4468e351fd6de1f53aee68233ab55b6c8ae972",
+        "url:https://upload.wikimedia.org/wikipedia/commons/1/1a/Wall_Detail%2C_StAugustine%27s%2C_Bourke_Street%2C_Melbourne_Australia_%284590275828%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Wall_Detail,_StAugustine%27s,_Bourke_Street,_Melbourne_Australia_(4590275828).jpg",
+      "title": "File:Wall Detail, StAugustine's, Bourke Street, Melbourne Australia (4590275828).jpg",
+      "visual_hash": "f4dc68f0f9696064",
+      "visual_hashes": [
+        "f4dc68f0f9696064",
+        "c4dc60b0b9696860",
+        "c45c60b8b9696862",
+        "c4dc60bcb9696962",
+        "f4dcc8f0f8696864",
+        "d4dce0f0b8696860",
+        "d4dce0b8b8696962",
+        "d4dce03cb8696968",
+        "d2dec870fc696966",
+        "d2dec070fc686962",
+        "c6dce038fc686962",
+        "dedce03cfc706968",
+        "d28ac8717cd46966",
+        "ca8ac0707cd46962",
+        "ca8ee0787cd46969",
+        "8acee03c7cd46d69"
+      ]
     }
   }
 }

@@ -111,7 +111,14 @@ def download_selection(candidates,selections,folder):
             pixels=list(ImageOps.grayscale(thumb).resize((9,8),Image.Resampling.LANCZOS).getdata())
             bits=[pixels[y*9+x]>pixels[y*9+x+1] for y in range(8) for x in range(8)]
             visual_hash=f'{sum(int(bit)<<i for i,bit in enumerate(bits)):016x}'
-        item.update({'visual_hash':visual_hash,'file':path.name,'focus':selection['focus'],
+        with Image.open(path) as original:
+            w,h=original.size;variants=[]
+            for mx in (0,.04,.08,.12):
+                for my in (0,.04,.08,.12):
+                    pixels=list(ImageOps.grayscale(original.crop((w*mx,h*my,w*(1-mx),h*(1-my)))).resize((9,8),Image.Resampling.LANCZOS).getdata())
+                    bits=[pixels[y*9+x]>pixels[y*9+x+1] for y in range(8) for x in range(8)]
+                    variants.append(f'{sum(int(bit)<<i for i,bit in enumerate(bits)):016x}')
+        item.update({'visual_hash':visual_hash,'visual_hashes':variants,'file':path.name,'focus':selection['focus'],
                      'selection_reason':selection['reason'],
                      'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
                      'modifications':'cropped to 9:16, darkened, overlaid with text'})

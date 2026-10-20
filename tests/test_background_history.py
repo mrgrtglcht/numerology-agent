@@ -32,6 +32,13 @@ class BackgroundHistoryTests(unittest.TestCase):
             h.reserve('a',{1:{'page':'first','visual_hash':'aabbccdd00112233'}})
             with self.assertRaises(ValueError): h.reserve('b',{1:{'page':'second','visual_hash':'aabbccdd00112232'}})
 
+    def test_frame_or_crop_variant_cannot_bypass_image_history(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            h=BackgroundHistory(Path(tmp)/'history.json')
+            h.reserve('a',{1:{'page':'original','visual_hash':'aabbccdd00112233'}})
+            with self.assertRaises(ValueError):
+                h.reserve('b',{1:{'page':'framed','visual_hash':'0000000000000000','visual_hashes':['0000000000000000','aabbccdd00112233']}})
+
     def test_each_carousel_has_one_background_and_parts_are_distinct(self):
         plan=series_plan('profession')
         response={'caption':'пример','entries':[{'number':n,'paragraphs':['абзац','абзац']} for n in plan['allowed']]}

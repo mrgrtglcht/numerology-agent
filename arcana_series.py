@@ -75,7 +75,7 @@ def validate_response(data,plan,candidates):
             from topic_planner import check_focus
             check_focus(angle,paragraphs[0])
         full=' '.join(paragraphs)
-        if len(full)>260 or len(full.split())>45: raise ValueError('Слишком длинный разбор справа от карты.')
+        if len(full)>300 or len(full.split())>45: raise ValueError('Слишком длинный разбор справа от карты.')
         normalized_entry={'number':n,'paragraphs':paragraphs}
         research=THEMES.get(plan['theme'],{}).get('research_context')
         if research:

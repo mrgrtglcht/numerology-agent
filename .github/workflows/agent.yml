@@ -110,7 +110,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto' || inputs.mode == 'series-auto' || inputs.mode == 'editor-auto')
         with:
-          name: quantafate-preview
+          name: quantafate-preview-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             output/
             !output/series-*/part-*/slides/**

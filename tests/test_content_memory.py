@@ -24,6 +24,7 @@ class ContentMemoryTests(unittest.TestCase):
             m=ContentMemory(Path(tmp)/'memory.json');m.reserve('a',config())
             m.format_ready('a','tiktok');m.format_ready('a','pinterest')
             self.assertEqual(len(m.data['posts']),1)
+            self.assertEqual(m.data['posts']['a']['content'],config())
             self.assertEqual(m.data['posts']['a']['status'],'prepared')
             m.delivery('a','pinterest','accepted',{'status':'scheduled'})
             self.assertEqual(m.data['posts']['a']['status'],'prepared')

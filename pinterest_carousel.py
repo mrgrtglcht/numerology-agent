@@ -3,7 +3,7 @@ import json
 import zipfile
 from pathlib import Path
 from PIL import Image,ImageDraw
-from carousel import background,text,position_diagram,matrix_diagram
+from carousel import background,text,position_diagram,matrix_diagram,fitted_paragraphs
 
 SIZE=(1000,1500)
 from brand import BOT_CTA as BOT
@@ -65,8 +65,8 @@ def render(config,output,backgrounds,cards=None):
             art=Image.open(cards[n]).convert('RGBA').resize((260,498),Image.Resampling.LANCZOS)
             im.paste(art,(70,355),art);d=ImageDraw.Draw(im)
             y=max(y,465)
-            for paragraph in s['paragraphs']: y=text(d,paragraph,390,y,36,width=540)+32
             limit=1145 if s.get('bot_footer') else 1340
+            y=fitted_paragraphs(d,s['paragraphs'],390,y,540,limit,size=36,min_size=32,gap=32)
             if y>limit: raise ValueError('Текст аркана не помещается в pinterest.')
             if s.get('bot_footer'):
                 d.line((70,1190,930,1190),fill='#B3B8AC',width=1)
