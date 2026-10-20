@@ -60,6 +60,19 @@
       "page": "https://commons.wikimedia.org/wiki/File:Interior_of_a_Gothic_Cathedral_LACMA_49.17.5.jpg",
       "title": "File:Interior of a Gothic Cathedral LACMA 49.17.5.jpg",
       "visual_hash": "296a66ececaa0945"
+    },
+    "editor-39452815047/part-01": {
+      "batch": "editor-39452815047",
+      "part": 1,
+      "identities": [
+        "original_sha1:a69b3fbc76ac11fbfb946e0248dd15527fffa9b8",
+        "page:https://commons.wikimedia.org/wiki/File:Juliet_Balcony,_University_of_Sydney_(14281701626).jpg",
+        "sha256:b4e5035d8d588feca974b9dcb860c7e5760f9c520b10b144d9bee409cfc25721",
+        "url:https://upload.wikimedia.org/wikipedia/commons/9/9f/Juliet_Balcony%2C_University_of_Sydney_%2814281701626%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Juliet_Balcony,_University_of_Sydney_(14281701626).jpg",
+      "title": "File:Juliet Balcony, University of Sydney (14281701626).jpg",
+      "visual_hash": "9199a3e3cb83c70c"
     }
   }
 }
