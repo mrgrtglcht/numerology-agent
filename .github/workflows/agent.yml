@@ -6,7 +6,7 @@ on:
       mode:
         description: 'check: Buffer; telegram-check: права бота; demo: карточки; preview: Gemini; draft: черновики; publish: публикация'
         type: choice
-        options: [check, telegram-check, demo, preview, draft, publish, carousel-auto, series-auto]
+        options: [check, telegram-check, demo, preview, draft, publish, carousel-auto, series-auto, editor-auto]
         default: check
       topic:
         description: 'Тема карусели, например: кармический хвост 15–5–8'
@@ -81,7 +81,7 @@ jobs:
       - name: Проверки без публикации
         run: python -m unittest discover -s tests -v
       - name: Обновить память контента без отправок
-        if: github.event_name == 'schedule' || inputs.demo_content != true && (inputs.mode == 'series-auto' || inputs.mode == 'carousel-auto' || inputs.mode == 'publish' || inputs.mode == 'draft')
+        if: github.event_name == 'schedule' || inputs.demo_content != true && (inputs.mode == 'editor-auto' || inputs.mode == 'series-auto' || inputs.mode == 'carousel-auto' || inputs.mode == 'publish' || inputs.mode == 'draft')
         run: python sync_content_memory.py
       - name: Запуск
         shell: bash
@@ -94,6 +94,10 @@ jobs:
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
             python agent.py carousel-auto --topic "$TOPIC" --batch "auto-${GITHUB_RUN_ID}" "${extra[@]}"
+          elif [[ "$MODE" == "editor-auto" ]]; then
+            extra=()
+            if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--plan-only); fi
+            python agent.py editor-auto --batch "editor-${GITHUB_RUN_ID}" "${extra[@]}"
           elif [[ "$MODE" == "series-auto" ]]; then
             extra=()
             if [[ "$DEMO_CONTENT" == "true" ]]; then extra+=(--demo-content); fi
@@ -104,7 +108,7 @@ jobs:
             python agent.py "$MODE" --targets "$TARGETS" "${extra[@]}"
           fi
       - uses: actions/upload-artifact@v4
-        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto' || inputs.mode == 'series-auto')
+        if: always() && (inputs.mode == 'demo' || inputs.mode == 'preview' || inputs.mode == 'carousel-auto' || inputs.mode == 'series-auto' || inputs.mode == 'editor-auto')
         with:
           name: quantafate-preview
           path: |
@@ -113,6 +117,10 @@ jobs:
             !output/series-*/part-*/carousel.zip
             !output/series-*/part-*/pinterest/slides/**
             !output/series-*/part-*/pinterest/carousel.zip
+            !output/editor-*/part-*/slides/**
+            !output/editor-*/part-*/carousel.zip
+            !output/editor-*/part-*/pinterest/slides/**
+            !output/editor-*/part-*/pinterest/carousel.zip
           retention-days: 3
           if-no-files-found: ignore
 

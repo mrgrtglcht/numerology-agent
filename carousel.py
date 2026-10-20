@@ -6,6 +6,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+from brand import BOT_CTA
 
 ROOT=Path(__file__).resolve().parent
 ASSETS=ROOT/'assets'
@@ -139,6 +140,8 @@ def render(config_path=None, output=None, background_dir=None):
         raise ValueError('В кармический хвост карты таро не добавляются.')
     cards={}
     if is_series:
+        from topic_planner import register_topics
+        register_topics()
         from matrix_rules import THEMES,allowed
         from tarot_assets import prepare
         profile=THEMES[c['theme']]
@@ -176,7 +179,7 @@ def render(config_path=None, output=None, background_dir=None):
             for paragraph in s['paragraphs']: y=text(d,paragraph,460,y,40,width=500)+44
             if y>1510: raise ValueError(f'Аркан {number}: текст не помещается справа от карты.')
         elif s['layout']=='bot':
-            text(d,'разобрать свою матрицу судьбы можешь в боте @quantafate',90,420,64,True,width=850)
+            text(d,BOT_CTA,90,420,64,True,width=850)
             # Original matrix illustration, using the same real example as the series.
             if c.get('example_points'):
                 position_diagram(d,540,1120,None,c['example_points'],radius=285)

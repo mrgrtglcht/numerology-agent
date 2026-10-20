@@ -14,7 +14,9 @@ def digest(value): return hashlib.sha256(normal(value).encode()).hexdigest()
 
 def units(config):
     if config.get('type')=='arcana_series':
-        return [f'arcana:{config["theme"]}:{config.get("position")}:{n}' for n in config['part_arcana']]
+        from matrix_rules import THEMES
+        key=THEMES.get(config['theme'],{}).get('semantic_key',config['theme'])
+        return [f'arcana:{key}:{config.get("position")}:{n}' for n in config['part_arcana']]
     if config.get('tail_numbers'): return ['tail:'+','.join(map(str,config['tail_numbers']))]
     return ['topic:'+normal(config.get('topic') or config.get('title') or config.get('caption'))]
 
@@ -61,7 +63,7 @@ class ContentMemory:
         self.data['posts'][owner]={'units':wanted,'fingerprint':fingerprint,'body':text,
           'title':config.get('title') or config.get('topic') or config.get('theme'),
           'theme':config.get('theme'),'position':config.get('position'),'arcana':config.get('part_arcana',[]),
-          'tail':config.get('tail_numbers'),'part':config.get('part'),'status':'reserved',
+          'tail':config.get('tail_numbers'),'part':config.get('part'),'sources':config.get('research_sources',[]),'status':'reserved',
           'created_at':datetime.now(timezone.utc).isoformat(),'deliveries':{},'formats':[]}
         self.save()
 

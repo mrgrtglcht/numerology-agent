@@ -6,7 +6,7 @@ from PIL import Image,ImageDraw
 from carousel import background,text,position_diagram,matrix_diagram
 
 SIZE=(1000,1500)
-BOT='разобрать свою матрицу судьбы можешь в боте @quantafate'
+from brand import BOT_CTA as BOT
 
 def plan(config):
     slides=config['slides'];arcana=[s for s in slides if s['layout']=='arcana']

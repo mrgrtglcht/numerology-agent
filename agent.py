@@ -220,7 +220,8 @@ def send_telegram(content, urls):
 def main():
     load_env()
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish', 'carousel', 'carousel-auto', 'series-auto'])
+    parser.add_argument('mode', choices=['demo', 'preview', 'draft', 'publish', 'carousel', 'carousel-auto', 'series-auto', 'editor-auto'])
+    parser.add_argument('--plan-only',action='store_true',help='Поиск темы и источников без Gemini и рендера.')
     parser.add_argument('--series-theme',default='profession')
     parser.add_argument('--part',type=int,default=0,help='0: все части серии; иначе номер части.')
     parser.add_argument('--content', type=Path, help='Локальный JSON для карусели в согласованном стиле.')
@@ -231,6 +232,11 @@ def main():
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,60}', args.batch):
         raise SafeError('Недопустимое имя серии.')
+    if args.mode == 'editor-auto':
+        from editor_auto import run as editor
+        try: editor(ROOT/'output'/args.batch,plan_only=args.plan_only)
+        except ValueError as error: raise SafeError(str(error)) from None
+        return
     if args.mode == 'series-auto':
         from arcana_series import run as run_series
         try: run_series(args.series_theme,ROOT/'output'/args.batch,part=args.part,demo=args.demo_content)
