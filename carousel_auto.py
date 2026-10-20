@@ -119,7 +119,7 @@ def generate_visual(instruction,candidates,max_tokens=6500,diagnostic_path=None)
     diagnostic({'stage':'request_dispatched','image_count':len(candidates)})
     result=agent.request_json('Gemini',f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
         {'contents':[{'parts':parts}], 'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':max_tokens}},
-        {'x-goog-api-key':key})
+        {'x-goog-api-key':key},timeout=90)
     diagnostic({'stage':'response_received','candidate_count':len(result.get('candidates',[]))})
     try:
         candidate=result['candidates'][0]

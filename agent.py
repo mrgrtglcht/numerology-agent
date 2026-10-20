@@ -15,6 +15,9 @@ from pathlib import Path
 
 from cards import card
 
+# Internal modules import agent; share this module and its exception type in CLI runs.
+if __name__=='__main__': sys.modules['agent']=sys.modules[__name__]
+
 ROOT = Path(__file__).parent
 
 
@@ -38,13 +41,13 @@ def required(name):
     return value
 
 
-def request_json(label, url, payload=None, headers=None, method=None, missing_ok=False):
+def request_json(label, url, payload=None, headers=None, method=None, missing_ok=False,timeout=45):
     request = urllib.request.Request(url,
         data=None if payload is None else json.dumps(payload).encode(),
         headers={'Content-Type': 'application/json', 'User-Agent': 'QuantaFate/1.0', **(headers or {})},
         method=method or ('GET' if payload is None else 'POST'))
     try:
-        with urllib.request.urlopen(request, timeout=45) as response:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             return json.load(response)
     except urllib.error.HTTPError as error:
         if missing_ok and error.code == 404:
