@@ -1804,10 +1804,12 @@
           "checked_at": "2026-10-20T16:57:36.873042+00:00"
         }
       ],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-10-20T16:57:57.229768+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "telegram"
+      ]
     }
   }
 }
