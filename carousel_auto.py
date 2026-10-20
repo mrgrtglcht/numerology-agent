@@ -102,7 +102,7 @@ def generate(topic,candidates):
     return generate_visual(prompt(topic,candidates),candidates,6500)
 
 
-def generate_visual(instruction,candidates,max_tokens=6500):
+def generate_visual(instruction,candidates,max_tokens=6500,diagnostic_path=None):
     # Reuse the project's existing quota guard and HTTP handling; no fallback calls.
     import agent
     if agent.os.environ.get('GEMINI_FREE_TIER_CONFIRMED')!='true':
@@ -114,13 +114,19 @@ def generate_visual(instruction,candidates,max_tokens=6500):
     for c in candidates:
         parts.extend([{'text':'изображение '+c['id']},
                       {'inlineData':{'mimeType':'image/jpeg','data':base64.b64encode(Path(c['local_thumbnail']).read_bytes()).decode()}}])
+    def diagnostic(value):
+        if diagnostic_path: Path(diagnostic_path).write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding='utf-8')
+    diagnostic({'stage':'request_dispatched','image_count':len(candidates)})
     result=agent.request_json('Gemini',f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
         {'contents':[{'parts':parts}], 'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':max_tokens}},
         {'x-goog-api-key':key})
+    diagnostic({'stage':'response_received','candidate_count':len(result.get('candidates',[]))})
     try:
         candidate=result['candidates'][0]
-        if candidate.get('finishReason')!='STOP': raise ValueError('Незавершённый ответ модели.')
         text=''.join(p.get('text','') for p in candidate['content']['parts'] if not p.get('thought'))
+        if diagnostic_path: Path(diagnostic_path).with_name('raw-model-output.txt').write_text(text,encoding='utf-8')
+        diagnostic({'stage':'response_received','finish_reason':candidate.get('finishReason'),'text_chars':len(text)})
+        if candidate.get('finishReason')!='STOP': raise ValueError('Незавершённый ответ модели.')
         return json.loads(text)
     except (KeyError,IndexError,TypeError,json.JSONDecodeError):
         raise ValueError('Модель не вернула законченный JSON; автоматического повтора нет.') from None
