@@ -25,6 +25,18 @@ def due_telegram(now):
     return now.weekday() in (2,6) and now.hour==18 and now.minute>=30
 
 
+def bootstrap_telegram_history(store):
+    """Known public author post, read with the owner's authorization as a style reference."""
+    memory=ContentMemory(store=store);owner='telegram/quantafate/3'
+    if owner in memory.data['posts']:return
+    style=json.loads((ROOT/'telegram_style.json').read_text(encoding='utf-8'))
+    config={'topic':'приветствие quantafate','title':'приветствие quantafate',
+      'caption':style['reference'],'slides':[{'body':style['reference']}],
+      'source_url':style['reference_url']}
+    memory.reserve(owner,config);memory.format_ready(owner,'telegram')
+    memory.delivery(owner,'telegram','published',{'message_id':3,'url':style['reference_url']})
+
+
 def channel_info():
     target=required('BUFFER_TIKTOK_CHANNEL_ID')
     orgs=buffer('query CloudOrgs {account {organizations {id}}}')['account']['organizations']
@@ -146,7 +158,8 @@ def generate_telegram(folder,memory):
     topic,dossier=plan(folder,memory=planning)
     # Image on every fourth article; choose it in the same model request.
     candidates=[]
-    if (len(articles)+1)%4==0:
+    published_articles=sum(p['status']=='published' for p in articles)
+    if (published_articles+1)%4==0:
         from backgrounds import search_candidates,thumbnails
         from background_history import BackgroundHistory
         history=BackgroundHistory()
@@ -158,7 +171,7 @@ def generate_telegram(folder,memory):
       'Тема: '+json.dumps(topic,ensure_ascii=False)+'. Значение позиции: '+THEMES[topic['theme']]['meaning']+'. '
       'Выбери один конкретный аспект темы, объясни его, приведи 2–3 бытовых примера и практическое наблюдение. '
       'Арканы: '+json.dumps(topic['arcana'])+'. Не составляй короткий каталог карусели. '
-      'Используй источники, но не копируй длинные цитаты. Различай символическую трактовку и проверяемый факт. '
+      'Используй источники, но не копируй длинные цитаты. Различай символическую трактовку и проверяемый факт; один раз естественно обозначь, что речь о символической трактовке матрицы, без длинного дисклеймера. '
       'Без гарантий будущего, исторических выдумок, медицинских/финансовых советов и запугивания. '
       'Не рекламируй и не упоминай бота. Не используй markdown, HTML, ссылки или @имена. '
       'От 1800 до 3400 знаков, 5–9 коротких абзацев, всё строчными. '
@@ -255,14 +268,31 @@ def run_target(target,store,preview=False,now=None):
 
 
 def main():
-    load_env();p=argparse.ArgumentParser();p.add_argument('mode',choices=['check','preview','publish','scheduled']);p.add_argument('--target',choices=TARGETS,default='tiktok');a=p.parse_args()
+    load_env();p=argparse.ArgumentParser();p.add_argument('mode',choices=['check','preview','publish','scheduled','publish-prepared']);p.add_argument('--target',choices=TARGETS,default='tiktok');p.add_argument('--folder',type=Path);a=p.parse_args()
     os.environ['PUBLICATION_ASSETS']='true'
     if a.mode=='check':
         c=channel_info();print('TikTok:',c['name'],'расписание:',json.dumps(c['postingSchedule']))
         from check_telegram import check
         print(json.dumps(check(),ensure_ascii=False));return
-    if a.mode=='publish' and os.environ.get('ALLOW_PUBLISH')!='true':raise SafeError('Ручная публикация не разрешена.')
+    if a.mode in ('publish','publish-prepared') and os.environ.get('ALLOW_PUBLISH')!='true':raise SafeError('Ручная публикация не разрешена.')
     store=GitHubStore()
+    bootstrap_telegram_history(store)
+    if a.mode=='publish-prepared':
+        if a.target!='tiktok' or not a.folder:raise SafeError('Нужен подготовленный комплект TikTok.')
+        found=[p for p in a.folder.rglob('content.json') if p.parent.name.startswith('part-')]
+        if not found:
+            cached=list(a.folder.rglob('model-response.json'))
+            if len(cached)!=1 or not (cached[0].parent/'editor-plan.json').exists():raise SafeError('Нет готовой карусели или сохранённого ответа.')
+            from editor_auto import plan
+            from arcana_series import run
+            topic,_=plan(cached[0].parent)
+            run(topic['theme'],cached[0].parent,part=topic['part'],cached_only=True)
+            found=[p for p in a.folder.rglob('content.json') if p.parent.name.startswith('part-')]
+        if len(found)!=1:raise SafeError('В артефакте должна быть ровно одна карусель.')
+        part=found[0].parent;owner=part.parent.name+'/'+part.name
+        memory=ContentMemory(store=store);channel_info()
+        if pending_tiktok(memory)>=2:raise SafeError('Очередь уже заполнена.')
+        print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
         targets=[];now=now_local()
         if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and now.hour<12:targets.append('tiktok')

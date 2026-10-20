@@ -58,6 +58,13 @@ class SeriesTests(unittest.TestCase):
             else: r['entries'][0]['number']=r['entries'][1]['number']
             with self.assertRaises(ValueError): series.validate_response(r,plan,[{'id':'b1'}])
 
+    def test_background_wrapper_preserves_validation_and_does_not_invent_ids(self):
+        r=self.fixture();r['background']={'selected':r.pop('selected'),'caption':r.pop('caption')}
+        result=series.validate_response(r,series_plan('profession'),[{'id':'b1'}])
+        self.assertEqual(result['selected'][0]['id'],'b1')
+        r['background']['selected'][0]['id']='unknown'
+        with self.assertRaises(ValueError):series.validate_response(r,series_plan('profession'),[{'id':'b1'}])
+
     def test_composition_has_correct_position_cards_and_bot_final(self):
         plan=series_plan('profession')
         r=series.validate_response(self.fixture(),plan,[{'id':'b1'}])

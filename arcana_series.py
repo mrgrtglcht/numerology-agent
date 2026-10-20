@@ -50,6 +50,13 @@ def instruction(theme,plan,candidates):
 
 def validate_response(data,plan,candidates):
     if not isinstance(data,dict): raise ValueError('Нужен объект JSON для серии.')
+    # A known Gemini variation wraps only the two background fields. Keep every
+    # ID, count, focus, source and text validation below; never invent a selection.
+    if 'selected' not in data and isinstance(data.get('background'),dict):
+        wrapped=data['background']
+        if set(wrapped)<= {'selected','caption'} and 'selected' in wrapped:
+            data={**data,'selected':wrapped['selected']}
+            if 'caption' not in data and 'caption' in wrapped:data['caption']=wrapped['caption']
     selected=data.get('selected'); ids={c['id'] for c in candidates}
     if not isinstance(selected,list) or not 1<=len(selected)<=plan.get('background_count',plan['total_parts']): raise ValueError('Подходящий фон не выбран.')
     seen=set(); selections=[]
@@ -116,7 +123,7 @@ def compose(theme,part,plan,response,sources):
             'part_arcana':numbers,'research_sources':[{k:v for k,v in source.items() if k!='excerpt'} for source in profile.get('research_context',[])],'slides':slides,'caption':response['caption']+f' часть {part} из {plan["total_parts"]}.',
             'typography':{'family':'Manrope','lowercase':True}}
 
-def run(theme,output,part=0,demo=False):
+def run(theme,output,part=0,demo=False,cached_only=False):
     from content_memory import ContentMemory,units
     if theme.startswith('explore_') and theme not in THEMES:
         from topic_planner import register_topics
@@ -161,6 +168,7 @@ def run(theme,output,part=0,demo=False):
     def save(): state_path.write_text(json.dumps(state,ensure_ascii=False,indent=2),encoding='utf-8')
     save()
     if response_path.exists(): raw=json.loads(response_path.read_text(encoding='utf-8'))
+    elif cached_only: raise ValueError('Нет сохранённого ответа; новый запрос запрещён.')
     elif demo:
         if theme!='profession': raise ValueError('Готовый демонстрационный текст есть только для профессий.')
         raw=json.loads((ROOT/'examples/profession-series.json').read_text(encoding='utf-8'))

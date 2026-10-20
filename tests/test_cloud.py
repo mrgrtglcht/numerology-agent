@@ -18,6 +18,14 @@ class Store:
 
 
 class CloudTests(unittest.TestCase):
+    def test_known_public_intro_import_is_idempotent(self):
+        s=Store();cloud.bootstrap_telegram_history(s);cloud.bootstrap_telegram_history(s)
+        memory=ContentMemory(store=s)
+        self.assertEqual(len(memory.data['posts']),1)
+        post=memory.data['posts']['telegram/quantafate/3']
+        self.assertEqual(post['status'],'published')
+        self.assertEqual(post['deliveries']['telegram']['receipt']['message_id'],3)
+
     def test_summer_winter_one_local_slot(self):
         for month,utc_hour in ((7,16),(10,17)):
             day=1 if month==7 else 28 # both Wednesdays in 2026

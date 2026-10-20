@@ -6,7 +6,7 @@ on:
       mode:
         description: 'check — подключения; preview — без отправки; publish — отправка'
         type: choice
-        options: [check, preview, publish]
+        options: [check, preview, publish, publish-prepared]
         default: check
       target:
         description: 'Канал'
@@ -17,6 +17,10 @@ on:
         description: 'Разрешаю ручную отправку (только publish)'
         type: boolean
         default: false
+      source_run:
+        description: 'ID успешного preview TikTok (только publish-prepared)'
+        type: string
+        default: ''
   schedule:
     - cron: '17 5 * * *'
     - cron: '30 16,17 * * 0,3'
@@ -51,6 +55,7 @@ jobs:
       MODE: ${{ github.event_name == 'schedule' && 'scheduled' || inputs.mode }}
       TARGET: ${{ inputs.target || 'tiktok' }}
       ALLOW_PUBLISH: ${{ inputs.approve_publication }}
+      SOURCE_RUN: ${{ inputs.source_run }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -67,7 +72,14 @@ jobs:
         run: python sync_content_memory.py
       - name: Подготовить и отправить контент
         shell: bash
-        run: python cloud_agent.py "$MODE" --target "$TARGET"
+        run: |
+          extra=()
+          if [[ "$MODE" == 'publish-prepared' ]]; then
+            [[ "$SOURCE_RUN" =~ ^[0-9]+$ ]] || exit 1
+            gh run download "$SOURCE_RUN" --pattern 'quantafate-cloud-*' --dir output/restore
+            extra+=(--folder output/restore)
+          fi
+          python cloud_agent.py "$MODE" --target "$TARGET" "${extra[@]}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
