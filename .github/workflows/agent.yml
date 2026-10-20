@@ -80,6 +80,9 @@ jobs:
         run: python -c "from carousel import ensure_font; ensure_font()"
       - name: Проверки без публикации
         run: python -m unittest discover -s tests -v
+      - name: Обновить память контента без отправок
+        if: github.event_name == 'schedule' || inputs.demo_content != true && (inputs.mode == 'series-auto' || inputs.mode == 'carousel-auto' || inputs.mode == 'publish' || inputs.mode == 'draft')
+        run: python sync_content_memory.py
       - name: Запуск
         shell: bash
         run: |
@@ -108,6 +111,8 @@ jobs:
             output/
             !output/series-*/part-*/slides/**
             !output/series-*/part-*/carousel.zip
+            !output/series-*/part-*/pinterest/slides/**
+            !output/series-*/part-*/pinterest/carousel.zip
           retention-days: 3
           if-no-files-found: ignore
 

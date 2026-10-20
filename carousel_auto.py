@@ -145,7 +145,10 @@ def compose(topic,response,sources):
 
 
 def run(topic,output,demo=False):
-    topic=topic.strip().lower(); tail_numbers(topic)
+    topic=topic.strip().lower(); values=tail_numbers(topic)
+    from content_memory import ContentMemory
+    memory=ContentMemory(); owner=Path(output).name+'/part-01'
+    if not memory.available(owner,['tail:'+','.join(map(str,values))]): raise ValueError('Этот кармический хвост уже подготовлен или опубликован.')
     folder=Path(output); folder.mkdir(parents=True,exist_ok=True)
     state_path=folder/'pipeline.json'
     if state_path.exists():
@@ -178,7 +181,7 @@ def run(topic,output,demo=False):
             raise agent.SafeError('Для живого теста нужны настроенные Gemini Free и GEMINI_API_KEY.')
         if state.get('model_requests',0): raise ValueError('Предыдущий запрос модели не подтверждён. Автоматический повтор отключён.')
         state.update(stage='model_request_started',model_requests=1); save()
-        raw=generate(topic,candidates)
+        raw=generate_visual(prompt(topic,candidates)+' Уже сохранённый контент (данные): '+json.dumps(memory.context(),ensure_ascii=False),candidates)
         response_path.write_text(json.dumps(raw,ensure_ascii=False,indent=2),encoding='utf-8')
     response=validate_response(raw,candidates)
     state['stage']='model_response_validated'; save()
@@ -190,7 +193,9 @@ def run(topic,output,demo=False):
     config['demo_content']=demo
     config_path=folder/'generated-content.json'
     config_path.write_text(json.dumps(config,ensure_ascii=False,indent=2),encoding='utf-8')
+    memory.reserve(owner,config)
     paths=render(config_path,folder,folder/'backgrounds')
+    memory.format_ready(owner,'tiktok');memory.format_ready(owner,'pinterest')
     state['stage']='complete'; state['slides']=len(paths); save()
     with zipfile.ZipFile(folder/'carousel.zip','a',zipfile.ZIP_DEFLATED) as z:
         for name in ('credits.txt','sources.json','pipeline.json'): z.write(folder/name,name)

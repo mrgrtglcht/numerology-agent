@@ -265,14 +265,31 @@ def main():
     if state and state.get('targets') != targets:
         raise SafeError('Список целей серии изменился. Выберите новое имя --batch.')
     if not state:
+        memory_owner='legacy/'+args.batch
+        memory=None
+        if args.mode!='demo' and not args.demo_content:
+            from content_memory import ContentMemory,units
+            memory=ContentMemory(store=store)
+            if not memory.available(memory_owner,units({'topic':args.topic})):
+                raise SafeError('Эта тема уже есть в памяти. Выбери новую тему.')
         content = validate_content(DEMO.copy()) if args.mode == 'demo' or args.demo_content else generate(args.topic)
+        if memory:
+            content['topic']=args.topic
+            memory.reserve(memory_owner,content)
         paths = render(content, args.batch, test=args.mode == 'demo' or args.demo_content)
+        if memory:
+            for platform in ('tiktok','pinterest'): memory.format_ready(memory_owner,platform)
         if not remote:
             print('Карточки и текст сохранены в output/' + args.batch + '. Публикаций не было.')
             return
         urls = {p.name: store.put(f'media/{args.batch}-{args.mode}/{p.name}', p.read_bytes()) for p in paths}
         state = {'content': content, 'urls': urls, 'targets': targets, 'deliveries': {}}
+        if memory: state['memory_owner']=memory_owner
         store.save_state(state_path, state)
+    memory=None
+    if state.get('memory_owner'):
+        from content_memory import ContentMemory
+        memory=ContentMemory(store=store)
     failed = False
     for target in targets:
         if target in state['deliveries']:
@@ -288,13 +305,18 @@ def main():
         else:
             required('TELEGRAM_BOT_TOKEN')
             required('TELEGRAM_CHANNEL_ID')
+        if memory: memory.delivery(state['memory_owner'],target,'sending')
         state['deliveries'][target] = {'state': 'sending'}
         store.save_state(state_path, state)
         try:
             receipt = send_telegram(state['content'], state['urls']) if target == 'telegram' else send_buffer(data)
             state['deliveries'][target] = {'state': 'accepted', 'receipt': receipt}
+            if memory:
+                status='published' if target=='telegram' or receipt.get('status')=='sent' else 'draft' if args.mode=='draft' else 'accepted'
+                memory.delivery(state['memory_owner'],target,status,receipt)
             print(target + ': запрос принят. Итоговую публикацию проверьте в сервисе.')
         except SafeError as error:
+            if memory: memory.delivery(state['memory_owner'],target,'needs_review')
             state['deliveries'][target] = {'state': 'needs_review', 'reason': str(error)}
             print(target + ': ' + str(error))
             failed = True

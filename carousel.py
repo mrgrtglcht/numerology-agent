@@ -217,6 +217,8 @@ def render(config_path=None, output=None, background_dir=None):
     with zipfile.ZipFile(folder/'carousel.zip','w',zipfile.ZIP_DEFLATED) as z:
         for i in range(1,len(slides)+1): z.write(out/f'{i:02}.png',f'slides/{i:02}.png')
         for name in ['content.json','caption.txt','preview.jpg']: z.write(folder/name,name)
+    from pinterest_carousel import render as render_pinterest
+    render_pinterest(c,folder/'pinterest',backgrounds,cards)
     print(f'Exported {len(rendered)} slides at {c["size"]}; tarot_cards={bool(cards)}; CTA={c["include_cta"] or is_series}')
     return [out/f'{i:02}.png' for i in range(1,len(slides)+1)]
 
