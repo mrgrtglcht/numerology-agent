@@ -44,8 +44,8 @@ class ContentMemoryTests(unittest.TestCase):
 
     def test_duplicate_part_is_refused_before_model_or_search(self):
         with tempfile.TemporaryDirectory() as tmp:
-            with patch('content_memory.ROOT',Path(tmp)):
-                m=ContentMemory();m.reserve('previous',config((3,4,5,6)))
+            m=ContentMemory(Path(tmp)/'memory.json');m.reserve('previous',config((3,4,5,6)))
+            with patch('content_memory.ContentMemory',return_value=m):
                 with patch('arcana_series.generate_visual') as model,patch('arcana_series.search_candidates') as search:
                     with self.assertRaises(ValueError): arcana_series.run('profession',Path(tmp)/'new',part=1)
                     model.assert_not_called();search.assert_not_called()

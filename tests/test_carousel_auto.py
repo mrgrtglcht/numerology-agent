@@ -72,11 +72,15 @@ class AutoTests(unittest.TestCase):
                 self.assertTrue(any('inlineData' in p for p in payload['contents'][0]['parts']))
 
     def test_uncertain_model_request_cannot_silently_run_again(self):
+        from content_memory import ContentMemory
+        from background_history import BackgroundHistory
         with tempfile.TemporaryDirectory() as temp:
             folder=Path(temp)
             state={'topic':'15–5–8','demo':False,'stage':'model_request_started','model_requests':1}
             (folder/'pipeline.json').write_text(json.dumps(state),encoding='utf-8')
             with patch.dict(os.environ,{'GEMINI_FREE_TIER_CONFIRMED':'true','GEMINI_API_KEY':'test'}), \
+                 patch('content_memory.ContentMemory',return_value=ContentMemory(folder/'test-memory.json')), \
+                 patch('background_history.BackgroundHistory',return_value=BackgroundHistory(folder/'test-backgrounds.json')), \
                  patch('carousel_auto.search_candidates',return_value=[{'id':'b1'}]), \
                  patch('carousel_auto.thumbnails',side_effect=lambda c,f:c), \
                  patch('carousel_auto.generate') as model:
