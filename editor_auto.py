@@ -6,9 +6,9 @@ from topic_planner import choose,register_topics
 from web_research import research
 from matrix_rules import THEMES
 
-def plan(output):
+def plan(output,memory=None):
     folder=Path(output);folder.mkdir(parents=True,exist_ok=True)
-    path=folder/'editor-plan.json';memory=ContentMemory();register_topics()
+    path=folder/'editor-plan.json';memory=memory or ContentMemory();register_topics()
     topic=json.loads(path.read_text(encoding='utf-8')) if path.exists() else choose(memory,folder.name)
     if topic['theme'] not in THEMES:raise ValueError('Тема отсутствует в проверенном справочнике.')
     from matrix_rules import series_plan

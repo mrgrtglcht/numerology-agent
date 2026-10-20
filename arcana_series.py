@@ -201,7 +201,8 @@ def run(theme,output,part=0,demo=False):
     done=sorted(set(state.get('parts',[]))|set(completed))
     state.update(stage='complete',parts=done,series_complete=done==list(range(1,plan['total_parts']+1)),
                  allowed=plan['allowed'],excluded=plan['excluded']); save()
-    rights='tarot images: user-selected numerolog.ru banner cutouts; republication licence not established.\nbackground licences: credits.txt and sources.json.\n'
+    import os
+    rights=('tarot images: pinned public-domain RWS originals from Wikimedia Commons; sources: assets/tarot/public-domain-manifest.json.\n' if os.environ.get('PUBLICATION_ASSETS')=='true' else 'tarot images: user-selected numerolog.ru banner cutouts; republication licence not established.\n')+'background licences: credits.txt and sources.json.\n'
     (folder/'asset-notes.txt').write_text(rights,encoding='utf-8')
     with zipfile.ZipFile(folder/'series.zip','w',zipfile.ZIP_DEFLATED) as z:
         for p in sorted(folder.glob('part-*/carousel.zip')): z.write(p,p.parent.name+'/carousel.zip')

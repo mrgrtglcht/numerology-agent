@@ -2,6 +2,7 @@
 import hashlib
 import io
 import json
+import os
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -10,6 +11,7 @@ from PIL import Image,ImageDraw
 ROOT=Path(__file__).resolve().parent
 
 def prepare(numbers):
+    if os.environ.get('PUBLICATION_ASSETS')=='true': return prepare_public_domain(numbers)
     root=ROOT/'assets/tarot'; root.mkdir(exist_ok=True)
     records=json.loads((root/'source-manifest.json').read_text(encoding='utf-8'))
     lookup={r['number']:r for r in records}; paths={}
@@ -32,6 +34,29 @@ def prepare(numbers):
         with Image.open(target) as card:
             if card.mode!='RGBA' or card.size!=(156,299) or card.getpixel((0,0))[3]!=0:
                 raise ValueError('Некорректная прозрачность карты.')
+        paths[number]=target
+    return paths
+
+
+def prepare_public_domain(numbers):
+    """Original RWS artwork, pinned Commons public-domain files; no site banners."""
+    from backgrounds import read_bytes
+    root=ROOT/'assets/tarot/public-domain';root.mkdir(parents=True,exist_ok=True)
+    records=json.loads((root.parent/'public-domain-manifest.json').read_text(encoding='utf-8'))
+    lookup={r['number']:r for r in records};paths={}
+    for number in sorted(set(numbers)):
+        record=lookup[number]
+        if record['license']!='Public domain': raise ValueError('Непроверенная лицензия карты.')
+        original=root/f'{number:02}.jpg'
+        if not original.exists(): original.write_bytes(read_bytes(record['url']))
+        if hashlib.sha1(original.read_bytes()).hexdigest()!=record['sha1']: raise ValueError('Оригинал карты изменился.')
+        target=root/f'{number:02}.png'
+        with Image.open(original) as source:
+            card=source.convert('RGBA').resize((312,598),Image.Resampling.LANCZOS)
+        # Preserve the outer border and smoothly remove only the corners.
+        mask=Image.new('L',(312*4,598*4))
+        ImageDraw.Draw(mask).rounded_rectangle((0,0,312*4-1,598*4-1),radius=20*4,fill=255)
+        card.putalpha(mask.resize(card.size,Image.Resampling.LANCZOS));card.save(target)
         paths[number]=target
     return paths
 

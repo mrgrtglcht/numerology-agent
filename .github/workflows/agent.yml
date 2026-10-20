@@ -33,8 +33,6 @@ on:
         description: 'Разрешаю публичную публикацию этих карточек (только режим publish)'
         type: boolean
         default: false
-  schedule:
-    - cron: '17 16 * * *'
 
 concurrency:
   group: quantafate-delivery
