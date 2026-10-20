@@ -3,6 +3,7 @@ import hashlib
 import html
 import io
 import json
+import math
 import re
 import urllib.parse
 import urllib.request
@@ -41,12 +42,13 @@ def read_bytes(url,limit=18*1024*1024):
     return data
 
 
-def search_candidates(limit=8):
+def search_candidates(limit=8,exclude=None):
     results=[]; seen=set()
     for query in QUERIES:
+        query_count=0
         params={'action':'query','format':'json','formatversion':2,'generator':'search',
-                'gsrsearch':query,'gsrnamespace':6,'gsrlimit':16,'prop':'imageinfo',
-                'iiprop':'url|size|mime|extmetadata','iiurlwidth':400}
+                'gsrsearch':query,'gsrnamespace':6,'gsrlimit':50,'prop':'imageinfo',
+                'iiprop':'url|size|mime|extmetadata|sha1','iiurlwidth':400}
         req=urllib.request.Request(API+'?'+urllib.parse.urlencode(params),headers={'User-Agent':AGENT})
         with urllib.request.urlopen(req,timeout=40) as response: data=json.load(response)
         for page in sorted(data.get('query',{}).get('pages',[]),key=lambda p:p.get('index',999)):
@@ -59,15 +61,19 @@ def search_candidates(limit=8):
             if w*h>40_000_000 or info.get('size',0)>18*1024*1024: continue
             if license_name.lower() not in LICENSES: continue
             if not allowed_url(info.get('url','')) or not allowed_url(info.get('thumburl','')): continue
+            identity={'page':info['descriptionurl'],'url':info['url'],'original_sha1':info.get('sha1')}
+            if exclude and exclude(identity): continue
             seen.add(page['title'])
             results.append({'id':f'b{len(results)+1}','title':page['title'],
                             'url':info['url'],'thumbnail':info['thumburl'],
-                            'page':info['descriptionurl'],'width':w,'height':h,
+                            'page':info['descriptionurl'],'original_sha1':info.get('sha1'),'width':w,'height':h,
                             'creator':metadata(info,'Artist')[:1000],
                             'credit':metadata(info,'Credit')[:1000],
                             'license':license_name,'license_url':metadata(info,'LicenseUrl'),
                             'query':query})
             if len(results)>=limit: return results
+            query_count+=1
+            if query_count>=max(2,math.ceil(limit/len(QUERIES))): break
     if not results: raise ValueError('Подходящие фоны с подтверждённой лицензией не найдены.')
     return results
 
@@ -101,7 +107,11 @@ def download_selection(candidates,selections,folder):
                 image.save(path,quality=95)
         with Image.open(path) as image:
             if image.width<600 or image.height<1000: raise ValueError('Недостаточное разрешение фона.')
-        item.update({'file':path.name,'focus':selection['focus'],
+        with Image.open(path) as thumb:
+            pixels=list(ImageOps.grayscale(thumb).resize((9,8),Image.Resampling.LANCZOS).getdata())
+            bits=[pixels[y*9+x]>pixels[y*9+x+1] for y in range(8) for x in range(8)]
+            visual_hash=f'{sum(int(bit)<<i for i,bit in enumerate(bits)):016x}'
+        item.update({'visual_hash':visual_hash,'file':path.name,'focus':selection['focus'],
                      'selection_reason':selection['reason'],
                      'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
                      'modifications':'cropped to 9:16, darkened, overlaid with text'})

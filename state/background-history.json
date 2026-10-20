@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "posts": {
+    "quantafate-unique-posts/part-01": {
+      "batch": "quantafate-unique-posts",
+      "part": 1,
+      "identities": [
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Gothic_Church_Ruin_-_Google_Art_Project.jpg",
+        "sha256:314a9595de4bd8de1e85b276a90231d42b0d21fa34173ea98537a2184dafe5b6",
+        "url:https://upload.wikimedia.org/wikipedia/commons/4/4a/Carl_Blechen_-_Gothic_Church_Ruin_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Gothic_Church_Ruin_-_Google_Art_Project.jpg",
+      "title": "File:Carl Blechen - Gothic Church Ruin - Google Art Project.jpg",
+      "visual_hash": "b9d1e1e173c379a9"
+    },
+    "quantafate-unique-posts/part-02": {
+      "batch": "quantafate-unique-posts",
+      "part": 2,
+      "identities": [
+        "page:https://commons.wikimedia.org/wiki/File:Ivy-Covered_Outer_Walls_of_Bojnice_(Bajm%C3%B3c)_Castle,_Slovakia.jpg",
+        "sha256:62b3ba1c1a1d9da676032c8d83ea33f2a21367799cb7ca73e2ca3fa06e4ae5e0",
+        "url:https://upload.wikimedia.org/wikipedia/commons/d/d2/Ivy-Covered_Outer_Walls_of_Bojnice_%28Bajm%C3%B3c%29_Castle%2C_Slovakia.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Ivy-Covered_Outer_Walls_of_Bojnice_(Bajm%C3%B3c)_Castle,_Slovakia.jpg",
+      "title": "File:Ivy-Covered Outer Walls of Bojnice (Bajmóc) Castle, Slovakia.jpg",
+      "visual_hash": "acd8d87470ecf0b4"
+    },
+    "quantafate-unique-posts/part-03": {
+      "batch": "quantafate-unique-posts",
+      "part": 3,
+      "identities": [
+        "page:https://commons.wikimedia.org/wiki/File:P%C3%B6ggstall_St._Anna_im_Felde_Westfenster_02.jpg",
+        "sha256:e0b8c9cc512e7b0cdd98e34c51ca6fa7e0122f3823b269e464c2eb95d698c3ae",
+        "url:https://upload.wikimedia.org/wikipedia/commons/4/45/P%C3%B6ggstall_St._Anna_im_Felde_Westfenster_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:P%C3%B6ggstall_St._Anna_im_Felde_Westfenster_02.jpg",
+      "title": "File:Pöggstall St. Anna im Felde Westfenster 02.jpg",
+      "visual_hash": "eea5b6b4b4194ac6"
+    },
+    "quantafate-unique-posts/part-04": {
+      "batch": "quantafate-unique-posts",
+      "part": 4,
+      "identities": [
+        "page:https://commons.wikimedia.org/wiki/File:1813_Schinkel_Gotischer_Dom_am_Wasser_anagoria.JPG",
+        "sha256:29feafea5c2a5f81bd82d1d1f7e3804ce5a39312adffae7a1ef0681d3d33f56e",
+        "url:https://upload.wikimedia.org/wikipedia/commons/8/88/1813_Schinkel_Gotischer_Dom_am_Wasser_anagoria.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:1813_Schinkel_Gotischer_Dom_am_Wasser_anagoria.JPG",
+      "title": "File:1813 Schinkel Gotischer Dom am Wasser anagoria.JPG",
+      "visual_hash": "9dd0cbc6e6e662f8"
+    },
+    "quantafate-unique-posts/part-05": {
+      "batch": "quantafate-unique-posts",
+      "part": 5,
+      "identities": [
+        "page:https://commons.wikimedia.org/wiki/File:Interior_of_a_Gothic_Cathedral_LACMA_49.17.5.jpg",
+        "sha256:c236b9bc8c4aadbe999e169e47b9696894ef2ec3f2c206d983a16ed2025ae901",
+        "url:https://upload.wikimedia.org/wikipedia/commons/7/7a/Interior_of_a_Gothic_Cathedral_LACMA_49.17.5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Interior_of_a_Gothic_Cathedral_LACMA_49.17.5.jpg",
+      "title": "File:Interior of a Gothic Cathedral LACMA 49.17.5.jpg",
+      "visual_hash": "296a66ececaa0945"
+    }
+  }
+}
