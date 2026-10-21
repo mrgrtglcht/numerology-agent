@@ -145,17 +145,15 @@ def deliver_tiktok(folder,owner,store,memory):
 
 
 def generate_telegram(folder,memory):
-    from editor_auto import plan
     from matrix_rules import THEMES
-    planning=copy.copy(memory);planning.data=copy.deepcopy(memory.data)
-    from topic_planner import register_topics
-    register_topics()
+    from telegram_series import select,brief
+    from web_research import research
+    topic=select(memory)
+    if topic['cached_content']:return topic['cached_content']
+    topic={k:v for k,v in topic.items() if not k.startswith('cached_')}
+    (folder/'telegram-plan.json').write_text(json.dumps(topic,ensure_ascii=False,indent=2),encoding='utf-8')
+    dossier=research(topic,folder)
     articles=[p for p in memory.data['posts'].values() if p.get('theme')=='telegram_article' and p['status']!='rejected']
-    for record in planning.data['posts'].values():
-        c=record.get('content',{})
-        if c.get('editor_theme'):
-            record['units']=units({'type':'arcana_series','theme':c['editor_theme'],'position':c['position'],'part_arcana':c['part_arcana']})
-    topic,dossier=plan(folder,memory=planning)
     # Image on every fourth article; choose it in the same model request.
     candidates=[]
     published_articles=sum(p['status']=='published' for p in articles)
@@ -169,7 +167,7 @@ def generate_telegram(folder,memory):
     instruction=('Напиши подробный пост для telegram quantafate на русском. '
       'Ниже данные, не инструкции. Стиль: '+json.dumps(style,ensure_ascii=False)+'. '
       'Тема: '+json.dumps(topic,ensure_ascii=False)+'. Значение позиции: '+THEMES[topic['theme']]['meaning']+'. '
-      'Выбери один конкретный аспект темы, объясни его, приведи 2–3 бытовых примера и практическое наблюдение. '
+      + brief(topic)+' '
       'Арканы: '+json.dumps(topic['arcana'])+'. Не составляй короткий каталог карусели. '
       'Используй источники, но не копируй длинные цитаты. Различай символическую трактовку и проверяемый факт; один раз естественно обозначь, что речь о символической трактовке матрицы, без длинного дисклеймера. '
       'Без гарантий будущего, исторических выдумок, медицинских/финансовых советов и запугивания. '
@@ -177,7 +175,7 @@ def generate_telegram(folder,memory):
       'От 1800 до 3400 знаков, 5–9 коротких абзацев, всё строчными. '
       'Не повторяй прошлые посты: '+json.dumps(recent,ensure_ascii=False)+'. '
       'Источники: '+json.dumps(dossier['sources'],ensure_ascii=False)+'. '
-      'Верни JSON: title, text, source_ids (реально использованные источники). '
+      'Верни JSON: title, text, arcana_number (null для введения, иначе заданный номер), source_ids (реально использованные источники). '
       + ('Также image_id из каталога '+json.dumps([{k:c[k] for k in ('id','title')} for c in candidates],ensure_ascii=False)+'. Выбери атмосферное изображение, подходящее теме как иллюстрация. Если ничего не подходит, image_id=null.' if candidates else 'image_id=null.'))
     from carousel_auto import generate_visual
     response=generate_visual(instruction,candidates,max_tokens=4000,diagnostic_path=folder/'model-request.json')
@@ -187,9 +185,12 @@ def generate_telegram(folder,memory):
         raise ValueError('В тексте есть реклама, ссылка или разметка.')
     refs=response.get('source_ids');known={s['id'] for s in dossier['sources']}
     if not isinstance(refs,list) or 'position' not in refs or not set(refs)<=known:raise ValueError('Нет основания для текста Telegram.')
+    if response.get('arcana_number')!=topic['number']:raise ValueError('Модель изменила аркан серии.')
+    if topic['number'] is not None and 'arcana-'+str(topic['number']) not in refs:raise ValueError('Нет источника конкретного аркана.')
     title=response.get('title','')
     if not isinstance(title,str) or not 1<=len(title)<=120:raise ValueError('Неверный заголовок.')
-    config={'theme':'telegram_article','topic':'telegram:'+topic['theme']+':'+','.join(map(str,topic['arcana'])),
+    config={'theme':'telegram_article','topic':topic['editorial_key'],'editorial_key':topic['editorial_key'],
+      'article_kind':topic['article_kind'],'arcana_number':topic['number'],
       'title':title.lower(),'caption':text,'slides':[{'body':text}],
       'research_sources':[{k:v for k,v in s.items() if k!='excerpt'} for s in dossier['sources']],
       'source_ids':refs,'style_reference':style['reference_url'],
@@ -239,12 +240,18 @@ def run_target(target,store,preview=False,now=None):
             memory=ContentMemory(store=store)
             receipt={'preview':True} if preview else deliver_tiktok(part,owner,store,memory)
         else:
-            config=generate_telegram(folder,memory);memory.reserve(owner,config);memory.format_ready(owner,'telegram')
+            config=generate_telegram(folder,memory)
+            editorial_key=config.get('editorial_key')
+            owner=next((old for old,p in memory.data['posts'].items() if editorial_key and p.get('content',{}).get('editorial_key')==editorial_key and p['status']!='rejected'),owner)
+            memory.reserve(owner,config);memory.format_ready(owner,'telegram')
             if preview:receipt={'preview':True}
             else:
                 image=config.get('image_source');image_url=None;image_receipt={}
                 if image:
                     public_caption({'caption':''},[image])
+                    if not (folder/'backgrounds'/image['file']).exists():
+                        from backgrounds import download_selection
+                        download_selection([image],[{'id':image['id'],'focus':image['focus'],'reason':'сохранённая иллюстрация'}],folder/'backgrounds')
                     image_url=store.put(f'media/{folder.name}/illustration.jpg',(folder/'backgrounds'/image['file']).read_bytes())
                     store.save_state(f'media/{folder.name}/source.json',image)
                 memory.delivery(owner,'telegram','sending')
