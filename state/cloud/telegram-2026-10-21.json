@@ -1,6 +1,15 @@
 {
-  "stage": "needs_review",
+  "stage": "complete",
   "owner": "cloud-telegram-2026-10-21/article",
-  "target": "telegram",
-  "day": "2026-10-21"
+  "receipt": {
+    "message_id": 8
+  },
+  "recovered": true,
+  "previous_state": {
+    "stage": "needs_review",
+    "owner": "cloud-telegram-2026-10-21/article",
+    "target": "telegram",
+    "day": "2026-10-21"
+  },
+  "response_sha256": "09368d8a2495f83dc964e6a372220ba94ecb60f1dbcf2cda2ab2b56d7b969780"
 }
