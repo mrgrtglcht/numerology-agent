@@ -144,6 +144,27 @@ def deliver_tiktok(folder,owner,store,memory):
     return receipt
 
 
+def validate_telegram_response(response,topic,sources,style_reference):
+    text=response.get('text','')
+    if not isinstance(text,str) or not (1400 if topic['article_kind']=='intro' else 1600)<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
+    if not 4<=len([p for p in text.split('\n\n') if p.strip()])<=10:raise ValueError('Текст Telegram должен быть разбит на короткие абзацы.')
+    if any(x in text.lower() for x in ('quantafate','телеграм бот','телеграм-бот','http','@')) or '<' in text:
+        raise ValueError('В тексте есть реклама, ссылка или разметка.')
+    refs=response.get('source_ids');known={s['id'] for s in sources}
+    if not isinstance(refs,list) or 'position' not in refs or not set(refs)<=known:raise ValueError('Нет основания для текста Telegram.')
+    if response.get('arcana_number')!=topic['number']:raise ValueError('Модель изменила аркан серии.')
+    if topic['number'] is not None and 'arcana-'+str(topic['number']) not in refs:raise ValueError('Нет источника конкретного аркана.')
+    title=response.get('title','')
+    if not isinstance(title,str) or not 1<=len(title)<=120:raise ValueError('Неверный заголовок.')
+    config={'theme':'telegram_article','topic':topic['editorial_key'],'editorial_key':topic['editorial_key'],
+      'article_kind':topic['article_kind'],'arcana_number':topic['number'],
+      'title':title.lower(),'caption':text,'slides':[{'body':text}],
+      'research_sources':[{k:v for k,v in s.items() if k!='excerpt'} for s in sources],
+      'source_ids':refs,'style_reference':style_reference,
+      'editor_theme':topic['theme'],'position':topic['position'],'part_arcana':topic['arcana']}
+    return config
+
+
 def generate_telegram(folder,memory):
     from matrix_rules import THEMES
     from telegram_series import select,brief
@@ -179,22 +200,7 @@ def generate_telegram(folder,memory):
       + ('Также image_id из каталога '+json.dumps([{k:c[k] for k in ('id','title')} for c in candidates],ensure_ascii=False)+'. Выбери атмосферное изображение, подходящее теме как иллюстрация. Если ничего не подходит, image_id=null.' if candidates else 'image_id=null.'))
     from carousel_auto import generate_visual
     response=generate_visual(instruction,candidates,max_tokens=4000,diagnostic_path=folder/'model-request.json')
-    text=response.get('text','')
-    if not isinstance(text,str) or not 1800<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
-    if any(x in text.lower() for x in ('quantafate','телеграм бот','телеграм-бот','http','@')) or '<' in text:
-        raise ValueError('В тексте есть реклама, ссылка или разметка.')
-    refs=response.get('source_ids');known={s['id'] for s in dossier['sources']}
-    if not isinstance(refs,list) or 'position' not in refs or not set(refs)<=known:raise ValueError('Нет основания для текста Telegram.')
-    if response.get('arcana_number')!=topic['number']:raise ValueError('Модель изменила аркан серии.')
-    if topic['number'] is not None and 'arcana-'+str(topic['number']) not in refs:raise ValueError('Нет источника конкретного аркана.')
-    title=response.get('title','')
-    if not isinstance(title,str) or not 1<=len(title)<=120:raise ValueError('Неверный заголовок.')
-    config={'theme':'telegram_article','topic':topic['editorial_key'],'editorial_key':topic['editorial_key'],
-      'article_kind':topic['article_kind'],'arcana_number':topic['number'],
-      'title':title.lower(),'caption':text,'slides':[{'body':text}],
-      'research_sources':[{k:v for k,v in s.items() if k!='excerpt'} for s in dossier['sources']],
-      'source_ids':refs,'style_reference':style['reference_url'],
-      'editor_theme':topic['theme'],'position':topic['position'],'part_arcana':topic['arcana']}
+    config=validate_telegram_response(response,topic,dossier['sources'],style['reference_url'])
     selected=response.get('image_id')
     if selected:
         from backgrounds import download_selection
@@ -214,6 +220,33 @@ def send_article(config):
       'text':text,'link_preview_options':{'is_disabled':True}})
     if not result.get('ok'):raise SafeError('Telegram не подтвердил отправку.')
     return {'message_id':result['result']['message_id']}
+
+
+def deliver_article(config,owner,folder,store,memory):
+    if memory.data['posts'][owner].get('deliveries',{}).get('telegram'):
+        raise SafeError('Для статьи уже есть попытка Telegram; повтор запрещён.')
+    image=config.get('image_source');image_url=None;image_receipt={}
+    if image:
+        public_caption({'caption':''},[image])
+        if not (folder/'backgrounds'/image['file']).exists():
+            from backgrounds import download_selection
+            download_selection([image],[{'id':image['id'],'focus':image['focus'],'reason':'сохранённая иллюстрация'}],folder/'backgrounds')
+        image_url=store.put(f'media/{folder.name}/illustration.jpg',(folder/'backgrounds'/image['file']).read_bytes())
+        store.save_state(f'media/{folder.name}/source.json',image)
+    memory.delivery(owner,'telegram','sending')
+    try:
+        if image_url:
+            caption=public_caption({'caption':config['title']},[image])['caption']
+            if len(caption)>1024:raise ValueError('Атрибуция не помещается в подпись изображения.')
+            photo=request_json('Telegram','https://api.telegram.org/bot'+required('TELEGRAM_BOT_TOKEN')+'/sendPhoto',
+              {'chat_id':required('TELEGRAM_CHANNEL_ID'),'photo':image_url,'caption':caption})
+            if not photo.get('ok'):raise SafeError('Telegram не подтвердил изображение.')
+            image_receipt={'image_message_id':photo['result']['message_id']}
+            memory.delivery(owner,'telegram','sending',image_receipt)
+        receipt={**send_article(config),**image_receipt}
+    except Exception:memory.delivery(owner,'telegram','needs_review',image_receipt);raise
+    memory.delivery(owner,'telegram','published',receipt)
+    return receipt
 
 
 def run_target(target,store,preview=False,now=None):
@@ -246,32 +279,37 @@ def run_target(target,store,preview=False,now=None):
             memory.reserve(owner,config);memory.format_ready(owner,'telegram')
             if preview:receipt={'preview':True}
             else:
-                image=config.get('image_source');image_url=None;image_receipt={}
-                if image:
-                    public_caption({'caption':''},[image])
-                    if not (folder/'backgrounds'/image['file']).exists():
-                        from backgrounds import download_selection
-                        download_selection([image],[{'id':image['id'],'focus':image['focus'],'reason':'сохранённая иллюстрация'}],folder/'backgrounds')
-                    image_url=store.put(f'media/{folder.name}/illustration.jpg',(folder/'backgrounds'/image['file']).read_bytes())
-                    store.save_state(f'media/{folder.name}/source.json',image)
-                memory.delivery(owner,'telegram','sending')
-                try:
-                    if image_url:
-                        caption=public_caption({'caption':config['title']},[image])['caption']
-                        if len(caption)>1024:raise ValueError('Атрибуция не помещается в подпись изображения.')
-                        photo=request_json('Telegram','https://api.telegram.org/bot'+required('TELEGRAM_BOT_TOKEN')+'/sendPhoto',
-                          {'chat_id':required('TELEGRAM_CHANNEL_ID'),'photo':image_url,'caption':caption})
-                        if not photo.get('ok'):raise SafeError('Telegram не подтвердил изображение.')
-                        image_receipt={'image_message_id':photo['result']['message_id']}
-                        memory.delivery(owner,'telegram','sending',image_receipt)
-                    receipt={**send_article(config),**image_receipt}
-                except Exception:memory.delivery(owner,'telegram','needs_review',image_receipt);raise
-                memory.delivery(owner,'telegram','published',receipt)
+                receipt=deliver_article(config,owner,folder,store,memory)
         store.save_state(key,{'stage':'complete','owner':owner,'preview':preview,'receipt':receipt})
         print(target+': '+('предпросмотр готов.' if preview else 'отправка принята.'))
     except Exception:
         store.save_state(key,{'stage':'needs_review','owner':owner,'target':target,'day':day})
         raise
+
+
+def recover_article(folder,store):
+    """Revalidate a saved response; never calls Gemini or resets an uncertain send."""
+    plans=list(Path(folder).rglob('telegram-plan.json'))
+    if len(plans)!=1:raise SafeError('Нужен ровно один сохранённый план Telegram.')
+    root=plans[0].parent
+    if not re.fullmatch(r'cloud-telegram-\d{4}-\d{2}-\d{2}',root.name):raise SafeError('Неизвестное имя исходного запуска.')
+    topic=json.loads(plans[0].read_text(encoding='utf-8'))
+    raw=(root/'raw-model-output.txt').read_text(encoding='utf-8')
+    dossier=json.loads((root/'research.json').read_text(encoding='utf-8'))
+    style=json.loads((ROOT/'telegram_style.json').read_text(encoding='utf-8'))
+    config=validate_telegram_response(json.loads(raw),topic,dossier['sources'],style['reference_url'])
+    if json.loads(raw).get('image_id'):raise SafeError('Восстановление изображения требует отдельной проверки.')
+    memory=ContentMemory(store=store)
+    from telegram_series import select
+    if select(memory)['editorial_key']!=config['editorial_key']:raise SafeError('Этот пост уже отправлен или нарушает порядок серии.')
+    owner=root.name+'/article'
+    memory.reserve(owner,config);memory.format_ready(owner,'telegram')
+    receipt=deliver_article(config,owner,root,store,memory)
+    key='state/cloud/telegram-'+root.name.removeprefix('cloud-telegram-')+'.json'
+    old=store.read_state(key)
+    store.save_state(key,{'stage':'complete','owner':owner,'receipt':receipt,'recovered':True,
+      'previous_state':old,'response_sha256':hashlib.sha256(raw.encode()).hexdigest()})
+    return receipt
 
 
 def main():
@@ -285,6 +323,8 @@ def main():
     store=GitHubStore()
     bootstrap_telegram_history(store)
     if a.mode=='publish-prepared':
+        if a.target=='telegram' and a.folder:
+            print(json.dumps(recover_article(a.folder,store),ensure_ascii=False));return
         if a.target!='tiktok' or not a.folder:raise SafeError('Нужен подготовленный комплект TikTok.')
         found=[p for p in a.folder.rglob('content.json') if p.parent.name.startswith('part-')]
         if not found:
@@ -307,7 +347,9 @@ def main():
         failed=False
         for target in targets:
             try:run_target(target,store,now=now)
-            except Exception as e:print(target+': '+type(e).__name__+'; см. журнал.');failed=True
+            except Exception as e:
+                detail=str(e) if isinstance(e,(ValueError,SafeError)) else type(e).__name__
+                print(target+': '+detail);failed=True
         if failed:raise SafeError('Облачная задача требует проверки. Повторная отправка выключена.')
     else:run_target(a.target,store,preview=a.mode=='preview')
 

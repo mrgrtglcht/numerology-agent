@@ -18,6 +18,34 @@ class Store:
 
 
 class CloudTests(unittest.TestCase):
+    def article_fixture(self):
+        from telegram_series import select
+        class Empty: data={'posts':{}}
+        topic=select(Empty());topic={k:v for k,v in topic.items() if not k.startswith('cached_')}
+        text='\n\n'.join(['разбираем значение центра матрицы и его связь с повседневными привычками. '*4]*5)
+        return topic,{'title':'центр матрицы','text':text,'arcana_number':None,'source_ids':['position'],'image_id':None}
+
+    def test_detailed_intro_below_old_1800_limit_is_valid(self):
+        topic,response=self.article_fixture()
+        self.assertTrue(1400<len(response['text'])<1800)
+        config=cloud.validate_telegram_response(response,topic,[{'id':'position'}],'reference')
+        self.assertEqual(config['caption'],response['text'])
+        response['text']='короткий текст'
+        with self.assertRaises(ValueError):cloud.validate_telegram_response(response,topic,[{'id':'position'}],'reference')
+
+    def test_recovery_sends_once_without_model_and_preserves_failure_audit(self):
+        topic,response=self.article_fixture();s=Store()
+        s.data['state/cloud/telegram-2026-10-21.json']={'stage':'needs_review'}
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)/'cloud-telegram-2026-10-21';folder.mkdir()
+            for name,value in [('telegram-plan.json',topic),('research.json',{'sources':[{'id':'position'}]}),('raw-model-output.txt',response)]:
+                (folder/name).write_text(json.dumps(value,ensure_ascii=False),encoding='utf-8')
+            with patch('cloud_agent.send_article',return_value={'message_id':99}) as send,patch('carousel_auto.generate_visual') as model:
+                cloud.recover_article(Path(tmp),s)
+                with self.assertRaises(SafeError):cloud.recover_article(Path(tmp),s)
+                self.assertEqual(send.call_count,1);model.assert_not_called()
+        self.assertEqual(s.data['state/cloud/telegram-2026-10-21.json']['previous_state']['stage'],'needs_review')
+
     def test_known_public_intro_import_is_idempotent(self):
         s=Store();cloud.bootstrap_telegram_history(s);cloud.bootstrap_telegram_history(s)
         memory=ContentMemory(store=s)
