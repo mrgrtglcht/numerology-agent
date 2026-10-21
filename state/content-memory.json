@@ -2135,10 +2135,9 @@
           "receipt": {
             "id": "6ad8cc21b535ec9954c6053d",
             "status": "scheduled",
-            "schedulingType": "automatic",
-            "asset_count": 7
+            "url": null
           },
-          "updated_at": "2026-10-21T14:28:49.992093+00:00"
+          "updated_at": "2026-10-21T20:16:16.152085+00:00"
         }
       },
       "formats": [
