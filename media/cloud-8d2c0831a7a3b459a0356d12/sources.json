@@ -1,0 +1,47 @@
+{
+  "backgrounds": [
+    {
+      "id": "b3",
+      "title": "File:Balmerino Abbey.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Balmerino_Abbey.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Balmerino_Abbey.jpg/500px-Balmerino_Abbey.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Balmerino_Abbey.jpg",
+      "original_sha1": "1e1f25774a080d845c42ac0fafcb719f2ee511ab",
+      "width": 1600,
+      "height": 1600,
+      "creator": "JackMiller786",
+      "credit": "Own work",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "query": "abbey ruins ivy",
+      "visual_hash": "09e0f02b5b2c0f00",
+      "visual_hashes": [
+        "09e0f02b5b2c0f00",
+        "04e0782b5b2c0f00",
+        "04f0392b5b2c0d82",
+        "64f0382b5b3c2c8e",
+        "0d60f0295b6e0f00",
+        "04e0f8295b6e0f02",
+        "44e0386b5b6e0c02",
+        "44f03c6b5b7e2c8f",
+        "0ce0b0691b6e0f00",
+        "04e0b869196e0f02",
+        "44e0bc69196e0e02",
+        "40f03c69197e2e0f",
+        "04c2f069996f0d00",
+        "04e0b469996e0d02",
+        "46e0bc69997e0f03",
+        "c2f0bc69a9ff2f0f"
+      ],
+      "file": "b3.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "плющ и спокойная зеленая атмосфера",
+      "sha256": "3a3e803be67471d96ff639e5a12050730eda6438e5aac6b7f918089b45e92bde",
+      "modifications": "cropped to 9:16, darkened, overlaid with text"
+    }
+  ],
+  "tarot_manifest": "assets/tarot/public-domain-manifest.json"
+}
