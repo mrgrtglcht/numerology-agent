@@ -2215,13 +2215,15 @@
           "checked_at": "2026-10-21T20:16:23.759814+00:00"
         }
       ],
-      "status": "prepared",
+      "status": "published",
       "created_at": "2026-10-21T23:09:06.444561+00:00",
       "deliveries": {
         "telegram": {
-          "status": "sending",
-          "receipt": {},
-          "updated_at": "2026-10-21T23:09:09.909298+00:00"
+          "status": "published",
+          "receipt": {
+            "message_id": 8
+          },
+          "updated_at": "2026-10-21T23:09:12.330138+00:00"
         }
       },
       "formats": [
