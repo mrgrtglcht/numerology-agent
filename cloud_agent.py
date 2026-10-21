@@ -22,7 +22,7 @@ def now_local(): return datetime.now(timezone.utc).astimezone(ZONE)
 
 def due_telegram(now):
     # Two UTC schedule triggers cover summer/winter; one local-day lock deduplicates.
-    return now.weekday() in (2,6) and now.hour==18 and now.minute>=30
+    return now.weekday() in (2,6) and (now.hour,now.minute)>=(18,30)
 
 
 def bootstrap_telegram_history(store):
@@ -295,7 +295,7 @@ def main():
         print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
         targets=[];now=now_local()
-        if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and now.hour<12:targets.append('tiktok')
+        if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and os.environ.get('SCHEDULE_TRIGGER')=='17 5 * * *':targets.append('tiktok')
         if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and due_telegram(now):targets.append('telegram')
         failed=False
         for target in targets:

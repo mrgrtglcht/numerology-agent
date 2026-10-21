@@ -31,6 +31,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   cloud:
@@ -56,6 +57,7 @@ jobs:
       TARGET: ${{ inputs.target || 'tiktok' }}
       ALLOW_PUBLISH: ${{ inputs.approve_publication }}
       SOURCE_RUN: ${{ inputs.source_run }}
+      SCHEDULE_TRIGGER: ${{ github.event.schedule }}
     steps:
       - uses: actions/checkout@v4
         with:

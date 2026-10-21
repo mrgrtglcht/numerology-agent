@@ -32,6 +32,7 @@ class CloudTests(unittest.TestCase):
             yes=datetime(2026,month,day,utc_hour,30,tzinfo=timezone.utc).astimezone(cloud.ZONE)
             no=datetime(2026,month,day,utc_hour-1,30,tzinfo=timezone.utc).astimezone(cloud.ZONE)
             self.assertTrue(cloud.due_telegram(yes));self.assertFalse(cloud.due_telegram(no))
+        self.assertTrue(cloud.due_telegram(datetime(2026,10,21,20,5,tzinfo=cloud.ZONE)))
 
     def test_all_seven_slides_automatic_queue_not_share_now(self):
         with patch.dict(os.environ,{'BUFFER_TIKTOK_CHANNEL_ID':'tt'}):
