@@ -1835,10 +1835,12 @@
       "tail": null,
       "part": null,
       "sources": [],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-10-21T14:27:53.045186+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "telegram"
+      ]
     }
   }
 }
