@@ -47,6 +47,14 @@ def prepare_public_domain(numbers):
     for number in sorted(set(numbers)):
         record=lookup[number]
         if record['license']!='Public domain': raise ValueError('Непроверенная лицензия карты.')
+        target=root/f'{number:02}.png'
+        pinned=record.get('prepared_sha256')
+        if pinned and target.exists():
+            if hashlib.sha256(target.read_bytes()).hexdigest()!=pinned:raise ValueError('Prepared public-domain card checksum mismatch.')
+            with Image.open(target) as card:
+                if card.mode!='RGBA' or card.size!=(312,598) or card.getpixel((0,0))[3]!=0:raise ValueError('Invalid prepared card transparency.')
+            paths[number]=target
+            continue
         original=root/f'{number:02}.jpg'
         if not original.exists(): original.write_bytes(read_bytes(record['url']))
         if hashlib.sha1(original.read_bytes()).hexdigest()!=record['sha1']: raise ValueError('Оригинал карты изменился.')
@@ -59,4 +67,3 @@ def prepare_public_domain(numbers):
         card.putalpha(mask.resize(card.size,Image.Resampling.LANCZOS));card.save(target)
         paths[number]=target
     return paths
-

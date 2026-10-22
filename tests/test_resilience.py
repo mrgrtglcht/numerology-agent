@@ -121,3 +121,19 @@ class ResilienceTests(unittest.TestCase):
         m.delivery('owner','tiktok','needs_review',{'expected_text_hash':digest('full caption'),'expected_asset_count':7})
         m.import_buffer([{'id':'other','text':'full caption','status':'scheduled','channelService':'tiktok','assets':[{}]*3}])
         self.assertEqual(m.data['posts']['owner']['deliveries']['tiktok']['status'],'needs_review')
+
+    def test_all_publication_cards_work_without_network(self):
+        from tarot_assets import prepare_public_domain
+        with patch('backgrounds.read_bytes',side_effect=AssertionError('network forbidden')):
+            cards=prepare_public_domain(range(1,23))
+        self.assertEqual(set(cards),set(range(1,23)))
+
+    def test_corrupted_bundled_card_is_rejected_without_download(self):
+        import tarot_assets
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);folder=root/'assets/tarot/public-domain';folder.mkdir(parents=True)
+            source=tarot_assets.ROOT/'assets/tarot/public-domain-manifest.json'
+            (folder.parent/source.name).write_bytes(source.read_bytes())
+            (folder/'03.png').write_bytes(b'corrupted')
+            with patch.object(tarot_assets,'ROOT',root),patch('backgrounds.read_bytes',side_effect=AssertionError('network forbidden')):
+                with self.assertRaises(ValueError):tarot_assets.prepare_public_domain([3])

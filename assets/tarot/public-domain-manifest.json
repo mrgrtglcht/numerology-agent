@@ -5,7 +5,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magician.jpg",
     "sha1": "d24df085c3c22da8cd7f88c0f2a4256c6ae50fda",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "abeec73f1190c757040f3ce951e29df3a9c8d4540cb297db26c19c88824ceaf5"
   },
   {
     "number": 2,
@@ -13,7 +14,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_02_High_Priestess.jpg",
     "sha1": "bb96b30d13035c34a06006ea4aca8ab9a5a98506",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "a38f6614bc5b0f829b15df18b5402a50a9060424c049af2edddf00b0af5ab971"
   },
   {
     "number": 3,
@@ -21,7 +23,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_03_Empress.jpg",
     "sha1": "0c04891e42d51937390049994de8ac8867b201a1",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "e610c49c1b4bb4f2fa8e5308d8ff501c41f3143c9f3f0d70a882831fa68aa128"
   },
   {
     "number": 4,
@@ -29,7 +32,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_04_Emperor.jpg",
     "sha1": "3fc0742d9a9199a226641a86b099df9540cfc3a3",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "a8efa3e7fbfc005ba85494b0e515933d2533049ef16c32ff559885418f52021c"
   },
   {
     "number": 5,
@@ -37,7 +41,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_05_Hierophant.jpg",
     "sha1": "1e7b864bcaf4c672d8fdf17e2abf7379326949c4",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "576598bd11c0f064abd56a2a3db18b1255b43689b6428aeb7a96f539ad037bbf"
   },
   {
     "number": 6,
@@ -45,7 +50,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_06_Lovers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_06_Lovers.jpg",
     "sha1": "1c18b372fc4658948f2d1e9770b2aa87a2e4ac02",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "adc68ebf0d8502a6c8f637e0cc5cdb4831403aacf5ae32baea982c046fd8ec0a"
   },
   {
     "number": 7,
@@ -53,7 +59,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_07_Chariot.jpg",
     "sha1": "8a93a2130017d32a7e8f9612d0874b5b1b41f83d",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "4906ce6379db77cd434c921ecce14d7e7c0ef8baed189827e5ab88e42c5113e2"
   },
   {
     "number": 8,
@@ -61,7 +68,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_11_Justice.jpg",
     "sha1": "16404e646dac8b8f5de4841b9259065059a04f71",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "02f5c8ecb56afe41ac342d9f8d7ebb931e9ecb88c6005ea3313fca567507d77a"
   },
   {
     "number": 9,
@@ -69,7 +77,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_09_Hermit.jpg",
     "sha1": "106bf91c47522063c78d60ab412c53064541f617",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "8a52e324998d3a38fff5f8375ff5e21a7d675c6e83df6b3ed627b72472ac5194"
   },
   {
     "number": 10,
@@ -77,7 +86,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_10_Wheel_of_Fortune.jpg",
     "sha1": "0758555fa3b5960fb631cba01879f3be0260a278",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "88770fef6c852d3fc8ef57b75a7cff87dd379f41ce7c3a1fc77693993ebc11e5"
   },
   {
     "number": 11,
@@ -85,7 +95,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_08_Strength.jpg",
     "sha1": "16baefeee43cee6b285838d27af690a0cf7e9db6",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "08051a396c67767d429cafd4b3c08f1c9889291795165320b356f78844e4c43c"
   },
   {
     "number": 12,
@@ -93,7 +104,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_12_Hanged_Man.jpg",
     "sha1": "41d2398a09087cc2936fcc70fcde7d92552331fd",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "7a3b2916aebcb49affe7ee562849e5ee22df2ac6a9ba2bb5fbc318f98e61c1e7"
   },
   {
     "number": 13,
@@ -101,7 +113,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_13_Death.jpg",
     "sha1": "a49bfe7b626af084f33a67dbb22c001718f80a80",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "87322ba8f29ae935f373c3752df15f0f53fc583dadebee16fc5f367609471954"
   },
   {
     "number": 14,
@@ -109,7 +122,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_14_Temperance.jpg",
     "sha1": "2d9eb7320f00cbf6d9e7ae334853ff7185a6b769",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "039708eb10d3b6a20ea668608c67aebeb6023a76a09297e71a05d8b0d9cdd6b8"
   },
   {
     "number": 15,
@@ -117,7 +131,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_15_Devil.jpg",
     "sha1": "fc1d9242a524d82317fc45b27ef9e93af550b082",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "46f6ae383d5b0b4e7233fe4d9983236c4b5fb9345ce7f41750f95dfdee18de09"
   },
   {
     "number": 16,
@@ -125,7 +140,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_16_Tower.jpg",
     "sha1": "c9da59cdde2b85b49c9e0ce67a6a08c7893ca926",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "35238b03bdc942da3e07add61b5b55d5f62363897bb70dea8edd5d6e7edf192c"
   },
   {
     "number": 17,
@@ -133,7 +149,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_17_Star.jpg",
     "sha1": "e220037a9310a12abd5733711810b4497a23ef77",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "e54dbf2917321cf45263fe150e0e4a8fed6e204f71a2bd48b230b5d2bc5c3842"
   },
   {
     "number": 18,
@@ -141,7 +158,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_18_Moon.jpg",
     "sha1": "e85cd51cdb95ef3b46284c0c317f72414b4ef30e",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "d5ce60913ea720770ac42b029a32810de343e344e4f63c17bde8efcd37ff4bce"
   },
   {
     "number": 19,
@@ -149,7 +167,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_19_Sun.jpg",
     "sha1": "c12879caebe972e194e81743e5925c5b8c5607d8",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "3d2112c442128b7c19ebbaff024822009f834a9054e77740389db59bda75362c"
   },
   {
     "number": 20,
@@ -157,7 +176,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_20_Judgement.jpg",
     "sha1": "19f6e9aae7c8169c75946e3eeb2b517cb295eb53",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "d031e5f9b04f6c26bd2036e9ea0925ff93de6b9eeb52289305227a2adf7390c2"
   },
   {
     "number": 21,
@@ -165,7 +185,8 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_21_World.jpg",
     "sha1": "5b41b2ebeffac2fea5348b2607479a4ee0fd99b8",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "57f3b892a357532cec814709bdbe1249e5cd9eb0fa0e88f1430b449cb259e712"
   },
   {
     "number": 22,
@@ -173,6 +194,7 @@
     "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
     "page": "https://commons.wikimedia.org/wiki/File:RWS_Tarot_00_Fool.jpg",
     "sha1": "a707c0123b59fd2420b05645e9d3d16b74235b42",
-    "license": "Public domain"
+    "license": "Public domain",
+    "prepared_sha256": "7b4806f8d2c640c9d7050939d191187cbafe3debfcad8eef8cf952aaeda3e30f"
   }
 ]
