@@ -67,7 +67,8 @@ class CloudTests(unittest.TestCase):
             data=cloud.tiktok_input({'title':'тема','caption':'подпись'},['https://example.org/'+str(n) for n in range(7)])
         self.assertEqual(len(data['assets']),7);self.assertEqual(data['mode'],'addToQueue')
         self.assertEqual(data['schedulingType'],'automatic');self.assertFalse(data['saveToDraft'])
-        self.assertIn('https://t.me/quantafate',data['text'])
+        self.assertIn('@quantafate',data['text'])
+        self.assertNotIn('https://',data['text'])
         with self.assertRaises(ValueError):cloud.tiktok_input({},['x']*11)
 
     def test_uncertain_day_never_calls_model_or_sender(self):
@@ -113,4 +114,3 @@ class CloudTests(unittest.TestCase):
 
 
 if __name__=='__main__':unittest.main()
-

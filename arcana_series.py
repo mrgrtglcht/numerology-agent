@@ -160,7 +160,9 @@ def run(theme,output,part=0,demo=False,cached_only=False):
     candidate_path=folder/'candidates.json'
     if candidate_path.exists(): candidates=json.loads(candidate_path.read_text(encoding='utf-8'))
     else:
-        candidates=search_candidates(limit=12 if generation_plan.get('background_count')==1 else 20,exclude=lambda source:not history.available(source,batch),seed=batch); candidate_path.write_text(json.dumps(candidates,ensure_ascii=False,indent=2),encoding='utf-8')
+        candidates=search_candidates(limit=12 if generation_plan.get('background_count')==1 else 20,exclude=lambda source:not history.available(source,batch),seed=batch,no_attribution=True); candidate_path.write_text(json.dumps(candidates,ensure_ascii=False,indent=2),encoding='utf-8')
+    from backgrounds import NO_ATTRIBUTION
+    candidates=[c for c in candidates if c.get('license','').lower() in NO_ATTRIBUTION]
     candidates=thumbnails(candidates,folder/'candidates')
     from backgrounds import fresh_thumbnails
     candidates=fresh_thumbnails(candidates,history,batch)[:8 if generation_plan.get('background_count')==1 else 20]

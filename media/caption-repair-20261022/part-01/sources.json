@@ -1,0 +1,44 @@
+[
+  {
+    "id": "b7",
+    "title": "File:Carl Blechen - Romantische Landschaft mit Ruine.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg/500px-Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg",
+    "original_sha1": "50cbd7eecf5899622c86ca3a2f4fb4775bdc5e6f",
+    "width": 1181,
+    "height": 1597,
+    "creator": "Carl Blechen",
+    "credit": "http://www.lwl.org",
+    "license": "Public domain",
+    "license_url": "",
+    "query": "romantic ruins painting",
+    "visual_hash": "67d99ca0a2d3c167",
+    "visual_hashes": [
+      "67d99ca0a2d3c167",
+      "7dd99ca0a2d3c167",
+      "fdd89ca0a2d3d1e1",
+      "ddb89ca0a2d3d3e1",
+      "66d89ca0a293c047",
+      "7cd89ca0a293c045",
+      "fcd89ca0a29391c1",
+      "dcb89ca0a29391c0",
+      "e6d89c20a191c047",
+      "7ed8bc60a191c0c5",
+      "fcd8bc60a19190c1",
+      "d4b89460a091b1c0",
+      "e6d8b4606191c0cd",
+      "fed8b460611180c5",
+      "fed4b468619190c1",
+      "d4bcb668619130c0"
+    ],
+    "file": "b7.jpg",
+    "focus": [
+      0.5,
+      0.5
+    ],
+    "selection_reason": "original public-domain romantic painting without mandatory attribution",
+    "sha256": "f747780f9a78ac91ed311c4d7b5b386293f6cfe584a3331cfce628e9b3d226e7",
+    "modifications": "cropped to 9:16, darkened, overlaid with text"
+  }
+]

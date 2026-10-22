@@ -18,6 +18,7 @@ QUERIES=('gothic church ruin painting','Caspar David Friedrich abbey painting',
          'abbey ruins ivy','gothic cathedral painting','medieval castle garden','gothic ruins')
 LICENSES={'public domain','pdm-owner','cc0','cc0 1.0','cc by 4.0','cc by-sa 4.0',
           'cc by 3.0','cc by-sa 3.0','cc by 2.0','cc by-sa 2.0','cc by 2.5','cc by-sa 2.5'}
+NO_ATTRIBUTION={'public domain','pdm-owner','cc0','cc0 1.0'}
 AGENT='QuantaFate/1.0 (licensed gothic-art carousel previews)'
 
 
@@ -47,7 +48,7 @@ def read_bytes(url,limit=18*1024*1024):
     return data
 
 
-def search_candidates(limit=8,exclude=None,seed=None):
+def search_candidates(limit=8,exclude=None,seed=None,no_attribution=False):
     results=[]; seen=set()
     offset=int(hashlib.sha256(str(seed).encode()).hexdigest(),16)%len(QUERIES) if seed else 0
     for query in QUERIES[offset:]+QUERIES[:offset]:
@@ -69,6 +70,7 @@ def search_candidates(limit=8,exclude=None,seed=None):
             if w<700 or h<1050 or not .40<=w/h<=1.55: continue
             if w*h>40_000_000 or info.get('size',0)>18*1024*1024: continue
             if license_name.lower() not in LICENSES: continue
+            if no_attribution and license_name.lower() not in NO_ATTRIBUTION: continue
             if not allowed_url(info.get('url','')) or not allowed_url(info.get('thumburl','')): continue
             identity={'page':info['descriptionurl'],'url':info['url'],'original_sha1':info.get('sha1')}
             if exclude and exclude(identity): continue

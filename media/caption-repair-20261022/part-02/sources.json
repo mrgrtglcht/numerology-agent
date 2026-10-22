@@ -1,0 +1,44 @@
+[
+  {
+    "id": "b8",
+    "title": "File:Ernst Ferdinand Oehme - Schloss Colditz.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg/500px-Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg",
+    "original_sha1": "0156c8c08eed4118c24d25528bbc455403bdb74f",
+    "width": 1694,
+    "height": 2000,
+    "creator": "Ernst Ferdinand Oehme",
+    "credit": "Bridgeman Art Library  :  Object  416543",
+    "license": "Public domain",
+    "license_url": "",
+    "query": "Ernst Ferdinand Oehme painting",
+    "visual_hash": "11c1c4e8e43030a1",
+    "visual_hashes": [
+      "11c1c4e8e43030a1",
+      "11c1cce8e4b830a1",
+      "41c1cce8e4b830b1",
+      "c1c1dceae4b03030",
+      "11c0c4c8e4b830a1",
+      "11c0c4c8e4b830a1",
+      "44c0ccc8e4b83031",
+      "c0c0dccae4b03030",
+      "30c0c4cae43830a0",
+      "10c0c4cae4b83020",
+      "54c0d4cae4b83030",
+      "c0c0dccae4b83030",
+      "30c0c4cae4383020",
+      "34c0d4cae4383020",
+      "94c0d4c8e6383030",
+      "80c0dcc9e6383030"
+    ],
+    "file": "b8.jpg",
+    "focus": [
+      0.5,
+      0.5
+    ],
+    "selection_reason": "original public-domain romantic painting without mandatory attribution",
+    "sha256": "e5bc62dc0e1c2fc7ecd0fc101aaacb3d7473e28f89d31a9ee2fe95acf2790a9e",
+    "modifications": "cropped to 9:16, darkened, overlaid with text"
+  }
+]

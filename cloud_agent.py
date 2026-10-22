@@ -67,17 +67,30 @@ def pending_tiktok(memory):
 
 def tiktok_input(config,urls):
     if not 2<=len(urls)<=10:raise ValueError('TikTok требует 2–10 изображений.')
+    if config.get('attribution_required'):raise ValueError('Для короткой подписи нужен фон без обязательной атрибуции.')
+    caption=tiktok_caption(config)
     title=config.get('title') or config.get('topic')
     if not title:
         from matrix_rules import THEMES
-        title=THEMES[config['theme']]['title']
+        title=THEMES.get(config.get('theme'),{}).get('title') or caption.splitlines()[0]
     title=title.replace('\n',' ').lower()[:85]
-    caption=config['caption']+'\n\nбольше разборов — в тгк @quantafate\nhttps://t.me/quantafate'
     if len(caption.encode('utf-16-le'))//2>4000:raise ValueError('Подпись со ссылкой не помещается.')
     return {'channelId':required('BUFFER_TIKTOK_CHANNEL_ID'),
       'text':caption,'assets':[{'image':{'url':u}} for u in urls],
       'schedulingType':'automatic','mode':'addToQueue','saveToDraft':False,
       'needsApproval':False,'aiAssisted':True,'metadata':{'tiktok':{'title':title}}}
+
+
+def tiktok_caption(config):
+    from matrix_rules import THEMES
+    if str(config.get('theme','')).startswith('explore_') and config['theme'] not in THEMES:
+        from topic_planner import register_topics
+        register_topics()
+    heading=THEMES.get(config.get('theme'),{}).get('title') or config.get('title') or config.get('topic') or 'разбор матрицы судьбы'
+    heading=' '.join(str(heading).splitlines()[0].lower().split()).strip(' .?!')[:110]
+    part=config.get('part');total=config.get('total_parts')
+    if part and total:heading+=f' · часть {part}/{total}'
+    return heading+'\n\nбольше разборов в тгк @quantafate'
 
 
 def queue_tiktok(data):
@@ -116,7 +129,7 @@ def public_caption(config,sources):
             credits.append(f"фон: {s['creator']}; {s['page']}; {s['license']} {s['license_url']}; кадрирование, затемнение и текст.")
     caption=config['caption']+ ('\n\n'+'\n'.join(credits) if credits else '')
     if len(caption.encode('utf-16-le'))//2>4000:raise ValueError('Подпись не помещается в TikTok.')
-    return {**config,'caption':caption}
+    return {**config,'caption':caption,'attribution_required':bool(credits)}
 
 
 def deliver_tiktok(folder,owner,store,memory):
@@ -125,6 +138,8 @@ def deliver_tiktok(folder,owner,store,memory):
     if record['status']=='rejected' or record['fingerprint']!=digest(body(config)) or record['units']!=units(config):
         raise ValueError('Контент не совпадает с сохранённой записью.')
     if record.get('deliveries',{}).get('tiktok'):raise SafeError('Для этой части уже есть попытка TikTok.')
+    from prepared_carousels import check_order
+    check_order(config,memory)
     sources=sources_for(folder);config=public_caption(config,sources)
     if config.get('include_tarot_cards') and os.environ.get('PUBLICATION_ASSETS')!='true':
         raise ValueError('Для публикации требуются карты из проверенных источников.')
@@ -303,11 +318,17 @@ def run_target(target,store,preview=False,now=None):
     owner=folder.name+'/article' if target=='telegram' else None
     try:
         if target=='tiktok':
-            from editor_auto import run
-            run(folder)
-            parts=sorted(folder.glob('part-*/content.json'))
-            if len(parts)!=1:raise ValueError('Ожидалась одна часть карусели.')
-            part=parts[0].parent;owner=folder.name+'/'+part.name
+            from prepared_carousels import select,prepare
+            saved_plan=folder/'prepared-tiktok.json'
+            cached=json.loads(saved_plan.read_text(encoding='utf-8'))['owner'] if saved_plan.exists() else (None if (folder/'editor-plan.json').exists() else select(memory))
+            if cached:
+                owner=cached;part=prepare(owner,memory,folder)
+            else:
+                from editor_auto import run
+                run(folder)
+                parts=sorted(folder.glob('part-*/content.json'))
+                if len(parts)!=1:raise ValueError('Ожидалась одна часть карусели.')
+                part=parts[0].parent;owner=folder.name+'/'+part.name
             memory=ContentMemory(store=store)
             receipt={'preview':True} if preview else deliver_tiktok(part,owner,store,memory)
         else:

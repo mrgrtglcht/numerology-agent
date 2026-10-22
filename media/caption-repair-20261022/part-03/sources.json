@@ -1,0 +1,44 @@
+[
+  {
+    "id": "b4",
+    "title": "File:Carl Gustav Carus - Winterlandschaft mit verfallenem Tor.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg/500px-Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg",
+    "original_sha1": "de0ee89317a9849b0f979b180904950805a65ecd",
+    "width": 2000,
+    "height": 1562,
+    "creator": "Carl Gustav Carus",
+    "credit": "Bridgeman Art Library  :  Object  438362",
+    "license": "Public domain",
+    "license_url": "",
+    "query": "Carl Gustav Carus ruins painting",
+    "visual_hash": "cdc9b0eefd7169c9",
+    "visual_hashes": [
+      "cdc9b0eefd7169c9",
+      "cde8b06ebd7169c9",
+      "cdb8b46ebd7161c9",
+      "c9b8a66ebd716169",
+      "cdcc20eeed6168c9",
+      "cda820eead7168c9",
+      "cca824efad7160c9",
+      "ccb8a6efad716068",
+      "cc8c686fed706888",
+      "cca8606f6c706888",
+      "cc28626f6d706048",
+      "cc28664f6d716048",
+      "de8c684f6c704888",
+      "8cec684f6c706888",
+      "8c68624f6c706048",
+      "8c68624f6c706048"
+    ],
+    "file": "b4.jpg",
+    "focus": [
+      0.5,
+      0.5
+    ],
+    "selection_reason": "original public-domain romantic painting without mandatory attribution",
+    "sha256": "1efebed768074bd859c9cdbe9386766933f699eb36a4548f6567b5be7820c178",
+    "modifications": "cropped to 9:16, darkened, overlaid with text"
+  }
+]
