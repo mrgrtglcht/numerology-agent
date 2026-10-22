@@ -19,7 +19,11 @@ def plan(output,memory=None):
     path.write_text(json.dumps(topic,ensure_ascii=False,indent=2),encoding='utf-8')
     from position_catalog import catalog
     (folder/'position-catalog.json').write_text(json.dumps(catalog(),ensure_ascii=False,indent=2),encoding='utf-8')
-    dossier=research(topic,folder)
+    saved=folder/'research.json'
+    if saved.exists() and (folder/'model-response.json').exists():
+        dossier=json.loads(saved.read_text(encoding='utf-8'))
+        if dossier['topic']['theme']!=topic['theme'] or dossier['topic']['part']!=topic['part']:raise ValueError('Источники относятся к другой части.')
+    else:dossier=research(topic,folder)
     profile=THEMES[topic['theme']]
     profile['single_post_research']=True
     profile['research_context']=dossier['sources']
@@ -32,4 +36,3 @@ def run(output,plan_only=False):
         series(topic['theme'],output,part=topic['part'])
     print('Выбрана новая тема: '+topic['title'].replace('\n',' ')+f'; часть {topic["part"]}. Источников: {len(dossier["sources"])}. Публикаций не было.')
     return topic
-

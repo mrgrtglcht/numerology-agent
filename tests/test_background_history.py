@@ -49,3 +49,14 @@ class BackgroundHistoryTests(unittest.TestCase):
             covers.append(config['slides'][0]['background'])
         self.assertEqual(len(set(covers)),5)
 
+    def test_used_artwork_is_filtered_before_model_selection(self):
+        from PIL import Image
+        from backgrounds import fresh_thumbnails
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'candidate.png'
+            im=Image.new('RGB',(90,80),'white');im.save(path)
+            history=BackgroundHistory(Path(tmp)/'history.json')
+            history.reserve('old',{1:{'page':'old-url','visual_hash':'0000000000000000'}})
+            candidate={'id':'b1','page':'alternate-scan','local_thumbnail':str(path)}
+            with self.assertRaises(ValueError):fresh_thumbnails([candidate],history,'new')
+            self.assertEqual(fresh_thumbnails([candidate],history,'old'),[candidate])

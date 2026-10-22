@@ -32,8 +32,10 @@ def query_buffer(key, query, variables=None):
         method='POST',
     )
     try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            payload = json.load(response)
+        def read():
+            with urllib.request.urlopen(request, timeout=30) as response:return json.load(response)
+        from read_retry import read_retry
+        payload=read_retry(read)
     except urllib.error.HTTPError as error:
         raise RuntimeError(f'Buffer вернул HTTP {error.code}. Тело ответа скрыто.') from None
     except (urllib.error.URLError, TimeoutError, ValueError):

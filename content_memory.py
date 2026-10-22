@@ -98,6 +98,14 @@ class ContentMemory:
             status={'sent':'published','draft':'draft','scheduled':'accepted','sending':'sending','error':'needs_review','needs_approval':'draft'}.get(post['status'])
             if status is None: raise ValueError('Неизвестный статус Buffer.')
             owner=next((key for key,r in self.data['posts'].items() if any(d.get('receipt',{}).get('id')==post_id for d in r['deliveries'].values())),None)
+            if owner is None and post['status']!='draft':
+                matches=[]
+                for key,r in self.data['posts'].items():
+                    delivery=r.get('deliveries',{}).get(target,{})
+                    expected=delivery.get('receipt',{})
+                    if delivery.get('status') in ('sending','needs_review') and expected.get('expected_text_hash')==digest(post['text']) and expected.get('expected_asset_count')==len(post.get('assets',[])):
+                        matches.append(key)
+                if len(matches)==1:owner=matches[0]
             if owner is None:
                 owner='buffer/'+post_id
                 if owner not in self.data['posts']:
@@ -109,4 +117,3 @@ class ContentMemory:
             record['deliveries'][target]={'status':status,'receipt':{'id':post_id,'status':post['status'],'url':post.get('externalLink')},'updated_at':datetime.now(timezone.utc).isoformat()}
             if status=='published': record['status']='published'
         self.save()
-

@@ -102,7 +102,7 @@ def generate(topic,candidates):
     return generate_visual(prompt(topic,candidates),candidates,6500)
 
 
-def generate_visual(instruction,candidates,max_tokens=6500,diagnostic_path=None):
+def generate_visual(instruction,candidates,max_tokens=6500,diagnostic_path=None,response_schema=None):
     # Reuse the project's existing quota guard and HTTP handling; no fallback calls.
     import agent
     if agent.os.environ.get('GEMINI_FREE_TIER_CONFIRMED')!='true':
@@ -117,8 +117,10 @@ def generate_visual(instruction,candidates,max_tokens=6500,diagnostic_path=None)
     def diagnostic(value):
         if diagnostic_path: Path(diagnostic_path).write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding='utf-8')
     diagnostic({'stage':'request_dispatched','image_count':len(candidates)})
+    config={'responseMimeType':'application/json','maxOutputTokens':max_tokens}
+    if response_schema is not None:config['responseJsonSchema']=response_schema
     result=agent.request_json('Gemini',f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent',
-        {'contents':[{'parts':parts}], 'generationConfig':{'responseMimeType':'application/json','maxOutputTokens':max_tokens}},
+        {'contents':[{'parts':parts}], 'generationConfig':config},
         {'x-goog-api-key':key},timeout=90)
     diagnostic({'stage':'response_received','candidate_count':len(result.get('candidates',[]))})
     try:
@@ -207,4 +209,3 @@ def run(topic,output,demo=False):
         for name in ('credits.txt','sources.json','pipeline.json'): z.write(folder/name,name)
     print('Поиск, выбор фона и сборка завершены. '+('Текст демонстрационный.' if demo else 'Один запрос модели; новые текст и выбор кадра.'))
     return paths
-

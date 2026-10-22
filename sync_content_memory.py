@@ -5,7 +5,7 @@ from content_memory import ContentMemory
 
 QUERY='''query MemoryPosts($input:PostsInput!,$after:String) {
  posts(first:100,after:$after,input:$input) {
-  edges {node {id text status channelService externalLink sentAt}}
+  edges {node {id text status channelService externalLink sentAt assets {id}}}
   pageInfo {hasNextPage endCursor}
  }
 }'''
@@ -30,4 +30,3 @@ def sync(channel_ids=None,memory=None):
     return posts
 
 if __name__=='__main__':sync()
-

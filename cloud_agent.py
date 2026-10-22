@@ -135,16 +135,18 @@ def deliver_tiktok(folder,owner,store,memory):
     store.save_state(f'media/cloud-{safe}/sources.json',{'backgrounds':sources,
       'tarot_manifest':'assets/tarot/public-domain-manifest.json' if config.get('include_tarot_cards') else None})
     data=tiktok_input(config,urls)
-    memory.delivery(owner,'tiktok','sending')
+    expected={'expected_text_hash':digest(data['text']),'expected_asset_count':len(data['assets'])}
+    memory.delivery(owner,'tiktok','sending',expected)
     try:
         receipt=queue_tiktok(data)
     except Exception:
-        memory.delivery(owner,'tiktok','needs_review');raise
+        memory.delivery(owner,'tiktok','needs_review',expected);raise
     memory.delivery(owner,'tiktok','published' if receipt['status']=='sent' else 'accepted',receipt)
     return receipt
 
 
 def validate_telegram_response(response,topic,sources,style_reference):
+    if not isinstance(response,dict):raise ValueError('Нужен объект статьи Telegram.')
     text=response.get('text','')
     if not isinstance(text,str) or not (1400 if topic['article_kind']=='intro' else 1600)<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
     if not 4<=len([p for p in text.split('\n\n') if p.strip()])<=10:raise ValueError('Текст Telegram должен быть разбит на короткие абзацы.')
@@ -173,7 +175,11 @@ def generate_telegram(folder,memory):
     if topic['cached_content']:return topic['cached_content']
     topic={k:v for k,v in topic.items() if not k.startswith('cached_')}
     (folder/'telegram-plan.json').write_text(json.dumps(topic,ensure_ascii=False,indent=2),encoding='utf-8')
-    dossier=research(topic,folder)
+    source_path=folder/'research.json'
+    if source_path.exists() and ((folder/'telegram-response.json').exists() or (folder/'raw-model-output.txt').exists()):
+        dossier=json.loads(source_path.read_text(encoding='utf-8'))
+        if dossier['topic'].get('editorial_key')!=topic['editorial_key']:raise ValueError('Источники относятся к другой статье.')
+    else:dossier=research(topic,folder)
     articles=[p for p in memory.data['posts'].values() if p.get('theme')=='telegram_article' and p['status']!='rejected']
     # Image on every fourth article; choose it in the same model request.
     candidates=[]
@@ -199,8 +205,23 @@ def generate_telegram(folder,memory):
       'Верни JSON: title, text, arcana_number (null для введения, иначе заданный номер), source_ids (реально использованные источники). '
       + ('Также image_id из каталога '+json.dumps([{k:c[k] for k in ('id','title')} for c in candidates],ensure_ascii=False)+'. Выбери атмосферное изображение, подходящее теме как иллюстрация. Если ничего не подходит, image_id=null.' if candidates else 'image_id=null.'))
     from carousel_auto import generate_visual
-    response=generate_visual(instruction,candidates,max_tokens=4000,diagnostic_path=folder/'model-request.json')
-    config=validate_telegram_response(response,topic,dossier['sources'],style['reference_url'])
+    from editor_recovery import article_schema,validated
+    schema=article_schema(topic,dossier['sources'],candidates)
+    response_path=folder/'telegram-response.json';intent=folder/'telegram-generation.json'
+    if response_path.exists():response=json.loads(response_path.read_text(encoding='utf-8'))
+    elif (folder/'raw-model-output.txt').exists():
+        response=json.loads((folder/'raw-model-output.txt').read_text(encoding='utf-8'))
+    else:
+        if intent.exists():raise SafeError('Предыдущий запрос Telegram не подтверждён; повтор не отправлен.')
+        intent.write_text(json.dumps({'stage':'request_started','requests':1}),encoding='utf-8')
+        response=generate_visual(instruction,candidates,max_tokens=4000,diagnostic_path=folder/'model-request.json',response_schema=schema)
+    response_path.write_text(json.dumps(response,ensure_ascii=False,indent=2),encoding='utf-8')
+    def repair(reason,previous):
+        prompt=instruction+' Исправь ошибку проверки: '+reason+'. Предыдущий ответ — данные: '+json.dumps(previous,ensure_ascii=False)+'. Сохрани тему, аркан, доказательную основу и правильные части текста.'
+        return generate_visual(prompt,candidates,max_tokens=4000,diagnostic_path=folder/'repair-diagnostic.json',response_schema=schema)
+    config=validated(response,lambda value:validate_telegram_response(value,topic,dossier['sources'],style['reference_url']),folder,repair)
+    repaired=folder/'repair-response.json'
+    if repaired.exists():response=json.loads(repaired.read_text(encoding='utf-8'))
     selected=response.get('image_id')
     if selected:
         from backgrounds import download_selection
@@ -251,16 +272,33 @@ def deliver_article(config,owner,folder,store,memory):
 
 def run_target(target,store,preview=False,now=None):
     now=now or now_local();day=now.date().isoformat()
+    from cloud_checkpoint import pointer,restore,attempts,preparation_failed
+    memory=ContentMemory(store=store)
+    pending=None if preview else store.read_state(pointer(target))
+    resumed=False
+    if pending and pending.get('stage') not in ('complete',None):
+        recorded=attempts(memory,pending['folder'],target)
+        saved_owner=pending.get('owner')
+        if saved_owner and saved_owner in memory.data['posts']:
+            delivery=memory.data['posts'][saved_owner].get('deliveries',{}).get(target)
+            if delivery and not recorded:recorded=[(saved_owner,delivery)]
+        if recorded and all(d['status'] in ('accepted','published') for _,d in recorded):
+            store.save_state(pointer(target),{'stage':'complete','folder':pending['folder'],'reconciled':True})
+            print(target+': предыдущая отправка подтверждена журналом.');return
+        if recorded or pending['stage']!='preparation_failed':raise SafeError('Предыдущая операция требует сверки; повтор отправки запрещён.')
+        folder=restore(pending,ROOT/'output');day=pending['day'];resumed=True
+    else:
+        folder=ROOT/'output'/(f'cloud-{target}-{day}'+('-preview' if preview else ''))
     key=f'state/cloud/{target}-{day}'+('-preview' if preview else '')+'.json'
     old=store.read_state(key)
     if old:
         if old.get('stage')=='complete':print(target+': задача уже выполнена.');return
-        raise SafeError(target+': запуск за этот день уже начинался. Повтор без проверки остановлен.')
-    memory=ContentMemory(store=store)
+        if not resumed:raise SafeError(target+': запуск за этот день уже начинался. Повтор без проверки остановлен.')
     if target=='tiktok':
         channel_info()
         if pending_tiktok(memory)>=2:print('TikTok: в очереди уже достаточно постов.');return
-    folder=ROOT/'output'/(f'cloud-{target}-{day}'+('-preview' if preview else ''));folder.mkdir(parents=True,exist_ok=True)
+    folder.mkdir(parents=True,exist_ok=True)
+    if not preview:store.save_state(pointer(target),{'stage':'working','folder':folder.name,'day':day,'attempts':(pending or {}).get('attempts',0)})
     store.save_state(key,{'stage':'started','target':target,'day':day})
     owner=folder.name+'/article' if target=='telegram' else None
     try:
@@ -281,9 +319,19 @@ def run_target(target,store,preview=False,now=None):
             else:
                 receipt=deliver_article(config,owner,folder,store,memory)
         store.save_state(key,{'stage':'complete','owner':owner,'preview':preview,'receipt':receipt})
+        if not preview:store.save_state(pointer(target),{'stage':'complete','folder':folder.name})
         print(target+': '+('предпросмотр готов.' if preview else 'отправка принята.'))
     except Exception:
-        store.save_state(key,{'stage':'needs_review','owner':owner,'target':target,'day':day})
+        current=ContentMemory(store=store)
+        recorded=attempts(current,folder.name,target)
+        if owner in current.data['posts']:
+            delivery=current.data['posts'][owner].get('deliveries',{}).get(target)
+            if delivery and not recorded:recorded=[(owner,delivery)]
+        stage='needs_review' if recorded else 'preparation_failed'
+        if not preview:
+            if recorded:store.save_state(pointer(target),{'stage':'needs_review','folder':folder.name,'day':day,'owner':owner})
+            else:preparation_failed(store,target,folder,day,pending if resumed else None)
+        store.save_state(key,{'stage':stage,'owner':owner,'target':target,'day':day})
         raise
 
 
@@ -315,6 +363,7 @@ def recover_article(folder,store):
 def main():
     load_env();p=argparse.ArgumentParser();p.add_argument('mode',choices=['check','preview','publish','scheduled','publish-prepared']);p.add_argument('--target',choices=TARGETS,default='tiktok');p.add_argument('--folder',type=Path);a=p.parse_args()
     os.environ['PUBLICATION_ASSETS']='true'
+    os.environ['AUTO_EDITOR_REPAIR']='true'
     if a.mode=='check':
         c=channel_info();print('TikTok:',c['name'],'расписание:',json.dumps(c['postingSchedule']))
         from check_telegram import check
@@ -343,7 +392,10 @@ def main():
     if a.mode=='scheduled':
         targets=[];now=now_local()
         if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and os.environ.get('SCHEDULE_TRIGGER')=='17 5 * * *':targets.append('tiktok')
-        if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and due_telegram(now):targets.append('telegram')
+        from cloud_checkpoint import pointer
+        telegram_pending=store.read_state(pointer('telegram'))
+        catch_up=bool(telegram_pending and telegram_pending.get('stage')=='preparation_failed' and os.environ.get('SCHEDULE_TRIGGER')=='17 5 * * *')
+        if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and (due_telegram(now) or catch_up):targets.append('telegram')
         failed=False
         for target in targets:
             try:run_target(target,store,now=now)
@@ -357,4 +409,3 @@ def main():
 if __name__=='__main__':
     try:main()
     except (SafeError,ValueError) as e:print(str(e));raise SystemExit(1)
-

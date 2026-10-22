@@ -12,8 +12,10 @@ from pathlib import Path
 from PIL import Image, ImageOps
 
 API='https://commons.wikimedia.org/w/api.php'
-QUERIES=('gothic church ruin painting', 'gothic window ivy', 'abbey ruins ivy',
-         'gothic cathedral painting', 'medieval castle garden', 'gothic ruins')
+QUERIES=('gothic church ruin painting','Caspar David Friedrich abbey painting',
+         'gothic window ivy','Carl Gustav Carus ruins painting',
+         'romantic ruins painting','Ernst Ferdinand Oehme painting',
+         'abbey ruins ivy','gothic cathedral painting','medieval castle garden','gothic ruins')
 LICENSES={'public domain','pdm-owner','cc0','cc0 1.0','cc by 4.0','cc by-sa 4.0',
           'cc by 3.0','cc by-sa 3.0','cc by 2.0','cc by-sa 2.0','cc by 2.5','cc by-sa 2.5'}
 AGENT='QuantaFate/1.0 (licensed gothic-art carousel previews)'
@@ -35,22 +37,29 @@ def allowed_url(url):
 def read_bytes(url,limit=18*1024*1024):
     if not allowed_url(url): raise ValueError('Изображение должно быть с Wikimedia Commons.')
     req=urllib.request.Request(url,headers={'User-Agent':AGENT})
-    with urllib.request.urlopen(req,timeout=40) as response:
-        if not allowed_url(response.url): raise ValueError('Неожиданный источник изображения.')
-        data=response.read(limit+1)
+    def read():
+        with urllib.request.urlopen(req,timeout=40) as response:
+            if not allowed_url(response.url): raise ValueError('Неожиданный источник изображения.')
+            return response.read(limit+1)
+    from read_retry import read_retry
+    data=read_retry(read)
     if len(data)>limit: raise ValueError('Изображение слишком большое.')
     return data
 
 
-def search_candidates(limit=8,exclude=None):
+def search_candidates(limit=8,exclude=None,seed=None):
     results=[]; seen=set()
-    for query in QUERIES:
+    offset=int(hashlib.sha256(str(seed).encode()).hexdigest(),16)%len(QUERIES) if seed else 0
+    for query in QUERIES[offset:]+QUERIES[:offset]:
         query_count=0
         params={'action':'query','format':'json','formatversion':2,'generator':'search',
                 'gsrsearch':query,'gsrnamespace':6,'gsrlimit':50,'prop':'imageinfo',
                 'iiprop':'url|size|mime|extmetadata|sha1','iiurlwidth':400}
         req=urllib.request.Request(API+'?'+urllib.parse.urlencode(params),headers={'User-Agent':AGENT})
-        with urllib.request.urlopen(req,timeout=40) as response: data=json.load(response)
+        def read():
+            with urllib.request.urlopen(req,timeout=40) as response:return json.load(response)
+        from read_retry import read_retry
+        data=read_retry(read)
         for page in sorted(data.get('query',{}).get('pages',[]),key=lambda p:p.get('index',999)):
             if page['title'] in seen: continue
             info=(page.get('imageinfo') or [{}])[0]
@@ -90,6 +99,26 @@ def thumbnails(candidates,folder):
                 image.save(path,quality=85)
         item['local_thumbnail']=str(path)
     return candidates
+
+
+def fresh_thumbnails(candidates,history,batch):
+    """Reject alternate scans of used artwork before asking the model to choose."""
+    from background_history import duplicate_visual
+    fresh=[]
+    for candidate in candidates:
+        if not history.available(candidate,batch):continue
+        with Image.open(candidate['local_thumbnail']) as original:
+            w,h=original.size;variants=[]
+            for mx in (0,.04,.08,.12):
+                for my in (0,.04,.08,.12):
+                    pixels=list(ImageOps.grayscale(original.crop((w*mx,h*my,w*(1-mx),h*(1-my)))).resize((9,8),Image.Resampling.LANCZOS).getdata())
+                    bits=[pixels[y*9+x]>pixels[y*9+x+1] for y in range(8) for x in range(8)]
+                    variants.append(f'{sum(int(bit)<<i for i,bit in enumerate(bits)):016x}')
+        identity={**candidate,'visual_hashes':variants}
+        if any(r['batch']!=batch and duplicate_visual(identity,r) for r in history.data['posts'].values()):continue
+        fresh.append(candidate)
+    if not fresh:raise ValueError('Нужны новые фоновые изображения: все кандидаты уже использованы.')
+    return fresh
 
 
 def download_selection(candidates,selections,folder):
@@ -134,4 +163,3 @@ def write_credits(sources,path):
                      f"{s['license']} — {s['license_url']}\n"
                      f"changes: {s['modifications']}\n")
     Path(path).write_text('\n'.join(parts),encoding='utf-8')
-

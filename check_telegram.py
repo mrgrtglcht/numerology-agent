@@ -10,7 +10,7 @@ def read_telegram(method, payload=None):
         raise SafeError('Проверка Telegram допускает только чтение.')
     result = request_json('Telegram',
         'https://api.telegram.org/bot' + required('TELEGRAM_BOT_TOKEN') + '/' + method,
-        payload or {})
+        payload or {},read_only=True)
     if not result.get('ok'):
         raise SafeError('Telegram отклонил проверку. Проверьте токен и доступ бота к каналу.')
     return result['result']

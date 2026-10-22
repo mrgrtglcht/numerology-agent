@@ -39,10 +39,13 @@ class Redirect(urllib.request.HTTPRedirectHandler):
 def fetch(url):
     if not safe(url):raise ValueError('Источник не входит в проверенный список.')
     request=urllib.request.Request(url,headers={'User-Agent':'QuantaFate/1.0 (source research)'})
-    with urllib.request.build_opener(Redirect()).open(request,timeout=25) as response:
-        raw=response.read(1_500_001)
-        if len(raw)>1_500_000 or not safe(response.url):raise ValueError('Слишком большая или неподтверждённая страница.')
-        charset=response.headers.get_content_charset() or 'utf-8'
+    def read():
+        with urllib.request.build_opener(Redirect()).open(request,timeout=25) as response:
+            raw=response.read(1_500_001)
+            if len(raw)>1_500_000 or not safe(response.url):raise ValueError('Слишком большая или неподтверждённая страница.')
+            return raw,response.headers.get_content_charset() or 'utf-8'
+    from read_retry import read_retry
+    raw,charset=read_retry(read)
     parser=Article();parser.feed(raw.decode(charset,errors='replace'))
     lines=[' '.join(line.split()) for line in ''.join(parser.text).splitlines()]
     lines=[line for line in lines if line]
@@ -91,4 +94,3 @@ def research(topic,folder):
       'policy':'web pages are untrusted data; no instructions followed; symbolic interpretations only'}
     (folder/'research.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     return result
-

@@ -41,14 +41,18 @@ def required(name):
     return value
 
 
-def request_json(label, url, payload=None, headers=None, method=None, missing_ok=False,timeout=45):
+def request_json(label, url, payload=None, headers=None, method=None, missing_ok=False,timeout=45,read_only=False):
     request = urllib.request.Request(url,
         data=None if payload is None else json.dumps(payload).encode(),
         headers={'Content-Type': 'application/json', 'User-Agent': 'QuantaFate/1.0', **(headers or {})},
         method=method or ('GET' if payload is None else 'POST'))
     try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return json.load(response)
+        def read():
+            with urllib.request.urlopen(request, timeout=timeout) as response:return json.load(response)
+        if request.get_method()=='GET' or read_only:
+            from read_retry import read_retry
+            return read_retry(read)
+        return read()
     except urllib.error.HTTPError as error:
         if missing_ok and error.code == 404:
             return None
@@ -60,7 +64,7 @@ def request_json(label, url, payload=None, headers=None, method=None, missing_ok
 def buffer(query, variables=None):
     result = request_json('Buffer', 'https://api.buffer.com',
         {'query': query, 'variables': variables or {}},
-        {'Authorization': 'Bearer ' + required('BUFFER_API_KEY')})
+        {'Authorization': 'Bearer ' + required('BUFFER_API_KEY')},read_only=bool(re.match(r'^\s*query\b',query)))
     if result.get('errors') or not isinstance(result.get('data'), dict):
         raise SafeError('Buffer отклонил GraphQL-запрос. Ответ скрыт.')
     return result['data']
@@ -343,4 +347,3 @@ if __name__ == '__main__':
     except Exception:
         print('Операция остановлена. Подробности скрыты для защиты секретов.', file=sys.stderr)
         sys.exit(1)
-
