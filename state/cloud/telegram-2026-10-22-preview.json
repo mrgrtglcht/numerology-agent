@@ -1,5 +1,8 @@
 {
-  "stage": "started",
-  "target": "telegram",
-  "day": "2026-10-22"
+  "stage": "complete",
+  "owner": "cloud-telegram-2026-10-22-preview/article",
+  "preview": true,
+  "receipt": {
+    "preview": true
+  }
 }
