@@ -1,5 +1,6 @@
 {
-  "stage": "started",
+  "stage": "needs_review",
+  "owner": null,
   "target": "tiktok",
   "day": "2026-10-22"
 }
