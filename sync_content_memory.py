@@ -18,7 +18,8 @@ def sync(channel_ids=None,memory=None):
     for org in orgs:
         cursor=None
         for page in range(20):
-            result=query_buffer(key,QUERY,{'input':{'organizationId':org['id'],'filter':{'channelIds':ids}},'after':cursor})['posts']
+            result=query_buffer(key,QUERY,{'input':{'organizationId':org['id'],'filter':{'channelIds':ids,
+              'status':['draft','error','needs_approval','scheduled','sending','sent']}},'after':cursor})['posts']
             posts.extend(edge['node'] for edge in result['edges'])
             if not result['pageInfo']['hasNextPage']:break
             next_cursor=result['pageInfo']['endCursor']

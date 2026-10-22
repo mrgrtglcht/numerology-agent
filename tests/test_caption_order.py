@@ -1,10 +1,22 @@
 import unittest
+from unittest.mock import patch,Mock
 from types import SimpleNamespace
 from cloud_agent import tiktok_caption,tiktok_input,public_caption
 from prepared_carousels import check_order,select
 
 
 class CaptionOrderTests(unittest.TestCase):
+    def test_sync_explicitly_reads_published_posts_not_only_default_queue(self):
+        from sync_content_memory import sync
+        calls=[]
+        def query(key,text,variables=None):
+            if variables is None:return {'account':{'organizations':[{'id':'org'}]}}
+            calls.append(variables)
+            return {'posts':{'edges':[],'pageInfo':{'hasNextPage':False}}}
+        with patch('sync_content_memory.load_key',return_value='test'),patch('sync_content_memory.query_buffer',side_effect=query):
+            sync(['channel'],memory=Mock())
+        self.assertIn('sent',calls[0]['input']['filter']['status'])
+        self.assertIn('scheduled',calls[0]['input']['filter']['status'])
     def test_short_caption_uses_topic_not_model_instructions_or_urls(self):
         text=tiktok_caption({'theme':'explore_E1_motivation','part':2,'total_parts':5,
           'caption':'разбор арканов серии e1 через призму мотивации https://t.me/quantafate'})

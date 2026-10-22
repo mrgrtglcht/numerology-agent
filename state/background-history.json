@@ -75,6 +75,99 @@
       "visual_hash": "9199a3e3cb83c70c"
     },
     "quantafate-editor-focused/part-01": {
+      "batch": "caption-repair-20261022",
+      "part": 1,
+      "identities": [
+        "original_sha1:50cbd7eecf5899622c86ca3a2f4fb4775bdc5e6f",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg",
+        "sha256:f747780f9a78ac91ed311c4d7b5b386293f6cfe584a3331cfce628e9b3d226e7",
+        "url:https://upload.wikimedia.org/wikipedia/commons/2/28/Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Romantische_Landschaft_mit_Ruine.jpg",
+      "title": "File:Carl Blechen - Romantische Landschaft mit Ruine.jpg",
+      "visual_hash": "67d99ca0a2d3c167",
+      "visual_hashes": [
+        "67d99ca0a2d3c167",
+        "7dd99ca0a2d3c167",
+        "fdd89ca0a2d3d1e1",
+        "ddb89ca0a2d3d3e1",
+        "66d89ca0a293c047",
+        "7cd89ca0a293c045",
+        "fcd89ca0a29391c1",
+        "dcb89ca0a29391c0",
+        "e6d89c20a191c047",
+        "7ed8bc60a191c0c5",
+        "fcd8bc60a19190c1",
+        "d4b89460a091b1c0",
+        "e6d8b4606191c0cd",
+        "fed8b460611180c5",
+        "fed4b468619190c1",
+        "d4bcb668619130c0"
+      ]
+    },
+    "cloud-tiktok-2026-10-20-preview/part-02": {
+      "batch": "caption-repair-20261022",
+      "part": 2,
+      "identities": [
+        "original_sha1:0156c8c08eed4118c24d25528bbc455403bdb74f",
+        "page:https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg",
+        "sha256:e5bc62dc0e1c2fc7ecd0fc101aaacb3d7473e28f89d31a9ee2fe95acf2790a9e",
+        "url:https://upload.wikimedia.org/wikipedia/commons/f/f9/Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Schloss_Colditz.jpg",
+      "title": "File:Ernst Ferdinand Oehme - Schloss Colditz.jpg",
+      "visual_hash": "11c1c4e8e43030a1",
+      "visual_hashes": [
+        "11c1c4e8e43030a1",
+        "11c1cce8e4b830a1",
+        "41c1cce8e4b830b1",
+        "c1c1dceae4b03030",
+        "11c0c4c8e4b830a1",
+        "11c0c4c8e4b830a1",
+        "44c0ccc8e4b83031",
+        "c0c0dccae4b03030",
+        "30c0c4cae43830a0",
+        "10c0c4cae4b83020",
+        "54c0d4cae4b83030",
+        "c0c0dccae4b83030",
+        "30c0c4cae4383020",
+        "34c0d4cae4383020",
+        "94c0d4c8e6383030",
+        "80c0dcc9e6383030"
+      ]
+    },
+    "cloud-tiktok-2026-10-22/part-03": {
+      "batch": "caption-repair-20261022",
+      "part": 3,
+      "identities": [
+        "original_sha1:de0ee89317a9849b0f979b180904950805a65ecd",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg",
+        "sha256:1efebed768074bd859c9cdbe9386766933f699eb36a4548f6567b5be7820c178",
+        "url:https://upload.wikimedia.org/wikipedia/commons/d/d9/Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Winterlandschaft_mit_verfallenem_Tor.jpg",
+      "title": "File:Carl Gustav Carus - Winterlandschaft mit verfallenem Tor.jpg",
+      "visual_hash": "cdc9b0eefd7169c9",
+      "visual_hashes": [
+        "cdc9b0eefd7169c9",
+        "cde8b06ebd7169c9",
+        "cdb8b46ebd7161c9",
+        "c9b8a66ebd716169",
+        "cdcc20eeed6168c9",
+        "cda820eead7168c9",
+        "cca824efad7160c9",
+        "ccb8a6efad716068",
+        "cc8c686fed706888",
+        "cca8606f6c706888",
+        "cc28626f6d706048",
+        "cc28664f6d716048",
+        "de8c684f6c704888",
+        "8cec684f6c706888",
+        "8c68624f6c706048",
+        "8c68624f6c706048"
+      ]
+    },
+    "quantafate-editor-focused/part-01/previous-background": {
       "batch": "quantafate-editor-focused",
       "part": 1,
       "identities": [
@@ -105,7 +198,7 @@
         "8acee03c7cd46d69"
       ]
     },
-    "cloud-tiktok-2026-10-20-preview/part-02": {
+    "cloud-tiktok-2026-10-20-preview/part-02/previous-background": {
       "batch": "cloud-tiktok-2026-10-20-preview",
       "part": 2,
       "identities": [
@@ -136,7 +229,7 @@
         "c2f0bc69a9ff2f0f"
       ]
     },
-    "cloud-tiktok-2026-10-22/part-03": {
+    "cloud-tiktok-2026-10-22/part-03/previous-background": {
       "batch": "cloud-tiktok-2026-10-22",
       "part": 3,
       "identities": [
