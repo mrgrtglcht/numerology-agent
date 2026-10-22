@@ -1,0 +1,47 @@
+{
+  "backgrounds": [
+    {
+      "id": "b2",
+      "title": "File:Entranceway, St Augustine's, Bourke Street, Melbourne Australia (4590276440).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Entranceway%2C_St_Augustine%27s%2C_Bourke_Street%2C_Melbourne_Australia_%284590276440%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Entranceway%2C_St_Augustine%27s%2C_Bourke_Street%2C_Melbourne_Australia_%284590276440%29.jpg/500px-Entranceway%2C_St_Augustine%27s%2C_Bourke_Street%2C_Melbourne_Australia_%284590276440%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Entranceway,_St_Augustine%27s,_Bourke_Street,_Melbourne_Australia_(4590276440).jpg",
+      "original_sha1": "95a55ca7eb770c7894e3beb669cfed192e1ab78c",
+      "width": 1200,
+      "height": 1800,
+      "creator": "Rexness",
+      "credit": "Entranceway, St Augustine's, Bourke Street, Melbourne Australia",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "query": "gothic window ivy",
+      "visual_hash": "4c8d8decb0c67598",
+      "visual_hashes": [
+        "4c8d8decb0c67598",
+        "cc8d8decb1ca6498",
+        "8c8dcdecb1da6499",
+        "8d8d4cecb1da64b5",
+        "4c8d8decb1c6e598",
+        "4c8d8decb1ca6498",
+        "8c8dcdecb1da64b9",
+        "8d8d4cecb19a66b5",
+        "4c0c0cecb1c2e49a",
+        "4c0c8cecb1ca6499",
+        "4c0dccec319b66b9",
+        "0c0dccec319bc6b5",
+        "4d0c4cec308be49a",
+        "4c0c4cee308be6b9",
+        "4c0c4cee309be6b1",
+        "4c0c4cee2099c6b4"
+      ],
+      "file": "b2.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "готический вход, тёмный камень и зелень; проверено отсутствие повтора картины",
+      "sha256": "975df74b90fb6bdf0b8a49ee1dfc1d3631098695e5eda4bb43ad6ae55f0463d7",
+      "modifications": "cropped to 9:16, darkened, overlaid with text"
+    }
+  ],
+  "tarot_manifest": "assets/tarot/public-domain-manifest.json"
+}
