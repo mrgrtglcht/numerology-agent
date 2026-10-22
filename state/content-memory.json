@@ -2610,12 +2610,14 @@
       "created_at": "2026-10-22T11:42:48.677296+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
-            "expected_text_hash": "5fb0881389ab29274d290b149c96bf7a3f47d8375a6bd3d2870847a66a8a407b",
-            "expected_asset_count": 7
+            "id": "6ad9f6cfebec8224f3bd9a15",
+            "status": "scheduled",
+            "schedulingType": "automatic",
+            "asset_count": 7
           },
-          "updated_at": "2026-10-22T11:43:09.459729+00:00"
+          "updated_at": "2026-10-22T11:43:11.697130+00:00"
         }
       },
       "formats": [
