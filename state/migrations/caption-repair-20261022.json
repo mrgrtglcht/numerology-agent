@@ -1,0 +1,162 @@
+{
+  "stage": "complete",
+  "reason": "short captions, new public-domain backgrounds, recover unpublished first part",
+  "actions": {
+    "stage": "complete",
+    "actions": [
+      {
+        "operation": "edit",
+        "id": "6ad8cc21b535ec9954c6053d",
+        "stage": "response_received",
+        "result": {
+          "__typename": "PostActionSuccess",
+          "post": {
+            "id": "6ad8cc21b535ec9954c6053d",
+            "text": "что поддерживает твою мотивацию · часть 2/5\n\nбольше разборов в тгк @quantafate",
+            "status": "scheduled",
+            "dueAt": "2026-10-23T20:27:00.000Z",
+            "schedulingType": "automatic",
+            "assets": [
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              }
+            ]
+          }
+        }
+      },
+      {
+        "operation": "edit",
+        "id": "6ad9f6cfebec8224f3bd9a15",
+        "stage": "response_received",
+        "result": {
+          "__typename": "PostActionSuccess",
+          "post": {
+            "id": "6ad9f6cfebec8224f3bd9a15",
+            "text": "что поддерживает твою мотивацию · часть 3/5\n\nбольше разборов в тгк @quantafate",
+            "status": "scheduled",
+            "dueAt": "2026-10-24T06:51:00.000Z",
+            "schedulingType": "automatic",
+            "assets": [
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              }
+            ]
+          }
+        }
+      },
+      {
+        "operation": "create_first",
+        "stage": "response_received",
+        "result": {
+          "__typename": "PostActionSuccess",
+          "post": {
+            "id": "6ada0c62e8cca8cdcc52e4df",
+            "text": "что поддерживает твою мотивацию · часть 1/5\n\nбольше разборов в тгк @quantafate",
+            "status": "scheduled",
+            "dueAt": "2026-10-25T08:46:00.000Z",
+            "schedulingType": "automatic",
+            "assets": [
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              },
+              {
+                "id": null
+              }
+            ]
+          }
+        }
+      },
+      {
+        "operation": "move_first_to_top",
+        "id": "6ada0c62e8cca8cdcc52e4df",
+        "stage": "response_received",
+        "result": {
+          "__typename": "PostActionSuccess",
+          "post": {
+            "id": "6ada0c62e8cca8cdcc52e4df",
+            "status": "scheduled",
+            "dueAt": "2026-10-23T20:27:00.000Z",
+            "schedulingType": "automatic"
+          }
+        }
+      }
+    ]
+  },
+  "queue": [
+    {
+      "id": "6ada0c62e8cca8cdcc52e4df",
+      "text": "что поддерживает твою мотивацию · часть 1/5\n\nбольше разборов в тгк @quantafate",
+      "status": "scheduled",
+      "dueAt": "2026-10-23T20:27:00.000Z",
+      "schedulingType": "automatic",
+      "asset_count": 7
+    },
+    {
+      "id": "6ad8cc21b535ec9954c6053d",
+      "text": "что поддерживает твою мотивацию · часть 2/5\n\nбольше разборов в тгк @quantafate",
+      "status": "scheduled",
+      "dueAt": "2026-10-24T06:51:00.000Z",
+      "schedulingType": "automatic",
+      "asset_count": 7
+    },
+    {
+      "id": "6ad9f6cfebec8224f3bd9a15",
+      "text": "что поддерживает твою мотивацию · часть 3/5\n\nбольше разборов в тгк @quantafate",
+      "status": "scheduled",
+      "dueAt": "2026-10-25T08:46:00.000Z",
+      "schedulingType": "automatic",
+      "asset_count": 7
+    }
+  ]
+}
