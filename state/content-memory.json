@@ -2323,10 +2323,12 @@
           "checked_at": "2026-10-22T11:39:11.044838+00:00"
         }
       ],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-10-22T11:39:14.380529+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "telegram"
+      ]
     }
   }
 }
