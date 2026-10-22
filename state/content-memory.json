@@ -2606,10 +2606,12 @@
           "checked_at": "2026-10-22T10:15:04.218152+00:00"
         }
       ],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-10-22T11:42:48.677296+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "tiktok"
+      ]
     }
   }
 }
