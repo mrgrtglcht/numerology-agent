@@ -1,5 +1,11 @@
 {
-  "stage": "started",
-  "target": "tiktok",
-  "day": "2026-10-22"
+  "stage": "complete",
+  "owner": "cloud-tiktok-2026-10-22/part-03",
+  "preview": false,
+  "receipt": {
+    "id": "6ad9f6cfebec8224f3bd9a15",
+    "status": "scheduled",
+    "schedulingType": "automatic",
+    "asset_count": 7
+  }
 }
