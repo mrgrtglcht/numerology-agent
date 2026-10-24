@@ -74,6 +74,8 @@ jobs:
         run: python -m unittest discover -s tests -v
         env:
           PUBLICATION_ASSETS: 'false'
+          TIKTOK_REQUIRE_MUSIC: 'false'
+          TIKTOK_PUBLISHER: 'buffer'
       - name: Сверить подтверждённые публикации с Buffer
         run: python sync_content_memory.py
       - name: Подготовить и отправить контент
