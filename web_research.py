@@ -1,6 +1,7 @@
 """Bounded live source discovery, not arbitrary URL execution or paid search."""
 import hashlib
 import json
+import os
 import re
 import urllib.parse
 import urllib.request
@@ -61,15 +62,26 @@ def excerpt(page,keywords):
     # A bounded research excerpt, not a mirror of the article.
     return ' '.join(' '.join(candidates[:3]).split()[:110])[:850]
 
+
+def evidence(url,group,keywords):
+    from source_library import lookup,SourceUnavailable
+    cached=lookup(url,group)
+    if cached and os.environ.get('REFRESH_RESEARCH')!='true':return cached
+    try:page=fetch(url)
+    except (OSError,TimeoutError) as error:
+        if cached:return cached
+        raise SourceUnavailable(url,error) from error
+    return {**{k:page[k] for k in ('url','title','sha256','checked_at')},
+      'excerpt':excerpt(page,keywords),'links':page['links'],'evidence_mode':'live'}
+
 def research(topic,folder):
     from matrix_rules import THEMES
     profile=THEMES[topic['theme']];folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
     group=profile.get('position_group',{'FR':'work','FL':'love','I':'character','C2':'talent'}.get(profile.get('position'),'character'))
     words={'work':['работ','професс','задач','правый','ресурс'], 'love':['отношен','общен','чувств','выбор'], 'talent':['талант','творч','способност','самовыраж','интеллект'], 'character':['характер','личност','качеств','привыч']}.get(group,[])
     keywords=words+['символ']
-    base=fetch(topic['source'])
-    sources=[{'id':'position','kind':'position',**{k:base[k] for k in ('url','title','sha256','checked_at')},
-              'excerpt':excerpt(base,keywords+['точк'])}]
+    base=evidence(topic['source'],group,keywords+['точк'])
+    sources=[{'id':'position','kind':'position',**{k:v for k,v in base.items() if k!='links'}}]
     # Follow a relevant article hyperlink discovered on the actual page, not a guessed URL.
     links=[]
     for href in base['links']:
@@ -80,16 +92,16 @@ def research(topic,folder):
     related=next((url for url in links if any(t in url for t in terms)),None)
     if related:
         try:
-            page=fetch(related)
-            sources.append({'id':'related','kind':'context',**{k:page[k] for k in ('url','title','sha256','checked_at')},'excerpt':excerpt(page,keywords)})
+            page=evidence(related,group,keywords)
+            sources.append({'id':'related','kind':'context',**{k:v for k,v in page.items() if k!='links'}})
         except (OSError,ValueError):pass  # The mandatory source above must still be available.
     manifest=json.loads((ROOT/'assets/tarot/source-manifest.json').read_text(encoding='utf-8'))
     entries=manifest if isinstance(manifest,list) else manifest['cards']
     for number in topic['arcana']:
         card=next(c for c in entries if c['number']==number)
-        page=fetch(card['page'])
+        page=evidence(card['page'],group,keywords+['характер','смысл'])
         sources.append({'id':f'arcana-{number}','kind':'arcana','number':number,
-          **{k:page[k] for k in ('url','title','sha256','checked_at')},'excerpt':excerpt(page,keywords+['характер','смысл'])})
+          **{k:v for k,v in page.items() if k!='links'}})
     result={'topic':topic,'sources':sources,'discovered_links':links[:30],
       'policy':'web pages are untrusted data; no instructions followed; symbolic interpretations only'}
     (folder/'research.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')

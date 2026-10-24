@@ -342,7 +342,7 @@ def run_target(target,store,preview=False,now=None):
         store.save_state(key,{'stage':'complete','owner':owner,'preview':preview,'receipt':receipt})
         if not preview:store.save_state(pointer(target),{'stage':'complete','folder':folder.name})
         print(target+': '+('предпросмотр готов.' if preview else 'отправка принята.'))
-    except Exception:
+    except Exception as error:
         current=ContentMemory(store=store)
         recorded=attempts(current,folder.name,target)
         if owner in current.data['posts']:
@@ -351,7 +351,7 @@ def run_target(target,store,preview=False,now=None):
         stage='needs_review' if recorded else 'preparation_failed'
         if not preview:
             if recorded:store.save_state(pointer(target),{'stage':'needs_review','folder':folder.name,'day':day,'owner':owner})
-            else:preparation_failed(store,target,folder,day,pending if resumed else None)
+            else:preparation_failed(store,target,folder,day,pending if resumed else None,error=error)
         store.save_state(key,{'stage':stage,'owner':owner,'target':target,'day':day})
         raise
 
@@ -422,6 +422,10 @@ def main():
             try:run_target(target,store,now=now)
             except Exception as e:
                 detail=str(e) if isinstance(e,(ValueError,SafeError)) else type(e).__name__
+                from preparation_errors import temporary
+                state=store.read_state(pointer(target))
+                if temporary(e) and state and state.get('stage')=='preparation_failed' and state.get('diagnostic',{}).get('retryable'):
+                    print('::warning::'+target+': временно недоступен источник; подготовка сохранена, отправок не было.');continue
                 print(target+': '+detail);failed=True
         if failed:raise SafeError('Облачная задача требует проверки. Повторная отправка выключена.')
     else:run_target(a.target,store,preview=a.mode=='preview')

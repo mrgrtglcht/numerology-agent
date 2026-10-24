@@ -40,9 +40,11 @@ def attempts(memory,folder,target):
       if key.startswith(folder+'/') and target in p.get('deliveries',{})]
 
 
-def preparation_failed(store,target,folder,day,previous=None):
+def preparation_failed(store,target,folder,day,previous=None,error=None):
+    from preparation_errors import diagnostic,temporary
     count=(previous or {}).get('attempts',0)+1
-    state={'stage':'preparation_failed' if count<3 else 'needs_review',
+    state={'stage':'preparation_failed' if count<3 or temporary(error) else 'needs_review',
       'folder':Path(folder).name,'day':day,'attempts':count,'files':snapshot(folder)}
+    if error:state['diagnostic']=diagnostic(error)
     store.save_state(pointer(target),state)
     return state

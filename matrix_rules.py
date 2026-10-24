@@ -80,7 +80,7 @@ THEMES={
  'facts':{'title':'неочевидное\nоб арканах','position':None,
    'label':'все старшие арканы','instruction':'эта серия — о самих старших арканах. искать определённую позицию в матрице не нужно.',
    'meaning':'короткие символические факты об арканах, без привязки к определённой позиции и без выдуманных исторических сведений',
-   'source':'https://numerolog.ru/tarot/znachenie-starshih-arkanov-taro.html'}
+   'source':'https://numerolog.ru/tarot/znacheniya-starshih-arkanov-taro.html'}
 }
 
 def series_plan(theme,per_part=4):
@@ -92,4 +92,3 @@ def series_plan(theme,per_part=4):
             'excluded':[v for v in range(1,23) if v not in values],
             'parts':[{'part':i+1,'arcana':v} for i,v in enumerate(chunks)],
             'total_parts':len(chunks),'per_part':per_part}
-
