@@ -1,5 +1,8 @@
 {
-  "stage": "started",
-  "target": "tiktok",
-  "day": "2026-10-24"
+  "stage": "complete",
+  "owner": "cloud-tiktok-2026-10-24-preview/part-04",
+  "preview": true,
+  "receipt": {
+    "preview": true
+  }
 }
