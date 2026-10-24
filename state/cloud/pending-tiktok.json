@@ -1,6 +1,9 @@
 {
-  "stage": "working",
+  "stage": "preparation_failed",
   "folder": "cloud-tiktok-2026-10-24",
   "day": "2026-10-24",
-  "attempts": 0
+  "attempts": 1,
+  "files": {
+    "editor-plan.json": "{\n  \"theme\": \"explore_E1_motivation\",\n  \"part\": 4,\n  \"position\": \"E1\",\n  \"angle\": \"motivation\",\n  \"title\": \"что поддерживает твою мотивацию\\nотношение к работе\",\n  \"arcana\": [\n    15,\n    16,\n    17,\n    18\n  ],\n  \"total_parts\": 5,\n  \"source\": \"https://axvii.ru/blog/kak-chitat-matritsu-sudby\",\n  \"method\": \"axvii-main-centre-22-v1\",\n  \"status\": \"planned\"\n}"
+  }
 }
