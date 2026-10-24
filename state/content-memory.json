@@ -2618,20 +2618,26 @@
       ],
       "status": "prepared",
       "created_at": "2026-10-22T11:42:48.677296+00:00",
-      "deliveries": {
-        "tiktok": {
-          "status": "accepted",
-          "receipt": {
-            "id": "6ad9f6cfebec8224f3bd9a15",
-            "status": "scheduled",
-            "url": null
-          },
-          "updated_at": "2026-10-24T09:50:58.840285+00:00"
-        }
-      },
+      "deliveries": {},
       "formats": [
         "tiktok",
         "pinterest"
+      ],
+      "delivery_history": [
+        {
+          "platform": "tiktok",
+          "reason": "migrate_to_music",
+          "verified_status": "draft",
+          "delivery": {
+            "status": "accepted",
+            "receipt": {
+              "id": "6ad9f6cfebec8224f3bd9a15",
+              "status": "scheduled",
+              "url": null
+            },
+            "updated_at": "2026-10-24T09:50:58.840285+00:00"
+          }
+        }
       ]
     },
     "cloud-tiktok-2026-10-24-preview/part-04": {

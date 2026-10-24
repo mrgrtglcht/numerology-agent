@@ -97,13 +97,13 @@ class ContentMemory:
             target=post['channelService'];post_id=post['id']
             status={'sent':'published','draft':'draft','scheduled':'accepted','sending':'sending','error':'needs_review','needs_approval':'draft'}.get(post['status'])
             if status is None: raise ValueError('Неизвестный статус Buffer.')
-            owner=next((key for key,r in self.data['posts'].items() if any(d.get('receipt',{}).get('id')==post_id for d in r['deliveries'].values())),None)
+            owner=next((key for key,r in self.data['posts'].items() if any(d.get('receipt',{}).get('provider','buffer')=='buffer' and d.get('receipt',{}).get('id')==post_id for d in r['deliveries'].values())),None)
             if owner is None and post['status']!='draft':
                 matches=[]
                 for key,r in self.data['posts'].items():
                     delivery=r.get('deliveries',{}).get(target,{})
                     expected=delivery.get('receipt',{})
-                    if delivery.get('status') in ('sending','needs_review') and expected.get('expected_text_hash')==digest(post['text']) and expected.get('expected_asset_count')==len(post.get('assets',[])):
+                    if expected.get('provider','buffer')=='buffer' and delivery.get('status') in ('sending','needs_review') and expected.get('expected_text_hash')==digest(post['text']) and expected.get('expected_asset_count')==len(post.get('assets',[])):
                         matches.append(key)
                 if len(matches)==1:owner=matches[0]
             if owner is None:

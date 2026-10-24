@@ -38,6 +38,10 @@ def bootstrap_telegram_history(store):
 
 
 def channel_info():
+    if os.environ.get('TIKTOK_PUBLISHER')=='postwire':
+        from postwire import creator
+        account=creator()
+        return {'name':account['creator_username'],'postingSchedule':'пятница 22:27, воскресенье 09:46; музыка включена'}
     target=required('BUFFER_TIKTOK_CHANNEL_ID')
     orgs=buffer('query CloudOrgs {account {organizations {id}}}')['account']['organizations']
     for org in orgs:
@@ -133,6 +137,8 @@ def public_caption(config,sources):
 
 
 def deliver_tiktok(folder,owner,store,memory):
+    if os.environ.get('TIKTOK_REQUIRE_MUSIC')=='true' and os.environ.get('TIKTOK_PUBLISHER')!='postwire':
+        raise SafeError('Публикация без музыки остановлена: требуется подключение PostWire.')
     folder=Path(folder);config=json.loads((folder/'content.json').read_text(encoding='utf-8'))
     record=memory.data['posts'][owner]
     if record['status']=='rejected' or record['fingerprint']!=digest(body(config)) or record['units']!=units(config):
@@ -149,6 +155,21 @@ def deliver_tiktok(folder,owner,store,memory):
     urls=[store.put(f'media/cloud-{safe}/{p.stem}.jpg',jpeg(p)) for p in paths]
     store.save_state(f'media/cloud-{safe}/sources.json',{'backgrounds':sources,
       'tarot_manifest':'assets/tarot/public-domain-manifest.json' if config.get('include_tarot_cards') else None})
+    if os.environ.get('TIKTOK_PUBLISHER')=='postwire':
+        import postwire
+        data=postwire.payload(config,urls,owner,memory)
+        expected={'provider':'postwire','expected_text_hash':digest(data['text']),
+                  'expected_asset_count':len(urls),'run_at':data['run_at']}
+        memory.delivery(owner,'tiktok','sending',expected)
+        receipt=expected
+        try:
+            receipt=postwire.enqueue(data)
+            memory.delivery(owner,'tiktok','sending',receipt)
+            postwire.verify(receipt,data)
+        except Exception:
+            memory.delivery(owner,'tiktok','needs_review',receipt);raise
+        memory.delivery(owner,'tiktok','accepted',receipt)
+        return receipt
     data=tiktok_input(config,urls)
     expected={'expected_text_hash':digest(data['text']),'expected_asset_count':len(data['assets'])}
     memory.delivery(owner,'tiktok','sending',expected)
@@ -310,6 +331,12 @@ def run_target(target,store,preview=False,now=None):
         if old.get('stage')=='complete':print(target+': задача уже выполнена.');return
         if not resumed:raise SafeError(target+': запуск за этот день уже начинался. Повтор без проверки остановлен.')
     if target=='tiktok':
+        if not preview and os.environ.get('TIKTOK_REQUIRE_MUSIC')=='true' and not (os.environ.get('TIKTOK_PUBLISHER')=='postwire' and os.environ.get('POSTWIRE_API_KEY')):
+            print('::warning::TikTok: публикация без музыки остановлена; подключи PostWire. Telegram продолжает работать.')
+            return
+        if os.environ.get('TIKTOK_PUBLISHER')=='postwire':
+            from postwire import sync
+            sync(memory)
         channel_info()
         if pending_tiktok(memory)>=2:print('TikTok: в очереди уже достаточно постов.');return
     folder.mkdir(parents=True,exist_ok=True)

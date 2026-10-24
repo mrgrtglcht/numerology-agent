@@ -41,6 +41,10 @@ jobs:
     env:
       PYTHONIOENCODING: utf-8
       BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      POSTWIRE_API_KEY: ${{ secrets.POSTWIRE_API_KEY }}
+      POSTWIRE_BRAND_ID: ${{ vars.POSTWIRE_BRAND_ID }}
+      TIKTOK_PUBLISHER: ${{ vars.TIKTOK_PUBLISHER || 'buffer' }}
+      TIKTOK_REQUIRE_MUSIC: 'true'
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
       GEMINI_FREE_TIER_CONFIRMED: ${{ vars.GEMINI_FREE_TIER_CONFIRMED }}
@@ -89,4 +93,3 @@ jobs:
           path: output/cloud-*/
           retention-days: 3
           if-no-files-found: ignore
-
