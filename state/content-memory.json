@@ -2633,6 +2633,299 @@
         "tiktok",
         "pinterest"
       ]
+    },
+    "cloud-tiktok-2026-10-24-preview/part-04": {
+      "units": [
+        "arcana:position:E1:angle:motivation:E1:15",
+        "arcana:position:E1:angle:motivation:E1:16",
+        "arcana:position:E1:angle:motivation:E1:17",
+        "arcana:position:E1:angle:motivation:E1:18"
+      ],
+      "fingerprint": "3ad948ac906de144e2772eb4c3b4b17e5729a7be177ee72a06c6888f5cf26b2e",
+      "body": "вовлеченность рождается из ярких задач, масштаба и возможности влиять на процессы, а не из рутины. важно направлять энергию на созидание и сохранять внутреннюю честность в делах. мотивацию поддерживают динамика, обновление привычного порядка и смелые проекты. полезно вовремя отказываться от устаревших подходов и начинать с чистого листа. интерес к делу питают творческое вдохновение, перспективы роста и признание результатов. важно делиться своими идеями и уверенно двигаться к долгосрочным ориентирам. вдохновение приходит через глубокие исследования, интуитивные решения и творческий поиск. стоит опираться на внутреннее чутье и не поддаваться надуманным сомнениям.",
+      "content": {
+        "type": "arcana_series",
+        "theme": "explore_E1_motivation",
+        "position": "E1",
+        "method": "axvii-main-centre-22-v1",
+        "example_points": {
+          "A": 22,
+          "C": 6,
+          "E": 10,
+          "G": 11,
+          "I": 13,
+          "B": 10,
+          "D": 16,
+          "F": 21,
+          "H": 6,
+          "I1": 8,
+          "A2": 8,
+          "A1": 3,
+          "B2": 5,
+          "B1": 15,
+          "C2": 19,
+          "C1": 7,
+          "D2": 11,
+          "D1": 9,
+          "E2": 5,
+          "E1": 15,
+          "F2": 7,
+          "F1": 10,
+          "G2": 6,
+          "G1": 17,
+          "H2": 19,
+          "H1": 7,
+          "F3": 11,
+          "FL": 17,
+          "FR": 16,
+          "A3": 21,
+          "C3": 5,
+          "I2": 21
+        },
+        "size": [
+          1080,
+          1920
+        ],
+        "include_tarot_cards": true,
+        "include_cta": false,
+        "series_bot_final": true,
+        "part": 4,
+        "total_parts": 5,
+        "part_arcana": [
+          15,
+          16,
+          17,
+          18
+        ],
+        "research_sources": [
+          {
+            "id": "position",
+            "kind": "position",
+            "url": "https://axvii.ru/blog/kak-chitat-matritsu-sudby",
+            "title": "ВидеоКак читать матрицу судьбы самому: понятный порядок для новичка4:40",
+            "sha256": "6e2c6c4d54d266bfe3bc3e7bfaf37594d8cfd5580f1346c85b7d8675b593a3b9",
+            "checked_at": "2026-10-24T09:41:25.045225+00:00",
+            "evidence_mode": "verified_library"
+          },
+          {
+            "id": "related",
+            "kind": "context",
+            "url": "https://axvii.ru/blog/materialnaya-liniya-v-matritse-sudby",
+            "title": "Материальная карма в матрице судьбы описывает привычки в работе и обращении с деньгами. Слово «карма» может тревожить, особенно если рядом говорят о финансовых трудностях. Три числ",
+            "sha256": "65a548f5d13248aa2b340105e69abe73d70e73951765bfdb8e67ee5c20846781",
+            "checked_at": "2026-10-24T09:51:06.150219+00:00",
+            "evidence_mode": "live"
+          },
+          {
+            "id": "arcana-15",
+            "kind": "arcana",
+            "number": 15,
+            "url": "https://numerolog.ru/tarot/znachenie-karty-taro-dyavol.html",
+            "title": "15 старший аркан Дьявол в Таро – значение, полное описание раскладов и сочетаний карт",
+            "sha256": "335a57bacb383af41192cac24c342bc16fb631caf2bbe0820289785110229bd4",
+            "checked_at": "2026-10-24T09:41:25.815357+00:00",
+            "evidence_mode": "verified_library"
+          },
+          {
+            "id": "arcana-16",
+            "kind": "arcana",
+            "number": 16,
+            "url": "https://numerolog.ru/tarot/znachenie-karty-taro-bashnya.html",
+            "title": "16 старший аркан Башня в Таро – значение, полное описание раскладов и сочетаний карт",
+            "sha256": "55f472a32e5f8a6d87be680cbb508e2d62683d36faf31b40c3a2f4eaca4df069",
+            "checked_at": "2026-10-24T09:41:25.781394+00:00",
+            "evidence_mode": "verified_library"
+          },
+          {
+            "id": "arcana-17",
+            "kind": "arcana",
+            "number": 17,
+            "url": "https://numerolog.ru/tarot/17-arkan-taro-zvezda.html",
+            "title": "17 старший аркан Звезда в Таро – значение, полное описание раскладов и сочетаний карт",
+            "sha256": "8b5ec97b1da24477e5a18f6907bc850cf81b3aba596242da9715051437db03e3",
+            "checked_at": "2026-10-24T09:44:51.875877+00:00",
+            "evidence_mode": "verified_library"
+          },
+          {
+            "id": "arcana-18",
+            "kind": "arcana",
+            "number": 18,
+            "url": "https://numerolog.ru/tarot/znachenie-karty-taro-luna.html",
+            "title": "18 старший аркан Луна в Таро – значение, полное описание раскладов и сочетаний карт",
+            "sha256": "81a0e853bbfb2b5946bfe82a88e9d60df1d0f143f6cfe4c097662df0381c2267",
+            "checked_at": "2026-10-24T09:41:26.400130+00:00",
+            "evidence_mode": "verified_library"
+          }
+        ],
+        "slides": [
+          {
+            "layout": "series_cover",
+            "title": "что поддерживает твою мотивацию\nотношение к работе",
+            "subtitle": "часть 4 из 5 · арканы 15, 16, 17, 18",
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "location",
+            "title": "где смотреть",
+            "blocks": [
+              {
+                "text": "найди правый луч. нужна его средняя точка."
+              }
+            ],
+            "note": "нужная точка выделена на примере матрицы",
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "arcana",
+            "arcana_number": 15,
+            "paragraphs": [
+              "вовлеченность рождается из ярких задач, масштаба и возможности влиять на процессы, а не из рутины.",
+              "важно направлять энергию на созидание и сохранять внутреннюю честность в делах."
+            ],
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "arcana",
+            "arcana_number": 16,
+            "paragraphs": [
+              "мотивацию поддерживают динамика, обновление привычного порядка и смелые проекты.",
+              "полезно вовремя отказываться от устаревших подходов и начинать с чистого листа."
+            ],
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "arcana",
+            "arcana_number": 17,
+            "paragraphs": [
+              "интерес к делу питают творческое вдохновение, перспективы роста и признание результатов.",
+              "важно делиться своими идеями и уверенно двигаться к долгосрочным ориентирам."
+            ],
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "arcana",
+            "arcana_number": 18,
+            "paragraphs": [
+              "вдохновение приходит через глубокие исследования, интуитивные решения и творческий поиск.",
+              "стоит опираться на внутреннее чутье и не поддаваться надуманным сомнениям."
+            ],
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          },
+          {
+            "layout": "bot",
+            "background": "b1.jpg",
+            "focus": [
+              0.5,
+              0.5
+            ]
+          }
+        ],
+        "caption": "разбор арканов серии часть 4 из 5.",
+        "typography": {
+          "family": "Manrope",
+          "lowercase": true
+        },
+        "demo_content": false
+      },
+      "title": "explore_E1_motivation",
+      "theme": "explore_E1_motivation",
+      "position": "E1",
+      "arcana": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "tail": null,
+      "part": 4,
+      "sources": [
+        {
+          "id": "position",
+          "kind": "position",
+          "url": "https://axvii.ru/blog/kak-chitat-matritsu-sudby",
+          "title": "ВидеоКак читать матрицу судьбы самому: понятный порядок для новичка4:40",
+          "sha256": "6e2c6c4d54d266bfe3bc3e7bfaf37594d8cfd5580f1346c85b7d8675b593a3b9",
+          "checked_at": "2026-10-24T09:41:25.045225+00:00",
+          "evidence_mode": "verified_library"
+        },
+        {
+          "id": "related",
+          "kind": "context",
+          "url": "https://axvii.ru/blog/materialnaya-liniya-v-matritse-sudby",
+          "title": "Материальная карма в матрице судьбы описывает привычки в работе и обращении с деньгами. Слово «карма» может тревожить, особенно если рядом говорят о финансовых трудностях. Три числ",
+          "sha256": "65a548f5d13248aa2b340105e69abe73d70e73951765bfdb8e67ee5c20846781",
+          "checked_at": "2026-10-24T09:51:06.150219+00:00",
+          "evidence_mode": "live"
+        },
+        {
+          "id": "arcana-15",
+          "kind": "arcana",
+          "number": 15,
+          "url": "https://numerolog.ru/tarot/znachenie-karty-taro-dyavol.html",
+          "title": "15 старший аркан Дьявол в Таро – значение, полное описание раскладов и сочетаний карт",
+          "sha256": "335a57bacb383af41192cac24c342bc16fb631caf2bbe0820289785110229bd4",
+          "checked_at": "2026-10-24T09:41:25.815357+00:00",
+          "evidence_mode": "verified_library"
+        },
+        {
+          "id": "arcana-16",
+          "kind": "arcana",
+          "number": 16,
+          "url": "https://numerolog.ru/tarot/znachenie-karty-taro-bashnya.html",
+          "title": "16 старший аркан Башня в Таро – значение, полное описание раскладов и сочетаний карт",
+          "sha256": "55f472a32e5f8a6d87be680cbb508e2d62683d36faf31b40c3a2f4eaca4df069",
+          "checked_at": "2026-10-24T09:41:25.781394+00:00",
+          "evidence_mode": "verified_library"
+        },
+        {
+          "id": "arcana-17",
+          "kind": "arcana",
+          "number": 17,
+          "url": "https://numerolog.ru/tarot/17-arkan-taro-zvezda.html",
+          "title": "17 старший аркан Звезда в Таро – значение, полное описание раскладов и сочетаний карт",
+          "sha256": "8b5ec97b1da24477e5a18f6907bc850cf81b3aba596242da9715051437db03e3",
+          "checked_at": "2026-10-24T09:44:51.875877+00:00",
+          "evidence_mode": "verified_library"
+        },
+        {
+          "id": "arcana-18",
+          "kind": "arcana",
+          "number": 18,
+          "url": "https://numerolog.ru/tarot/znachenie-karty-taro-luna.html",
+          "title": "18 старший аркан Луна в Таро – значение, полное описание раскладов и сочетаний карт",
+          "sha256": "81a0e853bbfb2b5946bfe82a88e9d60df1d0f143f6cfe4c097662df0381c2267",
+          "checked_at": "2026-10-24T09:41:26.400130+00:00",
+          "evidence_mode": "verified_library"
+        }
+      ],
+      "status": "reserved",
+      "created_at": "2026-10-24T09:51:41.986948+00:00",
+      "deliveries": {},
+      "formats": []
     }
   }
 }
