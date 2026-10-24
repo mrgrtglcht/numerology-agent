@@ -259,6 +259,37 @@
         "4c0c4cee309be6b1",
         "4c0c4cee2099c6b4"
       ]
+    },
+    "cloud-tiktok-2026-10-24-preview/part-04": {
+      "batch": "cloud-tiktok-2026-10-24-preview",
+      "part": 4,
+      "identities": [
+        "original_sha1:5d734dd4f9614c3249051feeedafb8edcb1c7de9",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Die_Rudelsburg_(1825).jpg",
+        "sha256:7fa6bbee47a6f17b07e891206e67a8c09efe28b0c534bf63c374dc199084f975",
+        "url:https://upload.wikimedia.org/wikipedia/commons/e/e6/Carl_Gustav_Carus_-_Die_Rudelsburg_%281825%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Die_Rudelsburg_(1825).jpg",
+      "title": "File:Carl Gustav Carus - Die Rudelsburg (1825).jpg",
+      "visual_hash": "26e2d2068e0d2eb0",
+      "visual_hashes": [
+        "26e2d2068e0d2eb0",
+        "26c2f206860d2fae",
+        "e2c27206860c0fae",
+        "e2827286860c0f2e",
+        "27e3d353870d2fb0",
+        "62c3f303870d2fae",
+        "62c37303870d2faf",
+        "e0837383870d0f2f",
+        "27e39353870d2f32",
+        "63c3f313870d2f2e",
+        "62837313070d272f",
+        "e1837313078d272f",
+        "27c1b3930725252a",
+        "6781b3131705252e",
+        "6181f3131705272d",
+        "c181f3131705272d"
+      ]
     }
   }
 }
