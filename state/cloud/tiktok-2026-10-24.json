@@ -1,5 +1,6 @@
 {
-  "stage": "started",
+  "stage": "preparation_failed",
+  "owner": null,
   "target": "tiktok",
   "day": "2026-10-24"
 }
