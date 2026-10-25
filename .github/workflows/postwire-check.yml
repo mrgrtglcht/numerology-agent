@@ -1,0 +1,43 @@
+name: PostWire connection check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/postwire-check.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      POSTWIRE_API_KEY: ${{ secrets.POSTWIRE_API_KEY }}
+      POSTWIRE_BRAND_ID: ${{ vars.POSTWIRE_BRAND_ID }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Check connected TikTok without publishing
+        run: |
+          python - <<'PY'
+          import json
+          import postwire
+          from agent import SafeError
+          try:
+              account = postwire.creator()
+              queue = postwire.api('/api/schedule')
+              print(json.dumps({'creator': account['creator_username'], 'public_allowed': True,
+                  'queue_schema': list(queue), 'queued_count': len(queue.get('scheduled', [])),
+                  'music_requested_by_adapter': True, 'published_now': False}))
+          except SafeError as error:
+              print(str(error))
+              raise SystemExit(1)
+          PY
