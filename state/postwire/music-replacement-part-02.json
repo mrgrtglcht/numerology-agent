@@ -1,5 +1,5 @@
 {
-  "stage": "sending",
+  "stage": "needs_review",
   "part": 2,
   "owner": "cloud-tiktok-2026-10-20-preview/part-02",
   "payload": {
