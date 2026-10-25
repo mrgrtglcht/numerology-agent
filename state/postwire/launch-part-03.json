@@ -48,5 +48,14 @@
         "photo_cover_index": 0
       }
     }
+  },
+  "receipt": {
+    "provider": "postwire",
+    "id": "6715e07f-f106-4996-96ae-5ba8694322ce",
+    "status": "queued",
+    "run_at": "2026-10-28T17:30:00+00:00",
+    "asset_count": 7,
+    "auto_add_music": true,
+    "privacy_level": "PUBLIC_TO_EVERYONE"
   }
 }
