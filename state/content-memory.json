@@ -2166,13 +2166,13 @@
             "provider": "postwire",
             "id": "ba181946-9c33-458f-9acd-701f02be43e7",
             "status": "queued",
-            "run_at": "2026-10-30T21:27:00+00:00",
+            "run_at": "2026-10-26T17:30:00+00:00",
             "asset_count": 7,
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE",
             "brand_organic_toggle": false
           },
-          "updated_at": "2026-10-25T09:33:46.472560+00:00"
+          "updated_at": "2026-10-25T09:48:04.403534+00:00"
         }
       },
       "formats": [
