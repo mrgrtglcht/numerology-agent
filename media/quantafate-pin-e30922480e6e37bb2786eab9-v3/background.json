@@ -1,0 +1,43 @@
+{
+  "id": "b1",
+  "title": "File:Ernst Ferdinand Oehme - Gewittersturm in der Gegend des Dorfes Kaditz.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg/500px-Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg",
+  "original_sha1": "c8a327140a9b07c7b65645bca2a09b93277c57c1",
+  "width": 2000,
+  "height": 1392,
+  "creator": "Ernst Ferdinand Oehme",
+  "credit": "Bridgeman Art Library  :  Object  658529",
+  "license": "Public domain",
+  "license_url": "",
+  "query": "Ernst Ferdinand Oehme painting",
+  "visual_hash": "e7e6f5190d4c5cbe",
+  "visual_hashes": [
+    "e7e6f5190d4c5cbe",
+    "e6e6f4190d4c5c9e",
+    "e665f839094c5c9c",
+    "e665f839094c5c9c",
+    "e6e6f4380c4cdcbe",
+    "e7e6f4380c4cdcbc",
+    "e6e6f8380d4cdcbc",
+    "e664f8380d4cdc9c",
+    "e6e6f4380cdc9cba",
+    "e7e6f4380c4c9cbc",
+    "e7e6f83c0c4cdcbc",
+    "e7e6f83c2c4cdc9c",
+    "e7e7f6380cdc9c3b",
+    "efe6f23c0cdc9c3c",
+    "efe6f83c0c4c9c3c",
+    "c7e6b83c2c4c9cbc"
+  ],
+  "file": "b1.jpg",
+  "focus": [
+    0.5,
+    0.5
+  ],
+  "selection_reason": "fresh public-domain carousel background",
+  "sha256": "9b57a5f5233adb284b001443ff40f0e73508b7c2e4e657fee410b849966e3d89",
+  "modifications": "cropped to 9:16, darkened, overlaid with text",
+  "download_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/e5d30b377fe913719b819ea62b199c73cd6443c5/media/quantafate-pin-e30922480e6e37bb2786eab9-v3/background.jpg"
+}
