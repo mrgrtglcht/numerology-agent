@@ -1,5 +1,5 @@
 {
-  "stage": "sending",
+  "stage": "accepted",
   "part": 1,
   "owner": "quantafate-editor-focused/part-01",
   "payload": {
@@ -60,5 +60,20 @@
   },
   "asset_count": 7,
   "prepared_at": "2026-10-25T09:25:16.283686+00:00",
-  "attempted_at": "2026-10-25T09:27:00.791065+00:00"
+  "attempted_at": "2026-10-25T09:27:00.791065+00:00",
+  "receipt": {
+    "posted": 1,
+    "id": null,
+    "status": null,
+    "held": null,
+    "results": [
+      {
+        "ok": true,
+        "platform": "tiktok",
+        "id": "p_pub_url~v2.7700534163694356511",
+        "status": "processing",
+        "privacy_level": "PUBLIC_TO_EVERYONE"
+      }
+    ]
+  }
 }
