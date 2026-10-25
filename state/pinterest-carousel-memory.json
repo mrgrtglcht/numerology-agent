@@ -2,7 +2,7 @@
   "version": 1,
   "posts": {
     "quantafate-pin-e30922480e6e37bb2786eab9": {
-      "stage": "published",
+      "stage": "replaced",
       "design_version": 2,
       "owner": "quantafate-editor-focused/part-01",
       "title": "что поддерживает твою мотивацию · часть 1/5",
@@ -25,7 +25,9 @@
         "url": "https://www.pinterest.com/pin/1141592205583291454/",
         "post_id": "1141592205583291454"
       },
-      "removal_started": true
+      "removal_started": true,
+      "removed": true,
+      "replacement": "quantafate-pin-e30922480e6e37bb2786eab9-v3"
     },
     "quantafate-pin-e30922480e6e37bb2786eab9-v3": {
       "stage": "published",
