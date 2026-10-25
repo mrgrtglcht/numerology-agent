@@ -2989,6 +2989,32 @@
         "tiktok",
         "pinterest"
       ]
+    },
+    "buffer/6ade4fa3a3d5bff523fae223": {
+      "units": [
+        "external:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body": " ",
+      "title": " ",
+      "status": "published",
+      "source": "buffer",
+      "created_at": "2026-10-25T12:02:59.000Z",
+      "deliveries": {
+        "pinterest": {
+          "status": "published",
+          "receipt": {
+            "id": "6ade4fa3a3d5bff523fae223",
+            "status": "sent",
+            "url": "https://www.pinterest.com/pin/1141592205583292282"
+          },
+          "updated_at": "2026-10-25T19:09:46.333785+00:00"
+        }
+      },
+      "formats": [
+        "pinterest"
+      ],
+      "arcana": []
     }
   }
 }
