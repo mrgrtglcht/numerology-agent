@@ -1,5 +1,23 @@
 # TikTok photo music migration — 2026-10-24
 
+## Activation verified 2026-10-25
+
+The owner connected quanta.aura, supplied the GitHub secret and confirmed removing
+both old silent TikToks. Creator-info confirmed PUBLIC_TO_EVERYONE.
+Part 1 was posted once with auto_add_music=true; TikTok returned publish_complete:
+https://www.tiktok.com/@quanta.aura/video/7700534302198615326
+Part 2 is queued once for 2026-10-30 22:27 Europe/Warsaw, schedule ID
+ba181946-9c33-458f-9acd-701f02be43e7. Readback confirmed all seven images,
+caption, public visibility and auto_add_music=true in scheduled.payload.
+The queue was reconciled without resending (Actions run 40181134859).
+Both canonical deliveries now use provider postwire and retain old Buffer history.
+cloud.yml now defaults to postwire; future slots are Friday 22:27 / Sunday 09:46.
+110 local tests pass, including the observed nested schedule schema and lowercase
+publish_complete status. Playback verification remains with the owner: TikTok's
+browser page displayed a CAPTCHA. Do not claim the sound was audibly checked.
+
+The following section records preparation history before activation.
+
 Music-free Buffer publishing is paused by TIKTOK_REQUIRE_MUSIC=true in cloud.yml.
 Telegram remains independent. Published parts 1 and 2 are retained.
 Part 3 was returned to a Buffer draft, retaining all seven images.

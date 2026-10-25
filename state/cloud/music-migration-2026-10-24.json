@@ -1,1 +1,16 @@
-{"stage": "awaiting_connection", "provider": "postwire", "buffer_part3": "6ad9f6cfebec8224f3bd9a15", "buffer_status": "draft", "verified_assets": 7, "preview_run": 40083563339, "published_parts_retained": [1, 2]}
+{
+  "stage": "active",
+  "provider": "postwire",
+  "activated_on": "2026-10-25",
+  "old_posts_removed_by_owner": true,
+  "first_published_url": "https://www.tiktok.com/@quanta.aura/video/7700534302198615326",
+  "second_schedule_id": "ba181946-9c33-458f-9acd-701f02be43e7",
+  "second_run_at": "2026-10-30T21:27:00+00:00",
+  "music_requested": true,
+  "playback_verified": false,
+  "verification_run": 40181134859,
+  "slots_warsaw": {
+    "friday": "22:27",
+    "sunday": "09:46"
+  }
+}
