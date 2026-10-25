@@ -2375,7 +2375,13 @@
       ],
       "status": "prepared",
       "created_at": "2026-10-22T11:39:14.380529+00:00",
-      "deliveries": {},
+      "deliveries": {
+        "telegram": {
+          "status": "sending",
+          "receipt": {},
+          "updated_at": "2026-10-25T19:09:53.527462+00:00"
+        }
+      },
       "formats": [
         "telegram"
       ]
