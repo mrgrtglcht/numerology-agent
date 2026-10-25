@@ -1,0 +1,63 @@
+{
+  "stage": "prepared",
+  "part": 1,
+  "owner": "quantafate-editor-focused/part-01",
+  "payload": {
+    "platforms": [
+      "tiktok"
+    ],
+    "brand_id": "54e08f72-683c-4e92-a263-d507b2f9b4df",
+    "text": "что поддерживает твою мотивацию · часть 1/5\n\nбольше разборов в тгк @quantafate",
+    "media": [
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/01.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/02.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/03.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/04.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/05.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/06.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-01/07.jpg",
+        "type": "image"
+      }
+    ],
+    "idempotency_key": "quantafate-music-replacement-part-01-20261025",
+    "options": {
+      "tiktok": {
+        "privacy_level": "PUBLIC_TO_EVERYONE",
+        "auto_add_music": true,
+        "brand_organic_toggle": true,
+        "as_draft": false,
+        "photo_cover_index": 0
+      }
+    }
+  },
+  "old_delivery": {
+    "status": "published",
+    "receipt": {
+      "id": "6ada0c62e8cca8cdcc52e4df",
+      "status": "sent",
+      "url": "https://www.tiktok.com/@quanta.aura/video/7699962410282536205?utm_campaign=tt4d_open_api&utm_source=7103819247981182978"
+    },
+    "updated_at": "2026-10-24T09:50:58.840251+00:00"
+  },
+  "asset_count": 7,
+  "prepared_at": "2026-10-25T09:25:16.283686+00:00"
+}
