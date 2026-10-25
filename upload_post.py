@@ -1,6 +1,9 @@
 """Upload-Post API: allowlisted diagnostics and Pinterest carousel delivery."""
 import json
 import os
+import urllib.request
+import urllib.error
+import uuid
 from urllib.parse import urlencode
 from agent import SafeError,request_json,required
 
@@ -24,6 +27,33 @@ def connection():
     if len(matches)!=1:raise SafeError('Доска quantaura не найдена в подключённом Pinterest.')
     return {'plan':me.get('plan'),'profile':profile,'board':wanted,'board_name':matches[0]['name'],
             'account':boards.get('pinterest_account_used')}
+
+def publish(post,conn,key):
+    urls=post['image_urls']
+    if not 2<=len(urls)<=5:raise SafeError('Карусель Pinterest требует 2–5 изображений.')
+    link='https://t.me/quantafate'
+    fields=[('user',conn['profile']),('platform[]','pinterest'),('title',post['title']),
+      ('pinterest_title',post['title']),('pinterest_description',post['caption']),
+      ('pinterest_board_id',conn['board']),('pinterest_link',link),('async_upload','true'),
+      ('request_id',key),('external_id',key)]
+    for url in urls:
+        if not url.startswith('https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/'):raise SafeError('Непроверенный адрес изображения.')
+        fields.extend([('photos[]',url),('pinterest_carousel_titles[]',post['title']),
+          ('pinterest_carousel_descriptions[]',post['caption']),('pinterest_carousel_links[]',link)])
+    boundary='quantafate'+uuid.uuid4().hex
+    data=b''.join((f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n{value}\r\n').encode() for name,value in fields)
+    data+=f'--{boundary}--\r\n'.encode()
+    req=urllib.request.Request(BASE+'/api/upload_photos',data=data,method='POST',headers={
+      'Authorization':'Apikey '+required('UPLOAD_POST_API_KEY'),'Content-Type':'multipart/form-data; boundary='+boundary,
+      'Idempotency-Key':key,'User-Agent':'QuantaFate/1.0'})
+    try:
+        with urllib.request.urlopen(req,timeout=90) as response:return json.load(response)
+    except urllib.error.HTTPError as e:
+        raise SafeError('Upload-Post: HTTP '+str(e.code)+'. Повтор остановлен; требуется проверка статуса.') from None
+    except (OSError,ValueError):raise SafeError('Upload-Post: результат отправки неизвестен; повтор остановлен.') from None
+
+def status(key):
+    return get('/api/uploadposts/status?'+urlencode({'request_id':key}))
 
 if __name__=='__main__':
     try:print(json.dumps(connection(),ensure_ascii=False))
