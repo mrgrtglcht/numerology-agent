@@ -2169,7 +2169,8 @@
             "run_at": "2026-10-30T21:27:00+00:00",
             "asset_count": 7,
             "auto_add_music": true,
-            "privacy_level": "PUBLIC_TO_EVERYONE"
+            "privacy_level": "PUBLIC_TO_EVERYONE",
+            "brand_organic_toggle": false
           },
           "updated_at": "2026-10-25T09:33:46.472560+00:00"
         }
