@@ -2,7 +2,7 @@
   "version": 1,
   "posts": {
     "quantafate-pin-e30922480e6e37bb2786eab9": {
-      "stage": "accepted",
+      "stage": "published",
       "design_version": 2,
       "owner": "quantafate-editor-focused/part-01",
       "title": "что поддерживает твою мотивацию · часть 1/5",
@@ -21,7 +21,10 @@
         "arcana:explore_E1_motivation:E1:6"
       ],
       "prepared_at": "2026-10-25T11:48:10.608482+00:00",
-      "receipt": {}
+      "receipt": {
+        "url": "https://www.pinterest.com/pin/1141592205583291454/",
+        "post_id": "1141592205583291454"
+      }
     }
   },
   "days": {
