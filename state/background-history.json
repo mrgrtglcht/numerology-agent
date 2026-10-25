@@ -290,6 +290,37 @@
         "6181f3131705272d",
         "c181f3131705272d"
       ]
+    },
+    "quantafate-pin-e30922480e6e37bb2786eab9/part-01": {
+      "batch": "quantafate-pin-e30922480e6e37bb2786eab9",
+      "part": 1,
+      "identities": [
+        "original_sha1:056037f2187e3ea5824430655d7a3e2bc7170b4d",
+        "page:https://commons.wikimedia.org/wiki/File:Castle_of_Sainte-Agnes_from_medieval_garden.jpg",
+        "sha256:365e4fac3bf110cb5c3618ba656a2c4113752fff2e0ca6e39e73c1ed0c8e5f4c",
+        "url:https://upload.wikimedia.org/wikipedia/commons/1/1a/Castle_of_Sainte-Agnes_from_medieval_garden.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Castle_of_Sainte-Agnes_from_medieval_garden.jpg",
+      "title": "File:Castle of Sainte-Agnes from medieval garden.jpg",
+      "visual_hash": "3296966c3616701a",
+      "visual_hashes": [
+        "3296966c3616701a",
+        "3396366c3612b41a",
+        "9396326c3612343a",
+        "9696726c76129632",
+        "3297b26c7612f219",
+        "3396326c7612b219",
+        "1396724c7612b638",
+        "1796724c7612b232",
+        "3397b3ee7212f219",
+        "339723ce7612b219",
+        "339263ce7612b239",
+        "979373ce7612ba30",
+        "7193a3ce731bf118",
+        "319ba3ce731b7239",
+        "339be3ce731b3239",
+        "b39be3ce63133a31"
+      ]
     }
   }
 }
