@@ -1,0 +1,52 @@
+{
+  "stage": "sending",
+  "owner": "cloud-tiktok-2026-10-22/part-03",
+  "payload": {
+    "platforms": [
+      "tiktok"
+    ],
+    "brand_id": "54e08f72-683c-4e92-a263-d507b2f9b4df",
+    "text": "что поддерживает твою мотивацию · часть 3/5\n\nбольше разборов в тгк @quantafate",
+    "media": [
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/01.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/02.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/03.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/04.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/05.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/06.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/07.jpg",
+        "type": "image"
+      }
+    ],
+    "run_at": "2026-10-28T17:30:00+00:00",
+    "label": "quantafate-da3fa653de9a5fe3905684fd",
+    "options": {
+      "tiktok": {
+        "privacy_level": "PUBLIC_TO_EVERYONE",
+        "auto_add_music": true,
+        "brand_organic_toggle": false,
+        "as_draft": false,
+        "photo_cover_index": 0
+      }
+    }
+  }
+}
