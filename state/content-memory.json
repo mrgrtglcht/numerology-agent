@@ -2161,18 +2161,37 @@
       "created_at": "2026-10-21T14:28:10.462045+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "published",
+          "status": "needs_review",
           "receipt": {
-            "id": "6ad8cc21b535ec9954c6053d",
-            "status": "sent",
-            "url": "https://tiktok.com/@quanta.aura/video/7700123092693077261"
+            "provider": "postwire",
+            "id": "ba181946-9c33-458f-9acd-701f02be43e7",
+            "status": "queued",
+            "run_at": "2026-10-30T21:27:00+00:00",
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-10-24T09:50:58.840297+00:00"
+          "updated_at": "2026-10-25T09:31:38.700395+00:00"
         }
       },
       "formats": [
         "tiktok",
         "pinterest"
+      ],
+      "delivery_history": [
+        {
+          "platform": "tiktok",
+          "reason": "owner_deleted_silent_post",
+          "delivery": {
+            "status": "published",
+            "receipt": {
+              "id": "6ad8cc21b535ec9954c6053d",
+              "status": "sent",
+              "url": "https://tiktok.com/@quanta.aura/video/7700123092693077261"
+            },
+            "updated_at": "2026-10-24T09:50:58.840297+00:00"
+          }
+        }
       ]
     },
     "cloud-telegram-2026-10-21/article": {
