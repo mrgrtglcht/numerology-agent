@@ -27,7 +27,7 @@
       }
     },
     "quantafate-pin-e30922480e6e37bb2786eab9-v3": {
-      "stage": "sending",
+      "stage": "accepted",
       "design_version": 3,
       "owner": "quantafate-editor-focused/part-01",
       "title": "что поддерживает твою мотивацию по матрице судьбы · часть 1",
@@ -48,7 +48,8 @@
       ],
       "prepared_at": "2026-10-25T11:56:35.911104+00:00",
       "replaces": "quantafate-pin-e30922480e6e37bb2786eab9",
-      "replacement_approved": true
+      "replacement_approved": true,
+      "receipt": {}
     }
   },
   "days": {
