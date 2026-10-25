@@ -10,6 +10,13 @@ class Store:
     def save_state(self,path,data):self.data=copy.deepcopy(data)
 
 class UploadPinterestTests(unittest.TestCase):
+    def test_pinterest_analysis_has_no_cover_or_bot_footer(self):
+        from pinterest_carousel import plan
+        config={'pinterest_analysis_only':True,'slides':[{'layout':'series_cover'},{'layout':'location'},
+          {'layout':'arcana','arcana_number':3},{'layout':'arcana','arcana_number':4},{'layout':'bot'}]}
+        pages=plan(config)
+        self.assertEqual([s['layout'] for s in pages],['arcana','arcana'])
+        self.assertFalse(any(p.get('bot_footer') for p in pages))
     def test_status_handles_async_list_without_confusing_acceptance_and_publication(self):
         self.assertEqual(pin.result_state({'success':True,'request_id':'key'})[0],'accepted')
         self.assertEqual(pin.result_state({'status':'completed','results':[{'platform':'pinterest','success':True,'post_url':'https://www.pinterest.com/pin/123/'}]})[0],'published')
@@ -17,6 +24,7 @@ class UploadPinterestTests(unittest.TestCase):
 
     def test_timeout_is_durable_and_never_reposted(self):
         store=Store();now=datetime(2026,10,25,12,tzinfo=timezone.utc)
+        store.data['posts']['key']['design_version']=2
         with patch.object(pin.upload_post,'connection',return_value={}),patch.object(pin,'sync'),patch.object(pin.upload_post,'publish',side_effect=TimeoutError) as send:
             with self.assertRaises(TimeoutError):pin.run('publish',store,now)
             self.assertEqual(store.data['posts']['key']['stage'],'needs_review')

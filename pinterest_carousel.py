@@ -12,6 +12,8 @@ def plan(config):
     slides=config['slides'];arcana=[s for s in slides if s['layout']=='arcana']
     if arcana:
         if len(arcana)>4: raise ValueError('Для pinterest нужны части максимум по четыре аркана.')
+        if config.get('pinterest_analysis_only'):
+            return [dict(s) for s in arcana]
         result=[{'layout':'pin_overview','background':slides[0]['background'],'focus':slides[0]['focus']}]+[dict(s) for s in arcana]
         result[-1]['bot_footer']=True
         return result
@@ -60,6 +62,8 @@ def render(config,output,backgrounds,cards=None):
                     for b in intro['blocks']: y=text(d,b['text'],70,y+30,36,width=860)
         elif s['layout']=='arcana':
             from matrix_rules import ARCANA
+            if config.get('pinterest_analysis_only'):
+                text(d,config['slides'][0]['title'].split('\n')[0],70,145,30,True,width=860)
             n=s['arcana_number'];text(d,f'{n} аркан',390,225,27,width=540)
             y=text(d,ARCANA[n],390,285,46,True,width=540)+65
             art=Image.open(cards[n]).convert('RGBA').resize((260,498),Image.Resampling.LANCZOS)
@@ -91,4 +95,3 @@ def render(config,output,backgrounds,cards=None):
         for path in sorted(out.glob('*.png')):z.write(path,'slides/'+path.name)
         for name in ('content.json','preview.jpg'):z.write(folder/name,name)
     return [out/f'{i:02}.png' for i in range(1,len(pages)+1)]
-

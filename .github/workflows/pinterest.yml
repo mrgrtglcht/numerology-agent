@@ -1,4 +1,4 @@
-name: QuantaFate Pinterest
+name: QuantaFate Pinterest carousels
 on:
   push:
     paths: ['.github/workflows/pinterest.yml']

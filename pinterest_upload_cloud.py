@@ -48,14 +48,15 @@ def prepare(key,owner,config,store):
         source['download_url']=store.put('media/'+key+'/background.jpg',(folder/'backgrounds'/source['file']).read_bytes())
         store.save_state('media/'+key+'/background.json',source)
     history.reserve(key,{1:source})
+    config['pinterest_analysis_only']=True
     for slide in config['slides']:slide.update(background=source['file'],focus=[.5,.5])
     files=render(config,folder,folder/'backgrounds')
     urls=[store.put('media/'+key+'/'+f'{i:02}.png',path.read_bytes()) for i,path in enumerate(files,1)]
     preview=store.put('media/'+key+'/preview.jpg',(folder/'preview.jpg').read_bytes())
     title=config['slides'][0]['title'].split('\n')[0]+f' · часть {config["part"]}/{config["total_parts"]}'
-    caption='арканы '+', '.join(map(str,config['part_arcana']))+' в матрице судьбы.\n\nбольше разборов — в тгк @quantafate'
+    caption=''
     if len(title)>100 or len(caption)>500:raise SafeError('Слишком длинное описание Pinterest.')
-    return {'stage':'prepared','owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
+    return {'stage':'prepared','design_version':2,'owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
       'units':units(config),'prepared_at':datetime.now(timezone.utc).isoformat()}
 
 def result_state(result):
@@ -88,7 +89,11 @@ def run(mode,store,now=None):
     if any(p['stage'] in ('sending','accepted','needs_review') for p in ledger['posts'].values()):raise SafeError('Предыдущая карусель ещё не подтверждена; повтор запрещён.')
     if sum(d.startswith(day[:7]) for d in ledger['days'])>=10:print('Pinterest: достигнут предел 10 отправок за месяц.');return
     ready=next(((k,p) for k,p in ledger['posts'].items() if p['stage']=='prepared'),None)
-    if ready:key,post=ready
+    if ready:
+        key,post=ready
+        if post.get('design_version')!=2:
+            config=ContentMemory(store=store).data['posts'][post['owner']]['content']
+            post=prepare(key,post['owner'],copy.deepcopy(config),store);ledger['posts'][key]=post;store.save_state(PATH,ledger)
     else:
         item=select(ContentMemory(store=store),ledger)
         if not item:print('Pinterest: нет новых опубликованных материалов.');return
