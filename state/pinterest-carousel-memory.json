@@ -3,24 +3,24 @@
   "posts": {
     "quantafate-pin-e30922480e6e37bb2786eab9": {
       "stage": "prepared",
+      "design_version": 2,
       "owner": "quantafate-editor-focused/part-01",
       "title": "что поддерживает твою мотивацию · часть 1/5",
-      "caption": "арканы 3, 4, 5, 6 в матрице судьбы.\n\nбольше разборов — в тгк @quantafate",
+      "caption": "",
       "image_urls": [
-        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/4d479c57ad2da383474a8950f8b46c34bfe54f2b/media/quantafate-pin-e30922480e6e37bb2786eab9/01.png",
-        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/9a2be461d325d143bc4ab5f2a31f71176e33d625/media/quantafate-pin-e30922480e6e37bb2786eab9/02.png",
-        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/666c97d49fff770c2249e3c56e49a9aceca4d4b5/media/quantafate-pin-e30922480e6e37bb2786eab9/03.png",
-        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/732875f726749735c2be6ca5be98bc22d6515689/media/quantafate-pin-e30922480e6e37bb2786eab9/04.png",
-        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/afc154483def1262cb58520b5444d638859781f5/media/quantafate-pin-e30922480e6e37bb2786eab9/05.png"
+        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/641661fbf335af15e1b70a290aa554fab7615c72/media/quantafate-pin-e30922480e6e37bb2786eab9/01.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/c73ea9ec38a079ca4b8933bac5a2302974fdbaae/media/quantafate-pin-e30922480e6e37bb2786eab9/02.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/b5679927a170cbab868eb8feaa2ac1e250aee9fe/media/quantafate-pin-e30922480e6e37bb2786eab9/03.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3c35518f985e62f57b3eb3b0d836e0d8cbda952a/media/quantafate-pin-e30922480e6e37bb2786eab9/04.png"
       ],
-      "preview_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/25cbf673a6d9bae05e64ba1c9a26b024a8cc2a92/media/quantafate-pin-e30922480e6e37bb2786eab9/preview.jpg",
+      "preview_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3bda52dd3ebbdfa50673f1e935cf1f0f961a6b0c/media/quantafate-pin-e30922480e6e37bb2786eab9/preview.jpg",
       "units": [
-        "arcana:position:E1:angle:motivation:E1:3",
-        "arcana:position:E1:angle:motivation:E1:4",
-        "arcana:position:E1:angle:motivation:E1:5",
-        "arcana:position:E1:angle:motivation:E1:6"
+        "arcana:explore_E1_motivation:E1:3",
+        "arcana:explore_E1_motivation:E1:4",
+        "arcana:explore_E1_motivation:E1:5",
+        "arcana:explore_E1_motivation:E1:6"
       ],
-      "prepared_at": "2026-10-25T11:46:56.823320+00:00"
+      "prepared_at": "2026-10-25T11:48:10.608482+00:00"
     }
   },
   "days": {}
