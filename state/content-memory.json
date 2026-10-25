@@ -2660,13 +2660,17 @@
       "created_at": "2026-10-22T11:42:48.677296+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
+            "id": "6715e07f-f106-4996-96ae-5ba8694322ce",
+            "status": "queued",
             "run_at": "2026-10-28T17:30:00+00:00",
-            "expected_asset_count": 7
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-10-25T09:48:12.771193+00:00"
+          "updated_at": "2026-10-25T09:48:20.546927+00:00"
         }
       },
       "formats": [
