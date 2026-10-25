@@ -75,5 +75,12 @@
         "privacy_level": "PUBLIC_TO_EVERYONE"
       }
     ]
+  },
+  "status_check": {
+    "platform": "tiktok",
+    "id": "p_pub_url~v2.7700534163694356511",
+    "status": "publish_complete",
+    "post_id": "7700534302198615326",
+    "url": "https://www.tiktok.com/@quanta.aura/video/7700534302198615326"
   }
 }
