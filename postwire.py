@@ -92,10 +92,11 @@ def enqueue(data):
 
 def verify(receipt, data):
     row = api('/api/schedule/'+receipt['id']).get('scheduled') or {}
-    media = row.get('media')
-    options = row.get('options', {}).get('tiktok', {})
+    saved = row.get('payload',row)
+    media = saved.get('media')
+    options = saved.get('options', {}).get('tiktok', {})
     urls = [m.get('url') if isinstance(m,dict) else m for m in (media or [])]
-    if (row.get('status') != 'queued' or row.get('text') != data['text']
+    if (row.get('status') != 'queued' or saved.get('text') != data['text']
         or urls != [m['url'] for m in data['media']]
         or options.get('auto_add_music') is not True or options.get('privacy_level') != PUBLIC):
         raise SafeError('PostWire не подтвердил все слайды, музыку и публичность. Нужна сверка, повтор запрещён.')

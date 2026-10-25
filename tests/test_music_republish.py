@@ -40,3 +40,9 @@ class MusicReplacementTests(unittest.TestCase):
     def test_sanitized_receipt_never_contains_credentials(self):
         result=m.summarize({'token':'secret','results':[{'platform':'tiktok','ok':True,'access_token':'secret','id':'post'}]})
         self.assertNotIn('secret',str(result))
+
+    def test_actual_lowercase_tiktok_completion_is_published(self):
+        store=Store({'stage':'accepted','receipt':{'results':[{'platform':'tiktok','ok':True,'id':'publish-id'}]}})
+        with patch('postwire.api',return_value={'platform':'tiktok','status':'publish_complete','url':'https://www.tiktok.com/@quanta.aura/photo/123'}):
+            result=m.status(1,store)
+        self.assertEqual(result['stage'],'published')

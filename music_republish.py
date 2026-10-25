@@ -127,7 +127,10 @@ def schedule_second(store):
         receipt=postwire.enqueue(payload)
         state['schedule_receipt']=receipt;store.save_state(path,state)
         # Store the actual public schedule row for a schema-safe readback audit.
-        state['schedule_readback']=postwire.api('/api/schedule/'+receipt['id'])
+        observed=postwire.api('/api/schedule/'+receipt['id']).get('scheduled') or {}
+        saved=observed.get('payload',observed)
+        state['schedule_readback']={'id':observed.get('id'),'status':observed.get('status'),
+          'run_at':observed.get('run_at'),'payload':{k:v for k,v in saved.items() if k in ('text','media','options','platforms','brand_id')}}
         store.save_state(path,state)
         postwire.verify(receipt,payload)
     except Exception:
@@ -138,14 +141,28 @@ def schedule_second(store):
     print(json.dumps({'stage':'scheduled','part':2,'receipt':receipt},ensure_ascii=False))
 
 
+def reconcile_second(store):
+    state=store.read_state(state_path(2)) or {}
+    receipt=state.get('schedule_receipt')
+    if not receipt or state.get('stage') not in ('needs_review','scheduled'):
+        raise SafeError('Нет сохранённого идентификатора второй части.')
+    postwire.verify(receipt,state['scheduled_payload'])
+    state['stage']='scheduled'
+    state.pop('schedule_readback',None)
+    store.save_state(state_path(2),state)
+    record_delivery(state,store,receipt,'accepted')
+    print(json.dumps({'stage':'scheduled','part':2,'receipt':receipt,'resend':False},ensure_ascii=False))
+
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['prepare','publish','status','schedule-second']);parser.add_argument('--part',type=int,choices=[1,2],default=1)
+    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['prepare','publish','status','schedule-second','reconcile-second']);parser.add_argument('--part',type=int,choices=[1,2],default=1)
     args=parser.parse_args();store=GitHubStore()
     if args.mode=='prepare':
         state=prepare(args.part,store)
         print(json.dumps({'stage':state['stage'],'part':args.part,'asset_count':state['asset_count'],'caption':state['payload']['text'],'music':True,'public':True},ensure_ascii=False))
     elif args.mode=='publish':publish(args.part,store)
     elif args.mode=='schedule-second':schedule_second(store)
+    elif args.mode=='reconcile-second':reconcile_second(store)
     else:status(args.part,store)
 
 

@@ -47,6 +47,13 @@ class PostWireTests(unittest.TestCase):
             memory.import_buffer([{'id':'buffer','channelService':'tiktok','text':'caption','status':'scheduled','assets':[{},{}]}])
             self.assertEqual(memory.data['posts']['post']['deliveries']['tiktok']['status'],'needs_review')
 
+    def test_actual_nested_schedule_payload_is_verified_without_resending(self):
+        data={'text':'caption','media':[{'url':'https://example.com/1.jpg'}],
+          'options':{'tiktok':{'privacy_level':p.PUBLIC,'auto_add_music':True}}}
+        with patch.object(p,'api',return_value={'scheduled':{'id':'abc','status':'queued','payload':data}}) as api:
+            p.verify({'id':'abc'},data)
+            api.assert_called_once_with('/api/schedule/abc')
+
     def test_music_requirement_blocks_buffer_before_any_network(self):
         from cloud_agent import deliver_tiktok
         with patch.dict('os.environ',{'TIKTOK_REQUIRE_MUSIC':'true','TIKTOK_PUBLISHER':'buffer'}),patch('cloud_agent.buffer') as api:
