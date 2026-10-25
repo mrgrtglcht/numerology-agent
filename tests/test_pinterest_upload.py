@@ -19,6 +19,7 @@ class UploadPinterestTests(unittest.TestCase):
         self.assertFalse(any(p.get('bot_footer') for p in pages))
     def test_status_handles_async_list_without_confusing_acceptance_and_publication(self):
         self.assertEqual(pin.result_state({'success':True,'request_id':'key'})[0],'accepted')
+        self.assertEqual(pin.result_state({'status':'queued','results':[{'platform':'pinterest','status':'queued','success':False}]})[0],'accepted')
         self.assertEqual(pin.result_state({'status':'completed','results':[{'platform':'pinterest','success':True,'post_url':'https://www.pinterest.com/pin/123/'}]})[0],'published')
         self.assertEqual(pin.result_state({'results':{'pinterest':{'success':False,'skipped':True}}})[0],'needs_review')
         self.assertEqual(pin.result_state({'status':'completed','results':[{'platform':'pinterest','success':True,'platform_post_id':'123','post_url':'https://t.me/quantafate'}]})[1]['url'],'https://www.pinterest.com/pin/123/')

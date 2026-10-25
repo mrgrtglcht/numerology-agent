@@ -70,6 +70,8 @@ def result_state(result):
         return 'published',{'url':'https://www.pinterest.com/pin/'+identity+'/','post_id':identity}
     if pin.get('success') is True and not pin.get('skipped') and url and url.startswith('https://') and 'pinterest.' in url:
         return 'published',{'url':url,'post_id':pin.get('post_id')}
+    pending={'queued','pending','processing','in_progress','retryable'}
+    if result.get('status') in pending or pin.get('status') in pending:return 'accepted',{}
     if pin.get('success') is False or result.get('success') is False or result.get('status')=='failed':return 'needs_review',{}
     return 'accepted',{}
 
@@ -81,7 +83,7 @@ def sync(ledger,store):
         print(json.dumps({'upload_status':upload_post.safe_summary(result)},ensure_ascii=False))
         stage,receipt=result_state(result)
         if stage=='published':post.update(stage=stage,receipt=receipt)
-        elif stage=='needs_review':post['stage']=stage
+        else:post['stage']=stage
     store.save_state(PATH,ledger)
 
 def run(mode,store,now=None):
