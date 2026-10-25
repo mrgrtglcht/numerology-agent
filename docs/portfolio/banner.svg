@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="420" viewBox="0 0 1440 420" role="img" aria-labelledby="title desc">
+  <title id="title">quantafate — бот, контент и автоматизация</title>
+  <desc id="desc">проект: telegram-бот с расчётом матрицы и ии-расшифровкой, контент-агент для telegram и tiktok.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101916"/><stop offset="1" stop-color="#25382b"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#8b9d68" stop-opacity=".3"/><stop offset="1" stop-color="#8b9d68" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1440" height="420" rx="22" fill="url(#bg)"/>
+  <circle cx="1190" cy="200" r="260" fill="url(#glow)"/>
+  <g fill="none" stroke="#b6be91" stroke-opacity=".32">
+    <circle cx="1190" cy="210" r="140"/><circle cx="1190" cy="210" r="100"/>
+    <path d="M1190 70 1330 210 1190 350 1050 210Z M1091 111H1289V309H1091Z M1050 210H1330 M1190 70V350"/>
+  </g>
+  <g fill="#c9d2a3"><circle cx="1190" cy="70" r="5"/><circle cx="1330" cy="210" r="5"/><circle cx="1190" cy="350" r="5"/><circle cx="1050" cy="210" r="5"/><circle cx="1190" cy="210" r="9"/></g>
+  <text x="72" y="76" font-family="Arial,sans-serif" font-size="16" letter-spacing="3" fill="#bdc8a6">product case · python + ai</text>
+  <text x="68" y="193" font-family="Georgia,serif" font-size="96" fill="#fbfaf4">quantafate</text>
+  <text x="73" y="254" font-family="Arial,sans-serif" font-size="31" fill="#eef0e6">бот, который объясняет. агент, который публикует.</text>
+  <path d="M73 293H962" stroke="#b6be91" stroke-opacity=".35"/>
+  <text x="73" y="341" font-family="Arial,sans-serif" font-size="20" fill="#c3cdb7">telegram bot  /  content agent  /  tiktok  /  cloud automation</text>
+</svg>
