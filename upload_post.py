@@ -55,6 +55,14 @@ def publish(post,conn,key):
 def status(key):
     return get('/api/uploadposts/status?'+urlencode({'request_id':key}))
 
+def safe_summary(value):
+    """Expose response shape and delivery facts, never credentials or free-form errors."""
+    allowed={'status','success','platform','url','post_url','post_id','pin_id','error_code','skipped','completed','total'}
+    if isinstance(value,list):return [safe_summary(v) for v in value]
+    if isinstance(value,dict):
+        return {k:(safe_summary(v) if isinstance(v,(dict,list)) else v if k in allowed else '<hidden>') for k,v in value.items()}
+    return '<hidden>'
+
 if __name__=='__main__':
     try:print(json.dumps(connection(),ensure_ascii=False))
     except SafeError as e:print(str(e));raise SystemExit(1)

@@ -73,6 +73,7 @@ def sync(ledger,store):
         if post['stage'] not in ('sending','accepted','needs_review'):continue
         try:result=upload_post.status(key)
         except SafeError:continue
+        print(json.dumps({'upload_status':upload_post.safe_summary(result)},ensure_ascii=False))
         stage,receipt=result_state(result)
         if stage=='published':post.update(stage=stage,receipt=receipt)
         elif stage=='needs_review':post['stage']=stage

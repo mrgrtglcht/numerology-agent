@@ -23,7 +23,7 @@ jobs:
       GITHUB_TOKEN: ${{ github.token }}
       GITHUB_REPOSITORY: ${{ github.repository }}
       PYTHONIOENCODING: utf-8
-      MODE: ${{ github.event_name == 'schedule' && 'scheduled' || github.event_name == 'push' && 'preview' || inputs.mode }}
+      MODE: ${{ github.event_name == 'schedule' && 'scheduled' || github.event_name == 'push' && 'status' || inputs.mode }}
     steps:
       - uses: actions/checkout@v4
         with:
