@@ -1,0 +1,29 @@
+name: Approved Pinterest replacement
+on:
+  push:
+    paths: ['.github/workflows/pinterest-replacement.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: quantafate-delivery
+  cancel-in-progress: false
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      UPLOAD_POST_API_KEY: ${{ secrets.UPLOAD_POST_API_KEY }}
+      UPLOAD_POST_PROFILE: ${{ vars.UPLOAD_POST_PROFILE }}
+      GITHUB_TOKEN: ${{ github.token }}
+      GITHUB_REPOSITORY: ${{ github.repository }}
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python replace_pinterest.py
