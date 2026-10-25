@@ -114,7 +114,7 @@ def sync(memory):
         # Only a positive network result proves publication. Unknown schemas stop safely.
         results = row.get('results') or []
         proof = next((r for r in results if isinstance(r,dict) and r.get('platform') == 'tiktok' and r.get('ok') is True),None) if isinstance(results,list) else None
-        if proof and row.get('status') in ('published','completed','sent'):
+        if proof and str(row.get('status','')).lower() in ('published','publish_complete','completed','sent'):
             memory.delivery(owner,'tiktok','published',{**receipt,'result':proof})
         elif row.get('status') == 'queued' and delivery.get('status') == 'accepted':
             continue

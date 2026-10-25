@@ -9,6 +9,7 @@ from urllib.parse import urlencode
 from PIL import Image
 from agent import GitHubStore, SafeError, required
 from cloud_agent import tiktok_caption
+from content_memory import ContentMemory
 import postwire
 
 ASSET_REF='2f211f3b33bf09e7ff88bed654f3bde9e61d1464'
@@ -88,20 +89,63 @@ def status(part,store):
     if not identity:raise SafeError('В ответе нет идентификатора TikTok; нужна сверка.')
     outcome=postwire.api('/api/post/status?'+urlencode({'platform':'tiktok','id':identity}))
     state['status_check']={k:v for k,v in outcome.items() if k in ('platform','id','status','url','privacy_level','auto_add_music','publish_id','post_id')}
-    if outcome.get('status') in ('published','PUBLISH_COMPLETE','sent','completed'):
+    if str(outcome.get('status','')).lower() in ('published','publish_complete','sent','completed'):
         state['stage']='published'
     store.save_state(path,state)
     print(json.dumps({'stage':state['stage'],'part':part,'status_check':state['status_check']},ensure_ascii=False))
     return state
 
 
+def record_delivery(state,store,receipt,status):
+    memory=ContentMemory(store=store);record=memory.data['posts'][state['owner']]
+    old=record.get('deliveries',{}).get('tiktok')
+    if old and old.get('receipt',{}).get('provider','buffer')=='buffer':
+        record.setdefault('delivery_history',[]).append({'platform':'tiktok','reason':'owner_deleted_silent_post',
+          'delivery':old})
+    memory.delivery(state['owner'],'tiktok',status,receipt)
+
+
+def schedule_second(store):
+    if os.environ.get('ALLOW_MUSIC_REPLACEMENT')!='true' or os.environ.get('OLD_POSTS_REMOVED')!='true':
+        raise SafeError('Нужно подтверждение замены.')
+    first=status(1,store)
+    if first['stage']!='published':raise SafeError('Первая часть ещё обрабатывается.')
+    proof=first['receipt']['results'][0]
+    record_delivery(first,store,{'provider':'postwire','mode':'immediate','id':proof['id'],
+      'run_at':first['attempted_at'],'asset_count':7,'auto_add_music':True,
+      'privacy_level':postwire.PUBLIC,'url':first['status_check'].get('url')},'published')
+    state=prepare(2,store);path=state_path(2)
+    if state['stage']!='prepared':raise SafeError('Вторая часть уже отправлялась. Повтора нет.')
+    memory=ContentMemory(store=store)
+    urls=[m['url'] for m in state['payload']['media']]
+    config=memory.data['posts'][state['owner']]['content']
+    payload=postwire.payload(config,urls,state['owner'],memory)
+    state.update(stage='sending',scheduled_payload=payload)
+    store.save_state(path,state)
+    receipt={'provider':'postwire','run_at':payload['run_at']}
+    try:
+        receipt=postwire.enqueue(payload)
+        state['schedule_receipt']=receipt;store.save_state(path,state)
+        # Store the actual public schedule row for a schema-safe readback audit.
+        state['schedule_readback']=postwire.api('/api/schedule/'+receipt['id'])
+        store.save_state(path,state)
+        postwire.verify(receipt,payload)
+    except Exception:
+        state['stage']='needs_review';store.save_state(path,state)
+        record_delivery(state,store,receipt,'needs_review');raise
+    state['stage']='scheduled';store.save_state(path,state)
+    record_delivery(state,store,receipt,'accepted')
+    print(json.dumps({'stage':'scheduled','part':2,'receipt':receipt},ensure_ascii=False))
+
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['prepare','publish','status']);parser.add_argument('--part',type=int,choices=[1,2],default=1)
+    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['prepare','publish','status','schedule-second']);parser.add_argument('--part',type=int,choices=[1,2],default=1)
     args=parser.parse_args();store=GitHubStore()
     if args.mode=='prepare':
         state=prepare(args.part,store)
         print(json.dumps({'stage':state['stage'],'part':args.part,'asset_count':state['asset_count'],'caption':state['payload']['text'],'music':True,'public':True},ensure_ascii=False))
     elif args.mode=='publish':publish(args.part,store)
+    elif args.mode=='schedule-second':schedule_second(store)
     else:status(args.part,store)
 
 
