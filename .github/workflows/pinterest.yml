@@ -1,15 +1,11 @@
 name: QuantaFate Pinterest
 on:
-  push:
-    paths: ['.github/workflows/pinterest.yml']
   workflow_dispatch:
     inputs:
       mode:
         type: choice
         options: [preview, publish, status]
         default: preview
-  schedule:
-    - cron: '30 16,17 * * 2,6'
 permissions:
   contents: write
 concurrency:
