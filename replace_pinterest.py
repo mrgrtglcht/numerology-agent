@@ -27,7 +27,10 @@ def run(store):
         sync(ledger,store)
         if post['stage'] in ('published','needs_review'):break
         if attempt<4:time.sleep(10)
-    if post['stage']!='published':raise SafeError('Новый пин ещё не подтверждён; старый сохранён. Повторной отправки не будет.')
+    if post['stage']=='needs_review':raise SafeError('Сервис сообщил об ошибке новой карусели; старый пин сохранён.')
+    if post['stage']!='published':
+        print('Pinterest: сервис ещё обрабатывает карусель. Старый пин сохранён; повторной отправки не будет.')
+        return
     if not old.get('removed'):
         if old.get('removal_started'):raise SafeError('Удаление уже начиналось; сначала нужна проверка результата.')
         old['removal_started']=True;store.save_state(PATH,ledger)

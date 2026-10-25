@@ -1,8 +1,6 @@
 name: Approved Pinterest replacement
 # Resume checks of the same request without sending it again.
 on:
-  push:
-    paths: ['.github/workflows/pinterest-replacement.yml']
   workflow_dispatch:
 permissions:
   contents: write
