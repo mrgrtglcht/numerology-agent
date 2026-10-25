@@ -11,7 +11,9 @@ QUERY='''query MemoryPosts($input:PostsInput!,$after:String) {
 }'''
 
 def sync(channel_ids=None,memory=None):
-    ids=channel_ids or [os.environ.get(n) for n in ('BUFFER_TIKTOK_CHANNEL_ID','BUFFER_PINTEREST_CHANNEL_ID') if os.environ.get(n)]
+    names=['BUFFER_PINTEREST_CHANNEL_ID']
+    if os.environ.get('TIKTOK_PUBLISHER')!='postwire':names.insert(0,'BUFFER_TIKTOK_CHANNEL_ID')
+    ids=channel_ids or [os.environ.get(n) for n in names if os.environ.get(n)]
     if not ids: raise ValueError('Для чтения истории нужны ID каналов QuantaFate.')
     key=load_key();posts=[]
     orgs=query_buffer(key,'query MemoryOrgs {account {organizations {id}}}')['account']['organizations']

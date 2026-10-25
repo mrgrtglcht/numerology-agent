@@ -9,6 +9,16 @@ from content_memory import ContentMemory, digest
 
 
 class PostWireTests(unittest.TestCase):
+    def test_launch_monday_wednesday_then_regular_friday(self):
+        class Memory: data={'posts':{}}
+        memory=Memory()
+        now=datetime(2026,10,25,12,tzinfo=timezone.utc)
+        self.assertEqual(p.next_slot(memory,now),'2026-10-26T17:30:00+00:00')
+        memory.data={'posts':{'second':{'deliveries':{'tiktok':{'receipt':{'provider':'postwire','run_at':'2026-10-26T17:30:00+00:00'}}}}}}
+        self.assertEqual(p.next_slot(memory,now),'2026-10-28T17:30:00+00:00')
+        memory.data['posts']['second']['deliveries']['tiktok']['receipt']['run_at']='2026-10-28T17:30:00+00:00'
+        self.assertEqual(p.next_slot(memory,now),'2026-10-30T21:27:00+00:00')
+
     def test_schedule_keeps_warsaw_time_across_dst(self):
         class Memory: data={'posts':{}}
         slot=p.next_slot(Memory(),datetime(2026,10,24,10,tzinfo=timezone.utc))

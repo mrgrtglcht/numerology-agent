@@ -13,6 +13,7 @@ from agent import SafeError, request_json, required
 
 ZONE = ZoneInfo('Europe/Warsaw')
 PUBLIC = 'PUBLIC_TO_EVERYONE'
+LAUNCH_SLOTS = {'2026-10-26':(18,30), '2026-10-28':(18,30)}
 
 
 def api(path, payload=None, method=None):
@@ -45,11 +46,11 @@ def next_slot(memory, now=None):
     receipts = [p.get('deliveries', {}).get('tiktok', {}).get('receipt', {})
                 for p in memory.data['posts'].values()]
     dates = [instant(r['run_at']) for r in receipts if r.get('provider') == 'postwire' and r.get('run_at')]
-    # Keep the accepted series in order, with at most two posts per local week.
+    # Preserve series order: two owner-requested launch slots, then Fri/Sun.
     after = max([now+timedelta(minutes=10), *dates])
     for day in range(70):
         date = local.date()+timedelta(days=day)
-        slot = {4:(22,27), 6:(9,46)}.get(date.weekday())
+        slot = LAUNCH_SLOTS.get(date.isoformat()) or {4:(22,27), 6:(9,46)}.get(date.weekday())
         if not slot:
             continue
         candidate = datetime(date.year,date.month,date.day,*slot,tzinfo=ZONE).astimezone(timezone.utc)
