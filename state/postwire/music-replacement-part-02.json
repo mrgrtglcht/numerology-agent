@@ -43,7 +43,7 @@
       "tiktok": {
         "privacy_level": "PUBLIC_TO_EVERYONE",
         "auto_add_music": true,
-        "brand_organic_toggle": true,
+        "brand_organic_toggle": false,
         "as_draft": false,
         "photo_cover_index": 0
       }
@@ -102,7 +102,7 @@
       "tiktok": {
         "privacy_level": "PUBLIC_TO_EVERYONE",
         "auto_add_music": true,
-        "brand_organic_toggle": true,
+        "brand_organic_toggle": false,
         "as_draft": false,
         "photo_cover_index": 0
       }
@@ -115,6 +115,7 @@
     "run_at": "2026-10-30T21:27:00+00:00",
     "asset_count": 7,
     "auto_add_music": true,
-    "privacy_level": "PUBLIC_TO_EVERYONE"
+    "privacy_level": "PUBLIC_TO_EVERYONE",
+    "brand_organic_toggle": false
   }
 }
