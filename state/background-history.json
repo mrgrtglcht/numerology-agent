@@ -321,6 +321,37 @@
         "339be3ce731b3239",
         "b39be3ce63133a31"
       ]
+    },
+    "quantafate-pin-e30922480e6e37bb2786eab9-v3/part-01": {
+      "batch": "quantafate-pin-e30922480e6e37bb2786eab9-v3",
+      "part": 1,
+      "identities": [
+        "original_sha1:c8a327140a9b07c7b65645bca2a09b93277c57c1",
+        "page:https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg",
+        "sha256:9b57a5f5233adb284b001443ff40f0e73508b7c2e4e657fee410b849966e3d89",
+        "url:https://upload.wikimedia.org/wikipedia/commons/7/77/Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Gewittersturm_in_der_Gegend_des_Dorfes_Kaditz.jpg",
+      "title": "File:Ernst Ferdinand Oehme - Gewittersturm in der Gegend des Dorfes Kaditz.jpg",
+      "visual_hash": "e7e6f5190d4c5cbe",
+      "visual_hashes": [
+        "e7e6f5190d4c5cbe",
+        "e6e6f4190d4c5c9e",
+        "e665f839094c5c9c",
+        "e665f839094c5c9c",
+        "e6e6f4380c4cdcbe",
+        "e7e6f4380c4cdcbc",
+        "e6e6f8380d4cdcbc",
+        "e664f8380d4cdc9c",
+        "e6e6f4380cdc9cba",
+        "e7e6f4380c4c9cbc",
+        "e7e6f83c0c4cdcbc",
+        "e7e6f83c2c4cdc9c",
+        "e7e7f6380cdc9c3b",
+        "efe6f23c0cdc9c3c",
+        "efe6f83c0c4c9c3c",
+        "c7e6b83c2c4c9cbc"
+      ]
     }
   }
 }
