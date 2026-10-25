@@ -15,11 +15,11 @@ ZONE = ZoneInfo('Europe/Warsaw')
 PUBLIC = 'PUBLIC_TO_EVERYONE'
 
 
-def api(path, payload=None):
+def api(path, payload=None, method=None):
     if not path.startswith('/api/') or '://' in path:
         raise ValueError('Неверный адрес PostWire.')
     return request_json('PostWire', 'https://postwire.io'+path, payload,
-                        {'Authorization': 'Bearer '+required('POSTWIRE_API_KEY')})
+                        {'Authorization': 'Bearer '+required('POSTWIRE_API_KEY')},method=method)
 
 
 def creator():
@@ -74,7 +74,7 @@ def payload(config, urls, owner, memory):
             'text':tiktok_caption(config), 'media':[{'url':u,'type':'image'} for u in urls],
             'run_at':next_slot(memory), 'label':'quantafate-'+hashlib.sha256(owner.encode()).hexdigest()[:24],
             'options':{'tiktok':{'privacy_level':PUBLIC, 'auto_add_music':True,
-                'brand_organic_toggle':True, 'as_draft':False, 'photo_cover_index':0}}}
+                'brand_organic_toggle':False, 'as_draft':False, 'photo_cover_index':0}}}
 
 
 def enqueue(data):

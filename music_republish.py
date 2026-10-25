@@ -42,7 +42,7 @@ def prepare(part, store):
       'text':tiktok_caption(config),'media':[{'url':u,'type':'image'} for u in urls],
       'idempotency_key':f'quantafate-music-replacement-part-{part:02}-20261025',
       'options':{'tiktok':{'privacy_level':postwire.PUBLIC,'auto_add_music':True,
-        'brand_organic_toggle':True,'as_draft':False,'photo_cover_index':0}}}
+        'brand_organic_toggle':False,'as_draft':False,'photo_cover_index':0}}}
     state={'stage':'prepared','part':part,'owner':OWNERS[part],'payload':payload,
       'old_delivery':record['deliveries']['tiktok'],'asset_count':7,'prepared_at':datetime.now(timezone.utc).isoformat()}
     store.save_state(path,state)
