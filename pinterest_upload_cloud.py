@@ -27,6 +27,8 @@ def select(memory,ledger):
     return None
 
 def prepare(key,owner,config,store):
+    from topic_planner import register_topics
+    register_topics()
     from backgrounds import search_candidates,thumbnails,fresh_thumbnails,download_selection
     from background_history import BackgroundHistory
     from pinterest_carousel import render
@@ -48,21 +50,24 @@ def prepare(key,owner,config,store):
         source['download_url']=store.put('media/'+key+'/background.jpg',(folder/'backgrounds'/source['file']).read_bytes())
         store.save_state('media/'+key+'/background.json',source)
     history.reserve(key,{1:source})
-    config['pinterest_analysis_only']=True
+    config['pinterest_square']=True
     for slide in config['slides']:slide.update(background=source['file'],focus=[.5,.5])
     files=render(config,folder,folder/'backgrounds')
     urls=[store.put('media/'+key+'/'+f'{i:02}.png',path.read_bytes()) for i,path in enumerate(files,1)]
     preview=store.put('media/'+key+'/preview.jpg',(folder/'preview.jpg').read_bytes())
-    title=config['slides'][0]['title'].split('\n')[0]+f' · часть {config["part"]}/{config["total_parts"]}'
+    title=config['slides'][0]['title'].split('\n')[0]+' по матрице судьбы'+f' · часть {config["part"]}'
     caption=''
     if len(title)>100 or len(caption)>500:raise SafeError('Слишком длинное описание Pinterest.')
-    return {'stage':'prepared','design_version':2,'owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
+    return {'stage':'prepared','design_version':3,'owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
       'units':units(config),'prepared_at':datetime.now(timezone.utc).isoformat()}
 
 def result_state(result):
     rows=result.get('results',{})
     pin=next((p for p in rows if p.get('platform')=='pinterest'),{}) if isinstance(rows,list) else rows.get('pinterest',{})
     url=pin.get('url') or pin.get('post_url')
+    identity=str(pin.get('platform_post_id') or pin.get('post_id') or '')
+    if result.get('status')=='completed' and pin.get('success') is True and identity.isdigit():
+        return 'published',{'url':'https://www.pinterest.com/pin/'+identity+'/','post_id':identity}
     if pin.get('success') is True and not pin.get('skipped') and url and url.startswith('https://') and 'pinterest.' in url:
         return 'published',{'url':url,'post_id':pin.get('post_id')}
     if pin.get('success') is False or result.get('success') is False or result.get('status')=='failed':return 'needs_review',{}
@@ -85,6 +90,14 @@ def run(mode,store,now=None):
     if ledger.get('version')!=1:raise SafeError('Неизвестная версия журнала Pinterest.')
     conn=upload_post.connection();sync(ledger,store)
     if mode=='status':print(json.dumps(ledger,ensure_ascii=False));return
+    if mode=='revise':
+        old=next(((k,p) for k,p in ledger['posts'].items() if p.get('design_version')!=3),None)
+        if not old:raise SafeError('Нет старого макета для исправления.')
+        old_key,old_post=old;key=old_key+'-v3'
+        config=ContentMemory(store=store).data['posts'][old_post['owner']]['content']
+        post=prepare(key,old_post['owner'],copy.deepcopy(config),store)
+        post['replaces']=old_key;ledger['posts'][key]=post;store.save_state(PATH,ledger)
+        print(json.dumps({'stage':'prepared','preview_url':post['preview_url']},ensure_ascii=False));return
     if mode=='scheduled' and (now.weekday() not in (1,5) or (now.hour,now.minute)<(18,30)):return
     if mode in ('publish','scheduled') and day in ledger['days']:print('Pinterest: отправка за день уже начиналась.');return
     if any(p['stage'] in ('sending','accepted','needs_review') for p in ledger['posts'].values()):raise SafeError('Предыдущая карусель ещё не подтверждена; повтор запрещён.')
@@ -92,7 +105,7 @@ def run(mode,store,now=None):
     ready=next(((k,p) for k,p in ledger['posts'].items() if p['stage']=='prepared'),None)
     if ready:
         key,post=ready
-        if post.get('design_version')!=2:
+        if post.get('design_version')!=3:
             config=ContentMemory(store=store).data['posts'][post['owner']]['content']
             post=prepare(key,post['owner'],copy.deepcopy(config),store);ledger['posts'][key]=post;store.save_state(PATH,ledger)
     else:
@@ -111,6 +124,6 @@ def run(mode,store,now=None):
 
 if __name__=='__main__':
     load_env();os.environ['PUBLICATION_ASSETS']='true'
-    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['preview','publish','scheduled','status']);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('mode',choices=['preview','publish','scheduled','status','revise']);args=parser.parse_args()
     try:run(args.mode,GitHubStore())
     except (SafeError,ValueError) as e:print(str(e));raise SystemExit(1)

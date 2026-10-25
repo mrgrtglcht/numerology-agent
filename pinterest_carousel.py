@@ -30,6 +30,8 @@ def plan(config):
     return result
 
 def render(config,output,backgrounds,cards=None):
+    if config.get('pinterest_square'):
+        return render_square(config,output,backgrounds,cards)
     folder=Path(output);out=folder/'slides';out.mkdir(parents=True,exist_ok=True)
     sources=Path(backgrounds).resolve();pages=plan(config)
     cards=cards or {}
@@ -94,4 +96,44 @@ def render(config,output,backgrounds,cards=None):
     with zipfile.ZipFile(folder/'carousel.zip','w',zipfile.ZIP_DEFLATED) as z:
         for path in sorted(out.glob('*.png')):z.write(path,'slides/'+path.name)
         for name in ('content.json','preview.jpg'):z.write(folder/name,name)
+    return [out/f'{i:02}.png' for i in range(1,len(pages)+1)]
+
+
+def render_square(config,output,backgrounds,cards=None):
+    """One cover with position guide, four interpretations, no promotional slide."""
+    from matrix_rules import ARCANA
+    from tarot_assets import prepare
+    pages=[{'layout':'pin_overview'}]+[s for s in config['slides'] if s['layout']=='arcana']
+    if not 2<=len(pages)<=5:raise ValueError('Для Pinterest нужны 2–5 карточек.')
+    folder=Path(output);out=folder/'slides';out.mkdir(parents=True,exist_ok=True)
+    cards=cards or prepare([s['arcana_number'] for s in pages if s['layout']=='arcana'])
+    cover=config['slides'][0];theme=cover['title'].split('\n')[0]
+    bg=(Path(backgrounds)/cover['background']).resolve()
+    if not bg.is_relative_to(Path(backgrounds).resolve()):raise ValueError('Неверный путь фона.')
+    images=[]
+    for i,s in enumerate(pages,1):
+        im=background(bg,(1000,1000),cover['focus']);d=ImageDraw.Draw(im)
+        text(d,'quantafate',65,55,23,width=870)
+        if s['layout']=='pin_overview':
+            y=text(d,theme+'\nпо матрице судьбы',65,125,53,True,width=870)
+            location=next(v for v in config['slides'] if v['layout']=='location')
+            instruction='где смотреть: '+' '.join(b['text'] for b in location['blocks'])
+            end=text(d,instruction,65,y+25,29,width=870)
+            cy=max(720,end+220)
+            if cy+205>935:raise ValueError('Схема не помещается на квадратную обложку.')
+            position_diagram(d,500,cy,config['position'],config['example_points'],radius=190)
+        else:
+            n=s['arcana_number']
+            text(d,'матрица судьбы · '+theme,65,120,26,True,width=870)
+            text(d,f'{n} аркан',390,235,26,width=540)
+            y=text(d,ARCANA[n],390,280,43,True,width=540)+40
+            art=Image.open(cards[n]).convert('RGBA');art.thumbnail((250,480),Image.Resampling.LANCZOS)
+            im.paste(art,(65,310),art);d=ImageDraw.Draw(im)
+            fitted_paragraphs(d,s['paragraphs'],390,max(y,395),540,900,size=32,min_size=28,gap=24)
+        text(d,'quantafate',65,950,22,width=600)
+        text(d,f'{i:02} / {len(pages):02}',820,950,22,width=150)
+        path=out/f'{i:02}.png';im.save(path);images.append(im)
+    sheet=Image.new('RGB',(300*len(images),300))
+    for i,im in enumerate(images):sheet.paste(im.resize((300,300),Image.Resampling.LANCZOS),(i*300,0))
+    sheet.save(folder/'preview.jpg',quality=94)
     return [out/f'{i:02}.png' for i in range(1,len(pages)+1)]

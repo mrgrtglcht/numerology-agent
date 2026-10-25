@@ -33,13 +33,13 @@ def publish(post,conn,key):
     if not 2<=len(urls)<=5:raise SafeError('Карусель Pinterest требует 2–5 изображений.')
     link='https://t.me/quantafate'
     fields=[('user',conn['profile']),('platform[]','pinterest'),('title',post['title']),
-      ('pinterest_title',post['title']),('pinterest_description',post['caption']),
+      ('pinterest_title',post['title']),('pinterest_description',post['caption'] or ' '),
       ('pinterest_board_id',conn['board']),('pinterest_link',link),('async_upload','true'),
       ('request_id',key),('external_id',key)]
     for url in urls:
         if not url.startswith('https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/'):raise SafeError('Непроверенный адрес изображения.')
         fields.extend([('photos[]',url),('pinterest_carousel_titles[]',post['title']),
-          ('pinterest_carousel_descriptions[]',post['caption']),('pinterest_carousel_links[]',link)])
+          ('pinterest_carousel_descriptions[]',post['caption'] or ' '),('pinterest_carousel_links[]',link)])
     boundary='quantafate'+uuid.uuid4().hex
     data=b''.join((f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"\r\n\r\n{value}\r\n').encode() for name,value in fields)
     data+=f'--{boundary}--\r\n'.encode()
@@ -57,7 +57,7 @@ def status(key):
 
 def safe_summary(value):
     """Expose response shape and delivery facts, never credentials or free-form errors."""
-    allowed={'status','success','platform','url','post_url','post_id','pin_id','error_code','skipped','completed','total'}
+    allowed={'status','success','platform','url','post_url','post_id','platform_post_id','pin_id','error_code','skipped','completed','total'}
     if isinstance(value,list):return [safe_summary(v) for v in value]
     if isinstance(value,dict):
         return {k:(safe_summary(v) if isinstance(v,(dict,list)) else v if k in allowed else '<hidden>') for k,v in value.items()}
