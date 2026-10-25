@@ -32,7 +32,7 @@ def publish(post,conn,key):
     urls=post['image_urls']
     if not 2<=len(urls)<=5:raise SafeError('Карусель Pinterest требует 2–5 изображений.')
     link='https://t.me/quantafate'
-    fields=[('user',conn['profile']),('platform[]','pinterest'),('title',post['title']),
+    fields=[('user',conn['profile']),('platform[]','pinterest'),('title',' '),
       ('pinterest_title',post['title']),('pinterest_description',post['caption'] or ' '),
       ('pinterest_board_id',conn['board']),('pinterest_link',link),('async_upload','true'),
       ('request_id',key),('external_id',key)]

@@ -40,3 +40,4 @@ class UploadPinterestTests(unittest.TestCase):
         req=send.call_args.args[0]
         self.assertEqual(req.data.count(b'https://t.me/quantafate'),6)
         self.assertEqual(req.get_header('Idempotency-key'),'key')
+        self.assertIn(b'name="title"\r\n\r\n \r\n',req.data)
