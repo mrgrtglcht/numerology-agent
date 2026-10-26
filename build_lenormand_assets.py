@@ -17,6 +17,7 @@ def run():
     folder=ROOT/'assets/oracle/grand-lenormand';folder.mkdir(parents=True,exist_ok=True)
     pages=[]
     cached=ROOT/'output/lenormand-pages.json'
+    cached.parent.mkdir(parents=True,exist_ok=True)
     if cached.exists():pages=json.loads(cached.read_text(encoding='utf-8'))
     for start in (() if pages else (3,43,83)):
         indexes=list(range(start,min(start+40,106),2))

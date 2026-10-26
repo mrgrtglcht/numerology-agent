@@ -1,4 +1,5 @@
 name: Prepare historical oracle assets
+# Asset import is separate from the publishing workflows.
 on:
   push:
     paths: ['.github/workflows/oracle-assets.yml']
