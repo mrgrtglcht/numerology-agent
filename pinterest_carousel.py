@@ -113,15 +113,16 @@ def render_square(config,output,backgrounds,cards=None):
     images=[]
     for i,s in enumerate(pages,1):
         im=background(bg,(1000,1000),cover['focus']);d=ImageDraw.Draw(im)
-        text(d,'quantafate',65,55,23,width=870)
+        if s['layout']!='pin_overview':text(d,'quantafate',65,55,23,width=870)
         if s['layout']=='pin_overview':
             y=text(d,theme+'\nпо матрице судьбы',65,125,53,True,width=870)
             location=next(v for v in config['slides'] if v['layout']=='location')
             instruction='где смотреть: '+' '.join(b['text'] for b in location['blocks'])
             end=text(d,instruction,65,y+25,29,width=870)
-            cy=max(720,end+220)
-            if cy+205>935:raise ValueError('Схема не помещается на квадратную обложку.')
-            position_diagram(d,500,cy,config['position'],config['example_points'],radius=190)
+            cy=max(685,end+190)
+            if cy+180>875:raise ValueError('Схема не помещается на квадратную обложку.')
+            position_diagram(d,500,cy,config['position'],config['example_points'],radius=165)
+            text(d,'больше в телеграм канале quantafate',65,905,30,True,width=870)
         else:
             n=s['arcana_number']
             text(d,'матрица судьбы · '+theme,65,120,26,True,width=870)
@@ -130,7 +131,7 @@ def render_square(config,output,backgrounds,cards=None):
             art=Image.open(cards[n]).convert('RGBA');art.thumbnail((250,480),Image.Resampling.LANCZOS)
             im.paste(art,(65,310),art);d=ImageDraw.Draw(im)
             fitted_paragraphs(d,s['paragraphs'],390,max(y,395),540,900,size=32,min_size=28,gap=24)
-        text(d,'quantafate',65,950,22,width=600)
+        if s['layout']!='pin_overview':text(d,'quantafate',65,950,22,width=600)
         text(d,f'{i:02} / {len(pages):02}',820,950,22,width=150)
         path=out/f'{i:02}.png';im.save(path);images.append(im)
     sheet=Image.new('RGB',(300*len(images),300))

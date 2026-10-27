@@ -26,7 +26,7 @@ class UploadPinterestTests(unittest.TestCase):
 
     def test_timeout_is_durable_and_never_reposted(self):
         store=Store();now=datetime(2026,10,25,12,tzinfo=timezone.utc)
-        store.data['posts']['key']['design_version']=3
+        store.data['posts']['key']['design_version']=4
         with patch.object(pin.upload_post,'connection',return_value={}),patch.object(pin,'sync'),patch.object(pin.upload_post,'publish',side_effect=TimeoutError) as send:
             with self.assertRaises(TimeoutError):pin.run('publish',store,now)
             self.assertEqual(store.data['posts']['key']['stage'],'needs_review')

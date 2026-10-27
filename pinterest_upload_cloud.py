@@ -55,10 +55,10 @@ def prepare(key,owner,config,store):
     files=render(config,folder,folder/'backgrounds')
     urls=[store.put('media/'+key+'/'+f'{i:02}.png',path.read_bytes()) for i,path in enumerate(files,1)]
     preview=store.put('media/'+key+'/preview.jpg',(folder/'preview.jpg').read_bytes())
-    title=config['slides'][0]['title'].split('\n')[0]+' по матрице судьбы'+f' · часть {config["part"]}'
+    title=config['slides'][0]['title'].split('\n')[0]+' по матрице судьбы'
     caption=''
     if len(title)>100 or len(caption)>500:raise SafeError('Слишком длинное описание Pinterest.')
-    return {'stage':'prepared','design_version':3,'owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
+    return {'stage':'prepared','design_version':4,'owner':owner,'title':title,'caption':caption,'image_urls':urls,'preview_url':preview,
       'units':units(config),'prepared_at':datetime.now(timezone.utc).isoformat()}
 
 def result_state(result):
@@ -107,7 +107,7 @@ def run(mode,store,now=None):
     ready=next(((k,p) for k,p in ledger['posts'].items() if p['stage']=='prepared'),None)
     if ready:
         key,post=ready
-        if post.get('design_version')!=3:
+        if post.get('design_version')!=4:
             config=ContentMemory(store=store).data['posts'][post['owner']]['content']
             post=prepare(key,post['owner'],copy.deepcopy(config),store);ledger['posts'][key]=post;store.save_state(PATH,ledger)
     else:
