@@ -13,6 +13,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify status handling without sending
+        run: python -m unittest discover -s tests -p 'test_postwire*.py' -v
       - name: Read existing deliveries only
         env:
           POSTWIRE_API_KEY: ${{ secrets.POSTWIRE_API_KEY }}
@@ -49,4 +55,16 @@ jobs:
                   print(json.dumps({"owner":owner,"shape":shape(data),"facts":facts(data)},ensure_ascii=False))
               except Exception as error:
                   print(json.dumps({"owner":owner,"read_error":type(error).__name__,"http_status":getattr(error,"code",None)}))
+          # Exercise the fixed reconciliation against live statuses using a read-only memory.
+          import postwire
+          class ReadOnlyMemory:
+              data=memory
+              def delivery(self,owner,platform,status,receipt):
+                  print(json.dumps({"reconciled_owner":owner,"status":status,"network_status":receipt.get("status_check",{}).get("status")}))
+          for post in memory["posts"].values():
+              delivery=post.get("deliveries",{}).get("tiktok",{})
+              receipt=delivery.get("receipt",{})
+              if receipt.get("provider")=="postwire" and receipt.get("mode")!="immediate":
+                  delivery["status"]="accepted"
+          postwire.sync(ReadOnlyMemory())
           PY

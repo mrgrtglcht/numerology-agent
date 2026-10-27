@@ -104,6 +104,17 @@ def verify(receipt, data):
     return receipt
 
 
+PUBLISHED = frozenset(('published','publish_complete','completed','sent'))
+PROCESSING = frozenset(('processing','publishing','uploading','pending'))
+SCHEDULE_DONE = PUBLISHED | {'done'}
+
+
+def _safe_result(result):
+    return {key:value for key,value in result.items()
+            if key in ('platform','ok','id','status','url','post_type','privacy_level','items')
+            and isinstance(value,(str,int,bool))}
+
+
 def sync(memory):
     for owner, post in list(memory.data['posts'].items()):
         delivery = post.get('deliveries',{}).get('tiktok',{})
@@ -113,12 +124,36 @@ def sync(memory):
         if not receipt.get('id'):
             raise SafeError('Неизвестен результат отправки PostWire; повтор запрещён.')
         row = api('/api/schedule/'+receipt['id']).get('scheduled') or {}
-        # Only a positive network result proves publication. Unknown schemas stop safely.
+        state = str(row.get('status','')).lower()
         results = row.get('results') or []
         proof = next((r for r in results if isinstance(r,dict) and r.get('platform') == 'tiktok' and r.get('ok') is True),None) if isinstance(results,list) else None
-        if proof and str(row.get('status','')).lower() in ('published','publish_complete','completed','sent'):
-            memory.delivery(owner,'tiktok','published',{**receipt,'result':proof})
-        elif row.get('status') == 'queued' and delivery.get('status') == 'accepted':
+        # "done" completes PostWire's worker, not necessarily TikTok processing.
+        if state in SCHEDULE_DONE and proof:
+            result = _safe_result(proof)
+            network_state = str(proof.get('status','')).lower()
+            if network_state in PUBLISHED:
+                memory.delivery(owner,'tiktok','published',{**receipt,'status':'published','result':result})
+                continue
+            identity = proof.get('id')
+            if not isinstance(identity,str) or not re.fullmatch(r'[A-Za-z0-9_~.:-]{1,200}',identity):
+                raise SafeError('PostWire завершил отправку без проверяемого ID TikTok; повтор запрещён.')
+            outcome = api('/api/post/status?'+urlencode({'platform':'tiktok','id':identity}))
+            checked_platform = outcome.get('platform')
+            if checked_platform not in (None,'tiktok') or (outcome.get('id') and outcome['id'] != identity):
+                raise SafeError('PostWire вернул статус другой публикации; повтор запрещён.')
+            checked = _safe_result(outcome)
+            network_state = str(outcome.get('status','')).lower()
+            if network_state in PUBLISHED:
+                memory.delivery(owner,'tiktok','published',{**receipt,'status':'published','result':result,'status_check':checked})
+                continue
+            if network_state in PROCESSING:
+                memory.delivery(owner,'tiktok','accepted',{**receipt,'status':network_state,'result':result,'status_check':checked})
+                print('TikTok: публикация обрабатывается; статус будет проверен снова без повторной отправки.')
+                continue
+            raise SafeError('TikTok не подтвердил успешную публикацию (статус: '+(network_state if re.fullmatch(r'[a-z_]{1,40}',network_state) else 'unknown')+'); повтор запрещён.')
+        if state == 'queued' and delivery.get('status') == 'accepted':
             continue
-        else:
-            raise SafeError('Публикация PostWire ещё не подтверждена; автоматический повтор запрещён.')
+        if state in PROCESSING and delivery.get('status') == 'accepted':
+            print('PostWire: отправка ещё обрабатывается; повтор не выполняется.')
+            continue
+        raise SafeError('Публикация PostWire требует проверки (статус: '+(state if re.fullmatch(r'[a-z_]{1,40}',state) else 'unknown')+'); автоматический повтор запрещён.')
