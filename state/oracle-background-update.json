@@ -1,0 +1,133 @@
+{
+  "stage": "prepared",
+  "payload": {
+    "text": "больше в тгк @quantafate",
+    "media": [
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3f52b520d963c7d86382b43351f8c27d4512475a/media/oracle-first-background-v2/01.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/951c81b45da74d8b9d8aaf9bd7d4020b69d842b2/media/oracle-first-background-v2/02.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/5014d234f8f7c10d2ab2bcce1f523825716fe3c2/media/cloud-5e11ac67a74837e8e36cfbec/03.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/ebc511a7945d75ba55f3966e8be028508deff073/media/oracle-first-background-v2/04.jpg",
+        "type": "image"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/3775387aa75abea878d4077280fc56fd8e819946/media/cloud-5e11ac67a74837e8e36cfbec/05.jpg",
+        "type": "image"
+      }
+    ],
+    "options": {
+      "tiktok": {
+        "as_draft": false,
+        "privacy_level": "PUBLIC_TO_EVERYONE",
+        "auto_add_music": true,
+        "photo_cover_index": 0,
+        "brand_organic_toggle": false
+      }
+    },
+    "brand_id": "54e08f72-683c-4e92-a263-d507b2f9b4df",
+    "platforms": [
+      "tiktok"
+    ]
+  },
+  "config": {
+    "type": "oracle_pick",
+    "theme": "oracle_pick",
+    "deck": "лес любви",
+    "question_id": "what_is_he_hiding",
+    "title": "что он скрывает от тебя",
+    "topic": "что он скрывает от тебя",
+    "count": 3,
+    "options": [
+      {
+        "card_id": "fl-04",
+        "visual_reason": "хитрая лиса под маской может указывать на двойные стандарты или недомолвки в общении"
+      },
+      {
+        "card_id": "fl-29",
+        "visual_reason": "руки кукловода символизируют скрытые рычаги влияния и стремление держать контроль"
+      },
+      {
+        "card_id": "fl-32",
+        "visual_reason": "запечатанное письмо за столом отражает невысказанные мысли и тайны, которые пока остаются на бумаге"
+      }
+    ],
+    "caption": "больше в тгк @quantafate",
+    "size": [
+      1080,
+      1920
+    ],
+    "include_tarot_cards": false,
+    "include_cta": false,
+    "slides": [
+      {
+        "layout": "oracle_cover"
+      },
+      {
+        "layout": "oracle_instruction"
+      },
+      {
+        "layout": "oracle_backs"
+      },
+      {
+        "layout": "oracle_note"
+      },
+      {
+        "layout": "oracle_faces"
+      }
+    ],
+    "oracle_background": {
+      "id": "b4",
+      "title": "File:Klosterruine Eldena und Riesengebirge (C D Friedrich).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Klosterruine_Eldena_und_Riesengebirge_%28C_D_Friedrich%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Klosterruine_Eldena_und_Riesengebirge_%28C_D_Friedrich%29.jpg/500px-Klosterruine_Eldena_und_Riesengebirge_%28C_D_Friedrich%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Klosterruine_Eldena_und_Riesengebirge_(C_D_Friedrich).jpg",
+      "original_sha1": "6a2686b1f18b10c96ce9a6b721f39ed2e0a577fe",
+      "width": 2889,
+      "height": 2052,
+      "creator": "Caspar David Friedrich",
+      "credit": "1. scanned from book 2.  Digitale Bibliothek MV",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "Caspar David Friedrich abbey painting",
+      "visual_hash": "69134fbfb2676f4f",
+      "visual_hashes": [
+        "69134fbfb2676f4f",
+        "71134dbfba677f4f",
+        "71134dbfbae77f4f",
+        "b1536dbf3ae77f6f",
+        "69334dff3a676f5d",
+        "71134dff3ae76f4d",
+        "71134dff3ae77f4d",
+        "b953cdff3ac77fef",
+        "e8b3cd7f3b676f5d",
+        "f0b3cd7f3be76f4d",
+        "b013cd7f3bc77fcd",
+        "b853cd7f3ac77fed",
+        "e8b3cd7f7be7ed9d",
+        "f0b3cd7f7bc7ef95",
+        "b093cc7f7bc77fc5",
+        "3893cc7f7bc77bed"
+      ],
+      "file": "b4.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "387bce5467a494f8b4929af4e0aee5a0d04753ecb4a7c9b945402ce737ab1abd",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/46a39eddb380f75c82a7214e4f175c934a0f20c1/media/oracle-first-background-v2/background.jpg"
+    },
+    "visual_background_version": 2
+  },
+  "run_at": "2026-10-30T21:27:00+00:00"
+}
