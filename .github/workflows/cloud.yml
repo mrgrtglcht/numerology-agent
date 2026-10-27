@@ -1,4 +1,5 @@
 name: QuantaFate cloud publishing
+# Preparation resumes saved oracle responses; delivery receipts prohibit resends.
 
 on:
   push:

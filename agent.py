@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -162,18 +163,31 @@ class GitHubStore:
             raise SafeError('Для прямых ссылок на карточки нужен публичный репозиторий. Приватные файлы не раскрываются.')
 
     def get(self, path):
-        return request_json('GitHub', self.base + '/contents/' + path + '?ref=' + self.branch,
+        return request_json('GitHub', self.base + '/contents/' + path + '?ref=' + self.branch + '&fresh=' + str(time.time_ns()),
                             headers=self.headers, missing_ok=True)
 
     def put(self, path, data):
         existing = self.get(path)
-        payload = {'message': 'QuantaFate: update generated media or delivery receipt',
-                   'content': base64.b64encode(data).decode(), 'branch': self.branch}
-        if existing:
-            payload['sha'] = existing['sha']
-        result = request_json('GitHub', self.base + '/contents/' + path, payload, self.headers, 'PUT')
-        # Immutable commit URL: later pushes cannot replace media on an existing post.
-        return f'https://raw.githubusercontent.com/{self.repo}/{result["commit"]["sha"]}/{path}'
+        expected = existing.get('sha') if existing else None
+        encoded = base64.b64encode(data).decode()
+        for attempt in range(3):
+            payload = {'message': 'QuantaFate: update generated media or delivery receipt',
+                       'content': encoded, 'branch': self.branch}
+            if existing: payload['sha'] = existing['sha']
+            try:
+                result = request_json('GitHub', self.base + '/contents/' + path, payload, self.headers, 'PUT')
+                return f'https://raw.githubusercontent.com/{self.repo}/{result["commit"]["sha"]}/{path}'
+            except SafeError as error:
+                if 'GitHub: HTTP 409.' not in str(error) or attempt == 2: raise
+                time.sleep(.3 * (attempt+1))
+                current = self.get(path)
+                current_sha = current.get('sha') if current else None
+                same_content = bool(current and current.get('encoding') == 'base64'
+                                    and base64.b64decode(current.get('content','')) == data)
+                # Retry a branch-tip race, never overwrite a changed receipt/history.
+                if current_sha != expected and not same_content:
+                    raise SafeError('Журнал GitHub изменён другим запуском; перезапись остановлена.') from None
+                existing = current
 
     def read_state(self, path):
         existing = self.get(path)
