@@ -3134,7 +3134,18 @@
       "sources": [],
       "status": "prepared",
       "created_at": "2026-10-27T18:23:10.216195+00:00",
-      "deliveries": {},
+      "deliveries": {
+        "tiktok": {
+          "status": "sending",
+          "receipt": {
+            "provider": "postwire",
+            "expected_text_hash": "e56196daf8b2d6e4278168fce3b9776cb8f6f155c825e2f447998ec34d86b105",
+            "expected_asset_count": 5,
+            "run_at": "2026-10-30T21:27:00+00:00"
+          },
+          "updated_at": "2026-10-27T18:27:43.816549+00:00"
+        }
+      },
       "formats": [
         "tiktok"
       ]
