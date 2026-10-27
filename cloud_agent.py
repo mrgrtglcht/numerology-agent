@@ -86,6 +86,7 @@ def tiktok_input(config,urls):
 
 
 def tiktok_caption(config):
+    if config.get('type')=='oracle_pick':return 'больше в тгк @quantafate'
     from matrix_rules import THEMES
     if str(config.get('theme','')).startswith('explore_') and config['theme'] not in THEMES:
         from topic_planner import register_topics
@@ -346,9 +347,19 @@ def run_target(target,store,preview=False,now=None):
     try:
         if target=='tiktok':
             from prepared_carousels import select,prepare
+            from tiktok_formats import next_format
+            format_path=folder/'tiktok-format.json'
+            if format_path.exists():chosen_format=json.loads(format_path.read_text(encoding='utf-8'))['format']
+            else:
+                chosen_format='matrix' if (folder/'prepared-tiktok.json').exists() or (folder/'editor-plan.json').exists() else next_format(memory)
+                format_path.write_text(json.dumps({'format':chosen_format}),encoding='utf-8')
             saved_plan=folder/'prepared-tiktok.json'
             cached=json.loads(saved_plan.read_text(encoding='utf-8'))['owner'] if saved_plan.exists() else (None if (folder/'editor-plan.json').exists() else select(memory))
-            if cached:
+            if chosen_format=='oracle':
+                from oracle_posts import prepare as prepare_oracle,ready_owner
+                owner=ready_owner(memory) or folder.name+'/oracle'
+                part=prepare_oracle(owner,memory,folder)
+            elif cached:
                 owner=cached;part=prepare(owner,memory,folder)
             else:
                 from editor_auto import run
@@ -439,10 +450,10 @@ def main():
         print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
         targets=[];now=now_local()
-        if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and os.environ.get('SCHEDULE_TRIGGER')=='17 5 * * *':targets.append('tiktok')
+        if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and os.environ.get('SCHEDULE_TRIGGER') in ('17 5 * * *','17 5,11 * * *'):targets.append('tiktok')
         from cloud_checkpoint import pointer
         telegram_pending=store.read_state(pointer('telegram'))
-        catch_up=bool(telegram_pending and telegram_pending.get('stage')=='preparation_failed' and os.environ.get('SCHEDULE_TRIGGER')=='17 5 * * *')
+        catch_up=bool(telegram_pending and telegram_pending.get('stage')=='preparation_failed' and os.environ.get('SCHEDULE_TRIGGER') in ('17 5 * * *','17 5,11 * * *'))
         if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and (due_telegram(now) or catch_up):targets.append('telegram')
         failed=False
         for target in targets:

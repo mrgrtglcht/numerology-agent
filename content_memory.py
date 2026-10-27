@@ -13,6 +13,7 @@ def normal(value): return ' '.join(re.findall(r'[\w]+',str(value).lower().replac
 def digest(value): return hashlib.sha256(normal(value).encode()).hexdigest()
 
 def units(config):
+    if config.get('type')=='oracle_pick':return ['oracle:'+config['question_id']]
     if config.get('type')=='arcana_series':
         from matrix_rules import THEMES
         key=THEMES.get(config['theme'],{}).get('semantic_key',config['theme'])
@@ -21,6 +22,8 @@ def units(config):
     return ['topic:'+normal(config.get('topic') or config.get('title') or config.get('caption'))]
 
 def body(config):
+    if config.get('type')=='oracle_pick':
+        return config['title']+' '+config['question_id']+' '+' '.join(o['card_id'] for o in config.get('options',[]))
     values=[]
     for slide in config.get('slides',[]):
         if slide.get('layout') in ('bot','location','series_cover','cover'): continue

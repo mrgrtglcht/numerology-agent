@@ -3,7 +3,7 @@ import json
 import re
 from pathlib import Path
 
-FILES={'prepared-tiktok.json','editor-plan.json','research.json','series-plan.json','candidates.json','pipeline.json',
+FILES={'oracle-plan.json','oracle-response.json','oracle-generation.json','oracle-model.json','tiktok-format.json','prepared-tiktok.json','editor-plan.json','research.json','series-plan.json','candidates.json','pipeline.json',
  'background-review.json','model-response.json','model-diagnostic.json','raw-model-output.txt','sources.json',
  'telegram-plan.json','telegram-response.json','telegram-generation.json','telegram.json',
  'model-request.json','repair-state.json','repair-response.json','repair-diagnostic.json'}

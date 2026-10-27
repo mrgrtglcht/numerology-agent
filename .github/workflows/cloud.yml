@@ -1,6 +1,8 @@
 name: QuantaFate cloud publishing
 
 on:
+  push:
+    paths: ['.github/workflows/cloud.yml']
   workflow_dispatch:
     inputs:
       mode:
@@ -22,7 +24,7 @@ on:
         type: string
         default: ''
   schedule:
-    - cron: '17 5 * * *'
+    - cron: '17 5,11 * * *'
     - cron: '30 16,17 * * 0,3'
 
 concurrency:
@@ -35,7 +37,7 @@ permissions:
 
 jobs:
   cloud:
-    if: github.event_name == 'workflow_dispatch' || vars.ENABLE_TIKTOK_CLOUD == 'true' || vars.ENABLE_TELEGRAM_CLOUD == 'true'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || vars.ENABLE_TIKTOK_CLOUD == 'true' || vars.ENABLE_TELEGRAM_CLOUD == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -57,11 +59,11 @@ jobs:
       ENABLE_TIKTOK_CLOUD: ${{ vars.ENABLE_TIKTOK_CLOUD }}
       ENABLE_TELEGRAM_CLOUD: ${{ vars.ENABLE_TELEGRAM_CLOUD }}
       PUBLICATION_ASSETS: 'true'
-      MODE: ${{ github.event_name == 'schedule' && 'scheduled' || inputs.mode }}
+      MODE: ${{ (github.event_name == 'schedule' || github.event_name == 'push') && 'scheduled' || inputs.mode }}
       TARGET: ${{ inputs.target || 'tiktok' }}
       ALLOW_PUBLISH: ${{ inputs.approve_publication }}
       SOURCE_RUN: ${{ inputs.source_run }}
-      SCHEDULE_TRIGGER: ${{ github.event.schedule }}
+      SCHEDULE_TRIGGER: ${{ github.event_name == 'push' && '17 5,11 * * *' || github.event.schedule }}
     steps:
       - uses: actions/checkout@v4
         with:

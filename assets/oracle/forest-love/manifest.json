@@ -1,0 +1,364 @@
+{
+  "deck": "лес любви",
+  "author": "Вероника Тёмная",
+  "artist": "Mirabella_Mirosha",
+  "source_page": "https://www.labirint.ru/books/770452/",
+  "processing": "AI-assisted restoration approved by user; small illustration details may differ from the physical deck",
+  "publication_rights": "use authorized by project owner; license not independently verified",
+  "cards": [
+    {
+      "id": "fl-01",
+      "number": 1,
+      "name": "встреча",
+      "file": "01.webp",
+      "sha256": "4ecc69c9120a05f2a27bd0a270863801868cafc83544a73029324183e80a3d68"
+    },
+    {
+      "id": "fl-02",
+      "number": 2,
+      "name": "детство",
+      "file": "02.webp",
+      "sha256": "0da750d6e5eeac650d684eabb0f9f6ce3ab1c2e5cc5d9f83993099ddd4240443"
+    },
+    {
+      "id": "fl-03",
+      "number": 3,
+      "name": "страсть",
+      "file": "03.webp",
+      "sha256": "76642d3f48a850b14415897e34d86d46b39be77dafe6c533f7f7daa1769e74dd"
+    },
+    {
+      "id": "fl-04",
+      "number": 4,
+      "name": "лицемерие",
+      "file": "04.webp",
+      "sha256": "18971b22844e6eedbec06eec255e8c67066c3a082e15a80904e2cfac2fdabcd5"
+    },
+    {
+      "id": "fl-05",
+      "number": 5,
+      "name": "болото",
+      "file": "05.webp",
+      "sha256": "9cbb0421ee835f22d619508a602b9bc6ab1cc729744612e466b6bfc2ad4aa730"
+    },
+    {
+      "id": "fl-06",
+      "number": 6,
+      "name": "праздник",
+      "file": "06.webp",
+      "sha256": "23cbb0fd968da70b4ab1420a7c450cc0f51687cf31c19590a9a6f2ec40dbefb0"
+    },
+    {
+      "id": "fl-07",
+      "number": 7,
+      "name": "стена",
+      "file": "07.webp",
+      "sha256": "edb8867fb7e13b870f7109354a57e61d8b00a86ae98270cd1d817b3b77f7ab48"
+    },
+    {
+      "id": "fl-08",
+      "number": 8,
+      "name": "передвижение",
+      "file": "08.webp",
+      "sha256": "dc5972a36c0cced3649d96f5820dadd3f8729066bd0dfb4fe73ad42c124d9efc"
+    },
+    {
+      "id": "fl-09",
+      "number": 9,
+      "name": "работа",
+      "file": "09.webp",
+      "sha256": "a73dea8f757533d78d12461b16c5bb2fe81783db3de088dd5326d8c474aafd4b"
+    },
+    {
+      "id": "fl-10",
+      "number": 10,
+      "name": "облако",
+      "file": "10.webp",
+      "sha256": "181c0756d201ac6f10d61eb3ca0178ed17cde510deb7b27923a9f82ada71a52d"
+    },
+    {
+      "id": "fl-11",
+      "number": 11,
+      "name": "скупость",
+      "file": "11.webp",
+      "sha256": "2f8cdbf7e842c385381572b921cc9fc860040434803aabeec0f5bd6d14dbf097"
+    },
+    {
+      "id": "fl-12",
+      "number": 12,
+      "name": "друг",
+      "file": "12.webp",
+      "sha256": "eaa593bd4ae81cd1ecbd8ecfedf44e314e97564e884ba12928a542579f78d24f"
+    },
+    {
+      "id": "fl-13",
+      "number": 13,
+      "name": "зеркало",
+      "file": "13.webp",
+      "sha256": "0cd2f4864a8dbd936877579858b7ad73a4dd31b27460a827d5fa6bb0258b6792"
+    },
+    {
+      "id": "fl-14",
+      "number": 14,
+      "name": "любовь",
+      "file": "14.webp",
+      "sha256": "3b4ec4de392f83f9d94735ee39f2072debd75869d310b090b176eefa90f32dab"
+    },
+    {
+      "id": "fl-15",
+      "number": 15,
+      "name": "красота",
+      "file": "15.webp",
+      "sha256": "b18c169f411ac9a0f92d6fa2f6a3fdbec3908a62be7efa44a972d8b337f988c1"
+    },
+    {
+      "id": "fl-16",
+      "number": 16,
+      "name": "ведьма",
+      "file": "16.webp",
+      "sha256": "e32e495ce3ac668109dab40c99aa4b91a1466a29a56cd27298c79d546a52050f"
+    },
+    {
+      "id": "fl-17",
+      "number": 17,
+      "name": "разница",
+      "file": "17.webp",
+      "sha256": "286154126dfc1fda155c62c88fca10c2cd5521bba26267e7fc9bfb070219c92d"
+    },
+    {
+      "id": "fl-18",
+      "number": 18,
+      "name": "ноша",
+      "file": "18.webp",
+      "sha256": "cb2e1ad4f1c6a67cfe8b37a08ed6c69e58d934ff876fd8bbf2041da4d0d386dc"
+    },
+    {
+      "id": "fl-19",
+      "number": 19,
+      "name": "выбор",
+      "file": "19.webp",
+      "sha256": "f6a428766fbe24b7eb257eec69d725d128dac494919fc7bdd4c62119b9c3e40f"
+    },
+    {
+      "id": "fl-20",
+      "number": 20,
+      "name": "снежная королева",
+      "file": "20.webp",
+      "sha256": "7e6adb88df3481d3b2ac4e286c505be41a0755f3b8cd4446617560e8a633eee8"
+    },
+    {
+      "id": "fl-21",
+      "number": 21,
+      "name": "воспоминания",
+      "file": "21.webp",
+      "sha256": "537ca45e2d6c3871643e74967db5e60a69ca6699d04489bd0ae4197cf078dfe7"
+    },
+    {
+      "id": "fl-22",
+      "number": 22,
+      "name": "подарок",
+      "file": "22.webp",
+      "sha256": "74e27f43a5d00bd798ec95106e2e1cf29f956b3e70a0cda7a8fb10f07eb34b9a"
+    },
+    {
+      "id": "fl-23",
+      "number": 23,
+      "name": "женщина",
+      "file": "23.webp",
+      "sha256": "e6a1339b3115bd73faaab2ecd153c7523051e088d30bb093a9c8ec6450c8c643"
+    },
+    {
+      "id": "fl-24",
+      "number": 24,
+      "name": "мужчина",
+      "file": "24.webp",
+      "sha256": "16153a804f88f3b2fa403644ad695827b04a791844bbe336a87de8ab2fcf10a5"
+    },
+    {
+      "id": "fl-25",
+      "number": 25,
+      "name": "интуиция",
+      "file": "25.webp",
+      "sha256": "f8d1e2602bafbc00504bd0af177c4417b659b3f70999986cb048258525ebd86a"
+    },
+    {
+      "id": "fl-26",
+      "number": 26,
+      "name": "одиночество",
+      "file": "26.webp",
+      "sha256": "805e6db651908d082adf5290d9025ee20b22be0eff93d026b93178ef721c784a"
+    },
+    {
+      "id": "fl-27",
+      "number": 27,
+      "name": "клетка",
+      "file": "27.webp",
+      "sha256": "e3c4472305d6765f8825c6f701416586007e27a2808942183dd166533f15b6da"
+    },
+    {
+      "id": "fl-28",
+      "number": 28,
+      "name": "ревность",
+      "file": "28.webp",
+      "sha256": "9462b04befc2b985276e1568de140262ed73ecbd169995ef4d44bac83f283236"
+    },
+    {
+      "id": "fl-29",
+      "number": 29,
+      "name": "манипуляция",
+      "file": "29.webp",
+      "sha256": "2bb50442fd874aeb0863db64c2c4c663072a9b1ac6c6a46b2dcfa3a8df74d7ba"
+    },
+    {
+      "id": "fl-30",
+      "number": 30,
+      "name": "забота",
+      "file": "30.webp",
+      "sha256": "4dba752f47cea4a6e4d19a0cc62d70c8e626e8e9b45dadc3a05e8bc54fbdf6f8"
+    },
+    {
+      "id": "fl-31",
+      "number": 31,
+      "name": "служанка",
+      "file": "31.webp",
+      "sha256": "5989b63d7572e78922a40a21d8a0dadaf90dff3c2c5045e0b5e519754ba85d6d"
+    },
+    {
+      "id": "fl-32",
+      "number": 32,
+      "name": "письмо",
+      "file": "32.webp",
+      "sha256": "1fd2af71d4ac0b0dce047fc3787f4c4858181d7480c5d078150a1ebceda1061c"
+    },
+    {
+      "id": "fl-33",
+      "number": 33,
+      "name": "обида",
+      "file": "33.webp",
+      "sha256": "8408011188d1bce375cee1ee380ffef2db16de2939b2de80b343b3d883be95c9"
+    },
+    {
+      "id": "fl-34",
+      "number": 34,
+      "name": "род",
+      "file": "34.webp",
+      "sha256": "27ce65bdc53775401bc191e227624e272a3a3cae4d3d0b20b0a180425ad64438"
+    },
+    {
+      "id": "fl-35",
+      "number": 35,
+      "name": "рутина",
+      "file": "35.webp",
+      "sha256": "6136b5a0c0d6b7172c68564c40c5e02ec72d3e9871e31ceeaa241724b04a59d3"
+    },
+    {
+      "id": "fl-36",
+      "number": 36,
+      "name": "месть",
+      "file": "36.webp",
+      "sha256": "66f263849b95ede41955dbc03d36b2e987a89a768af32979bdd27aecb4d78111"
+    },
+    {
+      "id": "fl-37",
+      "number": 37,
+      "name": "лень",
+      "file": "37.webp",
+      "sha256": "547b55e6a857d32d8a620eb351aa45daea88e75a5a4619e81ffc6666daa2472d"
+    },
+    {
+      "id": "fl-38",
+      "number": 38,
+      "name": "удача",
+      "file": "38.webp",
+      "sha256": "f59fa3abd641abc833c331cea64941260231cc417f670d9fc05e84bcd7fe72b3"
+    },
+    {
+      "id": "fl-39",
+      "number": 39,
+      "name": "боль",
+      "file": "39.webp",
+      "sha256": "ffd4ebb6ccd7a20b963ea89a92edba708e0bcfe44992fdd0ca610a5ecbae9557"
+    },
+    {
+      "id": "fl-40",
+      "number": 40,
+      "name": "знания",
+      "file": "40.webp",
+      "sha256": "360e8d2107e89ec3e7c78ab2ba81a2e38b36ab59af3d2e8042870325131b7aed"
+    },
+    {
+      "id": "fl-41",
+      "number": 41,
+      "name": "расчет",
+      "file": "41.webp",
+      "sha256": "3f539de9cf312c5d1a62db2879d536a53d9e6c323885da2cd99e2445b0cfd352"
+    },
+    {
+      "id": "fl-42",
+      "number": 42,
+      "name": "отдых",
+      "file": "42.webp",
+      "sha256": "fd6c277a32d76687dd950ef945f15c8ac942d91b6d9a393791013ff5e9fa6777"
+    },
+    {
+      "id": "fl-43",
+      "number": 43,
+      "name": "правосудие",
+      "file": "43.webp",
+      "sha256": "a2cf65b32007b1147a80cf2c5039c64f906277375e1ff20a005d22a141a47c0d"
+    },
+    {
+      "id": "fl-44",
+      "number": 44,
+      "name": "сила",
+      "file": "44.webp",
+      "sha256": "8512be4428908229fc119cc8ee15dc7d03eaf61b84209fb0fd7eafe9e16a9e7f"
+    },
+    {
+      "id": "fl-45",
+      "number": 45,
+      "name": "устремление",
+      "file": "45.webp",
+      "sha256": "8c7f4af82dd8ecb993d570de0d8c580c30233e56c80932295e3879ea71017834"
+    },
+    {
+      "id": "fl-46",
+      "number": 46,
+      "name": "самоанализ",
+      "file": "46.webp",
+      "sha256": "5deb04ef6922667efe485f6891563a03bb75efdbacd88e332f30dc82f4963100"
+    },
+    {
+      "id": "fl-47",
+      "number": 47,
+      "name": "прощение",
+      "file": "47.webp",
+      "sha256": "f8985a5973267d309107e666cca47681dd89d32482eacebd3d48cf405d545095"
+    },
+    {
+      "id": "fl-48",
+      "number": 48,
+      "name": "благодарность",
+      "file": "48.webp",
+      "sha256": "bfd4826c19efd06d6d26028ad70cdde6f41f8d48a0be88f7bd29f166a91f4770"
+    },
+    {
+      "id": "fl-49",
+      "number": 49,
+      "name": "свобода",
+      "file": "49.webp",
+      "sha256": "851a62f928172cd483652728b7103d54e727836444f582f6ef1ff8e2c9d6e4f5"
+    },
+    {
+      "id": "fl-50",
+      "number": 50,
+      "name": "вынашивание",
+      "file": "50.webp",
+      "sha256": "0c56729c2b92983f00357d311e28660ad5a752f21771cd7a6c7cce02890bd3f6"
+    }
+  ],
+  "back": {
+    "file": "back.webp",
+    "sha256": "1239c243b3793213e9b3c3854ae6f721531319f2e6a0acd35fe46e1814b5ec14"
+  }
+}
