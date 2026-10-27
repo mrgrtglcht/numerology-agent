@@ -1,6 +1,5 @@
 {
-  "stage": "preparation_failed",
-  "owner": "cloud-tiktok-2026-10-27/oracle",
+  "stage": "started",
   "target": "tiktok",
   "day": "2026-10-27"
 }
