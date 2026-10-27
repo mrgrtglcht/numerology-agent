@@ -1,0 +1,52 @@
+name: Check PostWire delivery status
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/postwire-status.yml']
+permissions:
+  contents: read
+jobs:
+  status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read existing deliveries only
+        env:
+          POSTWIRE_API_KEY: ${{ secrets.POSTWIRE_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json,os,re,urllib.request
+          from pathlib import Path
+          def shape(value,depth=0):
+              if depth>5:return type(value).__name__
+              if isinstance(value,dict):
+                  return {str(k)[:60]:shape(v,depth+1) for k,v in list(value.items())[:40]}
+              if isinstance(value,list):return [shape(x,depth+1) for x in value[:4]]
+              return type(value).__name__
+          def facts(value,path=""):
+              out={}
+              if isinstance(value,dict):
+                  for k,v in value.items():
+                      p=path+"."+str(k)
+                      if k in {"status","ok","platform","code","error_code","fail_reason","publish_id","post_id"} and isinstance(v,(str,bool,int)):
+                          if not isinstance(v,str) or re.fullmatch(r"[A-Za-z0-9_~.:-]{1,160}",v):out[p]=v
+                      elif isinstance(v,(dict,list)):out.update(facts(v,p))
+              elif isinstance(value,list):
+                  for i,v in enumerate(value[:6]):out.update(facts(v,path+"["+str(i)+"]"))
+              return out
+          memory=json.loads(Path("state/content-memory.json").read_text())
+          for owner,p in memory["posts"].items():
+              receipt=p.get("deliveries",{}).get("tiktok",{}).get("receipt",{})
+              if receipt.get("provider")!="postwire" or receipt.get("mode")=="immediate":continue
+              identity=receipt.get("id","")
+              if not re.fullmatch(r"[A-Za-z0-9_-]{1,100}",identity):continue
+              req=urllib.request.Request("https://postwire.io/api/schedule/"+identity,headers={"Authorization":"Bearer "+os.environ["POSTWIRE_API_KEY"]})
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as response:data=json.load(response)
+                  print(json.dumps({"owner":owner,"shape":shape(data),"facts":facts(data)},ensure_ascii=False))
+              except Exception as error:
+                  print(json.dumps({"owner":owner,"read_error":type(error).__name__,"http_status":getattr(error,"code",None)}))
+          PY

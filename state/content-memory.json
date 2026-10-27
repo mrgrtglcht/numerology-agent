@@ -2161,18 +2161,23 @@
       "created_at": "2026-10-21T14:28:10.462045+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "accepted",
+          "status": "published",
           "receipt": {
             "provider": "postwire",
             "id": "ba181946-9c33-458f-9acd-701f02be43e7",
-            "status": "queued",
+            "status": "published",
             "run_at": "2026-10-26T17:30:00+00:00",
             "asset_count": 7,
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE",
-            "brand_organic_toggle": false
+            "brand_organic_toggle": false,
+            "confirmation": {
+              "source": "owner_confirmation",
+              "confirmed_at": "2026-10-27T11:04:19+00:00",
+              "note": "Owner confirmed part 2 is visible in TikTok; no resend."
+            }
           },
-          "updated_at": "2026-10-25T09:48:04.403534+00:00"
+          "updated_at": "2026-10-27T11:04:19+00:00"
         }
       },
       "formats": [
