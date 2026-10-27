@@ -6,6 +6,7 @@ import urllib.error
 import uuid
 from urllib.parse import urlencode
 from agent import SafeError,request_json,required
+from media_urls import trusted_media_url
 
 BASE='https://api.upload-post.com'
 
@@ -37,7 +38,7 @@ def publish(post,conn,key):
       ('pinterest_board_id',conn['board']),('pinterest_link',link),('async_upload','true'),
       ('request_id',key),('external_id',key)]
     for url in urls:
-        if not url.startswith('https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/'):raise SafeError('Непроверенный адрес изображения.')
+        if not trusted_media_url(url):raise SafeError('Непроверенный адрес изображения.')
         fields.extend([('photos[]',url),('pinterest_carousel_titles[]',post['title']),
           ('pinterest_carousel_descriptions[]',post['caption'] or ' '),('pinterest_carousel_links[]',link)])
     boundary='quantafate'+uuid.uuid4().hex

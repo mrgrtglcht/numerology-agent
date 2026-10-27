@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image,ImageDraw
 from agent import ROOT,SafeError
 from content_memory import normal
+from media_urls import trusted_media_url
 
 DECK=ROOT/'assets/oracle/forest-love'
 CAPTION='больше в тгк @quantafate'
@@ -132,7 +133,7 @@ def prepare(owner,memory,folder):
         import urllib.request
         path=folder/'backgrounds'/source['file'];path.parent.mkdir(parents=True,exist_ok=True)
         url=source['public_url']
-        if not url.startswith('https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/'):raise SafeError('Неверный адрес фона.')
+        if not trusted_media_url(url):raise SafeError('Неверный адрес фона.')
         with urllib.request.urlopen(url,timeout=45) as r:path.write_bytes(r.read())
         if hashlib.sha256(path.read_bytes()).hexdigest()!=source['sha256']:raise SafeError('Повреждён фон.')
         sources=[source]
