@@ -1,9 +1,6 @@
 {
-  "stage": "complete",
-  "folder": "cloud-tiktok-2026-10-24",
-  "recovered_preparation": true,
-  "prepared_owner": "cloud-tiktok-2026-10-24-preview/part-04",
-  "preview_run": 40083563339,
-  "not_published": true,
-  "music_connection_required": true
+  "stage": "working",
+  "folder": "cloud-tiktok-2026-10-27",
+  "day": "2026-10-27",
+  "attempts": 0
 }
