@@ -58,7 +58,7 @@
       }
     },
     "quantafate-pin-3730cc4cb2f528147d0945a1": {
-      "stage": "sending",
+      "stage": "accepted",
       "design_version": 3,
       "owner": "cloud-tiktok-2026-10-20-preview/part-02",
       "title": "что поддерживает твою мотивацию по матрице судьбы · часть 2",
@@ -77,7 +77,8 @@
         "arcana:position:E1:angle:motivation:E1:9",
         "arcana:position:E1:angle:motivation:E1:10"
       ],
-      "prepared_at": "2026-10-27T17:52:02.893478+00:00"
+      "prepared_at": "2026-10-27T17:52:02.893478+00:00",
+      "receipt": {}
     }
   },
   "days": {
