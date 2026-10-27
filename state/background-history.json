@@ -445,6 +445,37 @@
         "0a92969693939393",
         "1a92969693939392"
       ]
+    },
+    "cloud-tiktok-2026-10-27/oracle-background-v3/part-01": {
+      "batch": "cloud-tiktok-2026-10-27/oracle-background-v3",
+      "part": 1,
+      "identities": [
+        "original_sha1:6a2686b1f18b10c96ce9a6b721f39ed2e0a577fe",
+        "page:https://commons.wikimedia.org/wiki/File:Klosterruine_Eldena_und_Riesengebirge_(C_D_Friedrich).jpg",
+        "sha256:387bce5467a494f8b4929af4e0aee5a0d04753ecb4a7c9b945402ce737ab1abd",
+        "url:https://upload.wikimedia.org/wikipedia/commons/c/c2/Klosterruine_Eldena_und_Riesengebirge_%28C_D_Friedrich%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Klosterruine_Eldena_und_Riesengebirge_(C_D_Friedrich).jpg",
+      "title": "File:Klosterruine Eldena und Riesengebirge (C D Friedrich).jpg",
+      "visual_hash": "69134fbfb2676f4f",
+      "visual_hashes": [
+        "69134fbfb2676f4f",
+        "71134dbfba677f4f",
+        "71134dbfbae77f4f",
+        "b1536dbf3ae77f6f",
+        "69334dff3a676f5d",
+        "71134dff3ae76f4d",
+        "71134dff3ae77f4d",
+        "b953cdff3ac77fef",
+        "e8b3cd7f3b676f5d",
+        "f0b3cd7f3be76f4d",
+        "b013cd7f3bc77fcd",
+        "b853cd7f3ac77fed",
+        "e8b3cd7f7be7ed9d",
+        "f0b3cd7f7bc7ef95",
+        "b093cc7f7bc77fc5",
+        "3893cc7f7bc77bed"
+      ]
     }
   }
 }
