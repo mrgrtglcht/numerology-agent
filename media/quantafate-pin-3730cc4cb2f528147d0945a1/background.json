@@ -1,0 +1,43 @@
+{
+  "id": "b3",
+  "title": "File:Medieval garden of Sainte-Agnes.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Medieval_garden_of_Sainte-Agnes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Medieval_garden_of_Sainte-Agnes.jpg/500px-Medieval_garden_of_Sainte-Agnes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "page": "https://commons.wikimedia.org/wiki/File:Medieval_garden_of_Sainte-Agnes.jpg",
+  "original_sha1": "88e857f39d4429176b0e37919180c97a9af54954",
+  "width": 4416,
+  "height": 3312,
+  "creator": "Tangopaso",
+  "credit": "Own work",
+  "license": "Public domain",
+  "license_url": "",
+  "query": "medieval castle garden",
+  "visual_hash": "cedbcc480607833f",
+  "visual_hashes": [
+    "cedbcc480607833f",
+    "cbdecc4806078337",
+    "cbdccc48060607b3",
+    "dbcccc48060647a3",
+    "cfdbccc80607233f",
+    "cbdfccc806070333",
+    "dbdcccc806070733",
+    "9bcccc4806060723",
+    "df9fccc80607233f",
+    "df9fccc80607833b",
+    "db9ecc880607872b",
+    "9dcecc8802078723",
+    "df9fce880707037f",
+    "df9fce880707037b",
+    "dd9ece880707036b",
+    "9d8ec8880307872b"
+  ],
+  "file": "b3.jpg",
+  "focus": [
+    0.5,
+    0.5
+  ],
+  "selection_reason": "fresh public-domain carousel background",
+  "sha256": "eeb8088405b79195f5742c9a26b923cab43d7be989c70fec04e4bef7e66882a0",
+  "modifications": "cropped to 9:16, darkened, overlaid with text",
+  "download_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/33cb60cc6dc34b67c2956ff65ad312a6ae460e89/media/quantafate-pin-3730cc4cb2f528147d0945a1/background.jpg"
+}
