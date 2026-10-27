@@ -3,7 +3,9 @@ import json
 import re
 from pathlib import Path
 
-FILES={'oracle-plan.json','oracle-response.json','oracle-generation.json','oracle-model.json','tiktok-format.json','prepared-tiktok.json','editor-plan.json','research.json','series-plan.json','candidates.json','pipeline.json',
+FILES={'prepared-tiktok.json','editor-plan.json','research.json','series-plan.json','candidates.json','pipeline.json',
+ 'oracle-background-review.json','oracle-background-model.json',
+ 'oracle-plan.json','oracle-response.json','oracle-generation.json','oracle-model.json','tiktok-format.json',
  'background-review.json','model-response.json','model-diagnostic.json','raw-model-output.txt','sources.json',
  'telegram-plan.json','telegram-response.json','telegram-generation.json','telegram.json',
  'model-request.json','repair-state.json','repair-response.json','repair-diagnostic.json'}
@@ -48,3 +50,4 @@ def preparation_failed(store,target,folder,day,previous=None,error=None):
     if error:state['diagnostic']=diagnostic(error)
     store.save_state(pointer(target),state)
     return state
+

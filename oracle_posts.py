@@ -92,8 +92,21 @@ def prepare_background(owner,folder,history):
         candidates=search_candidates(limit=10,seed=owner,no_attribution=True,exclude=lambda s:not history.available(s,owner))
         path.write_text(json.dumps(candidates,ensure_ascii=False),encoding='utf-8')
     candidates=fresh_thumbnails(thumbnails(candidates,folder/'candidates'),history,owner)
+    candidates=[c for c in candidates if re.search(r'abbey|abtei|ruin|forest|landscape|landschaft|cathedral|dom |kloster|garden|castle|church',c['title'],re.I)]
     if not candidates:raise SafeError('Не найден новый фон оракула.')
-    chosen=candidates[0] if not saved.exists() else next(c for c in candidates if c['id']==json.loads(saved.read_text(encoding='utf-8'))[0]['id'])
+    review=folder/'oracle-background-review.json'
+    if saved.exists():selected=json.loads(saved.read_text(encoding='utf-8'))[0]['id']
+    elif review.exists():selected=json.loads(review.read_text(encoding='utf-8'))['id']
+    else:
+        from carousel_auto import generate_visual
+        result=generate_visual('Выбери один эстетичный атмосферный фон для оракула об отношениях: лес, сад, пейзаж или готическая архитектура. '
+          'Нужна цельная красивая сцена, подходящая для квадратного кадрирования и белого текста. Не выбирай предметные музейные фото, '
+          'посуду, портреты, скульптуры и страницы текста. Если подходящих нет, верни id=none. Верни JSON с id и reason.',candidates,
+          max_tokens=500,diagnostic_path=folder/'oracle-background-model.json',response_schema={'type':'object','properties':{
+          'id':{'type':'string','enum':['none']+[c['id'] for c in candidates]},'reason':{'type':'string'}},'required':['id','reason']})
+        selected=result['id'];review.write_text(json.dumps(result,ensure_ascii=False),encoding='utf-8')
+    chosen=next((c for c in candidates if c['id']==selected),None)
+    if not chosen:raise SafeError('Модель не нашла подходящий атмосферный фон.')
     return download_selection([chosen],[{'id':chosen['id'],'focus':[.5,.5],'reason':'fresh atmospheric background for relationship oracle'}],folder/'backgrounds')
 
 def prepare(owner,memory,folder):
@@ -136,3 +149,4 @@ def prepare(owner,memory,folder):
     (part/'content.json').write_text(json.dumps(config,ensure_ascii=False,indent=2),encoding='utf-8')
     memory.reserve(owner,config);memory.format_ready(owner,'tiktok')
     return part
+
