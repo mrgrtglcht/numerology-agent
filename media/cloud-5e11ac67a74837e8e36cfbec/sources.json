@@ -1,0 +1,48 @@
+{
+  "backgrounds": [
+    {
+      "id": "b3",
+      "title": "File:Bourdalou (medieval Louvre).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Bourdalou_%28medieval_Louvre%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Bourdalou_%28medieval_Louvre%29.jpg/500px-Bourdalou_%28medieval_Louvre%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Bourdalou_(medieval_Louvre).jpg",
+      "original_sha1": "13e34edcd6f7a308974fc6d2dab2a0d0eb271127",
+      "width": 2733,
+      "height": 2049,
+      "creator": "Tangopaso",
+      "credit": "Self-photographed",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "medieval castle garden",
+      "visual_hash": "86204cccc4a00313",
+      "visual_hashes": [
+        "86204cccc4a00313",
+        "96684cccc4800303",
+        "1668cccccc908303",
+        "3068cccccc90a003",
+        "9728cccc84a20313",
+        "1768ccccc4a20313",
+        "1668cccccc928303",
+        "3048cccccc92a003",
+        "1728cccc86020111",
+        "1768cccc86224111",
+        "1768cccc8e924101",
+        "31cccccc8e924081",
+        "1728ccce8e410111",
+        "1768cccc8e104111",
+        "17c88ecc8e124101",
+        "31cc8ecc8e124101"
+      ],
+      "file": "b3.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "dab4866ed1daf6f98da7a99d8d8ac8cebe92e8f89fea1c965596b9ca4e493b85",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/c2b76c480b946a2bd49ba3a7cf4b2152f55c09f6/media/oracle-5e11ac67a74837e8e36cfbec/background.jpg"
+    }
+  ],
+  "tarot_manifest": null
+}
