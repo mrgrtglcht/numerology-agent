@@ -69,3 +69,16 @@ class PostWireTests(unittest.TestCase):
         with patch.dict('os.environ',{'TIKTOK_REQUIRE_MUSIC':'true','TIKTOK_PUBLISHER':'buffer'}),patch('cloud_agent.buffer') as api:
             with self.assertRaises(SafeError):deliver_tiktok(None,None,None,None)
             api.assert_not_called()
+
+    def test_third_scheduled_post_is_allowed_but_fourth_is_blocked(self):
+        class Memory: data={'posts':{}}
+        config={'title':'пример'}
+        queue=[{'status':'queued'},{'status':'queued'}]
+        with patch.object(p,'creator',return_value={'brand_id':'brand'}),patch.object(p,'api',return_value={'scheduled':queue}) as api,patch('cloud_agent.tiktok_caption',return_value='больше в тгк @quantafate'),patch.object(p,'next_slot',return_value='2026-11-01T08:46:00+00:00'):
+            data=p.payload(config,['https://example.com/1.jpg','https://example.com/2.jpg'],'owner',Memory())
+            self.assertEqual(len(data['media']),2)
+            self.assertTrue(data['options']['tiktok']['auto_add_music'])
+            queue.append({'status':'queued'})
+            with self.assertRaises(SafeError):p.payload(config,['https://example.com/1.jpg','https://example.com/2.jpg'],'another',Memory())
+            self.assertEqual(api.call_args_list[0].args,('/api/schedule',))
+            self.assertTrue(all(call.args==('/api/schedule',) and not call.kwargs for call in api.call_args_list))

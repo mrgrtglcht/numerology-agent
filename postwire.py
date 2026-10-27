@@ -13,6 +13,7 @@ from agent import SafeError, request_json, required
 
 ZONE = ZoneInfo('Europe/Warsaw')
 PUBLIC = 'PUBLIC_TO_EVERYONE'
+QUEUE_TARGET = 3
 LAUNCH_SLOTS = {'2026-10-26':(18,30), '2026-10-28':(18,30)}
 
 
@@ -69,7 +70,7 @@ def payload(config, urls, owner, memory):
     queue = api('/api/schedule').get('scheduled')
     if not isinstance(queue, list):
         raise SafeError('PostWire не подтвердил состояние очереди.')
-    if sum(p.get('status') in ('queued','held','publishing','pending_approval') for p in queue) >= 2:
+    if sum(p.get('status') in ('queued','held','publishing','pending_approval') for p in queue) >= QUEUE_TARGET:
         raise SafeError('Очередь PostWire заполнена; платный тариф не включается.')
     return {'platforms':['tiktok'], 'brand_id':account['brand_id'],
             'text':tiktok_caption(config), 'media':[{'url':u,'type':'image'} for u in urls],

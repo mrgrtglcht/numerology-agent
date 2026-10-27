@@ -58,6 +58,9 @@ def channel_info():
     raise SafeError('Настроенный TikTok не найден в Buffer.')
 
 
+from postwire import QUEUE_TARGET
+
+
 def pending_tiktok(memory):
     # Reconciled with Buffer first. Uncertain attempts stop replenishment.
     pending=0
@@ -339,7 +342,7 @@ def run_target(target,store,preview=False,now=None):
             from postwire import sync
             sync(memory)
         channel_info()
-        if pending_tiktok(memory)>=2:print('TikTok: в очереди уже достаточно постов.');return
+        if pending_tiktok(memory)>=QUEUE_TARGET:print('TikTok: в очереди уже достаточно постов.');return
     folder.mkdir(parents=True,exist_ok=True)
     if not preview:store.save_state(pointer(target),{'stage':'working','folder':folder.name,'day':day,'attempts':(pending or {}).get('attempts',0)})
     store.save_state(key,{'stage':'started','target':target,'day':day})
@@ -446,7 +449,7 @@ def main():
         if len(found)!=1:raise SafeError('В артефакте должна быть ровно одна карусель.')
         part=found[0].parent;owner=part.parent.name+'/'+part.name
         memory=ContentMemory(store=store);channel_info()
-        if pending_tiktok(memory)>=2:raise SafeError('Очередь уже заполнена.')
+        if pending_tiktok(memory)>=QUEUE_TARGET:raise SafeError('Очередь уже заполнена.')
         print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
         targets=[];now=now_local()
