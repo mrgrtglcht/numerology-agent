@@ -414,6 +414,37 @@
         "17c88ecc8e124101",
         "31cc8ecc8e124101"
       ]
+    },
+    "cloud-tiktok-2026-10-27/oracle-background-v2/part-01": {
+      "batch": "cloud-tiktok-2026-10-27/oracle-background-v2",
+      "part": 1,
+      "identities": [
+        "original_sha1:8e50b4bad76e1281d52371971f6704997e686dd4",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Gothic_Church_Ruins_-_Google_Art_Project.jpg",
+        "sha256:579dce46845bdd192a492761450a09323309712e01056abda2300e152ea08c56",
+        "url:https://upload.wikimedia.org/wikipedia/commons/d/d9/Carl_Blechen_-_Gothic_Church_Ruins_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Blechen_-_Gothic_Church_Ruins_-_Google_Art_Project.jpg",
+      "title": "File:Carl Blechen - Gothic Church Ruins - Google Art Project.jpg",
+      "visual_hash": "8fd5d4d4d6d6d6db",
+      "visual_hashes": [
+        "8fd5d4d4d6d6d6db",
+        "8dd5d4d4d6d6d6d3",
+        "89d4d4d4d6d6d6d7",
+        "99d4d4d4d6d6d6d6",
+        "0d959456d3d6d6db",
+        "8d949456d3d6d6d3",
+        "8d949456d3d6d6d3",
+        "99949456d3d7d6d6",
+        "0d90965693929699",
+        "0d92965693939691",
+        "0896965693939692",
+        "9896965693939696",
+        "0c92969693939399",
+        "4c92969693939391",
+        "0a92969693939393",
+        "1a92969693939392"
+      ]
     }
   }
 }
