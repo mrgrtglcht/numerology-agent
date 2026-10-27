@@ -383,6 +383,37 @@
         "dd9ece880707036b",
         "9d8ec8880307872b"
       ]
+    },
+    "cloud-tiktok-2026-10-27/oracle/part-01": {
+      "batch": "cloud-tiktok-2026-10-27/oracle",
+      "part": 1,
+      "identities": [
+        "original_sha1:13e34edcd6f7a308974fc6d2dab2a0d0eb271127",
+        "page:https://commons.wikimedia.org/wiki/File:Bourdalou_(medieval_Louvre).jpg",
+        "sha256:dab4866ed1daf6f98da7a99d8d8ac8cebe92e8f89fea1c965596b9ca4e493b85",
+        "url:https://upload.wikimedia.org/wikipedia/commons/0/0d/Bourdalou_%28medieval_Louvre%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Bourdalou_(medieval_Louvre).jpg",
+      "title": "File:Bourdalou (medieval Louvre).jpg",
+      "visual_hash": "86204cccc4a00313",
+      "visual_hashes": [
+        "86204cccc4a00313",
+        "96684cccc4800303",
+        "1668cccccc908303",
+        "3068cccccc90a003",
+        "9728cccc84a20313",
+        "1768ccccc4a20313",
+        "1668cccccc928303",
+        "3048cccccc92a003",
+        "1728cccc86020111",
+        "1768cccc86224111",
+        "1768cccc8e924101",
+        "31cccccc8e924081",
+        "1728ccce8e410111",
+        "1768cccc8e104111",
+        "17c88ecc8e124101",
+        "31cc8ecc8e124101"
+      ]
     }
   }
 }
