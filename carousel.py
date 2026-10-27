@@ -175,7 +175,10 @@ def render(config_path=None, output=None, background_dir=None):
         text(d,'quantafate',x,215,25,width=840)
         if s['layout']=='series_cover':
             y=text(d,s['title'],x,500,82,True)
-            text(d,s['subtitle'],x,max(y+95,860),38,width=850)
+            # Old saved previews may still contain an arcana list in subtitle.
+            # Rebuild this line from series metadata so covers never reveal it.
+            subtitle=f'часть {c["part"]} из {c["total_parts"]}' if c.get('part') and c.get('total_parts') else ''
+            if subtitle:text(d,subtitle,x,max(y+95,860),38,width=850)
         elif s['layout']=='arcana':
             from matrix_rules import ARCANA
             number=s['arcana_number']

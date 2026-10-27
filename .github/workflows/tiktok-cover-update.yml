@@ -1,0 +1,54 @@
+name: Update queued TikTok cover
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/tiktok-cover-update.yml']
+permissions:
+  contents: read
+concurrency:
+  group: quantafate-delivery
+  cancel-in-progress: false
+jobs:
+  cover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Replace only the first image of existing part three
+        env:
+          POSTWIRE_API_KEY: ${{ secrets.POSTWIRE_API_KEY }}
+        run: |
+          python - <<'PY'
+          import copy,json,os,urllib.request
+          import postwire
+          identity='6715e07f-f106-4996-96ae-5ba8694322ce'
+          endpoint='/api/schedule/'+identity
+          before=postwire.api(endpoint)['scheduled']
+          assert before['status']=='queued','Part three is no longer queued; no changes made.'
+          payload=copy.deepcopy(before['payload'])
+          payload.pop('_actor',None)
+          assert payload['platforms']==['tiktok'] and len(payload['media'])==7
+          assert postwire.instant(before['run_at'])==postwire.instant('2026-10-28T17:30:00+00:00')
+          image='https://raw.githubusercontent.com/'+os.environ['GITHUB_REPOSITORY']+'/'+os.environ['GITHUB_SHA']+'/media/cover-without-arcana-20261027/part-03.jpg'
+          with urllib.request.urlopen(image,timeout=30) as r:assert r.status==200
+          previous=payload['media'][0]['url']
+          expected='https://raw.githubusercontent.com/mrgrtglcht/quantafate-agent/2f211f3b33bf09e7ff88bed654f3bde9e61d1464/media/caption-repair-20261022/part-03/01.jpg'
+          assert previous==expected or '/media/cover-without-arcana-20261027/part-03.jpg' in previous
+          if '/media/cover-without-arcana-20261027/part-03.jpg' not in previous:
+              payload['media'][0]['url']=image
+              postwire.api(endpoint,{'payload':payload},method='PATCH')
+          else:
+              image=previous
+          after=postwire.api(endpoint)['scheduled']
+          assert after['id']==identity and after['status']=='queued'
+          assert postwire.instant(after['run_at'])==postwire.instant(before['run_at'])
+          saved={k:v for k,v in after['payload'].items() if k!='_actor'}
+          assert saved==payload,'Queued payload did not match the requested single-cover edit.'
+          print(json.dumps({'status':'verified','schedule_id':identity,'run_at':after['run_at'],'asset_count':7,'only_cover_changed':True,'resend':False,'cover_url':image}))
+          PY

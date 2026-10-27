@@ -103,7 +103,7 @@ def compose(theme,part,plan,response,sources):
         s=sources[0]; return {'background':s['file'],'focus':s['focus']}
     entries={e['number']:e for e in response['entries']}
     slides=[{'layout':'series_cover','title':profile['title'],
-             'subtitle':f'часть {part} из {plan["total_parts"]} · арканы '+', '.join(map(str,numbers)),**asset(0)}]
+             'subtitle':f'часть {part} из {plan["total_parts"]}',**asset(0)}]
     if profile['position'] is None:
         slides.append({'layout':'body','title':'как читать серию','blocks':[{'text':profile['instruction']},
                       {'text':'в каждой части — несколько арканов. следующие части продолжают список без повторов.'}],**asset(1)})
