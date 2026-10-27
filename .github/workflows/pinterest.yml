@@ -10,7 +10,8 @@ on:
         options: [preview, publish, status, revise]
         default: preview
   schedule:
-    - cron: '30 16,17 * * 2,6'
+    # Evening retries use the same durable daily receipt, so they cannot duplicate a sent post.
+    - cron: '30 16-21 * * 2,6'
     - cron: '17 5 * * *'
 permissions:
   contents: write
