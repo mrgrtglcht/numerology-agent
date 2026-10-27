@@ -23,9 +23,16 @@ def main():
         config=copy.deepcopy(memory.data['posts'][OWNER]['content'])
         folder=ROOT/'output/oracle-background-update';folder.mkdir(parents=True,exist_ok=True)
         history=BackgroundHistory(store=store)
-        sources=prepare_background(OWNER+'-background-v2',folder,history)
-        history.reserve(OWNER+'-background-v2',{1:sources[0]})
-        sources[0]['public_url']=store.put('media/oracle-first-background-v2/background.jpg',(folder/'backgrounds'/sources[0]['file']).read_bytes())
+        sources=store.read_state('state/oracle-background-source.json')
+        if sources:
+            import urllib.request
+            dest=folder/'backgrounds'/sources[0]['file'];dest.parent.mkdir(parents=True,exist_ok=True)
+            with urllib.request.urlopen(sources[0]['public_url'],timeout=45) as response:dest.write_bytes(response.read())
+        else:
+            sources=prepare_background(OWNER+'-background-v3',folder,history)
+            history.reserve(OWNER+'-background-v3',{1:sources[0]})
+            sources[0]['public_url']=store.put('media/oracle-first-background-v2/background.jpg',(folder/'backgrounds'/sources[0]['file']).read_bytes())
+            store.save_state('state/oracle-background-source.json',sources)
         config['oracle_background']=sources[0];config['visual_background_version']=2
         render(config,folder,folder/'backgrounds'/sources[0]['file'],DECK,deck(),seed=OWNER)
         payload=copy.deepcopy(row['payload']);payload.pop('_actor',None)

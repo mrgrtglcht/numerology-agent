@@ -1,4 +1,5 @@
 name: Verify oracle atmosphere
+# Resume the same queued image correction with its saved background.
 on:
   workflow_dispatch:
   push:

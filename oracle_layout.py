@@ -6,6 +6,8 @@ ROOT=Path(__file__).resolve().parent
 W,H=1080,1920
 
 def face(size):
+    from carousel import ensure_font
+    ensure_font()
     f=ImageFont.truetype(str(ROOT/'assets/fonts/Manrope.ttf'),size)
     f.set_variation_by_axes([650]);return f
 
@@ -80,3 +82,4 @@ def render(config,folder,bg,deck,manifest,seed=''):
     sheet=Image.new('RGB',(1800,640),'black')
     for i,im in enumerate(slides):sheet.paste(im.resize((360,640),Image.Resampling.LANCZOS),(i*360,0))
     sheet.save(folder/'preview.jpg',quality=94)
+
