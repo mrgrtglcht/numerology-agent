@@ -3021,7 +3021,7 @@
             "status": "sent",
             "url": "https://www.pinterest.com/pin/1141592205583292282"
           },
-          "updated_at": "2026-10-27T18:27:10.781035+00:00"
+          "updated_at": "2026-10-28T11:22:03.573935+00:00"
         }
       },
       "formats": [
@@ -3153,6 +3153,32 @@
       "formats": [
         "tiktok"
       ]
+    },
+    "buffer/6ae0f2f1d7fbdf8e7d644e37": {
+      "units": [
+        "external:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body": " ",
+      "title": " ",
+      "status": "published",
+      "source": "buffer",
+      "created_at": "2026-10-27T17:52:22.000Z",
+      "deliveries": {
+        "pinterest": {
+          "status": "published",
+          "receipt": {
+            "id": "6ae0f2f1d7fbdf8e7d644e37",
+            "status": "sent",
+            "url": "https://www.pinterest.com/pin/1141592205583500696"
+          },
+          "updated_at": "2026-10-28T11:22:03.573881+00:00"
+        }
+      },
+      "formats": [
+        "pinterest"
+      ],
+      "arcana": []
     }
   }
 }
