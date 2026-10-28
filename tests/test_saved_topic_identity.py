@@ -35,7 +35,7 @@ class SavedTopicIdentityTests(unittest.TestCase):
             for key in list(THEMES):
                 if key.startswith('explore_'):THEMES.pop(key)
             memory=ContentMemory(Path(tmp)/'memory.json')
-            with patch('backgrounds.search_candidates',side_effect=RuntimeError('background reached')) as search:
+            with patch('background_history.BackgroundHistory'), patch('backgrounds.search_candidates',side_effect=RuntimeError('background reached')) as search:
                 with self.assertRaisesRegex(RuntimeError,'background reached'):
                     prepare('saved/part-01',memory,Path(tmp)/'render')
                 search.assert_called_once()
