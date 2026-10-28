@@ -16,6 +16,11 @@ def units(config):
     if config.get('type')=='oracle_pick':return ['oracle:'+config['question_id']]
     if config.get('type')=='arcana_series':
         from matrix_rules import THEMES
+        # A fresh worker may resume saved content before the topic planner runs.
+        # Resolve the same semantic identity used when the content was reserved.
+        if str(config['theme']).startswith('explore_') and config['theme'] not in THEMES:
+            from topic_planner import register_topics
+            register_topics()
         key=THEMES.get(config['theme'],{}).get('semantic_key',config['theme'])
         return [f'arcana:{key}:{config.get("position")}:{n}' for n in config['part_arcana']]
     if config.get('tail_numbers'): return ['tail:'+','.join(map(str,config['tail_numbers']))]
