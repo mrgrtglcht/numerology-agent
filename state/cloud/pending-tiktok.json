@@ -1,13 +1,6 @@
 {
-  "stage": "preparation_failed",
+  "stage": "working",
   "folder": "cloud-tiktok-2026-10-28",
   "day": "2026-10-28",
-  "attempts": 1,
-  "files": {
-    "tiktok-format.json": "{\"format\": \"matrix\"}"
-  },
-  "diagnostic": {
-    "type": "ValueError",
-    "retryable": false
-  }
+  "attempts": 1
 }
