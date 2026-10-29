@@ -2669,21 +2669,36 @@
           "checked_at": "2026-10-22T10:15:04.218152+00:00"
         }
       ],
-      "status": "prepared",
+      "status": "published",
       "created_at": "2026-10-22T11:42:48.677296+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "accepted",
+          "status": "published",
           "receipt": {
             "provider": "postwire",
             "id": "6715e07f-f106-4996-96ae-5ba8694322ce",
-            "status": "queued",
+            "status": "published",
             "run_at": "2026-10-28T17:30:00+00:00",
             "asset_count": 7,
             "auto_add_music": true,
-            "privacy_level": "PUBLIC_TO_EVERYONE"
+            "privacy_level": "PUBLIC_TO_EVERYONE",
+            "result": {
+              "id": "p_pub_url~v2.7701772230379849758",
+              "ok": true,
+              "items": 7,
+              "status": "processing",
+              "platform": "tiktok",
+              "post_type": "photo",
+              "privacy_level": "PUBLIC_TO_EVERYONE"
+            },
+            "status_check": {
+              "platform": "tiktok",
+              "id": "p_pub_url~v2.7701772230379849758",
+              "status": "publish_complete",
+              "url": "https://www.tiktok.com/@quanta.aura/video/7701772348369718559"
+            }
           },
-          "updated_at": "2026-10-25T09:48:20.546927+00:00"
+          "updated_at": "2026-10-29T16:46:07.276844+00:00"
         }
       },
       "formats": [
