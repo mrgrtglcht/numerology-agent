@@ -3012,7 +3012,18 @@
       ],
       "status": "prepared",
       "created_at": "2026-10-24T09:51:41.986948+00:00",
-      "deliveries": {},
+      "deliveries": {
+        "tiktok": {
+          "status": "sending",
+          "receipt": {
+            "provider": "postwire",
+            "expected_text_hash": "1eddfa70a34f8f34a2c1e055638255df13eae7f08910e8a0ad6e89c11faaafda",
+            "expected_asset_count": 7,
+            "run_at": "2026-11-01T08:46:00+00:00"
+          },
+          "updated_at": "2026-10-29T16:47:18.267050+00:00"
+        }
+      },
       "formats": [
         "tiktok",
         "pinterest"
