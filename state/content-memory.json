@@ -3322,6 +3322,122 @@
       "formats": [
         "telegram"
       ]
+    },
+    "cloud-tiktok-2026-10-29/oracle": {
+      "units": [
+        "oracle:barriers_to_closeness"
+      ],
+      "fingerprint": "24e01655b3b07451528b16e66f856135fedc7b2350ab33b852295a3170edb265",
+      "body": "какие барьеры мешают вашему сближению barriers_to_closeness fl-07 fl-17 fl-27 fl-33 fl-47",
+      "content": {
+        "type": "oracle_pick",
+        "theme": "oracle_pick",
+        "deck": "лес любви",
+        "question_id": "barriers_to_closeness",
+        "title": "какие барьеры мешают вашему сближению",
+        "topic": "какие барьеры мешают вашему сближению",
+        "count": 5,
+        "options": [
+          {
+            "card_id": "fl-07",
+            "visual_reason": "стена разделяет мужчину и женщину на разные стороны, символизируя преграды или закрытость в общении"
+          },
+          {
+            "card_id": "fl-17",
+            "visual_reason": "фигуры разделены пропастью или мостом, что отражает разницу в взглядах и внутренних мирах"
+          },
+          {
+            "card_id": "fl-27",
+            "visual_reason": "женщина внутри клетки указывает на чувство ограничения или невозможность проявить себя свободно рядом с ним"
+          },
+          {
+            "card_id": "fl-33",
+            "visual_reason": "отвернувшиеся друг от друга фигуры передают затаенную обиду и эмоциональное напряжение"
+          },
+          {
+            "card_id": "fl-47",
+            "visual_reason": "сцена примирения и диалога показывает готовность преодолевать разногласия и двигаться навстречу"
+          }
+        ],
+        "caption": "больше в тгк @quantafate",
+        "size": [
+          1080,
+          1920
+        ],
+        "include_tarot_cards": false,
+        "include_cta": false,
+        "slides": [
+          {
+            "layout": "oracle_cover"
+          },
+          {
+            "layout": "oracle_instruction"
+          },
+          {
+            "layout": "oracle_backs"
+          },
+          {
+            "layout": "oracle_note"
+          },
+          {
+            "layout": "oracle_faces"
+          }
+        ],
+        "oracle_background": {
+          "id": "b3",
+          "title": "File:Carl Gustav Carus - Gebirgslandschaft mit Ruine.jpg",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg/500px-Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg",
+          "original_sha1": "af556a7b29d0d4ad9b7e3f9af6d3e5e478044708",
+          "width": 1500,
+          "height": 1125,
+          "creator": "Attributed to   Carl Gustav Carus",
+          "credit": "Henry's Auktionshaus, Mutterstadt, 28 October 2023, lot 6110 via Invaluable",
+          "license": "Public domain",
+          "license_url": "",
+          "query": "Carl Gustav Carus ruins painting",
+          "visual_hash": "337c7966e6e6fffe",
+          "visual_hashes": [
+            "337c7966e6e6fffe",
+            "3b5c7366e6e6f7fe",
+            "7d5c6366e6e6e7ff",
+            "7d586366e6e6e7ff",
+            "335c7966e6e6fffe",
+            "795c7966e6e6f7ff",
+            "7d5c6366e6e6e7ff",
+            "7d5c6366e6e6e7fb",
+            "3bdcf963e6e6ffff",
+            "78dcf963e6e6f7ff",
+            "7ddce163e6e6e7ff",
+            "7ddce363e6e6e7ff",
+            "3afcf9e3e6e6ffff",
+            "79fce9e3e6e6f7ff",
+            "7cbce9e3e6e6e7ff",
+            "dcbc69e3e6e6e7ff"
+          ],
+          "file": "b3.jpg",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "selection_reason": "fresh atmospheric background for relationship oracle",
+          "sha256": "7b1db5971b632cf685992caaca493fad691671892df6bde2399edb478ed51c20",
+          "modifications": "cropped to 9:16, darkened, overlaid with text",
+          "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/21c540d69a38dd9d6234e068e85eb222b0ed14ec/media/oracle-34d7b71b805e05f511e75b69/background.jpg"
+        }
+      },
+      "title": "какие барьеры мешают вашему сближению",
+      "theme": "oracle_pick",
+      "position": null,
+      "arcana": [],
+      "tail": null,
+      "part": null,
+      "sources": [],
+      "status": "reserved",
+      "created_at": "2026-10-29T17:02:45.815747+00:00",
+      "deliveries": {},
+      "formats": []
     }
   }
 }
