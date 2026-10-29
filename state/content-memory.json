@@ -3017,11 +3017,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "1eddfa70a34f8f34a2c1e055638255df13eae7f08910e8a0ad6e89c11faaafda",
-            "expected_asset_count": 7,
-            "run_at": "2026-11-01T08:46:00+00:00"
+            "id": "13b1e12e-2876-4fc1-9ce3-0995dc5f2e47",
+            "status": "queued",
+            "run_at": "2026-11-01T08:46:00+00:00",
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-10-29T16:47:18.267050+00:00"
+          "updated_at": "2026-10-29T16:47:24.845845+00:00"
         }
       },
       "formats": [
