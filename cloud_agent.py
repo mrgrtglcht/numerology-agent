@@ -15,6 +15,16 @@ from content_memory import ContentMemory, digest, body, units
 
 ZONE=ZoneInfo('Europe/Warsaw')
 TARGETS=('tiktok','telegram')
+QUEUE_CHECK_TRIGGERS=('17 * * * *','17 5 * * *','17 5,11 * * *')
+
+
+def scheduled_targets(now,trigger,telegram_pending=None):
+    targets=[]
+    queue_check=trigger in QUEUE_CHECK_TRIGGERS
+    if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and queue_check:targets.append('tiktok')
+    catch_up=bool(queue_check and telegram_pending and telegram_pending.get('stage')=='preparation_failed')
+    if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and (due_telegram(now) or catch_up):targets.append('telegram')
+    return targets
 
 
 def now_local(): return datetime.now(timezone.utc).astimezone(ZONE)
@@ -452,12 +462,9 @@ def main():
         if pending_tiktok(memory)>=QUEUE_TARGET:raise SafeError('Очередь уже заполнена.')
         print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
-        targets=[];now=now_local()
-        if os.environ.get('ENABLE_TIKTOK_CLOUD')=='true' and os.environ.get('SCHEDULE_TRIGGER') in ('17 5 * * *','17 5,11 * * *'):targets.append('tiktok')
+        now=now_local()
         from cloud_checkpoint import pointer
-        telegram_pending=store.read_state(pointer('telegram'))
-        catch_up=bool(telegram_pending and telegram_pending.get('stage')=='preparation_failed' and os.environ.get('SCHEDULE_TRIGGER') in ('17 5 * * *','17 5,11 * * *'))
-        if os.environ.get('ENABLE_TELEGRAM_CLOUD')=='true' and (due_telegram(now) or catch_up):targets.append('telegram')
+        targets=scheduled_targets(now,os.environ.get('SCHEDULE_TRIGGER'),store.read_state(pointer('telegram')))
         failed=False
         for target in targets:
             try:run_target(target,store,now=now)
