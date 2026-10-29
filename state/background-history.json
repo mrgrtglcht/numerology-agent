@@ -507,6 +507,37 @@
         "1060dcf43271d797",
         "706cdcf032315597"
       ]
+    },
+    "cloud-tiktok-2026-10-29/oracle/part-01": {
+      "batch": "cloud-tiktok-2026-10-29/oracle",
+      "part": 1,
+      "identities": [
+        "original_sha1:af556a7b29d0d4ad9b7e3f9af6d3e5e478044708",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg",
+        "sha256:7b1db5971b632cf685992caaca493fad691671892df6bde2399edb478ed51c20",
+        "url:https://upload.wikimedia.org/wikipedia/commons/1/1f/Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg",
+      "title": "File:Carl Gustav Carus - Gebirgslandschaft mit Ruine.jpg",
+      "visual_hash": "337c7966e6e6fffe",
+      "visual_hashes": [
+        "337c7966e6e6fffe",
+        "3b5c7366e6e6f7fe",
+        "7d5c6366e6e6e7ff",
+        "7d586366e6e6e7ff",
+        "335c7966e6e6fffe",
+        "795c7966e6e6f7ff",
+        "7d5c6366e6e6e7ff",
+        "7d5c6366e6e6e7fb",
+        "3bdcf963e6e6ffff",
+        "78dcf963e6e6f7ff",
+        "7ddce163e6e6e7ff",
+        "7ddce363e6e6e7ff",
+        "3afcf9e3e6e6ffff",
+        "79fce9e3e6e6f7ff",
+        "7cbce9e3e6e6e7ff",
+        "dcbc69e3e6e6e7ff"
+      ]
     }
   }
 }
