@@ -1,0 +1,47 @@
+{
+  "backgrounds": [
+    {
+      "id": "b1",
+      "title": "File:François Antoine Bossuet - A romantic landscape with Mauritanian ruins and figures.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Fran%C3%A7ois_Antoine_Bossuet_-_A_romantic_landscape_with_Mauritanian_ruins_and_figures.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Fran%C3%A7ois_Antoine_Bossuet_-_A_romantic_landscape_with_Mauritanian_ruins_and_figures.jpg/500px-Fran%C3%A7ois_Antoine_Bossuet_-_A_romantic_landscape_with_Mauritanian_ruins_and_figures.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Antoine_Bossuet_-_A_romantic_landscape_with_Mauritanian_ruins_and_figures.jpg",
+      "original_sha1": "fd14bb15fe2efec66a0b6b0b6bfb96f9b145240b",
+      "width": 2447,
+      "height": 1717,
+      "creator": "François Bossuet",
+      "credit": "Dorotheum :        Info about artwork",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "romantic ruins painting",
+      "visual_hash": "88b0f8783c3b5be7",
+      "visual_hashes": [
+        "88b0f8783c3b5be7",
+        "90b07878383b5be7",
+        "10b07878383b5bd7",
+        "b1b87878383b1b5b",
+        "10b0f87c3a3b53eb",
+        "11b0f87c3a3b53e7",
+        "10b0787c3a3b53d7",
+        "b0a8787c3a3b53db",
+        "11b0fc5c3a7157eb",
+        "11b0fc743a7153e7",
+        "10b0dc743a7353d7",
+        "30a85c743a7353d7",
+        "1170fcd4327595eb",
+        "1170dcd43275d7e5",
+        "1060dcf43271d797",
+        "706cdcf032315597"
+      ],
+      "file": "b1.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "public-domain background for saved unpublished part",
+      "sha256": "b2618fa5bbaf79debd828d07fd137ec27d66db025ba28faa7f7827a5ff1492a2",
+      "modifications": "cropped to 9:16, darkened, overlaid with text"
+    }
+  ],
+  "tarot_manifest": "assets/tarot/public-domain-manifest.json"
+}
