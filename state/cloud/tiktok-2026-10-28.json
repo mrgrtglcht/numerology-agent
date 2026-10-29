@@ -1,6 +1,5 @@
 {
-  "stage": "preparation_failed",
-  "owner": "cloud-tiktok-2026-10-24-preview/part-04",
+  "stage": "started",
   "target": "tiktok",
   "day": "2026-10-28"
 }
