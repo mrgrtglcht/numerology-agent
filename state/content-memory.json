@@ -3014,7 +3014,7 @@
       "created_at": "2026-10-24T09:51:41.986948+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
             "id": "13b1e12e-2876-4fc1-9ce3-0995dc5f2e47",
@@ -3024,7 +3024,7 @@
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-10-29T16:47:24.845845+00:00"
+          "updated_at": "2026-10-29T16:47:28.150015+00:00"
         }
       },
       "formats": [
