@@ -1,0 +1,48 @@
+{
+  "backgrounds": [
+    {
+      "id": "b3",
+      "title": "File:Carl Gustav Carus - Gebirgslandschaft mit Ruine.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg/500px-Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Gebirgslandschaft_mit_Ruine.jpg",
+      "original_sha1": "af556a7b29d0d4ad9b7e3f9af6d3e5e478044708",
+      "width": 1500,
+      "height": 1125,
+      "creator": "Attributed to   Carl Gustav Carus",
+      "credit": "Henry's Auktionshaus, Mutterstadt, 28 October 2023, lot 6110 via Invaluable",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "Carl Gustav Carus ruins painting",
+      "visual_hash": "337c7966e6e6fffe",
+      "visual_hashes": [
+        "337c7966e6e6fffe",
+        "3b5c7366e6e6f7fe",
+        "7d5c6366e6e6e7ff",
+        "7d586366e6e6e7ff",
+        "335c7966e6e6fffe",
+        "795c7966e6e6f7ff",
+        "7d5c6366e6e6e7ff",
+        "7d5c6366e6e6e7fb",
+        "3bdcf963e6e6ffff",
+        "78dcf963e6e6f7ff",
+        "7ddce163e6e6e7ff",
+        "7ddce363e6e6e7ff",
+        "3afcf9e3e6e6ffff",
+        "79fce9e3e6e6f7ff",
+        "7cbce9e3e6e6e7ff",
+        "dcbc69e3e6e6e7ff"
+      ],
+      "file": "b3.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "7b1db5971b632cf685992caaca493fad691671892df6bde2399edb478ed51c20",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/21c540d69a38dd9d6234e068e85eb222b0ed14ec/media/oracle-34d7b71b805e05f511e75b69/background.jpg"
+    }
+  ],
+  "tarot_manifest": null
+}
