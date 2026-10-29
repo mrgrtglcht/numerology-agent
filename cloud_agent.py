@@ -208,6 +208,9 @@ def validate_telegram_response(response,topic,sources,style_reference):
     if topic['number'] is not None and 'arcana-'+str(topic['number']) not in refs:raise ValueError('Нет источника конкретного аркана.')
     title=response.get('title','')
     if not isinstance(title,str) or not 1<=len(title)<=120:raise ValueError('Неверный заголовок.')
+    if topic['number'] is not None:
+        from matrix_rules import ARCANA,THEMES
+        title=f"{topic['number']} аркан — {ARCANA[topic['number']]}: "+THEMES[topic['theme']]['title'].splitlines()[0]
     config={'theme':'telegram_article','topic':topic['editorial_key'],'editorial_key':topic['editorial_key'],
       'article_kind':topic['article_kind'],'arcana_number':topic['number'],
       'title':title.lower(),'caption':text,'slides':[{'body':text}],
@@ -462,6 +465,8 @@ def main():
         if pending_tiktok(memory)>=QUEUE_TARGET:raise SafeError('Очередь уже заполнена.')
         print(json.dumps(deliver_tiktok(part,owner,store,memory),ensure_ascii=False));return
     if a.mode=='scheduled':
+        from telegram_title_fix import apply as apply_title_fix
+        apply_title_fix(store)
         now=now_local()
         from cloud_checkpoint import pointer
         targets=scheduled_targets(now,os.environ.get('SCHEDULE_TRIGGER'),store.read_state(pointer('telegram')))
