@@ -538,6 +538,37 @@
         "7cbce9e3e6e6e7ff",
         "dcbc69e3e6e6e7ff"
       ]
+    },
+    "cloud-tiktok-2026-10-30/part-05": {
+      "batch": "cloud-tiktok-2026-10-30",
+      "part": 5,
+      "identities": [
+        "original_sha1:af47050e3c5704272ccb30cf7e5946827b6f72a6",
+        "page:https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Villa_d%27Este_in_Tivoli.jpg",
+        "sha256:414d48d84c9efb2a1ce739521d259ddef0a7333ca91e70884337a625e8026069",
+        "url:https://upload.wikimedia.org/wikipedia/commons/e/e0/Ernst_Ferdinand_Oehme_-_Villa_d%27Este_in_Tivoli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Villa_d%27Este_in_Tivoli.jpg",
+      "title": "File:Ernst Ferdinand Oehme - Villa d'Este in Tivoli.jpg",
+      "visual_hash": "e8e0a4e2d3d3f2fc",
+      "visual_hashes": [
+        "e8e0a4e2d3d3f2fc",
+        "e8f0a4e2d3d3f37a",
+        "e0d4a6e3d3d3d372",
+        "f084a6e3d3d3d3f2",
+        "c8e066e3d3d3f37c",
+        "e8f066e3d3d3f37a",
+        "60d066e3d3d3f372",
+        "e29462e3d3d3d3f2",
+        "c8e04663d3d3f37c",
+        "c8f266e3d3d3f37a",
+        "e09262e3d3d3f3fb",
+        "e29662e3d3d393f3",
+        "c8e24263939373fe",
+        "c8b242639391f3eb",
+        "e8b24363d391d3eb",
+        "e2924363d391d3eb"
+      ]
     }
   }
 }
