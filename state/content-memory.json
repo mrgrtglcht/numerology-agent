@@ -3769,11 +3769,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "519117010f61eac52ed6cfde991bf07860d4f0ac5387d142bf4a70140ede4b94",
-            "expected_asset_count": 7,
-            "run_at": "2026-11-08T08:46:00+00:00"
+            "id": "3aabdffd-5272-4092-8214-85d9be67a776",
+            "status": "queued",
+            "run_at": "2026-11-08T08:46:00+00:00",
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-10-30T21:32:38.526070+00:00"
+          "updated_at": "2026-10-30T21:32:43.950717+00:00"
         }
       },
       "formats": [
