@@ -84,7 +84,7 @@
       }
     },
     "quantafate-pin-781275a494d36a63af5b760b": {
-      "stage": "prepared",
+      "stage": "sending",
       "design_version": 4,
       "owner": "cloud-tiktok-2026-10-22/part-03",
       "title": "что поддерживает твою мотивацию по матрице судьбы",
@@ -108,6 +108,7 @@
   },
   "days": {
     "2026-10-25": "quantafate-pin-e30922480e6e37bb2786eab9",
-    "2026-10-27": "quantafate-pin-3730cc4cb2f528147d0945a1"
+    "2026-10-27": "quantafate-pin-3730cc4cb2f528147d0945a1",
+    "2026-10-31": "quantafate-pin-781275a494d36a63af5b760b"
   }
 }
