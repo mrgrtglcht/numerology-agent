@@ -4070,7 +4070,13 @@
       ],
       "status": "prepared",
       "created_at": "2026-11-01T17:31:41.586821+00:00",
-      "deliveries": {},
+      "deliveries": {
+        "telegram": {
+          "status": "sending",
+          "receipt": {},
+          "updated_at": "2026-11-01T17:31:46.918853+00:00"
+        }
+      },
       "formats": [
         "telegram"
       ]
