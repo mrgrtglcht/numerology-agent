@@ -1,0 +1,48 @@
+{
+  "backgrounds": [
+    {
+      "id": "b8",
+      "title": "File:Gothic Windows in the Ruins of the Monastery at Oybin MET DP151000.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg/500px-Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg",
+      "original_sha1": "0625bef97e22322a2136162f0c1021146df8c8bc",
+      "width": 3044,
+      "height": 3812,
+      "creator": "Carl Gustav Carus",
+      "credit": "This file was donated to Wikimedia Commons as part of a project by the  Metropolitan Museum of Art . See the  Image and Data Resources Open Access Policy",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "query": "gothic ruins",
+      "visual_hash": "972b31b0b2b2b28a",
+      "visual_hashes": [
+        "972b31b0b2b2b28a",
+        "132b31b0b2b2b28c",
+        "172b30b0b2b2b286",
+        "232b30b0b2b2b2b7",
+        "132b2131b1333289",
+        "132b3131b1b3328c",
+        "132b3131b1b33226",
+        "2329313131333336",
+        "132b61717133330d",
+        "136b61717133330c",
+        "1369717171333316",
+        "2369717171313337",
+        "134961717171334d",
+        "136961717171334d",
+        "1369717171713315",
+        "6369717171713337"
+      ],
+      "file": "b8.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "3b8aa88791013b371ca5dd5dd33fa77424ac8513d11e98d0521923760cc1666c",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/20bab3def34b9bd91a70ebfdbf2be5f3d99b697b/media/oracle-fa4c82ee53f87ac6adf17e13/background.jpg"
+    }
+  ],
+  "tarot_manifest": null
+}
