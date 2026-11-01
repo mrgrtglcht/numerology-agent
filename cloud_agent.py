@@ -98,8 +98,29 @@ def tiktok_input(config,urls):
       'needsApproval':False,'aiAssisted':True,'metadata':{'tiktok':{'title':title}}}
 
 
+def tiktok_hashtags(config):
+    if config.get('type')=='oracle_pick':
+        return '#оракул #картыоракула #отношения'
+    from matrix_rules import THEMES
+    theme=str(config.get('theme',''))
+    if theme.startswith('explore_') and theme not in THEMES:
+        from topic_planner import register_topics
+        register_topics()
+    profile=THEMES.get(theme,{})
+    position=config.get('position') or profile.get('position')
+    angle=profile.get('angle')
+    topic_tag=({'motivation':'мотивация','learning':'обучение','creativity':'творчество',
+                'boundaries':'личныеграницы','communication':'общение'}.get(angle)
+               or {'FL':'отношения','FR':'профессия','I':'характер','C':'таланты',
+                   'C1':'таланты','C2':'таланты'}.get(position)
+               or ('кармическийхвост' if config.get('tail_numbers') else None))
+    tags=['матрицасудьбы','нумерология','арканы']
+    if topic_tag:tags.append(topic_tag)
+    return ' '.join('#'+tag for tag in tags)
+
+
 def tiktok_caption(config):
-    if config.get('type')=='oracle_pick':return 'больше в тгк @quantafate'
+    if config.get('type')=='oracle_pick':return 'больше в тгк @quantafate\n\n'+tiktok_hashtags(config)
     from matrix_rules import THEMES
     if str(config.get('theme','')).startswith('explore_') and config['theme'] not in THEMES:
         from topic_planner import register_topics
@@ -108,7 +129,7 @@ def tiktok_caption(config):
     heading=' '.join(str(heading).splitlines()[0].lower().split()).strip(' .?!')[:110]
     part=config.get('part');total=config.get('total_parts')
     if part and total:heading+=f' · часть {part}/{total}'
-    return heading+'\n\nбольше разборов в тгк @quantafate'
+    return heading+'\n\nбольше разборов в тгк @quantafate\n\n'+tiktok_hashtags(config)
 
 
 def queue_tiktok(data):

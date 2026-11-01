@@ -20,8 +20,8 @@ class CaptionOrderTests(unittest.TestCase):
     def test_short_caption_uses_topic_not_model_instructions_or_urls(self):
         text=tiktok_caption({'theme':'explore_E1_motivation','part':2,'total_parts':5,
           'caption':'разбор арканов серии e1 через призму мотивации https://t.me/quantafate'})
-        self.assertEqual(text,'что поддерживает твою мотивацию · часть 2/5\n\nбольше разборов в тгк @quantafate')
-        self.assertLess(len(text),140)
+        self.assertEqual(text,'что поддерживает твою мотивацию · часть 2/5\n\nбольше разборов в тгк @quantafate\n\n#матрицасудьбы #нумерология #арканы #мотивация')
+        self.assertLess(len(text),220)
 
     def test_short_caption_cannot_silently_strip_required_credit(self):
         config=public_caption({'caption':'текст'},[{'license':'CC BY 4.0','creator':'author','page':'source','license_url':'license'}])
