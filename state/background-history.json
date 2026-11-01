@@ -600,6 +600,37 @@
         "0947533416465e2f",
         "0f46533416464e2f"
       ]
+    },
+    "cloud-tiktok-2026-11-01/oracle/part-01": {
+      "batch": "cloud-tiktok-2026-11-01/oracle",
+      "part": 1,
+      "identities": [
+        "original_sha1:0625bef97e22322a2136162f0c1021146df8c8bc",
+        "page:https://commons.wikimedia.org/wiki/File:Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg",
+        "sha256:3b8aa88791013b371ca5dd5dd33fa77424ac8513d11e98d0521923760cc1666c",
+        "url:https://upload.wikimedia.org/wikipedia/commons/a/a6/Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Gothic_Windows_in_the_Ruins_of_the_Monastery_at_Oybin_MET_DP151000.jpg",
+      "title": "File:Gothic Windows in the Ruins of the Monastery at Oybin MET DP151000.jpg",
+      "visual_hash": "972b31b0b2b2b28a",
+      "visual_hashes": [
+        "972b31b0b2b2b28a",
+        "132b31b0b2b2b28c",
+        "172b30b0b2b2b286",
+        "232b30b0b2b2b2b7",
+        "132b2131b1333289",
+        "132b3131b1b3328c",
+        "132b3131b1b33226",
+        "2329313131333336",
+        "132b61717133330d",
+        "136b61717133330c",
+        "1369717171333316",
+        "2369717171313337",
+        "134961717171334d",
+        "136961717171334d",
+        "1369717171713315",
+        "6369717171713337"
+      ]
     }
   }
 }
