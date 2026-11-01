@@ -3065,7 +3065,7 @@
             "status": "sent",
             "url": "https://www.pinterest.com/pin/1141592205583292282"
           },
-          "updated_at": "2026-11-01T18:45:49.484924+00:00"
+          "updated_at": "2026-11-01T18:58:11.586481+00:00"
         }
       },
       "formats": [
@@ -3230,7 +3230,7 @@
             "status": "sent",
             "url": "https://www.pinterest.com/pin/1141592205583500696"
           },
-          "updated_at": "2026-11-01T18:45:49.484887+00:00"
+          "updated_at": "2026-11-01T18:58:11.586457+00:00"
         }
       },
       "formats": [
@@ -4083,6 +4083,32 @@
       "formats": [
         "telegram"
       ]
+    },
+    "buffer/6ae78ab9de62aa194808ed91": {
+      "units": [
+        "external:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "fingerprint": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body": " ",
+      "title": " ",
+      "status": "published",
+      "source": "buffer",
+      "created_at": "2026-10-31T20:11:48.000Z",
+      "deliveries": {
+        "pinterest": {
+          "status": "published",
+          "receipt": {
+            "id": "6ae78ab9de62aa194808ed91",
+            "status": "sent",
+            "url": "https://www.pinterest.com/pin/1141592205583865802"
+          },
+          "updated_at": "2026-11-01T18:58:11.586418+00:00"
+        }
+      },
+      "formats": [
+        "pinterest"
+      ],
+      "arcana": []
     }
   }
 }
