@@ -1,5 +1,14 @@
 {
-  "stage": "started",
-  "target": "tiktok",
-  "day": "2026-11-01"
+  "stage": "complete",
+  "owner": "cloud-tiktok-2026-11-01/oracle",
+  "preview": false,
+  "receipt": {
+    "provider": "postwire",
+    "id": "c31fa445-f0bc-4070-8030-cf4c8204fd88",
+    "status": "queued",
+    "run_at": "2026-11-13T21:27:00+00:00",
+    "asset_count": 5,
+    "auto_add_music": true,
+    "privacy_level": "PUBLIC_TO_EVERYONE"
+  }
 }
