@@ -631,6 +631,37 @@
         "1369717171713315",
         "6369717171713337"
       ]
+    },
+    "cloud-telegram-2026-11-01/part-01": {
+      "batch": "cloud-telegram-2026-11-01",
+      "part": 1,
+      "identities": [
+        "original_sha1:b608d5cd1a76852430473a104d2d845868387501",
+        "page:https://commons.wikimedia.org/wiki/File:Window_Detail,_StAugustine%27s,_Bourke_Street,_Melbourne_Australia_(4590274672).jpg",
+        "sha256:6b9aac90c9092f5c302753dda12269c5ce58858cc4360d245fc9fc5a5a32aedd",
+        "url:https://upload.wikimedia.org/wikipedia/commons/4/47/Window_Detail%2C_StAugustine%27s%2C_Bourke_Street%2C_Melbourne_Australia_%284590274672%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Window_Detail,_StAugustine%27s,_Bourke_Street,_Melbourne_Australia_(4590274672).jpg",
+      "title": "File:Window Detail, StAugustine's, Bourke Street, Melbourne Australia (4590274672).jpg",
+      "visual_hash": "b0e9ccccccc8d062",
+      "visual_hashes": [
+        "b0e9ccccccc8d062",
+        "b0e9ccccccccd060",
+        "f0e9ccccccccc8e0",
+        "e8e8ccccccccc8f1",
+        "b0e8cccc8cccd062",
+        "f0e8cccc8cccd0e0",
+        "f0e8cccc8cccc8e0",
+        "e8ecccccccccc8d1",
+        "7168ccce8c8cd060",
+        "71e8ccce8c8cd0e1",
+        "70ecccce8c8cc0c1",
+        "60cccc9e8c8cc8d1",
+        "71e8cc968e8cd0e1",
+        "70eccc968e8c90c1",
+        "70cccc968e8c80c1",
+        "70cccc968e8c8ce0"
+      ]
     }
   }
 }
