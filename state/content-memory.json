@@ -3913,11 +3913,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "e56196daf8b2d6e4278168fce3b9776cb8f6f155c825e2f447998ec34d86b105",
-            "expected_asset_count": 5,
-            "run_at": "2026-11-13T21:27:00+00:00"
+            "id": "c31fa445-f0bc-4070-8030-cf4c8204fd88",
+            "status": "queued",
+            "run_at": "2026-11-13T21:27:00+00:00",
+            "asset_count": 5,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-01T09:03:12.443027+00:00"
+          "updated_at": "2026-11-01T09:03:18.901694+00:00"
         }
       },
       "formats": [
