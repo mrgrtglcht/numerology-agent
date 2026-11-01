@@ -4073,8 +4073,10 @@
       "deliveries": {
         "telegram": {
           "status": "sending",
-          "receipt": {},
-          "updated_at": "2026-11-01T17:31:46.918853+00:00"
+          "receipt": {
+            "image_message_id": 11
+          },
+          "updated_at": "2026-11-01T17:31:48.893729+00:00"
         }
       },
       "formats": [
