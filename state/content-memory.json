@@ -3910,7 +3910,7 @@
       "created_at": "2026-11-01T09:02:49.350166+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
             "id": "c31fa445-f0bc-4070-8030-cf4c8204fd88",
@@ -3920,7 +3920,7 @@
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-01T09:03:18.901694+00:00"
+          "updated_at": "2026-11-01T09:03:22.449250+00:00"
         }
       },
       "formats": [
