@@ -108,6 +108,28 @@
         "url": "https://www.pinterest.com/pin/1141592205583865802/",
         "post_id": "1141592205583865802"
       }
+    },
+    "quantafate-pin-3b7da3fc5297c386036782ce": {
+      "stage": "prepared",
+      "design_version": 4,
+      "owner": "cloud-tiktok-2026-10-24-preview/part-04",
+      "title": "что поддерживает твою мотивацию по матрице судьбы",
+      "caption": "",
+      "image_urls": [
+        "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/80d86a455b4bcd378096f8ef32a467e1af865455/media/quantafate-pin-3b7da3fc5297c386036782ce/01.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/d1fa33f1917afa8a9c7bc2ffaaca1e3a739efd6f/media/quantafate-pin-3b7da3fc5297c386036782ce/02.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/fb19dbbdf39f3a12dc1ea5f2e98364b3c8cb2ca2/media/quantafate-pin-3b7da3fc5297c386036782ce/03.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/d1c6b9937907a0b8253994dab6fff6ce2001fabc/media/quantafate-pin-3b7da3fc5297c386036782ce/04.png",
+        "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/b36959464012351a7438f53716ea91a26bb729cc/media/quantafate-pin-3b7da3fc5297c386036782ce/05.png"
+      ],
+      "preview_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/6296ea7a98a884f7efc8100c320fc0329d7aa316/media/quantafate-pin-3b7da3fc5297c386036782ce/preview.jpg",
+      "units": [
+        "arcana:position:E1:angle:motivation:E1:15",
+        "arcana:position:E1:angle:motivation:E1:16",
+        "arcana:position:E1:angle:motivation:E1:17",
+        "arcana:position:E1:angle:motivation:E1:18"
+      ],
+      "prepared_at": "2026-11-03T21:54:34.961254+00:00"
     }
   },
   "days": {
