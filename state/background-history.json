@@ -662,6 +662,37 @@
         "70cccc968e8c80c1",
         "70cccc968e8c8ce0"
       ]
+    },
+    "quantafate-pin-3b7da3fc5297c386036782ce/part-01": {
+      "batch": "quantafate-pin-3b7da3fc5297c386036782ce",
+      "part": 1,
+      "identities": [
+        "original_sha1:b3679ac4762010abe04e15218719ea0ada7dbfc0",
+        "page:https://commons.wikimedia.org/wiki/File:Gothic_Ruins_MET_ap1977.182.6.jpg",
+        "sha256:8a336c1451e9471718540c8938097eb4b125fb7fa9110c4be997a2a4c00f956f",
+        "url:https://upload.wikimedia.org/wikipedia/commons/f/ff/Gothic_Ruins_MET_ap1977.182.6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Gothic_Ruins_MET_ap1977.182.6.jpg",
+      "title": "File:Gothic Ruins MET ap1977.182.6.jpg",
+      "visual_hash": "07232925232f0d21",
+      "visual_hashes": [
+        "07232925232f0d21",
+        "0723212523270d01",
+        "2721212521270f09",
+        "2329212521270f09",
+        "06232564632f0d60",
+        "0721256461270f00",
+        "2329256461270f09",
+        "2321256461232f0d",
+        "07232564632f0d40",
+        "0721256461270f00",
+        "2329656461230f08",
+        "2325656461232f0d",
+        "07216564616f0d41",
+        "0321656461670d00",
+        "0325656460630f08",
+        "2325656460630f0c"
+      ]
     }
   }
 }
