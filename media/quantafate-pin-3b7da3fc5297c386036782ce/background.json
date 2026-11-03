@@ -1,0 +1,43 @@
+{
+  "id": "b1",
+  "title": "File:Gothic Ruins MET ap1977.182.6.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Gothic_Ruins_MET_ap1977.182.6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Gothic_Ruins_MET_ap1977.182.6.jpg/500px-Gothic_Ruins_MET_ap1977.182.6.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "page": "https://commons.wikimedia.org/wiki/File:Gothic_Ruins_MET_ap1977.182.6.jpg",
+  "original_sha1": "b3679ac4762010abe04e15218719ea0ada7dbfc0",
+  "width": 1175,
+  "height": 1259,
+  "creator": "William Rickarby Miller",
+  "credit": "This file was donated to Wikimedia Commons as part of a project by the  Metropolitan Museum of Art . See the  Image and Data Resources Open Access Policy",
+  "license": "CC0",
+  "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "query": "gothic ruins",
+  "visual_hash": "07232925232f0d21",
+  "visual_hashes": [
+    "07232925232f0d21",
+    "0723212523270d01",
+    "2721212521270f09",
+    "2329212521270f09",
+    "06232564632f0d60",
+    "0721256461270f00",
+    "2329256461270f09",
+    "2321256461232f0d",
+    "07232564632f0d40",
+    "0721256461270f00",
+    "2329656461230f08",
+    "2325656461232f0d",
+    "07216564616f0d41",
+    "0321656461670d00",
+    "0325656460630f08",
+    "2325656460630f0c"
+  ],
+  "file": "b1.jpg",
+  "focus": [
+    0.5,
+    0.5
+  ],
+  "selection_reason": "fresh public-domain carousel background",
+  "sha256": "8a336c1451e9471718540c8938097eb4b125fb7fa9110c4be997a2a4c00f956f",
+  "modifications": "cropped to 9:16, darkened, overlaid with text",
+  "download_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/df97f4c9751c0fd184e2dec29d120aae00652fd1/media/quantafate-pin-3b7da3fc5297c386036782ce/background.jpg"
+}
