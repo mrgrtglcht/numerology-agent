@@ -4209,10 +4209,12 @@
           "evidence_mode": "verified_library"
         }
       ],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-11-04T21:46:06.549282+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "telegram"
+      ]
     }
   }
 }
