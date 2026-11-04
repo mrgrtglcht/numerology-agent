@@ -3,10 +3,24 @@ import unittest
 from pathlib import Path
 from unittest.mock import Mock,patch
 import os
-from telegram_editor import check,history
+from telegram_editor import check,history,paragraphs
 from editor_recovery import validated
 
 class TelegramEditorTests(unittest.TestCase):
+    def test_three_long_blocks_are_reflowed_without_rewriting(self):
+        blocks=[]
+        for i in range(3):
+            blocks.append(' '.join(f'наблюдение {i} {n}: '+('содержание '*15).strip()+'.' for n in range(3)))
+        text='\n\n'.join(blocks);result=paragraphs(text)
+        self.assertEqual(result.split(),text.split())
+        self.assertEqual(len(result.split('\n\n')),5)
+        self.assertEqual(paragraphs(result),result)
+
+    def test_valid_paragraphs_and_unsplittable_text_are_preserved(self):
+        text='\n\n'.join(['один.','два.','три.','четыре.'])
+        self.assertEqual(paragraphs(text),text)
+        self.assertEqual(paragraphs('неоконченное предложение '*30),('неоконченное предложение '*30).strip())
+
     def test_previous_stock_opening_and_mechanical_ending_are_rejected(self):
         for text in ('продолжаем разговор о центре личной матрицы.','✦ продолжаем знакомство с арканами.',
                      'спокойное практическое наблюдение показывает, что надо отдыхать.'):
@@ -42,3 +56,4 @@ class TelegramEditorTests(unittest.TestCase):
                 result=validated({'text':'продолжаем разговор о матрице.'},validate,Path(tmp),repair)
                 self.assertTrue(result['text'].startswith('иногда'))
         repair.assert_called_once()
+

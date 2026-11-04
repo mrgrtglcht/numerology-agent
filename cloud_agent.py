@@ -219,6 +219,9 @@ def deliver_tiktok(folder,owner,store,memory):
 def validate_telegram_response(response,topic,sources,style_reference,recent_articles=None):
     if not isinstance(response,dict):raise ValueError('Нужен объект статьи Telegram.')
     text=response.get('text','')
+    if isinstance(text,str):
+        from telegram_editor import paragraphs
+        text=paragraphs(text)
     if not isinstance(text,str) or not (1400 if topic['article_kind']=='intro' else 1600)<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
     if not 4<=len([p for p in text.split('\n\n') if p.strip()])<=10:raise ValueError('Текст Telegram должен быть разбит на короткие абзацы.')
     if any(x in text.lower() for x in ('quantafate','телеграм бот','телеграм-бот','http','@')) or '<' in text:

@@ -17,6 +17,23 @@ def words(text):
 def spans(tokens,n):
     return [tuple(tokens[i:i+n]) for i in range(max(0,len(tokens)-n+1))]
 
+def paragraphs(text):
+    """Split long blocks at sentence boundaries without changing a word."""
+    blocks=[p.strip() for p in re.split(r'\n\s*\n',text) if p.strip()]
+    if len(blocks)>=4:return text
+    while len(blocks)<5:
+        choices=[]
+        for i,block in enumerate(blocks):
+            boundaries=[m.end() for m in re.finditer(r'[.!?…](?:[»”\"])?\s+',block)
+                        if m.end()>=100 and len(block)-m.end()>=100]
+            if boundaries:
+                cut=min(boundaries,key=lambda pos:abs(pos-len(block)/2))
+                choices.append((len(block),i,cut))
+        if not choices:break
+        _,i,cut=max(choices)
+        blocks[i:i+1]=[blocks[i][:cut].strip(),blocks[i][cut:].strip()]
+    return '\n\n'.join(blocks)
+
 def check(text,recent=()):
     from matrix_rules import ARCANA
     terms=set('аркан аркана арканов аркане матрица матрицы матрице судьба судьбы центр центра центре энергия энергии'.split())
@@ -52,3 +69,4 @@ def history(memory,key=None):
 
 def context(recent):
     return [{'opening':text[:260],'ending':text[-220:]} for text in recent[-6:]]
+
