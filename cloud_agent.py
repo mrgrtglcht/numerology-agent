@@ -268,7 +268,11 @@ def generate_telegram(folder,memory):
         from backgrounds import search_candidates,thumbnails
         from background_history import BackgroundHistory
         history=BackgroundHistory()
-        candidates=thumbnails(search_candidates(4,exclude=lambda source:not history.available(source,folder.name)),folder/'candidates')
+        try:
+            candidates=thumbnails(search_candidates(6,seed=folder.name,no_attribution=True,
+              exclude=lambda source:not history.available(source,folder.name)),folder/'candidates')
+        except (ValueError,SafeError,OSError):
+            print('Telegram: подходящей иллюстрации нет; готовим текстовый пост.')
     style=json.loads((ROOT/'telegram_style.json').read_text(encoding='utf-8'))
     from telegram_editor import history,context
     recent=history(memory,topic['editorial_key'])
@@ -289,7 +293,7 @@ def generate_telegram(folder,memory):
       'Не заменяй точные названия арканов вычурными синонимами ради разнообразия. '
       'Источники: '+json.dumps(dossier['sources'],ensure_ascii=False)+'. '
       'Верни JSON: title, text, arcana_number (null для введения, иначе заданный номер), source_ids (реально использованные источники). '
-      + ('Также image_id из каталога '+json.dumps([{k:c[k] for k in ('id','title')} for c in candidates],ensure_ascii=False)+'. Выбери атмосферное изображение, подходящее теме как иллюстрация. Если ничего не подходит, image_id=null.' if candidates else 'image_id=null.'))
+      + ('Также image_id из каталога '+json.dumps([{k:c[k] for k in ('id','title')} for c in candidates],ensure_ascii=False)+'. Оцени сами приложенные изображения. Выбери красивую атмосферную сцену, подходящую теме: романтическую живопись, сад, лес или руины в пейзаже. Не выбирай крупные планы окон, деталей фасада, музейные предметы, документы, коллажи и изображения с надписями. Совпадения названия или религиозной символики с арканом недостаточно. Если подходящей сцены нет, image_id=null.' if candidates else 'image_id=null.'))
     from carousel_auto import generate_visual
     from editor_recovery import article_schema,validated
     schema=article_schema(topic,dossier['sources'],candidates)
@@ -334,7 +338,11 @@ def deliver_article(config,owner,folder,store,memory):
         raise SafeError('Для статьи уже есть попытка Telegram; повтор запрещён.')
     image=config.get('image_source');image_url=None;image_receipt={}
     if image:
-        public_caption({'caption':''},[image])
+        from backgrounds import NO_ATTRIBUTION
+        if str(image.get('license','')).lower() not in NO_ATTRIBUTION:
+            print('Telegram: сохранённая иллюстрация требует подписи; публикуем только текст.')
+            image=None
+    if image:
         if not (folder/'backgrounds'/image['file']).exists():
             from backgrounds import download_selection
             download_selection([image],[{'id':image['id'],'focus':image['focus'],'reason':'сохранённая иллюстрация'}],folder/'backgrounds')
@@ -343,10 +351,8 @@ def deliver_article(config,owner,folder,store,memory):
     memory.delivery(owner,'telegram','sending')
     try:
         if image_url:
-            caption=public_caption({'caption':config['title']},[image])['caption']
-            if len(caption)>1024:raise ValueError('Атрибуция не помещается в подпись изображения.')
             photo=request_json('Telegram','https://api.telegram.org/bot'+required('TELEGRAM_BOT_TOKEN')+'/sendPhoto',
-              {'chat_id':required('TELEGRAM_CHANNEL_ID'),'photo':image_url,'caption':caption})
+              {'chat_id':required('TELEGRAM_CHANNEL_ID'),'photo':image_url})
             if not photo.get('ok'):raise SafeError('Telegram не подтвердил изображение.')
             image_receipt={'image_message_id':photo['result']['message_id']}
             memory.delivery(owner,'telegram','sending',image_receipt)
