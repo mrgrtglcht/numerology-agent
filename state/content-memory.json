@@ -51,7 +51,7 @@
       "created_at": "2026-10-20T15:24:46.308405+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
             "id": "3d38d01a-4737-48c1-9115-fc2d1c09b806",
@@ -61,7 +61,7 @@
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-06T21:32:39.803513+00:00"
+          "updated_at": "2026-11-06T21:32:42.806743+00:00"
         }
       },
       "formats": [
