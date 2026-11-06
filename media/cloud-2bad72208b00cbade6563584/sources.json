@@ -1,0 +1,47 @@
+{
+  "backgrounds": [
+    {
+      "id": "b1",
+      "title": "File:Ernst Ferdinand Oehme - Stolpen - Gesamtansicht.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Ernst_Ferdinand_Oehme_-_Stolpen_-_Gesamtansicht.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Ernst_Ferdinand_Oehme_-_Stolpen_-_Gesamtansicht.jpg/500px-Ernst_Ferdinand_Oehme_-_Stolpen_-_Gesamtansicht.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Ernst_Ferdinand_Oehme_-_Stolpen_-_Gesamtansicht.jpg",
+      "original_sha1": "e8a39aa84d902fa63630ce9cddbe8428295f1613",
+      "width": 1750,
+      "height": 1148,
+      "creator": "Ernst Ferdinand Oehme",
+      "credit": "1.  wooop.de  2.  cgfaonlineartmuseum.com",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "Ernst Ferdinand Oehme painting",
+      "visual_hash": "e6dcb898042d0181",
+      "visual_hashes": [
+        "e6dcb898042d0181",
+        "6edc9a98044d0181",
+        "ec9c9a98044d2581",
+        "ccb89898044d2581",
+        "c6dcba18064d0080",
+        "4edcba18064d0480",
+        "4ebcba18064c0480",
+        "ccba9818064d0401",
+        "c6fc3a18064c00a0",
+        "cebc3a18064c4480",
+        "cebc3818064c4480",
+        "cc3a9818064c4440",
+        "c7be3818064c40a0",
+        "cfbe3818064c4400",
+        "ceba3818064c4400",
+        "ac3a381806cc4440"
+      ],
+      "file": "b1.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "public-domain background for saved unpublished part",
+      "sha256": "2ea8942e259ebd2791ff3027b3df80ee0f4102a79b069bf99dc8b70669e9ea11",
+      "modifications": "cropped to 9:16, darkened, overlaid with text"
+    }
+  ],
+  "tarot_manifest": "assets/tarot/public-domain-manifest.json"
+}
