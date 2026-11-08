@@ -1,0 +1,48 @@
+{
+  "backgrounds": [
+    {
+      "id": "b3",
+      "title": "File:Carl Gustav Carus - Ruine Eldena mit Hütte bei Greifswald im Mondschein.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Carl_Gustav_Carus_-_Ruine_Eldena_mit_H%C3%BCtte_bei_Greifswald_im_Mondschein.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Carl_Gustav_Carus_-_Ruine_Eldena_mit_H%C3%BCtte_bei_Greifswald_im_Mondschein.jpg/500px-Carl_Gustav_Carus_-_Ruine_Eldena_mit_H%C3%BCtte_bei_Greifswald_im_Mondschein.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Ruine_Eldena_mit_H%C3%BCtte_bei_Greifswald_im_Mondschein.jpg",
+      "original_sha1": "35ab27ddba62937099a1772130cea76b89330713",
+      "width": 3567,
+      "height": 4648,
+      "creator": "Carl Gustav Carus",
+      "credit": "1.  Sotheby's, London, 2 June 2010, lot 3  2.  Digitale Bibliothek MV",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "Carl Gustav Carus ruins painting",
+      "visual_hash": "2088c863cbcba7c4",
+      "visual_hashes": [
+        "2088c863cbcba7c4",
+        "6088c063cbcba7e4",
+        "cc88c063cbcba7e6",
+        "cc89c063cbcbafa6",
+        "608c8861cbcda7c4",
+        "6088c061cbcda7e6",
+        "4c88c061cbc9a5e6",
+        "4c88c061cbcb8da7",
+        "608c8861c9cda7c6",
+        "408cc061c9cd25c6",
+        "4c8cc061c9cd25e7",
+        "ccacc061c9c905a7",
+        "610c0ce089cd25c6",
+        "450cc4e089cd25c6",
+        "442cc060c98d65a7",
+        "8c2cc260cd8d4527"
+      ],
+      "file": "b3.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "531cf26aab0ed8d99192d5332629a1cdf86108834c66f6c13a22d499fe0b44af",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/62ff2bb542161de348147499c2798317fa394026/media/oracle-410cd4e25882cf3d8cee99ab/background.jpg"
+    }
+  ],
+  "tarot_manifest": null
+}
