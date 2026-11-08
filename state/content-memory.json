@@ -4389,11 +4389,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "0d266f37504868f16c13f977b500b03c95098fdac9a68686be1a529b54c3a3a4",
-            "expected_asset_count": 5,
-            "run_at": "2026-11-20T21:27:00+00:00"
+            "id": "d8d3d07e-effa-40e6-af3d-7897041fd62d",
+            "status": "queued",
+            "run_at": "2026-11-20T21:27:00+00:00",
+            "asset_count": 5,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-08T09:02:31.845881+00:00"
+          "updated_at": "2026-11-08T09:02:36.748136+00:00"
         }
       },
       "formats": [
