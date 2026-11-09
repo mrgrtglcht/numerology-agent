@@ -4502,10 +4502,12 @@
           "evidence_mode": "verified_library"
         }
       ],
-      "status": "reserved",
+      "status": "prepared",
       "created_at": "2026-11-09T08:31:20.400184+00:00",
       "deliveries": {},
-      "formats": []
+      "formats": [
+        "telegram"
+      ]
     }
   }
 }
