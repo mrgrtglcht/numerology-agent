@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 
+TELEGRAM_ARTICLE_MIN_LENGTH=1200
 
 def normalize(data):
     if not isinstance(data,dict):return data
@@ -50,6 +51,6 @@ def article_schema(topic,sources,candidates):
     image={'anyOf':[{'type':'null'},{'type':'string','enum':[c['id'] for c in candidates]}]} if candidates else {'type':'null'}
     return {'type':'object','required':['title','text','arcana_number','source_ids','image_id'],'properties':{
       'title':{'type':'string','maxLength':120},
-      'text':{'type':'string','minLength':1400 if topic['number'] is None else 1600,'maxLength':3200},
+      'text':{'type':'string','minLength':TELEGRAM_ARTICLE_MIN_LENGTH,'maxLength':3200},
       'arcana_number':number,'image_id':image,
       'source_ids':{'type':'array','items':{'type':'string','enum':[s['id'] for s in sources]}}}}

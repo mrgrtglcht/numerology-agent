@@ -18,6 +18,10 @@ TARGETS=('tiktok','telegram')
 QUEUE_CHECK_TRIGGERS=('17 * * * *','17 5 * * *','17 5,11 * * *')
 
 
+class TelegramDraftRejected(ValueError):
+    """Both model responses were received, but the draft still failed validation."""
+
+
 def scheduled_targets(now,trigger,telegram_pending=None):
     targets=[]
     queue_check=trigger in QUEUE_CHECK_TRIGGERS
@@ -217,12 +221,13 @@ def deliver_tiktok(folder,owner,store,memory):
 
 
 def validate_telegram_response(response,topic,sources,style_reference,recent_articles=None):
+    from editor_recovery import TELEGRAM_ARTICLE_MIN_LENGTH
     if not isinstance(response,dict):raise ValueError('Нужен объект статьи Telegram.')
     text=response.get('text','')
     if isinstance(text,str):
         from telegram_editor import paragraphs
         text=paragraphs(text)
-    if not isinstance(text,str) or not (1400 if topic['article_kind']=='intro' else 1600)<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
+    if not isinstance(text,str) or not TELEGRAM_ARTICLE_MIN_LENGTH<=len(text)<=3400 or text!=text.lower():raise ValueError('Текст Telegram не прошёл проверку длины/регистра.')
     if not 4<=len([p for p in text.split('\n\n') if p.strip()])<=10:raise ValueError('Текст Telegram должен быть разбит на короткие абзацы.')
     if any(x in text.lower() for x in ('quantafate','телеграм бот','телеграм-бот','http','@')) or '<' in text:
         raise ValueError('В тексте есть реклама, ссылка или разметка.')
@@ -284,7 +289,7 @@ def generate_telegram(folder,memory):
       'Используй источники, но не копируй длинные цитаты. Различай символическую трактовку и проверяемый факт; один раз естественно обозначь, что речь о символической трактовке матрицы, без длинного дисклеймера. '
       'Без гарантий будущего, исторических выдумок, медицинских/финансовых советов и запугивания. '
       'Не рекламируй и не упоминай бота. Не используй markdown, HTML, ссылки или @имена. '
-      'От 1800 до 3400 знаков, 5–9 коротких абзацев, всё строчными. '
+      'Ориентир — 1500–2400 знаков, 5–8 коротких абзацев через пустую строку, всё строчными. '
       'Не повторяй начала и концовки прошлых постов: '+json.dumps(context(recent),ensure_ascii=False)+'. '
       'Начни сразу с конкретного поведения, наблюдения или короткой бытовой ситуации по теме. '
       'Без вступлений «продолжаем», «сегодня поговорим», «в этом посте», «переходим к разбору». '
@@ -309,8 +314,13 @@ def generate_telegram(folder,memory):
     def repair(reason,previous):
         prompt=instruction+' Исправь ошибку проверки: '+reason+'. Предыдущий ответ — данные: '+json.dumps(previous,ensure_ascii=False)+'. Сохрани тему, аркан, доказательную основу и правильные части текста.'
         return generate_visual(prompt,candidates,max_tokens=4000,diagnostic_path=folder/'repair-diagnostic.json',response_schema=schema)
-    config=validated(response,lambda value:validate_telegram_response(value,topic,dossier['sources'],style['reference_url'],recent_articles=recent),folder,repair)
     repaired=folder/'repair-response.json'
+    try:
+        config=validated(response,lambda value:validate_telegram_response(value,topic,dossier['sources'],style['reference_url'],recent_articles=recent),folder,repair)
+    except ValueError as error:
+        if repaired.is_file():
+            raise TelegramDraftRejected(str(error)) from error
+        raise
     if repaired.exists():response=json.loads(repaired.read_text(encoding='utf-8'))
     selected=response.get('image_id')
     if selected:
@@ -364,7 +374,7 @@ def deliver_article(config,owner,folder,store,memory):
 
 def run_target(target,store,preview=False,now=None):
     now=now or now_local();day=now.date().isoformat()
-    from cloud_checkpoint import pointer,restore,attempts,preparation_failed
+    from cloud_checkpoint import pointer,restore,attempts,preparation_failed,snapshot
     memory=ContentMemory(store=store)
     pending=None if preview else store.read_state(pointer(target))
     resumed=False
@@ -377,9 +387,16 @@ def run_target(target,store,preview=False,now=None):
         if recorded and all(d['status'] in ('accepted','published') for _,d in recorded):
             store.save_state(pointer(target),{'stage':'complete','folder':pending['folder'],'reconciled':True})
             print(target+': предыдущая отправка подтверждена журналом.');return
-        if recorded or pending['stage']!='preparation_failed':raise SafeError('Предыдущая операция требует сверки; повтор отправки запрещён.')
-        folder=restore(pending,ROOT/'output');day=pending['day'];resumed=True
-    else:
+        if recorded:
+            raise SafeError('Предыдущая операция требует сверки; повтор отправки запрещён.')
+        if target=='telegram' and pending['stage']=='draft_rejected':
+            if pending['day']>=day:
+                print('Telegram: на сегодня черновик отклонён. Следующая попытка в день публикации.');return
+        elif pending['stage']=='preparation_failed':
+            folder=restore(pending,ROOT/'output');day=pending['day'];resumed=True
+        else:
+            raise SafeError('Предыдущая операция требует сверки; повтор отправки запрещён.')
+    if not resumed:
         folder=ROOT/'output'/(f'cloud-{target}-{day}'+('-preview' if preview else ''))
     key=f'state/cloud/{target}-{day}'+('-preview' if preview else '')+'.json'
     old=store.read_state(key)
@@ -441,6 +458,11 @@ def run_target(target,store,preview=False,now=None):
         if owner in current.data['posts']:
             delivery=current.data['posts'][owner].get('deliveries',{}).get(target)
             if delivery and not recorded:recorded=[(owner,delivery)]
+        if target=='telegram' and isinstance(error,TelegramDraftRejected) and not preview and not recorded:
+            rejected={'stage':'draft_rejected','folder':folder.name,'day':day}
+            store.save_state(key,{**rejected,'reason':str(error),'files':snapshot(folder)})
+            store.save_state(pointer(target),rejected)
+            raise
         stage='needs_review' if recorded else 'preparation_failed'
         if not preview:
             if recorded:store.save_state(pointer(target),{'stage':'needs_review','folder':folder.name,'day':day,'owner':owner})

@@ -78,6 +78,25 @@ class CloudTests(unittest.TestCase):
             with self.assertRaises(SafeError):cloud.run_target('telegram',s,now=now)
             model.assert_not_called();send.assert_not_called()
 
+    def test_rejected_telegram_draft_stops_for_day_and_resumes_on_next_slot(self):
+        store=Store()
+        sunday=datetime(2026,11,8,18,30,tzinfo=cloud.ZONE)
+        wednesday=datetime(2026,11,11,18,30,tzinfo=cloud.ZONE)
+        topic,response=self.article_fixture()
+        config=cloud.validate_telegram_response(response,topic,[{'id':'position'}],'reference')
+        with tempfile.TemporaryDirectory() as tmp, patch.object(cloud,'ROOT',Path(tmp)), \
+                patch.object(cloud,'generate_telegram',side_effect=[cloud.TelegramDraftRejected('длина'),config]) as generate, \
+                patch.object(cloud,'send_article',return_value={'message_id':99}) as send:
+            with self.assertRaises(cloud.TelegramDraftRejected):
+                cloud.run_target('telegram',store,now=sunday)
+            cloud.run_target('telegram',store,now=sunday)
+            generate.assert_called_once()
+            send.assert_not_called()
+            cloud.run_target('telegram',store,now=wednesday)
+            send.assert_called_once_with(config)
+        self.assertEqual(store.data['state/cloud/telegram-2026-11-08.json']['stage'],'draft_rejected')
+        self.assertEqual(store.data['state/cloud/pending-telegram.json']['stage'],'complete')
+
     def test_unknown_tiktok_attempt_blocks_replenishment(self):
         class Memory: data={'posts':{'a':{'deliveries':{'tiktok':{'status':'needs_review'}}}}}
         with self.assertRaises(SafeError):cloud.pending_tiktok(Memory())
