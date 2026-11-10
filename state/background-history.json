@@ -755,6 +755,37 @@
         "442cc060c98d65a7",
         "8c2cc260cd8d4527"
       ]
+    },
+    "quantafate-pin-564cda36239ab37223801c5e/part-01": {
+      "batch": "quantafate-pin-564cda36239ab37223801c5e",
+      "part": 1,
+      "identities": [
+        "original_sha1:3ee518710cd3a6eb5ebe7a1a3618998145eda2c3",
+        "page:https://commons.wikimedia.org/wiki/File:Ypres_Tower_and_herb_garden,_Rye.jpg",
+        "sha256:341e549288f2e33418a3777ec2a1d20d24cdaf696a540d1eaae8a0c8d53bfb53",
+        "url:https://upload.wikimedia.org/wikipedia/commons/c/c3/Ypres_Tower_and_herb_garden%2C_Rye.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Ypres_Tower_and_herb_garden,_Rye.jpg",
+      "title": "File:Ypres Tower and herb garden, Rye.jpg",
+      "visual_hash": "4cc8c89d85853333",
+      "visual_hashes": [
+        "4cc8c89d85853333",
+        "8cca899d85842733",
+        "8cca899d85843733",
+        "ccca999d858c3727",
+        "5cca889da4852333",
+        "0cca889da4852733",
+        "8cca899da4842733",
+        "8eca9d9da4843723",
+        "148a882d24246333",
+        "0cca880d24a42773",
+        "8eca080d24a42773",
+        "8eca0c0d24a43763",
+        "948a892c26246371",
+        "1e89082c26246371",
+        "0e89082c26242763",
+        "8cc92c2c26243763"
+      ]
     }
   }
 }
