@@ -245,11 +245,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "aa69e241a6382f6cac30bed778bcb6590dfd704652e4d3104e3a01c4b0cb7d2c",
-            "expected_asset_count": 7,
-            "run_at": "2026-11-22T08:46:00+00:00"
+            "id": "afce38b4-0e88-4682-b3df-9933e85049cb",
+            "status": "queued",
+            "run_at": "2026-11-22T08:46:00+00:00",
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-14T10:32:04.356022+00:00"
+          "updated_at": "2026-11-14T10:32:09.637505+00:00"
         }
       },
       "formats": [
