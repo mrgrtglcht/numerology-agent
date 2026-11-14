@@ -120,7 +120,7 @@ def sync(memory):
     for owner, post in list(memory.data['posts'].items()):
         delivery = post.get('deliveries',{}).get('tiktok',{})
         receipt = delivery.get('receipt',{})
-        if receipt.get('provider') != 'postwire' or delivery.get('status') == 'published':
+        if receipt.get('provider') != 'postwire' or delivery.get('status') in ('published','failed'):
             continue
         if not receipt.get('id'):
             raise SafeError('Неизвестен результат отправки PostWire; повтор запрещён.')
@@ -151,6 +151,13 @@ def sync(memory):
                 memory.delivery(owner,'tiktok','accepted',{**receipt,'status':network_state,'result':result,'status_check':checked})
                 print('TikTok: публикация обрабатывается; статус будет проверен снова без повторной отправки.')
                 continue
+            if network_state == 'failed':
+                reason = outcome.get('fail_reason')
+                if isinstance(reason,str) and re.fullmatch(r'[a-z_]{1,100}',reason):
+                    checked['fail_reason'] = reason
+                memory.delivery(owner,'tiktok','failed',{**receipt,'status':'failed','result':result,'status_check':checked})
+                print('::warning::TikTok: подтверждён отказ публикации. Он сохранён в журнале; очередь продолжает работать.')
+                continue
             raise SafeError('TikTok не подтвердил успешную публикацию (статус: '+(network_state if re.fullmatch(r'[a-z_]{1,40}',network_state) else 'unknown')+'); повтор запрещён.')
         if state == 'queued' and delivery.get('status') == 'accepted':
             continue
@@ -158,3 +165,4 @@ def sync(memory):
             print('PostWire: отправка ещё обрабатывается; повтор не выполняется.')
             continue
         raise SafeError('Публикация PostWire требует проверки (статус: '+(state if re.fullmatch(r'[a-z_]{1,40}',state) else 'unknown')+'); автоматический повтор запрещён.')
+

@@ -53,11 +53,23 @@ class PostWireStatusTests(unittest.TestCase):
             self.assertEqual(api.call_count,1)
 
     def test_network_failure_or_unknown_status_cannot_become_published(self):
-        for status in ['failed','unknown','send_to_user_inbox']:
+        for status in ['unknown','send_to_user_inbox']:
             m=Memory()
             with patch.object(p,'api',side_effect=[completed(),{'platform':'tiktok','status':status}]):
                 with self.assertRaises(SafeError):p.sync(m)
             self.assertEqual(m.writes,[])
+
+    def test_confirmed_network_failure_is_terminal_and_does_not_block_queue(self):
+        from cloud_agent import pending_tiktok
+        m=Memory()
+        outcome={'platform':'tiktok','id':'p_pub_url~v2.123','status':'failed','fail_reason':'photo_pull_failed'}
+        with patch.object(p,'api',side_effect=[completed(),outcome]) as api:
+            p.sync(m)
+            p.sync(m)
+        self.assertEqual(api.call_count,2)
+        self.assertEqual(m.writes[0][0],'failed')
+        self.assertEqual(m.writes[0][1]['status_check']['fail_reason'],'photo_pull_failed')
+        self.assertEqual(pending_tiktok(m),0)
 
     def test_wrong_platform_or_identity_stops_without_send(self):
         for outcome in [{'platform':'instagram','status':'publish_complete'}, {'platform':'tiktok','id':'other','status':'publish_complete'}]:
@@ -74,4 +86,3 @@ class PostWireStatusTests(unittest.TestCase):
         self.assertNotIn('account',m.writes[0][1]['result'])
 
 if __name__=='__main__':unittest.main()
-

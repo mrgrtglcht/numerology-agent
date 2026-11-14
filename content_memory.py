@@ -85,7 +85,7 @@ class ContentMemory:
         self.save()
 
     def delivery(self,owner,platform,status,receipt=None):
-        if status not in ('draft','sending','accepted','published','needs_review'): raise ValueError('Неизвестный статус отправки.')
+        if status not in ('draft','sending','accepted','published','failed','needs_review'): raise ValueError('Неизвестный статус отправки.')
         record=self.data['posts'][owner]
         record['deliveries'][platform]={'status':status,'receipt':receipt or {},'updated_at':datetime.now(timezone.utc).isoformat()}
         if status=='published': record['status']='published'
@@ -125,3 +125,4 @@ class ContentMemory:
             record['deliveries'][target]={'status':status,'receipt':{'id':post_id,'status':post['status'],'url':post.get('externalLink')},'updated_at':datetime.now(timezone.utc).isoformat()}
             if status=='published': record['status']='published'
         self.save()
+
