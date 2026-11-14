@@ -786,6 +786,37 @@
         "0e89082c26242763",
         "8cc92c2c26243763"
       ]
+    },
+    "cloud-tiktok-2026-11-14/part-02": {
+      "batch": "cloud-tiktok-2026-11-14",
+      "part": 2,
+      "identities": [
+        "original_sha1:0ae124428f1190eb511ba0a3c8177b8e1126c606",
+        "page:https://commons.wikimedia.org/wiki/File:Taliansky_majster_z_18._storo%C4%8Dia_-_Dice_Players_in_Romantic_Ruins_-_O_3245_-_Slovak_National_Gallery.jpg",
+        "sha256:55b38ca6556474c6edc7f95a4c73e31be911de58927f967b6523218cc2f0b8cf",
+        "url:https://upload.wikimedia.org/wikipedia/commons/5/5f/Taliansky_majster_z_18._storo%C4%8Dia_-_Dice_Players_in_Romantic_Ruins_-_O_3245_-_Slovak_National_Gallery.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Taliansky_majster_z_18._storo%C4%8Dia_-_Dice_Players_in_Romantic_Ruins_-_O_3245_-_Slovak_National_Gallery.jpg",
+      "title": "File:Taliansky majster z 18. storočia - Dice Players in Romantic Ruins - O 3245 - Slovak National Gallery.jpg",
+      "visual_hash": "e8d8c8e8c3fbfc7b",
+      "visual_hashes": [
+        "e8d8c8e8c3fbfc7b",
+        "c8d848e8c3cbfc7b",
+        "c8d848e8c3cbfef7",
+        "d0c848ecc3cbfaf6",
+        "4899c848c3dbfefb",
+        "c898c848c3cbfef3",
+        "c9d8c848c3cbfef7",
+        "91d8c84ac3cbfaf6",
+        "c99cc8c8c3dbf6f9",
+        "899cc8c8c3dbfef3",
+        "899cc8c8c3cbfef7",
+        "91dcc8c2c3cbdaf7",
+        "c9bcccc8cbdbf6f9",
+        "899cc8c8c3dbfff3",
+        "a99cc8c0c3dbfff3",
+        "b49cc8c2c3dbd9f3"
+      ]
     }
   }
 }
