@@ -817,6 +817,37 @@
         "a99cc8c0c3dbfff3",
         "b49cc8c2c3dbd9f3"
       ]
+    },
+    "cloud-tiktok-2026-11-15/oracle/part-01": {
+      "batch": "cloud-tiktok-2026-11-15/oracle",
+      "part": 1,
+      "identities": [
+        "original_sha1:9c722f4a2ebe2183782fcd09f2a321bd6200c253",
+        "page:https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg",
+        "sha256:59d9b788f8b07ebccd999b703c67b224370d5d729d9ec25ab3a832db0ef97274",
+        "url:https://upload.wikimedia.org/wikipedia/commons/6/66/Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg",
+      "title": "File:Carl Gustav Carus - Mondschein hinter Burgruine mit Erker.jpg",
+      "visual_hash": "b6a0cac7c7c6ecfa",
+      "visual_hashes": [
+        "b6a0cac7c7c6ecfa",
+        "b6e1cec7c5c6cce8",
+        "86e0cec7c5c6cce8",
+        "80e8cec7c5c6ceec",
+        "b6a0cac787cfecf9",
+        "b6e0cec785c7cce8",
+        "a6e0cec785c7ceec",
+        "a0e8cec785c7ceec",
+        "36a0ca4787cfecf9",
+        "26e0ce4785c7ccec",
+        "26c8cf078487ceec",
+        "a0c84f038487ceec",
+        "37a0cd87858fccd9",
+        "27e0cd878587ccec",
+        "27c8cf838487ceec",
+        "22c8cf83a487cfec"
+      ]
     }
   }
 }
