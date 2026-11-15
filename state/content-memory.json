@@ -4559,6 +4559,114 @@
       "formats": [
         "telegram"
       ]
+    },
+    "cloud-tiktok-2026-11-15/oracle": {
+      "units": [
+        "oracle:main_obstacle_between_you"
+      ],
+      "fingerprint": "a30e443453319680111a19e890035966fba48b8acc05c218cfa08b74950955d4",
+      "body": "что он считает главным препятствием между вами main_obstacle_between_you fl-17 fl-27 fl-35",
+      "content": {
+        "type": "oracle_pick",
+        "theme": "oracle_pick",
+        "deck": "лес любви",
+        "question_id": "main_obstacle_between_you",
+        "title": "что он считает главным препятствием между вами",
+        "topic": "что он считает главным препятствием между вами",
+        "count": 3,
+        "options": [
+          {
+            "card_id": "fl-17",
+            "visual_reason": "карта разница отражает различия в характерах или взглядах, которые могут восприниматься как барьер"
+          },
+          {
+            "card_id": "fl-27",
+            "visual_reason": "карта клетка символизирует ощущение внутренних ограничений, замкнутости или несвободы в контакте"
+          },
+          {
+            "card_id": "fl-35",
+            "visual_reason": "карта рутина показывает бытовую предсказуемость и привычку, способные гасить романтическую искру"
+          }
+        ],
+        "caption": "больше в тгк @quantafate",
+        "size": [
+          1080,
+          1920
+        ],
+        "include_tarot_cards": false,
+        "include_cta": false,
+        "slides": [
+          {
+            "layout": "oracle_cover"
+          },
+          {
+            "layout": "oracle_instruction"
+          },
+          {
+            "layout": "oracle_backs"
+          },
+          {
+            "layout": "oracle_note"
+          },
+          {
+            "layout": "oracle_faces"
+          }
+        ],
+        "oracle_background": {
+          "id": "b2",
+          "title": "File:Carl Gustav Carus - Mondschein hinter Burgruine mit Erker.jpg",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg/500px-Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "page": "https://commons.wikimedia.org/wiki/File:Carl_Gustav_Carus_-_Mondschein_hinter_Burgruine_mit_Erker.jpg",
+          "original_sha1": "9c722f4a2ebe2183782fcd09f2a321bd6200c253",
+          "width": 1046,
+          "height": 1600,
+          "creator": "Carl Gustav Carus",
+          "credit": "1.  Germanisches Nationalmuseum (page no more available)  2.  Daxer & Marschall Kunsthandel, München",
+          "license": "Public domain",
+          "license_url": "",
+          "query": "Carl Gustav Carus ruins painting",
+          "visual_hash": "b6a0cac7c7c6ecfa",
+          "visual_hashes": [
+            "b6a0cac7c7c6ecfa",
+            "b6e1cec7c5c6cce8",
+            "86e0cec7c5c6cce8",
+            "80e8cec7c5c6ceec",
+            "b6a0cac787cfecf9",
+            "b6e0cec785c7cce8",
+            "a6e0cec785c7ceec",
+            "a0e8cec785c7ceec",
+            "36a0ca4787cfecf9",
+            "26e0ce4785c7ccec",
+            "26c8cf078487ceec",
+            "a0c84f038487ceec",
+            "37a0cd87858fccd9",
+            "27e0cd878587ccec",
+            "27c8cf838487ceec",
+            "22c8cf83a487cfec"
+          ],
+          "file": "b2.jpg",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "selection_reason": "fresh atmospheric background for relationship oracle",
+          "sha256": "59d9b788f8b07ebccd999b703c67b224370d5d729d9ec25ab3a832db0ef97274",
+          "modifications": "cropped to 9:16, darkened, overlaid with text",
+          "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/629f91c50a25c94d4b9a801804b6b84103c518aa/media/oracle-976712e455778c40c55ec22a/background.jpg"
+        }
+      },
+      "title": "что он считает главным препятствием между вами",
+      "theme": "oracle_pick",
+      "position": null,
+      "arcana": [],
+      "tail": null,
+      "part": null,
+      "sources": [],
+      "status": "reserved",
+      "created_at": "2026-11-15T09:02:26.250586+00:00",
+      "deliveries": {},
+      "formats": []
     }
   }
 }
