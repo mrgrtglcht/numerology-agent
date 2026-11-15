@@ -4667,7 +4667,7 @@
       "created_at": "2026-11-15T09:02:26.250586+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
             "id": "e32895f7-1466-409f-a30c-7a0b7ccbe8f9",
@@ -4677,7 +4677,7 @@
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-15T09:02:49.235971+00:00"
+          "updated_at": "2026-11-15T09:02:52.078967+00:00"
         }
       },
       "formats": [
