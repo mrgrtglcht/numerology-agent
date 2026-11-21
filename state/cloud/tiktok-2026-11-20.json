@@ -1,5 +1,6 @@
 {
-  "stage": "started",
+  "stage": "preparation_failed",
+  "owner": "quantafate-unique-posts/part-03",
   "target": "tiktok",
   "day": "2026-11-20"
 }
