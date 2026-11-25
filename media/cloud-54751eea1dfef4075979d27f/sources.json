@@ -1,0 +1,47 @@
+{
+  "backgrounds": [
+    {
+      "id": "b3",
+      "title": "File:Lluís Rigalt - Night Landscape with Gothic Ruins - Google Art Project.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/70/Llu%C3%ADs_Rigalt_-_Night_Landscape_with_Gothic_Ruins_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Llu%C3%ADs_Rigalt_-_Night_Landscape_with_Gothic_Ruins_-_Google_Art_Project.jpg/500px-Llu%C3%ADs_Rigalt_-_Night_Landscape_with_Gothic_Ruins_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Llu%C3%ADs_Rigalt_-_Night_Landscape_with_Gothic_Ruins_-_Google_Art_Project.jpg",
+      "original_sha1": "31744312123f2f5a8b413efb98e3639171a9218e",
+      "width": 4437,
+      "height": 3642,
+      "creator": "Lluís Rigalt",
+      "credit": "UAHWa1WnyhMyJA at Google Cultural Institute  maximum zoom level",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "gothic ruins",
+      "visual_hash": "5031d8c8c93290c8",
+      "visual_hashes": [
+        "5031d8c8c93290c8",
+        "5039c8c8c9321088",
+        "7039cac8c93a1088",
+        "31f8cac8c97a1090",
+        "d879d8c8c932908c",
+        "5839c8c8c97a9088",
+        "5038cac8c97a1088",
+        "71f8ca48c9fa3290",
+        "d879d9c8c87a908c",
+        "d879d9c8c87a908c",
+        "5079c948c87a9284",
+        "71f8cb48c95a3290",
+        "d858d9d8587a108c",
+        "d878d9d8d85a3084",
+        "d078d9d8d85a3204",
+        "5178d958d85a3214"
+      ],
+      "file": "b3.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "public-domain background for saved unpublished part",
+      "sha256": "00b5109303e27b2860c2e6f136468612de51d135a58973b4ea6f00c13fef4beb",
+      "modifications": "cropped to 9:16, darkened, overlaid with text"
+    }
+  ],
+  "tarot_manifest": "assets/tarot/public-domain-manifest.json"
+}
