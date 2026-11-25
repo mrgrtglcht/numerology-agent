@@ -4845,11 +4845,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "0d266f37504868f16c13f977b500b03c95098fdac9a68686be1a529b54c3a3a4",
-            "expected_asset_count": 5,
-            "run_at": "2026-12-04T21:27:00+00:00"
+            "id": "c165a1d2-ef50-4077-856b-78bc094cea52",
+            "status": "queued",
+            "run_at": "2026-12-04T21:27:00+00:00",
+            "asset_count": 5,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-25T00:47:22.497663+00:00"
+          "updated_at": "2026-11-25T00:47:27.463461+00:00"
         }
       },
       "formats": [
