@@ -4842,7 +4842,7 @@
       "created_at": "2026-11-25T00:47:02.124365+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "sending",
+          "status": "accepted",
           "receipt": {
             "provider": "postwire",
             "id": "c165a1d2-ef50-4077-856b-78bc094cea52",
@@ -4852,7 +4852,7 @@
             "auto_add_music": true,
             "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-25T00:47:27.463461+00:00"
+          "updated_at": "2026-11-25T00:47:31.500561+00:00"
         }
       },
       "formats": [
