@@ -1,5 +1,14 @@
 {
-  "stage": "started",
-  "target": "tiktok",
-  "day": "2026-11-20"
+  "stage": "complete",
+  "owner": "quantafate-unique-posts/part-03",
+  "preview": false,
+  "receipt": {
+    "provider": "postwire",
+    "id": "423aeb62-5f34-4efb-bf42-dd8eef0fd754",
+    "status": "queued",
+    "run_at": "2026-11-29T08:46:00+00:00",
+    "asset_count": 7,
+    "auto_add_music": true,
+    "privacy_level": "PUBLIC_TO_EVERYONE"
+  }
 }
