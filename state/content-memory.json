@@ -461,7 +461,18 @@
       "part": 3,
       "status": "prepared",
       "created_at": "2026-10-20T15:25:14.331638+00:00",
-      "deliveries": {},
+      "deliveries": {
+        "tiktok": {
+          "status": "sending",
+          "receipt": {
+            "provider": "postwire",
+            "expected_text_hash": "d239b2fd2c491ea59fa3d7308d12209e0a2da23c96ea655ce2e66cfe586eb1c5",
+            "expected_asset_count": 7,
+            "run_at": "2026-11-29T08:46:00+00:00"
+          },
+          "updated_at": "2026-11-25T00:31:52.085136+00:00"
+        }
+      },
       "formats": [
         "tiktok",
         "pinterest"
