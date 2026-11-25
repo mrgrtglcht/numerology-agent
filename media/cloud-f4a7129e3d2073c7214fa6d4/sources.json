@@ -1,0 +1,48 @@
+{
+  "backgrounds": [
+    {
+      "id": "b6",
+      "title": "File:Louis Pierre Verwée - Sheep among the ruins of Villers-la-Ville.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg/500px-Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "page": "https://commons.wikimedia.org/wiki/File:Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg",
+      "original_sha1": "eeb486e3c430a4c0db9961f87b9c9a77f90a4e0c",
+      "width": 1305,
+      "height": 1500,
+      "creator": "Louis-Pierre Verwee",
+      "credit": "https://de-vuyst.com/en/gallery/overview-artworks/154-5-6",
+      "license": "Public domain",
+      "license_url": "",
+      "query": "romantic ruins painting",
+      "visual_hash": "84e0c02c20b29680",
+      "visual_hashes": [
+        "84e0c02c20b29680",
+        "a4e0ec2c28b29680",
+        "e4c06c2c28b29288",
+        "e4c06c2c2832928e",
+        "a6e0406c69329690",
+        "a6c04c2c69329680",
+        "e6d04c2c69339288",
+        "e2c06c2c6933928f",
+        "a6e0c06c69331690",
+        "a6c04c6c69331690",
+        "e6d04c6c69311388",
+        "e2d04c646d31130e",
+        "06e2c86c69311610",
+        "62c2cc6c6d311210",
+        "62d0cc6c6d31320a",
+        "62d0cc646d71320e"
+      ],
+      "file": "b6.jpg",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "selection_reason": "fresh atmospheric background for relationship oracle",
+      "sha256": "9f6c133db4761cb9b7e88ade18984f99634a39bba0d054618b27bdbe494ebd39",
+      "modifications": "cropped to 9:16, darkened, overlaid with text",
+      "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/c87deaedbc7d367984f0c391f4d941be9ef1e808/media/oracle-f4a7129e3d2073c7214fa6d4/background.jpg"
+    }
+  ],
+  "tarot_manifest": null
+}
