@@ -4726,6 +4726,122 @@
       "formats": [
         "tiktok"
       ]
+    },
+    "cloud-tiktok-2026-11-25/oracle": {
+      "units": [
+        "oracle:current_role_in_his_life"
+      ],
+      "fingerprint": "eba0ba79795265581c460bf23d917be97f3f4750fbfe2739e82ff10b336560af",
+      "body": "какую роль ты играешь в его жизни прямо сейчас current_role_in_his_life fl-06 fl-18 fl-30 fl-31 fl-46",
+      "content": {
+        "type": "oracle_pick",
+        "theme": "oracle_pick",
+        "deck": "лес любви",
+        "question_id": "current_role_in_his_life",
+        "title": "какую роль ты играешь в его жизни прямо сейчас",
+        "topic": "какую роль ты играешь в его жизни прямо сейчас",
+        "count": 5,
+        "options": [
+          {
+            "card_id": "fl-06",
+            "visual_reason": "праздник отражает восприятие тебя как источника радости, ярких эмоций и украшения его будней"
+          },
+          {
+            "card_id": "fl-18",
+            "visual_reason": "ноша показывает ощущение, что общение или ожидания в твою сторону стали для него тяжелым грузом"
+          },
+          {
+            "card_id": "fl-30",
+            "visual_reason": "забота символизирует роль близкого человека, который укрывает теплом и поддерживает в нужный момент"
+          },
+          {
+            "card_id": "fl-31",
+            "visual_reason": "служанка намекает на то, что он привык к обслуживанию своих интересов и вкладу с твоей стороны"
+          },
+          {
+            "card_id": "fl-46",
+            "visual_reason": "самоанализ указывает на то, что ты заставляешь его глубоко задумываться о себе и переосмыслять привычки"
+          }
+        ],
+        "caption": "больше в тгк @quantafate",
+        "size": [
+          1080,
+          1920
+        ],
+        "include_tarot_cards": false,
+        "include_cta": false,
+        "slides": [
+          {
+            "layout": "oracle_cover"
+          },
+          {
+            "layout": "oracle_instruction"
+          },
+          {
+            "layout": "oracle_backs"
+          },
+          {
+            "layout": "oracle_note"
+          },
+          {
+            "layout": "oracle_faces"
+          }
+        ],
+        "oracle_background": {
+          "id": "b6",
+          "title": "File:Louis Pierre Verwée - Sheep among the ruins of Villers-la-Ville.jpg",
+          "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "thumbnail": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg/500px-Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "page": "https://commons.wikimedia.org/wiki/File:Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg",
+          "original_sha1": "eeb486e3c430a4c0db9961f87b9c9a77f90a4e0c",
+          "width": 1305,
+          "height": 1500,
+          "creator": "Louis-Pierre Verwee",
+          "credit": "https://de-vuyst.com/en/gallery/overview-artworks/154-5-6",
+          "license": "Public domain",
+          "license_url": "",
+          "query": "romantic ruins painting",
+          "visual_hash": "84e0c02c20b29680",
+          "visual_hashes": [
+            "84e0c02c20b29680",
+            "a4e0ec2c28b29680",
+            "e4c06c2c28b29288",
+            "e4c06c2c2832928e",
+            "a6e0406c69329690",
+            "a6c04c2c69329680",
+            "e6d04c2c69339288",
+            "e2c06c2c6933928f",
+            "a6e0c06c69331690",
+            "a6c04c6c69331690",
+            "e6d04c6c69311388",
+            "e2d04c646d31130e",
+            "06e2c86c69311610",
+            "62c2cc6c6d311210",
+            "62d0cc6c6d31320a",
+            "62d0cc646d71320e"
+          ],
+          "file": "b6.jpg",
+          "focus": [
+            0.5,
+            0.5
+          ],
+          "selection_reason": "fresh atmospheric background for relationship oracle",
+          "sha256": "9f6c133db4761cb9b7e88ade18984f99634a39bba0d054618b27bdbe494ebd39",
+          "modifications": "cropped to 9:16, darkened, overlaid with text",
+          "public_url": "https://raw.githubusercontent.com/mrgrtglcht/numerology-agent/c87deaedbc7d367984f0c391f4d941be9ef1e808/media/oracle-f4a7129e3d2073c7214fa6d4/background.jpg"
+        }
+      },
+      "title": "какую роль ты играешь в его жизни прямо сейчас",
+      "theme": "oracle_pick",
+      "position": null,
+      "arcana": [],
+      "tail": null,
+      "part": null,
+      "sources": [],
+      "status": "reserved",
+      "created_at": "2026-11-25T00:47:02.124365+00:00",
+      "deliveries": {},
+      "formats": []
     }
   }
 }
