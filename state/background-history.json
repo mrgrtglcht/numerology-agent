@@ -879,6 +879,37 @@
         "d078d9d8d85a3204",
         "5178d958d85a3214"
       ]
+    },
+    "cloud-tiktok-2026-11-25/oracle/part-01": {
+      "batch": "cloud-tiktok-2026-11-25/oracle",
+      "part": 1,
+      "identities": [
+        "original_sha1:eeb486e3c430a4c0db9961f87b9c9a77f90a4e0c",
+        "page:https://commons.wikimedia.org/wiki/File:Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg",
+        "sha256:9f6c133db4761cb9b7e88ade18984f99634a39bba0d054618b27bdbe494ebd39",
+        "url:https://upload.wikimedia.org/wikipedia/commons/e/ea/Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Louis_Pierre_Verw%C3%A9e_-_Sheep_among_the_ruins_of_Villers-la-Ville.jpg",
+      "title": "File:Louis Pierre Verwée - Sheep among the ruins of Villers-la-Ville.jpg",
+      "visual_hash": "84e0c02c20b29680",
+      "visual_hashes": [
+        "84e0c02c20b29680",
+        "a4e0ec2c28b29680",
+        "e4c06c2c28b29288",
+        "e4c06c2c2832928e",
+        "a6e0406c69329690",
+        "a6c04c2c69329680",
+        "e6d04c2c69339288",
+        "e2c06c2c6933928f",
+        "a6e0c06c69331690",
+        "a6c04c6c69331690",
+        "e6d04c6c69311388",
+        "e2d04c646d31130e",
+        "06e2c86c69311610",
+        "62c2cc6c6d311210",
+        "62d0cc6c6d31320a",
+        "62d0cc646d71320e"
+      ]
     }
   }
 }
