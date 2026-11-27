@@ -910,6 +910,37 @@
         "62d0cc6c6d31320a",
         "62d0cc646d71320e"
       ]
+    },
+    "cloud-tiktok-2026-11-27/part-04": {
+      "batch": "cloud-tiktok-2026-11-27",
+      "part": 4,
+      "identities": [
+        "original_sha1:fd6594dab837a24d714ba7b87931693da2919e2c",
+        "page:https://commons.wikimedia.org/wiki/File:Abtei_im_Eichwald-_(Caspar_David_Friedrich)-WUS03167.jpg",
+        "sha256:1c92f0872a214744578f857903a7b2e9856aabbf1baa2a460a7212a0bae50e29",
+        "url:https://upload.wikimedia.org/wikipedia/commons/6/6d/Abtei_im_Eichwald-_%28Caspar_David_Friedrich%29-WUS03167.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original"
+      ],
+      "page": "https://commons.wikimedia.org/wiki/File:Abtei_im_Eichwald-_(Caspar_David_Friedrich)-WUS03167.jpg",
+      "title": "File:Abtei im Eichwald- (Caspar David Friedrich)-WUS03167.jpg",
+      "visual_hash": "09594d8c84810111",
+      "visual_hashes": [
+        "09594d8c84810111",
+        "09594d8c84818111",
+        "49594d8c84818101",
+        "495d4d8c94818101",
+        "09594d8c94800111",
+        "09594d8c94800111",
+        "09594d8c94808101",
+        "495d4d8c94808001",
+        "2998cc4d14000011",
+        "0898cc4d14000011",
+        "88984c4d14000001",
+        "98dd4c4d14000001",
+        "2c98cc4d14000010",
+        "0c98cc4d14000011",
+        "88984c4d14000001",
+        "9c9a4c4d14000001"
+      ]
     }
   }
 }
