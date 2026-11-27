@@ -657,11 +657,14 @@
           "status": "sending",
           "receipt": {
             "provider": "postwire",
-            "expected_text_hash": "7f29efe34389bb48eaf3b5db5bd8623bef02230421013c29106abed8582a2949",
-            "expected_asset_count": 7,
-            "run_at": "2026-12-06T08:46:00+00:00"
+            "id": "86712b20-73e7-4a03-8611-a88c33728ebd",
+            "status": "queued",
+            "run_at": "2026-12-06T08:46:00+00:00",
+            "asset_count": 7,
+            "auto_add_music": true,
+            "privacy_level": "PUBLIC_TO_EVERYONE"
           },
-          "updated_at": "2026-11-27T21:32:08.841374+00:00"
+          "updated_at": "2026-11-27T21:32:14.037423+00:00"
         }
       },
       "formats": [
