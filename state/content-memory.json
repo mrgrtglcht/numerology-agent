@@ -4706,21 +4706,35 @@
       "tail": null,
       "part": null,
       "sources": [],
-      "status": "prepared",
+      "status": "published",
       "created_at": "2026-11-15T09:02:26.250586+00:00",
       "deliveries": {
         "tiktok": {
-          "status": "accepted",
+          "status": "published",
           "receipt": {
             "provider": "postwire",
             "id": "e32895f7-1466-409f-a30c-7a0b7ccbe8f9",
-            "status": "queued",
+            "status": "published",
             "run_at": "2026-11-27T21:27:00+00:00",
             "asset_count": 5,
             "auto_add_music": true,
-            "privacy_level": "PUBLIC_TO_EVERYONE"
+            "privacy_level": "PUBLIC_TO_EVERYONE",
+            "result": {
+              "id": "p_pub_url~v2.7712966722009204766",
+              "ok": true,
+              "items": 5,
+              "status": "processing",
+              "platform": "tiktok",
+              "post_type": "photo",
+              "privacy_level": "PUBLIC_TO_EVERYONE"
+            },
+            "status_check": {
+              "platform": "tiktok",
+              "id": "p_pub_url~v2.7712966722009204766",
+              "status": "publish_complete"
+            }
           },
-          "updated_at": "2026-11-15T09:02:52.078967+00:00"
+          "updated_at": "2026-11-27T21:31:19.672048+00:00"
         }
       },
       "formats": [
